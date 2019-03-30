@@ -1,0 +1,30 @@
+svg {
+    background-color: white;
+    padding-left: 30px;
+}
+
+path {
+    fill: none;
+    stroke: magenta;
+    stroke-width: 2;
+}
+
+.axis path, .axis line {
+    fill: none;
+    shape-rendering: crispEdges;
+    stroke: black;
+    stroke-width: 1;
+}
+
+.axis text {
+    fill: #766;
+    font-family: 'PT Sans Narrow', sans-serif;
+    font-size: 20px;
+}
+
+.gridaxis path, .gridaxis line {
+    fill: none;
+    shape-rendering: crispEdges;
+    stroke: #dddddd;
+    stroke-width: 1;
+}
