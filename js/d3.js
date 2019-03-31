@@ -1,8 +1,8 @@
 d3.json("../statistics/rally_count.json",function(error,data){
     if (error)
         throw error;
-    var width = 1280;
-    var height = 720;
+    var width = 640;
+    var height = 360;
 
     var x = d3.scaleLinear().range([0, width]);
     var y = d3.scaleLinear().range([height, 0]);
@@ -80,11 +80,68 @@ d3.json("../statistics/rally_count.json",function(error,data){
     
     //Add the circle attributes
     var circleAttributes = circles
+                            .attr("id",function(d) { return (d.x + "-" + d.y)})
                             .attr("cx", function (d) { return x(d.rally); })
                             .attr("cy", function (d) { return y(d.stroke); })
-                            .attr("r", function (d) { return 2; })
+                            .attr("r", function (d) { return 2.5; })
                             .attr("transform", "translate(30,30)")
-                            .style("fill", function (d) { return "black"; });
+                            .style("fill", function (d) { return "black"; })
+                            .on("mouseover",handleMouseOver)
+                            .on("mouseout",handleMouseOut)
+                            .on("click",handleMouseClick);
+
+    function handleMouseClick(d,i){
+        var coords = d3.mouse(this);
+        // console.log(coords);
+        var canv = document.createElement('canvas');
+        canv.id = 'radar-chart';
+        canv.width = 640;
+        canv.height = 360;
+        document.body.appendChild(canv);
+
+        var myRadarChart = new Chart(document.getElementById("radar-chart"), {
+            type: 'radar',
+            data: {
+              labels: ["Cut", "Drive", "Lob", "Long", "Netplay", "Rush", "Smash"],
+              datasets: [
+                {
+                  label: "Player A",
+                  fill: true,
+                  backgroundColor: "rgba(179,181,198,0.2)",
+                  borderColor: "rgba(179,181,198,1)",
+                  pointBorderColor: "#fff",
+                  pointBackgroundColor: "rgba(179,181,198,1)",
+                  data: [32,15,46,30,54,1,28]
+                }, {
+                  label: "Player B",
+                  fill: true,
+                  backgroundColor: "rgba(255,99,132,0.2)",
+                  borderColor: "rgba(255,99,132,1)",
+                  pointBorderColor: "#fff",
+                  pointBackgroundColor: "rgba(255,99,132,1)",
+                  pointBorderColor: "#fff",
+                  data: [33,13,57,31,47,3,18]
+                }
+              ]
+            },
+            options: {
+              title: {
+                display: true,
+                text: 'Rader chart of type'
+              }
+            }
+        });
+    }
+    //handleMouseOver & handleMouseOut not working yet
+    function handleMouseOver(d,i){
+        d3.select(this).attr("r",4);
+        // console.log(d3.select(this));
+    }
+
+    function handleMouseOut(d,i){
+        d3.select(this).attr("r",2.5);
+        // console.log("LOO");
+    }
 
     // text value on each points
     for (var i in data){
@@ -108,6 +165,9 @@ d3.json("../statistics/rally_count.json",function(error,data){
         .attr("transform", "translate(30,30)")
         .call(yAxis);
 
-    
+    svg.on("click",function(){
+        var coords = d3.mouse(this);
+        // console.log(coords);
+    })
 })
 
