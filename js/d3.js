@@ -96,7 +96,6 @@ d3.json("../statistics/rally_count.json",function(error,data){
     function handleMouseClick(d,i){
         var coords = d3.mouse(this);
         console.log(coords);
-        // console.log(document.getElementById("#radarChart"));
 
         $("#radarChart").show(function(event){
             console.log("DODO")
@@ -177,8 +176,12 @@ d3.json("../statistics/rally_count.json",function(error,data){
         .attr("transform", "translate(30,30)")
         .call(yAxis);
 
-    svg.on("click",function(){
-        var coords = d3.mouse(this);
-        // console.log(coords);
-    })
+    //close modal chart
+    $(function() {
+        $('.close').click(function() {
+            $('#radarChart').hide(function(event){
+                console.log("CLOSE")
+            });
+        });
+     });
 })

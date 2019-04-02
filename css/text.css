@@ -1,3 +1,8 @@
+.modal-header h4 {
+    font-size: 50px;
+    text-align: center;
+}
+
 svg {
     background-color: white;
     padding-left: 30px;
