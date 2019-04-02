@@ -80,57 +80,69 @@ d3.json("../statistics/rally_count.json",function(error,data){
     
     //Add the circle attributes
     var circleAttributes = circles
-                            .attr("id",function(d) { return (d.x + "-" + d.y)})
+                            .attr("id",function(d) { return (d.rally + "-" + d.stroke)})
                             .attr("cx", function (d) { return x(d.rally); })
                             .attr("cy", function (d) { return y(d.stroke); })
-                            .attr("r", function (d) { return 2.5; })
+                            .attr("r", function (d) { return 3; })
                             .attr("transform", "translate(30,30)")
                             .style("fill", function (d) { return "black"; })
                             .on("mouseover",handleMouseOver)
                             .on("mouseout",handleMouseOut)
-                            .on("click",handleMouseClick);
+                            .on("click",handleMouseClick)
+                            .append("a")
+                            .attr("data-toggle","modal")
+                            .attr("href","#radarChart");
 
     function handleMouseClick(d,i){
         var coords = d3.mouse(this);
-        // console.log(coords);
-        var canv = document.createElement('canvas');
-        canv.id = 'radar-chart';
-        canv.width = 640;
-        canv.height = 360;
-        document.body.appendChild(canv);
+        console.log(coords);
+        // console.log(document.getElementById("#radarChart"));
 
-        var myRadarChart = new Chart(document.getElementById("radar-chart"), {
-            type: 'radar',
-            data: {
-              labels: ["Cut", "Drive", "Lob", "Long", "Netplay", "Rush", "Smash"],
-              datasets: [
-                {
-                  label: "Player A",
-                  fill: true,
-                  backgroundColor: "rgba(179,181,198,0.2)",
-                  borderColor: "rgba(179,181,198,1)",
-                  pointBorderColor: "#fff",
-                  pointBackgroundColor: "rgba(179,181,198,1)",
-                  data: [32,15,46,30,54,1,28]
-                }, {
-                  label: "Player B",
-                  fill: true,
-                  backgroundColor: "rgba(255,99,132,0.2)",
-                  borderColor: "rgba(255,99,132,1)",
-                  pointBorderColor: "#fff",
-                  pointBackgroundColor: "rgba(255,99,132,1)",
-                  pointBorderColor: "#fff",
-                  data: [33,13,57,31,47,3,18]
+        $("#radarChart").show(function(event){
+            console.log("DODO")
+            var modal = $(this);
+            var canvas = modal.find('.modal-body canvas');
+        
+            // Chart initialisieren
+            var ctx = canvas[0].getContext("2d");
+
+            var chart = new Chart(ctx, {
+                type: "radar",
+                data: {
+                    labels: ["切球", "平球", "挑球", "長球", "小球", "撲球", "殺球"],
+                    datasets: [
+                        {
+                          label: "Player A",
+                          fill: true,
+                          backgroundColor: "rgba(179,181,198,0.2)",
+                          borderColor: "rgba(179,181,198,1)",
+                          pointBorderColor: "#fff",
+                          pointBackgroundColor: "rgba(179,181,198,1)",
+                          data: [32,15,46,30,54,1,28]
+                        }, {
+                          label: "Player B",
+                          fill: true,
+                          backgroundColor: "rgba(255,99,132,0.2)",
+                          borderColor: "rgba(255,99,132,1)",
+                          pointBorderColor: "#fff",
+                          pointBackgroundColor: "rgba(255,99,132,1)",
+                          pointBorderColor: "#fff",
+                          data: [33,13,57,31,47,3,18]
+                        }
+                    ]
+                },
+                options: {
+
                 }
-              ]
-            },
-            options: {
-              title: {
-                display: true,
-                text: 'Rader chart of type'
-              }
-            }
+            });
         });
+
+        // var canv = document.createElement('canvas');
+        // canv.id = 'radar-chart';
+        // canv.width = 640;
+        // canv.height = 360;
+        // document.body.appendChild(canv);
+
     }
     //handleMouseOver & handleMouseOut not working yet
     function handleMouseOver(d,i){
@@ -170,4 +182,3 @@ d3.json("../statistics/rally_count.json",function(error,data){
         // console.log(coords);
     })
 })
-

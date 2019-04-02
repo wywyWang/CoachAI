@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
     <title>CoachAI</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://fonts.googleapis.com/css?family=PT+Sans+Narrow" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://d3js.org/d3.v4.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
@@ -29,7 +30,21 @@
     <div class="linechart">
         <script src="js/d3.js"></script>
     </div>
-    <!-- <canvas id="radar-chart" width="640" height="360" visibility="hidden"></canvas> -->
+    <div class="modal" id="radarChart" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+                    </button>
+                    <h4 class="modal-title" id="exampleModalLabel">Radarchart</h4>
+                </div>
+                <div class="modal-body">
+                    <canvas id="canvas" width="568" height="300"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>
@@ -38,4 +53,6 @@
 http://tobiasahlin.com/blog/chartjs-charts-to-get-you-started/#2-line-chart
 https://www.chartjs.org/docs/latest/ 
 http://bl.ocks.org/WilliamQLiu/76ae20060e19bf42d774
+https://codepen.io/igpc/pen/oPXZEZ
+https://stackoverflow.com/questions/44990517/displaying-json-data-in-chartjs
 -->
