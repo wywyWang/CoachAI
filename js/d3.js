@@ -77,10 +77,16 @@ d3.json("../statistics/rally_count.json",function(error,data){
                                 .data(data)
                                 .enter()
                                 .append("circle");
+
+    var idx = [];
+    for(var i = 0;i < data.length;i++){
+        idx.push(i+1);
+    }
+    console.log(idx);
     
     //Add the circle attributes
     var circleAttributes = circles
-                            .attr("id",function(d) { return (d.rally + "-" + d.stroke)})
+                            .attr("id",function(d,i) { return (d.set + '-' + d.rally)})
                             .attr("cx", function (d) { return x(d.rally); })
                             .attr("cy", function (d) { return y(d.stroke); })
                             .attr("r", function (d) { return 3.5; })
@@ -103,15 +109,70 @@ d3.json("../statistics/rally_count.json",function(error,data){
                 "rally":"1-1",
                 "result":
                 [
+
                     {
-                        "player":"A",
-                        "balltype":"挑球",
-                        "count":2
-                    },
-                    {
-                        "player":"A",
-                        "balltype":"放小球",
-                        "count":2
+                        "playerA":
+                        [
+                            {
+                                "balltype":"挑球",
+                                "count":6
+                            },
+                            {
+                                "balltype":"放小球",
+                                "count":5
+                            },
+                            {
+                                "balltype":"挑球",
+                                "count":0
+                            },
+                            {
+                                "balltype":"挑球",
+                                "count":6
+                            },
+                            {
+                                "balltype":"挑球",
+                                "count":7
+                            },
+                            {
+                                "balltype":"挑球",
+                                "count":6
+                            },
+                            {
+                                "balltype":"挑球",
+                                "count":3
+                            }
+                        ],
+                        "playerB":
+                        [
+                            {
+                                "balltype":"挑球",
+                                "count":0
+                            },
+                            {
+                                "balltype":"挑球",
+                                "count":4
+                            },
+                            {
+                                "balltype":"挑球",
+                                "count":6
+                            },
+                            {
+                                "balltype":"挑球",
+                                "count":1
+                            },
+                            {
+                                "balltype":"挑球",
+                                "count":5
+                            },
+                            {
+                                "balltype":"挑球",
+                                "count":3
+                            },
+                            {
+                                "balltype":"挑球",
+                                "count":5
+                            }
+                        ]
                     }
                 ]
             },
@@ -120,23 +181,95 @@ d3.json("../statistics/rally_count.json",function(error,data){
                 "result":
                 [
                     {
-                        "player":"A",
-                        "balltype":"殺球",
-                        "count":5
-                    },
-                    {
-                        "player":"A",
-                        "balltype":"小球",
-                        "count":3
+                        "playerA":
+                        [
+                            {
+                                "balltype":"挑球",
+                                "count":7
+                            },
+                            {
+                                "balltype":"放小球",
+                                "count":5
+                            },
+                            {
+                                "balltype":"挑球",
+                                "count":8
+                            },
+                            {
+                                "balltype":"挑球",
+                                "count":9
+                            },
+                            {
+                                "balltype":"挑球",
+                                "count":5
+                            },
+                            {
+                                "balltype":"挑球",
+                                "count":4
+                            },
+                            {
+                                "balltype":"挑球",
+                                "count":3
+                            }
+                        ],
+                        "playerB":
+                        [
+                            {
+                                "balltype":"挑球",
+                                "count":2
+                            },
+                            {
+                                "balltype":"挑球",
+                                "count":5
+                            },
+                            {
+                                "balltype":"挑球",
+                                "count":4
+                            },
+                            {
+                                "balltype":"挑球",
+                                "count":2
+                            },
+                            {
+                                "balltype":"挑球",
+                                "count":8
+                            },
+                            {
+                                "balltype":"挑球",
+                                "count":9
+                            },
+                            {
+                                "balltype":"挑球",
+                                "count":5
+                            }
+                        ]
                     }
                 ]
             }
         ];
+        result = rallydata.findIndex(function(item){
+            return this.id == item.rally;
+        });
+        console.log(this.id)
+        console.log('1-2' === this.id)
+        console.log(result)
 
-        console.log(rallydata[1]);
+        var playerA=[];
+        playerA = rallydata.map(function(item){
+            return item.result[0].playerA.map(function(e){
+                return e.count;            
+            })
+        });
+        var playerB=[];
+        playerB = rallydata.map(function(item){
+            return item.result[0].playerB.map(function(e){
+                return e.count;            
+            })
+        });
+        console.log(playerA)
+        console.log(playerB)
 
         $("#radarChart").show(function(event){
-            console.log("DODOS")
             var modal = $(this);
             var canvas = modal.find('.modal-body canvas');
         
