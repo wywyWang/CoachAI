@@ -83,7 +83,7 @@ d3.json("../statistics/rally_count.json",function(error,data){
                             .attr("id",function(d) { return (d.rally + "-" + d.stroke)})
                             .attr("cx", function (d) { return x(d.rally); })
                             .attr("cy", function (d) { return y(d.stroke); })
-                            .attr("r", function (d) { return 3; })
+                            .attr("r", function (d) { return 3.5; })
                             .attr("transform", "translate(30,30)")
                             .style("fill", function (d) { return "black"; })
                             .on("mouseover",handleMouseOver)
@@ -97,8 +97,46 @@ d3.json("../statistics/rally_count.json",function(error,data){
         var coords = d3.mouse(this);
         console.log(coords);
 
+        // test json file
+        var rallydata = [
+            {
+                "rally":"1-1",
+                "result":
+                [
+                    {
+                        "player":"A",
+                        "balltype":"挑球",
+                        "count":2
+                    },
+                    {
+                        "player":"A",
+                        "balltype":"放小球",
+                        "count":2
+                    }
+                ]
+            },
+            {
+                "rally":"1-2",
+                "result":
+                [
+                    {
+                        "player":"A",
+                        "balltype":"殺球",
+                        "count":5
+                    },
+                    {
+                        "player":"A",
+                        "balltype":"小球",
+                        "count":3
+                    }
+                ]
+            }
+        ];
+
+        console.log(rallydata[1]);
+
         $("#radarChart").show(function(event){
-            console.log("DODO")
+            console.log("DODOS")
             var modal = $(this);
             var canvas = modal.find('.modal-body canvas');
         
@@ -143,14 +181,15 @@ d3.json("../statistics/rally_count.json",function(error,data){
         // document.body.appendChild(canv);
 
     }
+
     //handleMouseOver & handleMouseOut not working yet
     function handleMouseOver(d,i){
-        d3.select(this).attr("r",4);
-        // console.log(d3.select(this));
+        d3.select(this).attr("r",7);
+        console.log("OVER");
     }
 
     function handleMouseOut(d,i){
-        d3.select(this).attr("r",2.5);
+        d3.select(this).attr("r",4);
         // console.log("LOO");
     }
 

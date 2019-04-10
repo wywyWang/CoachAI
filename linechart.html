@@ -16,31 +16,36 @@
         <nav class="navbar navbar-inverse">
             <div class="container-fluid">
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="home.html">CoachAI</a>
+                    <a class="navbar-brand" href="./home.html">CoachAI</a>
                 </div>
                 <ul class="nav navbar-nav">
-                <li><a href="home.html">Home</a></li>
-                <li class="active"><a href="linechart.html">Statistics</a></li>
+                <li><a href="./home.html">Home</a></li>
+                <li class="active"><a href="./linechart.html">Statistics</a></li>
                 <li><a href="#">Page 2</a></li>
                 <li><a href="#">Page 3</a></li>
                 </ul>
             </div>
         </nav>
     </div>
-    <div class="linechart">
-        <script src="js/d3.js"></script>
-    </div>
-    <div class="modal" id="radarChart" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button id="closechart" type="button" class="close" data-dismiss="modal">
-                        <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
-                    </button>
-                    <h4 class="modal-title" id="exampleModalLabel">球種分析圖</h4>
-                </div>
-                <div class="modal-body">
-                    <canvas id="canvas" width="800" height="600"></canvas>
+    <div class="container">
+        <div class="linechart">
+            <script src="js/d3.js"></script>
+        </div>
+        <div class="on_off_court">
+            <script src="js/on_off_court.js"></script>
+        </div>
+        <div class="modal" id="radarChart" role="dialog" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button id="closechart" type="button" class="close" data-dismiss="modal">
+                            <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+                        </button>
+                        <h4 class="modal-title" id="exampleModalLabel">球種分析圖</h4>
+                    </div>
+                    <div class="modal-body">
+                        <canvas id="canvas" width="800" height="600"></canvas>
+                    </div>
                 </div>
             </div>
         </div>
