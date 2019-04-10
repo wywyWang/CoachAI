@@ -8,7 +8,7 @@ var chartRadarDOM;
 var chartRadarData;
 var chartRadarOptions;
 
-Chart.defaults.global.responsive = false;
+// Chart.defaults.global.responsive = false;
 chartRadarDOM = document.getElementById("on_off_court");
 //custormized options
 chartRadarOptions = 
