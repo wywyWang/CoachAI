@@ -29,8 +29,6 @@ d3.json("../statistics/rally_count.json",function(error,data){
         .attr("height", height+100)
         .append("g");
 
-    // Get the data
-
     // Scale the range of the data
     x.domain(d3.extent(data,
         function (d) {
@@ -77,12 +75,6 @@ d3.json("../statistics/rally_count.json",function(error,data){
                                 .data(data)
                                 .enter()
                                 .append("circle");
-
-    var idx = [];
-    for(var i = 0;i < data.length;i++){
-        idx.push(i+1);
-    }
-    console.log(idx);
     
     //Add the circle attributes
     var circleAttributes = circles
@@ -247,12 +239,12 @@ d3.json("../statistics/rally_count.json",function(error,data){
                 ]
             }
         ];
+
+        //get index from json file
+        var id = this.id;
         result = rallydata.findIndex(function(item){
-            return this.id == item.rally;
+            return id == item.rally;
         });
-        console.log(this.id)
-        console.log('1-2' === this.id)
-        console.log(result)
 
         var playerA=[];
         playerA = rallydata.map(function(item){
@@ -266,8 +258,8 @@ d3.json("../statistics/rally_count.json",function(error,data){
                 return e.count;            
             })
         });
-        console.log(playerA)
-        console.log(playerB)
+        // console.log(playerA[result])
+        // console.log(playerB[result])
 
         $("#radarChart").show(function(event){
             var modal = $(this);
@@ -288,7 +280,7 @@ d3.json("../statistics/rally_count.json",function(error,data){
                           borderColor: "rgba(179,181,198,1)",
                           pointBorderColor: "#fff",
                           pointBackgroundColor: "rgba(179,181,198,1)",
-                          data: [32,15,46,30,54,1,28]
+                          data: playerA[result]
                         }, {
                           label: "Player B",
                           fill: true,
@@ -297,21 +289,19 @@ d3.json("../statistics/rally_count.json",function(error,data){
                           pointBorderColor: "#fff",
                           pointBackgroundColor: "rgba(255,99,132,1)",
                           pointBorderColor: "#fff",
-                          data: [33,13,57,31,47,3,18]
+                          data: playerB[result]
                         }
                     ]
                 },
                 options: {
-
+                    scale:{
+                        ticks:{
+                            min:0
+                        }
+                    }
                 }
             });
         });
-
-        // var canv = document.createElement('canvas');
-        // canv.id = 'radar-chart';
-        // canv.width = 640;
-        // canv.height = 360;
-        // document.body.appendChild(canv);
 
     }
 
