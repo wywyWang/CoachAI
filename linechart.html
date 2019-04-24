@@ -28,12 +28,15 @@
         </nav>
     </div>
     <div class="container">
-        <div class="linechart">
-            <script src="js/d3.js"></script>
+        <div class="row">
+            <div class="col-md-6">
+                <script src="js/d3.js"></script>
+            </div>
+            <div class="col-md-6">
+                <script src="js/on_off_court.js"></script>
+            </div>
         </div>
-        <div class="on_off_court">
-            <script src="js/on_off_court.js"></script>
-        </div>
+        
         <div class="modal" id="radarChart" role="dialog" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -44,20 +47,11 @@
                         <h4 class="modal-title" id="exampleModalLabel">球種分析圖</h4>
                     </div>
                     <div class="modal-body">
-                        <canvas id="canvas" width="800" height="600"></canvas>
+                        <canvas id="canvas" width="1000" height="800"></canvas>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </body>
-
 </html>
-
-<!-- 
-http://tobiasahlin.com/blog/chartjs-charts-to-get-you-started/#2-line-chart
-https://www.chartjs.org/docs/latest/ 
-http://bl.ocks.org/WilliamQLiu/76ae20060e19bf42d774
-https://codepen.io/igpc/pen/oPXZEZ
-https://stackoverflow.com/questions/44990517/displaying-json-data-in-chartjs
--->

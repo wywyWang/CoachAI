@@ -1,7 +1,7 @@
 var canv = document.createElement('canvas');
 canv.id = 'on_off_court';
 canv.width = 800;
-canv.height = 600;
+canv.height = 400;
 document.body.appendChild(canv);
 
 var chartRadarDOM;
@@ -16,9 +16,10 @@ chartRadarOptions =
     legend:{
         labels:{
             fontColor: 'rgb(250,139,28)',
-            fontSize: 14
+            fontSize: 16
         }
-    }
+    },
+    responsive:false
 };
 
 $.getJSON("statistics/on_off_court_sum.json", function(data) {
@@ -33,9 +34,9 @@ $.getJSON("statistics/on_off_court_sum.json", function(data) {
     //random color generator
     color = new Array();
     for(var i = 0;i<data.length;i++){
-        r = Math.floor(Math.random() * 133);
-        g = Math.floor(Math.random() * 231);
-        b = Math.floor(Math.random() * 177);
+        r = Math.floor(Math.random() * 256);
+        g = Math.floor(Math.random() * 256);
+        b = Math.floor(Math.random() * 256);
         color.push('rgb(' + r + ', ' + g + ', ' + b + ')');
     }
     
@@ -46,8 +47,8 @@ $.getJSON("statistics/on_off_court_sum.json", function(data) {
             datasets: [{
                 backgroundColor: color,
                 pointBorderColor: "rgba(0,0,0,0)",
-                borderColor: 'rgb(129, 198, 228)',
-                borderWidth: 3,
+                borderColor: 'rgb(17, 16, 17)',
+                borderWidth: 1,
                 data: data
             }]
         },
