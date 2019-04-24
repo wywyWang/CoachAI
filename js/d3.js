@@ -160,6 +160,12 @@ d3.json("../statistics/rally_count.json",function(error,data){
                             ticks:{
                                 min:0
                             }
+                        },
+                        legend:{
+                            labels:{
+                                fontColor: 'rgb(250,139,28)',
+                                fontSize: 16
+                            }
                         }
                     }
                 });
