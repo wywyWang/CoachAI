@@ -95,214 +95,77 @@ d3.json("../statistics/rally_count.json",function(error,data){
         var coords = d3.mouse(this);
         console.log(coords);
 
-        // test json file
-        var rallydata = [
-            {
-                "rally":"1-1",
-                "result":
-                [
-
-                    {
-                        "playerA":
-                        [
-                            {
-                                "balltype":"挑球",
-                                "count":6
-                            },
-                            {
-                                "balltype":"放小球",
-                                "count":5
-                            },
-                            {
-                                "balltype":"挑球",
-                                "count":0
-                            },
-                            {
-                                "balltype":"挑球",
-                                "count":6
-                            },
-                            {
-                                "balltype":"挑球",
-                                "count":7
-                            },
-                            {
-                                "balltype":"挑球",
-                                "count":6
-                            },
-                            {
-                                "balltype":"挑球",
-                                "count":3
-                            }
-                        ],
-                        "playerB":
-                        [
-                            {
-                                "balltype":"挑球",
-                                "count":0
-                            },
-                            {
-                                "balltype":"挑球",
-                                "count":4
-                            },
-                            {
-                                "balltype":"挑球",
-                                "count":6
-                            },
-                            {
-                                "balltype":"挑球",
-                                "count":1
-                            },
-                            {
-                                "balltype":"挑球",
-                                "count":5
-                            },
-                            {
-                                "balltype":"挑球",
-                                "count":3
-                            },
-                            {
-                                "balltype":"挑球",
-                                "count":5
-                            }
-                        ]
-                    }
-                ]
-            },
-            {
-                "rally":"1-2",
-                "result":
-                [
-                    {
-                        "playerA":
-                        [
-                            {
-                                "balltype":"挑球",
-                                "count":7
-                            },
-                            {
-                                "balltype":"放小球",
-                                "count":5
-                            },
-                            {
-                                "balltype":"挑球",
-                                "count":8
-                            },
-                            {
-                                "balltype":"挑球",
-                                "count":9
-                            },
-                            {
-                                "balltype":"挑球",
-                                "count":5
-                            },
-                            {
-                                "balltype":"挑球",
-                                "count":4
-                            },
-                            {
-                                "balltype":"挑球",
-                                "count":3
-                            }
-                        ],
-                        "playerB":
-                        [
-                            {
-                                "balltype":"挑球",
-                                "count":2
-                            },
-                            {
-                                "balltype":"挑球",
-                                "count":5
-                            },
-                            {
-                                "balltype":"挑球",
-                                "count":4
-                            },
-                            {
-                                "balltype":"挑球",
-                                "count":2
-                            },
-                            {
-                                "balltype":"挑球",
-                                "count":8
-                            },
-                            {
-                                "balltype":"挑球",
-                                "count":9
-                            },
-                            {
-                                "balltype":"挑球",
-                                "count":5
-                            }
-                        ]
-                    }
-                ]
-            }
-        ];
-
         //get index from json file
         var id = this.id;
-        result = rallydata.findIndex(function(item){
-            return id == item.rally;
-        });
+        console.log(id)
+        $.getJSON("../statistics/rally_type.json", function(data2) {
+            //get index from json file
+            index = data2.findIndex(function(item){
+                return id == item.rally;
+            });
 
-        var playerA=[];
-        playerA = rallydata.map(function(item){
-            return item.result[0].playerA.map(function(e){
-                return e.count;            
-            })
-        });
-        var playerB=[];
-        playerB = rallydata.map(function(item){
-            return item.result[0].playerB.map(function(e){
-                return e.count;            
-            })
-        });
-        // console.log(playerA[result])
-        // console.log(playerB[result])
+            var labels = data2.map(function(item) {
+                return item.result.map(function(e){
+                    return e.balltype;            
+                })
+            });
 
-        $("#radarChart").show(function(event){
-            var modal = $(this);
-            var canvas = modal.find('.modal-body canvas');
-        
-            // Chart initialisieren
-            var ctx = canvas[0].getContext("2d");
+            var dataA = []
+            for(var i = 0;i<data2[index].result.length;i++){
+                dataA.push(data2[index].result[i].count)
+            }
 
-            var chart = new Chart(ctx, {
-                type: "radar",
-                data: {
-                    labels: ["切球", "平球", "挑球", "長球", "小球", "撲球", "殺球"],
-                    datasets: [
-                        {
-                          label: "Player A",
-                          fill: true,
-                          backgroundColor: "rgba(179,181,198,0.2)",
-                          borderColor: "rgba(179,181,198,1)",
-                          pointBorderColor: "#fff",
-                          pointBackgroundColor: "rgba(179,181,198,1)",
-                          data: playerA[result]
-                        }, {
-                          label: "Player B",
-                          fill: true,
-                          backgroundColor: "rgba(255,99,132,0.2)",
-                          borderColor: "rgba(255,99,132,1)",
-                          pointBorderColor: "#fff",
-                          pointBackgroundColor: "rgba(255,99,132,1)",
-                          pointBorderColor: "#fff",
-                          data: playerB[result]
-                        }
-                    ]
-                },
-                options: {
-                    scale:{
-                        ticks:{
-                            min:0
+            var dataB = []
+            for(var i = 0;i<data2[index+1].result.length;i++){
+                dataB.push(data2[index+1].result[i].count)
+            }
+
+            // console.log(labels[0])
+            // console.log(data2[index].result)
+            // console.log(data2[index+1].result)
+            // console.log(dataA)
+            // console.log(dataB)
+
+            $("#radarChart").show(function(event){
+                var modal = $(this);
+                var canvas = modal.find('.modal-body canvas');
+                var ctx = canvas[0].getContext("2d"); 
+                var chart = new Chart(ctx, {
+                    type: "radar",
+                    data: {
+                        labels: labels[0],
+                        datasets: [
+                            {
+                              label: "Player A",
+                              fill: true,
+                              backgroundColor: "rgba(179,181,198,0.2)",
+                              borderColor: "rgba(179,181,198,1)",
+                              pointBorderColor: "#fff",
+                              pointBackgroundColor: "rgba(179,181,198,1)",
+                              data: dataA
+                            }, {
+                              label: "Player B",
+                              fill: true,
+                              backgroundColor: "rgba(255,99,132,0.2)",
+                              borderColor: "rgba(255,99,132,1)",
+                              pointBorderColor: "#fff",
+                              pointBackgroundColor: "rgba(255,99,132,1)",
+                              pointBorderColor: "#fff",
+                              data: dataB
+                            }
+                        ]
+                    },
+                    options: {
+                        scale:{
+                            ticks:{
+                                min:0
+                            }
                         }
                     }
-                }
+                });
             });
-        });
 
+        });
     }
 
     //handleMouseOver & handleMouseOut not working yet
