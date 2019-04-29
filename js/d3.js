@@ -212,6 +212,11 @@ d3.json("../statistics/rally_count.json",function(error,data){
     $(function() {
         $('.close').click(function() {
             $('#radarChart').hide(function(event){
+                var modal = $(this);
+                var canvas = modal.find('.modal-body canvas');
+                var ctx = canvas[0].getContext("2d"); 
+                $(".modal-body canvas").remove();
+                $(".modal-body").html('<canvas id="canvas" width="1000" height="800"></canvas>');
                 console.log("CLOSE")
             });
         });
