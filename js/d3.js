@@ -123,8 +123,8 @@ d3.json("../statistics/rally_count.json",function(error,data){
             // console.log(labels[0])
             // console.log(data2[index].result)
             // console.log(data2[index+1].result)
-            // console.log(dataA)
-            // console.log(dataB)
+            console.log(dataA)
+            console.log(dataB)
 
             $("#radarChart").show(function(event){
                 var modal = $(this);
@@ -158,12 +158,13 @@ d3.json("../statistics/rally_count.json",function(error,data){
                     options: {
                         scale:{
                             ticks:{
-                                min:0
+                                min:0,
+                                stepSize:1
                             }
                         },
                         legend:{
                             labels:{
-                                fontColor: 'rgb(250,139,28)',
+                                fontColor: 'rgb(255, 117, 117)',
                                 fontSize: 16
                             }
                         }
