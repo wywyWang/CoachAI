@@ -15,7 +15,7 @@ chartRadarOptions =
 {
     legend:{
         labels:{
-            fontColor: 'rgb(255, 117, 117)',
+            fontColor: 'rgba(248, 184, 82, 1)',
             fontSize: 16
         }
     },

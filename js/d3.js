@@ -67,8 +67,7 @@ d3.json("../statistics/rally_count.json",function(error,data){
 
     svg.append("path") // Add the valueline path.
         .attr("transform", "translate(30,30)")
-        .attr("d", valueline(data))
-        .attr("stroke-dasharray","2.5");
+        .attr("d", valueline(data));
 
     //draw circle points
     var circles = svg.selectAll("circle")
@@ -120,11 +119,8 @@ d3.json("../statistics/rally_count.json",function(error,data){
                 dataB.push(data2[index+1].result[i].count)
             }
 
-            // console.log(labels[0])
-            // console.log(data2[index].result)
-            // console.log(data2[index+1].result)
-            console.log(dataA)
-            console.log(dataB)
+            // console.log(dataA)
+            // console.log(dataB)
 
             $("#radarChart").show(function(event){
                 var modal = $(this);
@@ -138,10 +134,10 @@ d3.json("../statistics/rally_count.json",function(error,data){
                             {
                               label: "Player A",
                               fill: true,
-                              backgroundColor: "rgba(179,181,198,0.2)",
-                              borderColor: "rgba(179,181,198,1)",
+                              backgroundColor: "rgba(66,129,164,0.2)",
+                              borderColor: "rgba(66,129,164,0.8)",
                               pointBorderColor: "#fff",
-                              pointBackgroundColor: "rgba(179,181,198,1)",
+                              pointBackgroundColor: "rgba(66,129,164,1)",
                               data: dataA
                             }, {
                               label: "Player B",
@@ -160,11 +156,14 @@ d3.json("../statistics/rally_count.json",function(error,data){
                             ticks:{
                                 min:0,
                                 stepSize:1
+                            },
+                            pointLabels: { 
+                                fontSize:14 
                             }
                         },
                         legend:{
                             labels:{
-                                fontColor: 'rgb(255, 117, 117)',
+                                fontColor: 'rgba(248, 184, 82, 1)',
                                 fontSize: 16
                             }
                         }

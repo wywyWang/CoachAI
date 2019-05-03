@@ -18,8 +18,8 @@ $.getJSON("../statistics/rally_type.json", function(data) {
         }
     };
 
-    // console.log(dataA)
-    // console.log(dataB)
+    console.log(dataA)
+    console.log(dataB)
 
     var canv = document.createElement('canvas');
     canv.id = 'total_balltype_canvas';
@@ -40,11 +40,14 @@ $.getJSON("../statistics/rally_type.json", function(data) {
             ticks:{
                 min:0,
                 stepSize:10
+            },
+            pointLabels: { 
+                fontSize:14 
             }
         },
         legend:{
             labels:{
-                fontColor: 'rgb(255, 117, 117)',
+                fontColor: 'rgba(248, 184, 82, 1)',
                 fontSize: 16
             }
         }
@@ -58,10 +61,10 @@ $.getJSON("../statistics/rally_type.json", function(data) {
                 {
                   label: "Player A",
                   fill: true,
-                  backgroundColor: "rgba(179,181,198,0.2)",
-                  borderColor: "rgba(179,181,198,1)",
+                  backgroundColor: "rgba(66,129,164,0.2)",
+                  borderColor: "rgba(66,129,164,1)",
                   pointBorderColor: "#fff",
-                  pointBackgroundColor: "rgba(179,181,198,1)",
+                  pointBackgroundColor: "rgba(66,129,164,1)",
                   data: dataA
                 }, {
                   label: "Player B",
