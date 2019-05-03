@@ -82,7 +82,12 @@ d3.json("../statistics/rally_count.json",function(error,data){
                             .attr("cy", function (d) { return y(d.stroke); })
                             .attr("r", function (d) { return 3.5; })
                             .attr("transform", "translate(30,30)")
-                            .style("fill", function (d) { return "black"; })
+                            .style("fill", function (d) { 
+                                if (d.winner == "A")
+                                    return "rgb(66,129,164)";
+                                else
+                                    return "rgb(255,99,132)";
+                            })
                             .on("mouseover",handleMouseOver)
                             .on("mouseout",handleMouseOut)
                             .on("click",handleMouseClick)

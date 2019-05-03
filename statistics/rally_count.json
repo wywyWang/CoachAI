@@ -2,191 +2,229 @@
     {
         "set": 1,
         "rally": 1,
-        "stroke": 18
+        "stroke": 18,
+        "winner": "A"
     },
     {
         "set": 1,
         "rally": 2,
-        "stroke": 5
+        "stroke": 5,
+        "winner": "B"
     },
     {
         "set": 1,
         "rally": 3,
-        "stroke": 6
+        "stroke": 6,
+        "winner": "A"
     },
     {
         "set": 1,
         "rally": 4,
-        "stroke": 25
+        "stroke": 25,
+        "winner": "B"
     },
     {
         "set": 1,
         "rally": 5,
-        "stroke": 22
+        "stroke": 22,
+        "winner": "B"
     },
     {
         "set": 1,
         "rally": 6,
-        "stroke": 9
+        "stroke": 9,
+        "winner": "A"
     },
     {
         "set": 1,
         "rally": 7,
-        "stroke": 10
+        "stroke": 10,
+        "winner": "B"
     },
     {
         "set": 1,
         "rally": 8,
-        "stroke": 7
+        "stroke": 7,
+        "winner": "B"
     },
     {
         "set": 1,
         "rally": 9,
-        "stroke": 6
+        "stroke": 6,
+        "winner": "B"
     },
     {
         "set": 1,
         "rally": 10,
-        "stroke": 11
+        "stroke": 11,
+        "winner": "A"
     },
     {
         "set": 1,
         "rally": 11,
-        "stroke": 5
+        "stroke": 5,
+        "winner": "B"
     },
     {
         "set": 1,
         "rally": 12,
-        "stroke": 14
+        "stroke": 14,
+        "winner": "A"
     },
     {
         "set": 1,
         "rally": 13,
-        "stroke": 10
+        "stroke": 10,
+        "winner": "B"
     },
     {
         "set": 1,
         "rally": 14,
-        "stroke": 9
+        "stroke": 9,
+        "winner": "A"
     },
     {
         "set": 1,
         "rally": 15,
-        "stroke": 9
+        "stroke": 9,
+        "winner": "B"
     },
     {
         "set": 1,
         "rally": 16,
-        "stroke": 9
+        "stroke": 9,
+        "winner": "A"
     },
     {
         "set": 1,
         "rally": 17,
-        "stroke": 11
+        "stroke": 11,
+        "winner": "B"
     },
     {
         "set": 1,
         "rally": 18,
-        "stroke": 13
+        "stroke": 13,
+        "winner": "B"
     },
     {
         "set": 1,
         "rally": 19,
-        "stroke": 12
+        "stroke": 12,
+        "winner": "A"
     },
     {
         "set": 1,
         "rally": 20,
-        "stroke": 11
+        "stroke": 11,
+        "winner": "A"
     },
     {
         "set": 1,
         "rally": 21,
-        "stroke": 18
+        "stroke": 18,
+        "winner": "B"
     },
     {
         "set": 1,
         "rally": 22,
-        "stroke": 6
+        "stroke": 6,
+        "winner": "A"
     },
     {
         "set": 1,
         "rally": 23,
-        "stroke": 11
+        "stroke": 11,
+        "winner": "B"
     },
     {
         "set": 1,
         "rally": 24,
-        "stroke": 8
+        "stroke": 8,
+        "winner": "A"
     },
     {
         "set": 1,
         "rally": 25,
-        "stroke": 5
+        "stroke": 5,
+        "winner": "B"
     },
     {
         "set": 1,
         "rally": 26,
-        "stroke": 14
+        "stroke": 14,
+        "winner": "A"
     },
     {
         "set": 1,
         "rally": 27,
-        "stroke": 10
+        "stroke": 10,
+        "winner": "A"
     },
     {
         "set": 1,
         "rally": 28,
-        "stroke": 12
+        "stroke": 12,
+        "winner": "B"
     },
     {
         "set": 1,
         "rally": 29,
-        "stroke": 19
+        "stroke": 19,
+        "winner": "B"
     },
     {
         "set": 1,
         "rally": 30,
-        "stroke": 19
+        "stroke": 19,
+        "winner": "A"
     },
     {
         "set": 1,
         "rally": 31,
-        "stroke": 9
+        "stroke": 9,
+        "winner": "B"
     },
     {
         "set": 1,
         "rally": 32,
-        "stroke": 11
+        "stroke": 11,
+        "winner": "B"
     },
     {
         "set": 1,
         "rally": 33,
-        "stroke": 10
+        "stroke": 10,
+        "winner": "B"
     },
     {
         "set": 1,
         "rally": 34,
-        "stroke": 5
+        "stroke": 5,
+        "winner": "B"
     },
     {
         "set": 1,
         "rally": 35,
-        "stroke": 22
+        "stroke": 22,
+        "winner": "A"
     },
     {
         "set": 1,
         "rally": 36,
-        "stroke": 13
+        "stroke": 13,
+        "winner": "B"
     },
     {
         "set": 1,
         "rally": 37,
-        "stroke": 25
+        "stroke": 25,
+        "winner": "A"
     },
     {
         "set": 1,
         "rally": 38,
-        "stroke": 8
+        "stroke": 8,
+        "winner": "B"
     }
 ]
