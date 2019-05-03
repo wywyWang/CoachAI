@@ -4,11 +4,13 @@ import numpy as np
 from collections import Counter
 import itertools  as it
 
-rally = pd.read_excel('../../clip_info_new.xlsx')
+rally = pd.read_excel('./clip_info_new.xlsx')
 rally = rally[['unique_id','rally','ball_round','player','frame_num','server','type','lose_reason']]
 rally_drop = rally.drop(["frame_num","server","lose_reason"],axis=1)
-totaltype = ["挑球","放小球","切球","長球","殺球","未擊球","平球","擋小球","回挑","發小球","未過網","小平球","撲球","掛網球"]
-
+rally_drop = rally_drop[rally_drop['type'] != '未擊球'].reset_index(drop=True)
+rally_drop = rally_drop[rally_drop['type'] != '未過網'].reset_index(drop=True)
+rally_drop = rally_drop[rally_drop['type'] != '掛網球'].reset_index(drop=True)
+totaltype = ["挑球","放小球","切球","長球","殺球","平球","擋小球","回挑","發小球","小平球","撲球","掛網球"]
 field = rally_drop.groupby(['unique_id','rally'])
 filepath = './rally_type.json'
 
@@ -70,6 +72,10 @@ for i in list(field.groups.keys()):
     resultA['count'] = bsA
     resultA = resultA.sort_values(['balltype'])
 
+#         result['rally'] += [resultA['rally']]
+#         result['player'] += [resultA['player']]
+#         result['balltype'] += [resultA['balltype']]
+#         result['count'] += [resultA['count']]
     result = result.append(resultA)
 
     resultA = (resultA.groupby(['rally','player'], as_index=False)
@@ -85,6 +91,13 @@ for i in list(field.groups.keys()):
     resultB = resultB.sort_values(['balltype'])
 
     result = result.append(resultB)
+
+#         resultB = (resultB.groupby(['rally','player'], as_index=False)
+#                  .apply(lambda x: x[['balltype','count']].to_dict('r'))
+#                  .reset_index()
+#                  .rename(columns={0:'result'})
+#                  )
+#         export_json(filepath,resultB)
 
 result = (result.groupby(['rally','player'], as_index=False)
             .apply(lambda x: x[['balltype','count']].to_dict('r'))
