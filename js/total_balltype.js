@@ -1,0 +1,80 @@
+$.getJSON("../statistics/rally_type.json", function(data) {
+    var labels = data.map(function(item) {
+        return item.result.map(function(e){
+            return e.balltype;            
+        })
+    });
+
+    var total = data.map(function(item){
+        return item.result
+    });
+
+    var dataA = new Array(data[0].result.length).fill(0);
+    var dataB = new Array(data[0].result.length).fill(0);
+    for(var i = 0;i<data.length;i+=2){
+        for(var j = 0;j<data[i].result.length;j++){
+            dataA[j] += data[i].result[j].count;
+            dataB[j] += data[i+1].result[j].count
+        }
+    };
+
+    // console.log(dataA)
+    // console.log(dataB)
+
+    var canv = document.createElement('canvas');
+    canv.id = 'total_balltype_canvas';
+    canv.width = 800;
+    canv.height = 400;
+    document.getElementById("total_balltype").appendChild(canv);
+
+    var chartRadarDOM;
+    var chartRadarData;
+    var chartRadarOptions;
+
+    // Chart.defaults.global.responsive = false;
+    chartRadarDOM = document.getElementById("total_balltype_canvas");
+    //custormized options
+    chartRadarOptions = 
+    {
+        scale:{
+            ticks:{
+                min:0,
+                stepSize:10
+            }
+        },
+        legend:{
+            labels:{
+                fontColor: 'rgb(255, 117, 117)',
+                fontSize: 16
+            }
+        }
+    };
+    
+    var chart = new Chart(chartRadarDOM, {
+        type: 'radar',
+        data:{
+            labels: labels[0],
+            datasets: [
+                {
+                  label: "Player A",
+                  fill: true,
+                  backgroundColor: "rgba(179,181,198,0.2)",
+                  borderColor: "rgba(179,181,198,1)",
+                  pointBorderColor: "#fff",
+                  pointBackgroundColor: "rgba(179,181,198,1)",
+                  data: dataA
+                }, {
+                  label: "Player B",
+                  fill: true,
+                  backgroundColor: "rgba(255,99,132,0.2)",
+                  borderColor: "rgba(255,99,132,1)",
+                  pointBorderColor: "#fff",
+                  pointBackgroundColor: "rgba(255,99,132,1)",
+                  pointBorderColor: "#fff",
+                  data: dataB
+                }
+            ]
+        },
+        options: chartRadarOptions
+    });
+});
