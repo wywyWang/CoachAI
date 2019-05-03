@@ -23,7 +23,7 @@ d3.json("../statistics/rally_count.json",function(error,data){
             return y(d.stroke);
         });
 
-    var svg = d3.select("body")
+    var svg = d3.select("#line_chart")
         .append("svg")
         .attr("width", width+100)
         .attr("height", height+100)

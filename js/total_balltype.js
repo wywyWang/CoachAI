@@ -22,7 +22,7 @@ $.getJSON("../statistics/rally_type.json", function(data) {
     console.log(dataB)
 
     var canv = document.createElement('canvas');
-    canv.id = 'total_balltype_canvas';
+    canv.id = 'total_balltype_chart';
     canv.width = 800;
     canv.height = 400;
     document.getElementById("total_balltype").appendChild(canv);
@@ -32,7 +32,7 @@ $.getJSON("../statistics/rally_type.json", function(data) {
     var chartRadarOptions;
 
     // Chart.defaults.global.responsive = false;
-    chartRadarDOM = document.getElementById("total_balltype_canvas");
+    chartRadarDOM = document.getElementById("total_balltype_chart");
     //custormized options
     chartRadarOptions = 
     {

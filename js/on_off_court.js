@@ -1,15 +1,15 @@
 var canv = document.createElement('canvas');
-canv.id = 'on_off_court';
+canv.id = 'on_off_court_chart';
 canv.width = 800;
 canv.height = 400;
-document.body.appendChild(canv);
+document.getElementById("on_off_court").appendChild(canv);
 
 var chartRadarDOM;
 var chartRadarData;
 var chartRadarOptions;
 
 // Chart.defaults.global.responsive = false;
-chartRadarDOM = document.getElementById("on_off_court");
+chartRadarDOM = document.getElementById("on_off_court_chart");
 //custormized options
 chartRadarOptions = 
 {
@@ -18,8 +18,8 @@ chartRadarOptions =
             fontColor: 'rgba(248, 184, 82, 1)',
             fontSize: 16
         }
-    },
-    responsive:false
+    }
+    // responsive:false
 };
 
 $.getJSON("statistics/on_off_court_sum.json", function(data) {
