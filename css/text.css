@@ -1,7 +1,21 @@
+.navbar{
+    margin-bottom: 0.5em;
+}
+
 .modal-header h4 {
     font-size: 30px;
     font-weight: bold;
     text-align: center;
+}
+
+.container .subtitle{
+    font-weight: bold;
+    font-size: 2em;
+    text-align: center;
+}
+
+#line_chart{
+    margin:0px auto;
 }
 
 svg {

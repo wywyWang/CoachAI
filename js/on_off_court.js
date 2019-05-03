@@ -1,7 +1,7 @@
 var canv = document.createElement('canvas');
 canv.id = 'on_off_court_chart';
 canv.width = 800;
-canv.height = 400;
+canv.height = 600;
 document.getElementById("on_off_court").appendChild(canv);
 
 var chartRadarDOM;

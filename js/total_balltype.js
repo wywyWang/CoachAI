@@ -24,7 +24,7 @@ $.getJSON("../statistics/rally_type.json", function(data) {
     var canv = document.createElement('canvas');
     canv.id = 'total_balltype_chart';
     canv.width = 800;
-    canv.height = 400;
+    canv.height = 600;
     document.getElementById("total_balltype").appendChild(canv);
 
     var chartRadarDOM;
