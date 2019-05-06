@@ -16,6 +16,7 @@
 
 #line_chart{
     margin:0px auto;
+    margin-top: 30px;
 }
 
 svg {
@@ -47,4 +48,8 @@ path {
     shape-rendering: crispEdges;
     stroke: #dddddd;
     stroke-width: 1;
+}
+
+.d3_legend{
+    font-size: 1.2em;
 }
