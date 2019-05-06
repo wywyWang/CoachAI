@@ -4,14 +4,14 @@ d3.json("../statistics/rally_count.json",function(error,data){
 
     // handmade legend
     var svg_legend = d3.select("#line_chart").append("svg")
-                        .attr("width", 640)
+                        .attr("width", 740)
                         .attr("height", 30)
-                        
-    svg_legend.append("circle").attr("cx",50).attr("cy",20).attr("r", 6).style("fill", "rgb(66,129,164)")
-    svg_legend.append("circle").attr("cx",250).attr("cy",20).attr("r", 6).style("fill", "rgb(255,99,132)")
-    svg_legend.append("text").attr("class", "d3_legend").attr("x", 60).attr("y", 20)
+
+    svg_legend.append("circle").attr("cx",190).attr("cy",20).attr("r", 6).style("fill", "rgb(66,129,164)")
+    svg_legend.append("circle").attr("cx",470).attr("cy",20).attr("r", 6).style("fill", "rgb(255,99,132)")
+    svg_legend.append("text").attr("class", "d3_legend").attr("x", 200).attr("y", 20)
                 .text("Player A Win").style("fill","rgb(66,129,164)").attr("alignment-baseline","middle")
-    svg_legend.append("text").attr("class", "d3_legend").attr("x", 260).attr("y", 20)
+    svg_legend.append("text").attr("class", "d3_legend").attr("x", 480).attr("y", 20)
                 .text("Player B Win").style("fill","rgb(255,99,132)").attr("alignment-baseline","middle")
 
     var width = 640;
