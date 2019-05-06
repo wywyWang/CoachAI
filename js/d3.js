@@ -97,7 +97,7 @@ d3.json("../statistics/rally_count.json",function(error,data){
 
     function handleMouseClick(d,i){
         var coords = d3.mouse(this);
-        console.log(coords);
+        // console.log(coords);
 
         //get index from json file
         var id = this.id;
@@ -182,7 +182,7 @@ d3.json("../statistics/rally_count.json",function(error,data){
     //handleMouseOver & handleMouseOut not working yet
     function handleMouseOver(d,i){
         d3.select(this).attr("r",7);
-        console.log("OVER");
+        // console.log("OVER");
     }
 
     function handleMouseOut(d,i){
@@ -221,7 +221,7 @@ d3.json("../statistics/rally_count.json",function(error,data){
                 var ctx = canvas[0].getContext("2d"); 
                 $(".modal-body canvas").remove();
                 $(".modal-body").html('<canvas id="canvas" width="1000" height="800"></canvas>');
-                console.log("CLOSE")
+                // console.log("CLOSE")
             });
         });
      });
