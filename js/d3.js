@@ -116,6 +116,7 @@ d3.json("../statistics/rally_count.json",function(error,data){
         var id = this.id;
         console.log(id)
         $.getJSON("../statistics/rally_type.json", function(data2) {
+            document.getElementById("rallytitle").innerHTML = id + ' 球種分佈圖';
             //get index from json file
             index = data2.findIndex(function(item){
                 return id == item.rally;
