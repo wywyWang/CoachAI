@@ -1,23 +1,48 @@
 $.getJSON("../statistics/rally_type.json", function(data) {
-    var labels = data.map(function(item) {
-        return item.result.map(function(e){
-            return e.balltype;            
-        })
-    });
+    var count=1;
 
-    var total = data.map(function(item){
-        return item.result
-    });
+    var labels = new Array(data.length/2);
+    for(var i=0;i<data.length/2;i+=1){
+      labels[i]=count;
+      count++;
+    }
+    var dataA = new Array(data.length/2);
+    var countA = 0;
+    for(var i=0;i<data.length;i+=2){
+      for(var j=0;j<data[i].result.length;j++){
+        if(data[i].result[j].balltype=="長球"){
+          dataA[countA]=data[i].result[j].count;
+          countA++;
+        }        
+      }
+    }
+    var dataB = new Array(data.length/2);
+    var countB = 0;
+    for(var i=1;i<data.length;i+=2){
+      for(var j=0;j<data[i].result.length;j++){
+        if(data[i].result[j].balltype=="長球"){
+          dataB[countB]=data[i].result[j].count;
+          countB++;
+        }        
+      }
+    }  
 
-    var dataA = new Array(data[0].result.length).fill(0);
-    var dataB = new Array(data[0].result.length).fill(0);
-    for(var i = 0;i<data.length;i+=2){
-        for(var j = 0;j<data[i].result.length;j++){
-            dataA[j] += data[i].result[j].count;
-            dataB[j] += data[i+1].result[j].count
-        }
-    };
-
+    // }
+    // var dataB = data.map(function(item){
+    //   if (item.player=='A'){
+    //     count+=1;
+    //   }
+    //   return count;      
+    // });
+    // var dataA = new Array(data[0].result.length).fill(0);
+    // var dataB = new Array(data[0].result.length).fill(0);
+    // for(var i = 0;i<data.length;i+=2){
+    //     for(var j = 0;j<data[i].result.length;j++){
+    //         dataA[j] += data[i].result[j].count;
+    //         dataB[j] += data[i+1].result[j].count
+    //     }
+    // };
+    console.log(labels)
     console.log(dataA)
     console.log(dataB)
 
@@ -54,13 +79,14 @@ $.getJSON("../statistics/rally_type.json", function(data) {
     };
     
     var chart = new Chart(chartRadarDOM, {
-        type: 'radar',
+        type: 'line',
         data:{
-            labels: labels[0],
+            labels: labels,
             datasets: [
                 {
                   label: "Player A",
-                  fill: true,
+                  fill: false,
+                  cubicInterpolationMode:"monotone",
                   backgroundColor: "rgba(66,129,164,0.2)",
                   borderColor: "rgba(66,129,164,1)",
                   pointBorderColor: "#fff",
@@ -68,7 +94,8 @@ $.getJSON("../statistics/rally_type.json", function(data) {
                   data: dataA
                 }, {
                   label: "Player B",
-                  fill: true,
+                  fill: false,
+                  cubicInterpolationMode:"monotone",
                   backgroundColor: "rgba(255,99,132,0.2)",
                   borderColor: "rgba(255,99,132,1)",
                   pointBorderColor: "#fff",
