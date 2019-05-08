@@ -84,7 +84,7 @@ $.getJSON("../statistics/rally_type.json", function(data) {
             labels: labels,
             datasets: [
                 {
-                  label: "Player A",
+                  label: "長球 A",
                   fill: false,
                   cubicInterpolationMode:"monotone",
                   backgroundColor: "rgba(66,129,164,0.2)",
@@ -93,7 +93,7 @@ $.getJSON("../statistics/rally_type.json", function(data) {
                   pointBackgroundColor: "rgba(66,129,164,1)",
                   data: dataA
                 }, {
-                  label: "Player B",
+                  label: "長球 B",
                   fill: false,
                   cubicInterpolationMode:"monotone",
                   backgroundColor: "rgba(255,99,132,0.2)",
