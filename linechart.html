@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://d3js.org/d3.v4.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+    <script src="js/d3.js"></script>
     <link rel="stylesheet"  href="css/text.css">
 </head>
 <body>
@@ -40,8 +41,19 @@
                 <script src="js/total_balltype.js"></script>
             </div>
         </div>
-        <div id="line_chart">
-            <script src="js/d3.js"></script>
+
+        <div>
+            <form id="interval-form">
+                <div class="form-group col-md-6">
+                    <input type="text" class="col-lm-2 col-form-label" id="down" placeholder="開始回合">
+                    <input type="text" class="col-lm-2 col-form-label" id="up" placeholder="結束回合">
+                    <button id="interval-submit" type="button" class="btn btn-primary">查詢</button>
+                </div>
+            </form>
+    
+            <div id="line_chart">
+                <script type="text/javascript">init();</script>
+            </div>
         </div>
         
         <div class="modal" id="radarChart" role="dialog" aria-hidden="true">
@@ -51,7 +63,7 @@
                         <button id="closechart" type="button" class="close" data-dismiss="modal">
                             <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
                         </button>
-                        <h4 class="modal-title" id="rallytitle">球種分析圖</h4>
+                        <h4 class="modal-title" id="rallytitle"></h4>
                     </div>
                     <div class="modal-body">
                         <canvas id="canvas" width="1000" height="800"></canvas>
