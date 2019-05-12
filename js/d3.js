@@ -1,23 +1,20 @@
-function init(){
+function init(minrally,maxrally){
     d3.json("../statistics/rally_count.json",function(error,data){
         if (error)
             throw error;
 
-        //init rally interval
-        var maxrally = d3.max(data, function(d){
-            return d.rally;
-        })
-        var minrally = d3.min(data, function(d){
-            return d.rally;
-        })
-
-        //get interval when clicking submit
-        var form = document.getElementById("interval-form");
-        document.getElementById("interval-submit").addEventListener("click", function () {
-            minrally = document.getElementById("down").value
-            maxrally = document.getElementById("up").value
-            alert("wait")
-        });
+        // init minrally and maxrally if are undefined,null,0,NaN,empty string,false
+        if (!minrally){
+            minrally = d3.min(data, function(d){
+                return d.rally;
+            });
+        }
+        if (!maxrally){
+            maxrally = d3.max(data, function(d){
+                return d.rally;
+            });
+        }
+        
         console.log(maxrally)
         console.log(minrally)
 
@@ -259,4 +256,12 @@ function init(){
             });
         });
     })
+}
+
+function test(){
+    //get interval when clicking submit
+    var minrally = document.getElementById("down").value;
+    var maxrally = document.getElementById("up").value;
+    init(minrally, maxrally);
+    alert("HI");
 }
