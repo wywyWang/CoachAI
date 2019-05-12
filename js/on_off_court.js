@@ -1,4 +1,4 @@
-function init_on_off_court(){
+function init_on_off_court(minrally,maxrally){
     var canv = document.createElement('canvas');
     canv.id = 'on_off_court_chart';
     canv.width = 800;
@@ -25,6 +25,21 @@ function init_on_off_court(){
     };
 
     $.getJSON("statistics/on_off_court_sum.json", function(data) {
+        // init minrally and maxrally if are undefined,null,0,NaN,empty string,false
+        if (!minrally){
+            minrally = d3.min(data, function(d){
+                return d.rally;
+            });
+        }
+        if (!maxrally){
+            maxrally = d3.max(data, function(d){
+                return d.rally;
+            });
+        }
+        
+        console.log(maxrally)
+        console.log(minrally)
+        
         var labels = data.map(function(e) {
             return e.balltype;
         });
@@ -57,4 +72,12 @@ function init_on_off_court(){
             options: chartRadarOptions
         });
     });
+}
+
+function change_interval(){
+    //get interval when clicking submit
+    var minrally = document.getElementById("down").value;
+    var maxrally = document.getElementById("up").value;
+    init_on_off_court(minrally, maxrally);
+    alert("HI");
 }
