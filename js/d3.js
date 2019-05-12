@@ -15,8 +15,8 @@ function init_linechart(minrally,maxrally){
             });
         }
         
-        console.log(maxrally)
         console.log(minrally)
+        console.log(maxrally)
 
         // handmade legend
         var svg_legend = d3.select("#line_chart").append("svg")
@@ -278,29 +278,28 @@ function init_on_off_court(minrally,maxrally){
         // responsive:false
     };
 
-    $.getJSON("statistics/on_off_court_sum.json", function(data) {
+    $.getJSON("statistics/on_off_court.json", function(data) {
         // init minrally and maxrally if are undefined,null,0,NaN,empty string,false
         if (!minrally){
-            minrally = d3.min(data, function(d){
-                return d.rally;
-            });
+            minrally = Math.min.apply(Math, data.map(function(d) { 
+                return d.rally; 
+            }));
         }
         if (!maxrally){
-            maxrally = d3.max(data, function(d){
-                return d.rally;
-            });
+            maxrally = Math.max.apply(Math, data.map(function(d) { 
+                return d.rally; 
+            }));
         }
-        
-        console.log(maxrally)
-        console.log(minrally)
-        
-        var labels = data.map(function(e) {
-            return e.balltype;
-        });
 
-        var data = data.map(function(e) {
-            return e.on_off_court;
-        });
+        //count each reason
+        var group_data = Object.keys(_.groupBy(data,"on_off_court"))
+        var sum_data = new Array(group_data.length).fill(0);
+        for(var i = parseInt(minrally);i<=parseInt(maxrally);i++){
+            sum_data[data[i-1].on_off_court] += 1;
+        }
+        console.log(sum_data)
+        
+        var labels = ["球場內","球場外","掛網"]
 
         //random color generator
         color = new Array();
@@ -320,7 +319,7 @@ function init_on_off_court(minrally,maxrally){
                     pointBorderColor: "rgba(0,0,0,0)",
                     borderColor: 'rgb(17, 16, 17)',
                     borderWidth: 1,
-                    data: data
+                    data: sum_data
                 }]
             },
             options: chartRadarOptions
