@@ -11,6 +11,8 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://d3js.org/d3.v4.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+    <script src="js/on_off_court.js"></script>
+    <script src="js/total_balltype.js"></script>
     <script src="js/d3.js"></script>
     <link rel="stylesheet"  href="css/text.css">
 </head>
@@ -34,11 +36,11 @@
         <div class="row">
             <div id="on_off_court" class="col-md-6">
                 <div class="subtitle">全場失分比例</div>
-                <script src="js/on_off_court.js"></script>
+                <script type="text/javascript">init_on_off_court();</script>
             </div>
             <div id="total_balltype" class="col-md-6">
                 <div class="subtitle">全場球種分析</div>
-                <script src="js/total_balltype.js"></script>
+                <script type="text/javascript">init_total_balltype();</script>
             </div>
         </div>
 
@@ -52,7 +54,7 @@
             </form>
     
             <div id="line_chart">
-                <script type="text/javascript">init();</script>
+                <script type="text/javascript">init_linechart();</script>
             </div>
         </div>
         
