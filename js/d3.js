@@ -94,9 +94,29 @@ function init_linechart(minrally,maxrally){
         .attr("class", "y gridaxis")
         .attr("transform", "translate(30,30)");
 
+        //rendering line between interval
         svg.append("path") // Add the valueline path.
             .attr("transform", "translate(30,30)")
-            .attr("d", valueline(data));
+            .attr("d", valueline(data.filter(function(d){
+                return d.rally >= minrally && d.rally <= maxrally;
+            })))
+            .attr("stroke","rgb(255, 210, 136)");
+
+        //rendering line less than interval
+        svg.append("path") 
+            .attr("transform", "translate(30,30)")
+            .attr("d", valueline(data.filter(function(d){
+                return d.rally <= minrally;
+            })))
+            .attr("stroke","rgb(216, 212, 212)");
+
+        //rendering line more than interval
+        svg.append("path") 
+            .attr("transform", "translate(30,30)")
+            .attr("d", valueline(data.filter(function(d){
+                return d.rally >= maxrally;
+            })))
+            .attr("stroke","rgb(216, 212, 212)");
 
         //draw circle points
         var circles = svg.selectAll("circle")
@@ -112,7 +132,9 @@ function init_linechart(minrally,maxrally){
                                 .attr("r", function (d) { return 3.5; })
                                 .attr("transform", "translate(30,30)")
                                 .style("fill", function (d) { 
-                                    if (d.winner == "A")
+                                    if (d.rally < minrally || d.rally > maxrally)
+                                        return "rgb(216, 212, 212)";
+                                    else if(d.winner == "A")
                                         return "rgb(66,129,164)";
                                     else
                                         return "rgb(255,99,132)";
@@ -331,7 +353,15 @@ function change_interval(){
     //get interval when clicking submit
     var minrally = document.getElementById("down").value;
     var maxrally = document.getElementById("up").value;
+
+    //delete original linechart
+    d3.selectAll("svg").remove();
+
     init_linechart(minrally, maxrally);
+
+    // var canvas = modal.find('#on_off_court canvas');
+    // var ctx = canvas[0].getContext("2d"); 
+    // $(".modal-body canvas").remove();
+    // $(".modal-body").html('<canvas id="on_off_court_chart" width="800" height="600"></canvas>');
     init_on_off_court(minrally,maxrally);
-    alert("HI");
 }

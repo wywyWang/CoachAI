@@ -14,6 +14,14 @@
     text-align: center;
 }
 
+.form-group{
+    margin-left: 50px;
+}
+
+.form-group input{
+    width: 100px;
+}
+
 #line_chart{
     margin:0px auto;
     margin-top: 30px;
@@ -26,7 +34,6 @@ svg {
 
 path {
     fill: none;
-    stroke: rgb(255, 210, 136);
     stroke-width: 2;
 }
 
