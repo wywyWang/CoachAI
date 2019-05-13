@@ -349,6 +349,94 @@ function init_on_off_court(minrally,maxrally){
     });
 }
 
+function init_total_balltype(minrally,maxrally){
+    $.getJSON("../statistics/rally_type.json", function(data) {
+        var labels = data.map(function(item) {
+            return item.result.map(function(e){
+                return e.balltype;            
+            })
+        });
+
+        var total = data.map(function(item){
+            return item.result
+        });
+
+        var dataA = new Array(data[0].result.length).fill(0);
+        var dataB = new Array(data[0].result.length).fill(0);
+        for(var i = 0;i<data.length;i+=2){
+            rally = parseInt(data[i].rally.split("-")[1]);
+            if (rally < minrally || rally > maxrally)
+                continue
+            for(var j = 0;j<data[i].result.length;j++){
+                dataA[j] += data[i].result[j].count;
+                dataB[j] += data[i+1].result[j].count
+            }
+        };
+
+        var canv = document.createElement('canvas');
+        canv.id = 'total_balltype_chart';
+        canv.width = 800;
+        canv.height = 600;
+        document.getElementById("total_balltype").appendChild(canv);
+
+        var chartRadarDOM;
+        var chartRadarData;
+        var chartRadarOptions;
+
+        // Chart.defaults.global.responsive = false;
+        chartRadarDOM = document.getElementById("total_balltype_chart");
+        //custormized options
+        chartRadarOptions = 
+        {
+            scale:{
+                ticks:{
+                    min:0,
+                    // stepSize:10
+                },
+                pointLabels: { 
+                    fontSize:14 
+                }
+            },
+            legend:{
+                labels:{
+                    fontColor: 'rgba(248, 184, 82, 1)',
+                    fontSize: 16
+                }
+            }
+        };
+        
+        var chart = new Chart(chartRadarDOM, {
+            type: 'radar',
+            data:{
+                labels: labels[0],
+                datasets: [
+                    {
+                    label: "Player A",
+                    fill: true,
+                    cubicInterpolationMode:"monotone",
+                    backgroundColor: "rgba(66,129,164,0.2)",
+                    borderColor: "rgba(66,129,164,1)",
+                    pointBorderColor: "#fff",
+                    pointBackgroundColor: "rgba(66,129,164,1)",
+                    data: dataA
+                    }, {
+                    label: "Player B",
+                    fill: true,
+                    cubicInterpolationMode:"monotone",
+                    backgroundColor: "rgba(255,99,132,0.2)",
+                    borderColor: "rgba(255,99,132,1)",
+                    pointBorderColor: "#fff",
+                    pointBackgroundColor: "rgba(255,99,132,1)",
+                    pointBorderColor: "#fff",
+                    data: dataB
+                    }
+                ]
+            },
+            options: chartRadarOptions
+        });
+    });
+}
+
 function change_interval(){
     //get interval when clicking submit
     var minrally = document.getElementById("down").value;
@@ -363,4 +451,9 @@ function change_interval(){
     $('#on_off_court').html('<div class="subtitle">全場失分比例</div>\
     <canvas id="on_off_court_chart" width="800" height="600"></canvas>'); 
     init_on_off_court(minrally,maxrally);
+
+    //delete old radar
+    $('#total_balltype_chart').remove();
+    $('#total_balltype').html('<div class="subtitle">全場球種統計</div>'); 
+    init_total_balltype(minrally,maxrally);
 }
