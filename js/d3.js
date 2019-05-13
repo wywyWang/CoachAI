@@ -354,14 +354,12 @@ function change_interval(){
     var minrally = document.getElementById("down").value;
     var maxrally = document.getElementById("up").value;
 
-    //delete original linechart
+    //delete old linechart
     d3.selectAll("svg").remove();
-
     init_linechart(minrally, maxrally);
 
-    // var canvas = modal.find('#on_off_court canvas');
-    // var ctx = canvas[0].getContext("2d"); 
-    // $(".modal-body canvas").remove();
-    // $(".modal-body").html('<canvas id="on_off_court_chart" width="800" height="600"></canvas>');
+    //delete old doughnut
+    $('#on_off_court_chart').remove();
+    $('#on_off_court').html('<canvas id="on_off_court_chart" width="800" height="600"></canvas>'); 
     init_on_off_court(minrally,maxrally);
 }
