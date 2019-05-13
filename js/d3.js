@@ -360,6 +360,7 @@ function change_interval(){
 
     //delete old doughnut
     $('#on_off_court_chart').remove();
-    $('#on_off_court').html('<canvas id="on_off_court_chart" width="800" height="600"></canvas>'); 
+    $('#on_off_court').html('<div class="subtitle">全場失分比例</div>\
+    <canvas id="on_off_court_chart" width="800" height="600"></canvas>'); 
     init_on_off_court(minrally,maxrally);
 }
