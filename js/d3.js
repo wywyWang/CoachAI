@@ -74,8 +74,40 @@ function init_linechart(minrally,maxrally){
         });
 
         var pointcolor = [];
+        var datadown = [];
+        var datainterval = [];
+        var dataup = [];
         for (var i = 0;i<data.length;i++){
             console.log(data[i])
+            if (data[i].rally < minrally){
+                datadown.push(data[i].stroke);
+                datainterval.push(null);
+                dataup.push(null);
+            }
+            else if (data[i].rally > maxrally){
+                datadown.push(null);
+                datainterval.push(null);
+                dataup.push(data[i].stroke);
+            }
+            else{
+                if (data[i].rally == minrally){
+                    datadown.push(data[i].stroke);
+                    datainterval.push(data[i].stroke);
+                    dataup.push(null);
+                }
+                else if (data[i].rally == maxrally){
+                    datadown.push(null);
+                    datainterval.push(data[i].stroke);
+                    dataup.push(data[i].stroke);
+                }
+                else{
+                    datadown.push(null);
+                    datainterval.push(data[i].stroke);
+                    dataup.push(null);
+                }
+                
+            }
+                
             if (data[i].rally < minrally || data[i].rally > maxrally)
                 pointcolor.push("rgb(216, 212, 212)");
             else if(data[i].winner == 'A')
@@ -90,15 +122,37 @@ function init_linechart(minrally,maxrally){
                 labels: labels,
                 datasets: [
                     {
-                      fill: false,
-                      cubicInterpolationMode:"monotone",
-                      backgroundColor: "rgba(66,129,164,0.2)",
-                      borderColor: "rgb(255, 210, 136)",
-                      pointBorderColor: "#fff",
-                      pointBackgroundColor:pointcolor,
-                      pointRadius: 4,
-                      pointHoverRadius: 6,
-                      data: datas
+                        fill: false,
+                        cubicInterpolationMode:"monotone",
+                        backgroundColor: "rgba(66,129,164,0.2)",
+                        borderColor: "rgb(216, 212, 212)",
+                        pointBorderColor: "#fff",
+                        pointBackgroundColor:pointcolor,
+                        pointRadius: 4,
+                        pointHoverRadius: 6,
+                        data: datadown
+                    },
+                    {
+                        fill: false,
+                        cubicInterpolationMode:"monotone",
+                        backgroundColor: "rgba(66,129,164,0.2)",
+                        borderColor: "rgb(255, 210, 136)",
+                        pointBorderColor: "#fff",
+                        pointBackgroundColor:pointcolor,
+                        pointRadius: 4,
+                        pointHoverRadius: 6,
+                        data: datainterval
+                    },
+                    {
+                        fill: false,
+                        cubicInterpolationMode:"monotone",
+                        backgroundColor: "rgba(66,129,164,0.2)",
+                        borderColor: "rgb(216, 212, 212)",
+                        pointBorderColor: "#fff",
+                        pointBackgroundColor:pointcolor,
+                        pointRadius: 4,
+                        pointHoverRadius: 6,
+                        data: dataup
                     }
                 ]
             },
