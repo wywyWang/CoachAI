@@ -1,5 +1,5 @@
 function init_linechart(minrally,maxrally){
-    d3.json("../statistics/rally_count.json",function(error,data){
+    d3.json("../statistics/rally_count_real.json",function(error,data){
         if (error)
             throw error;
 
