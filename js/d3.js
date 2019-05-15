@@ -1,3 +1,94 @@
+var set = 1;
+function init_test(minrally,maxrally){
+    // init minrally and maxrally if are undefined,null,0,NaN,empty string,false
+    $.getJSON("statistics/rally_count_real.json", function(data) {
+        data = data.filter(function(item) {
+            return item.set == set
+        });
+        data = data[0].result
+        console.log(data)
+        if (!minrally){
+            minrally = Math.min.apply(Math, data.map(function(d) { 
+                return d.rally;
+            }));
+        }
+
+        if (!maxrally){
+            maxrally = Math.max.apply(Math, data.map(function(d) { 
+                return d.rally
+            }));
+        }
+        console.log(minrally)
+        console.log(maxrally)
+
+        var canv = document.createElement('canvas');
+        canv.id = 'line_chart';
+        canv.width = 800;
+        canv.height = 600;
+        document.getElementById("line").appendChild(canv);
+
+        var chartRadarDOM;
+        var chartRadarData;
+        var chartRadarOptions;
+
+        chartRadarDOM = document.getElementById("line_chart");
+        //custormized options
+        chartRadarOptions = 
+        {
+            legend:{
+                display: false
+            },
+            scales:{
+                xAxes: [{
+                    scaleLabel:{
+                        display: true,
+                        labelString: '回合',
+                        fontSize: 16
+                    }
+                }],
+                yAxes: [{
+                    ticks:{
+                        beginAtZero: true,
+                    },
+                    scaleLabel:{
+                        display: true,
+                        labelString: '拍數',
+                        fontSize: 16
+                    }
+                }]
+            }
+        };
+
+        var labels = data.map(function(e) {
+            return e.rally;
+        });
+
+        var data = data.map(function(e) {
+            return e.stroke;
+        });
+
+        var chart = new Chart(chartRadarDOM, {
+            type: 'line',
+            data:{
+                labels: labels,
+                datasets: [
+                    {
+                      fill: false,
+                      cubicInterpolationMode:"monotone",
+                      backgroundColor: "rgba(66,129,164,0.2)",
+                      borderColor: "rgba(66,129,164,1)",
+                      pointBorderColor: "#fff",
+                      pointBackgroundColor: "rgba(66,129,164,1)",
+                      pointRadius: 4,
+                      pointHoverRadius: 6,
+                      data: data
+                    }
+                ]
+            },
+            options: chartRadarOptions
+        });
+    });
+}
 function init_linechart(minrally,maxrally){
     d3.json("../statistics/rally_count_real.json",function(error,data){
         if (error)
@@ -110,13 +201,6 @@ function init_linechart(minrally,maxrally){
             })))
             .attr("stroke","rgb(216, 212, 212)");
 
-            // 算出贏的球種用雷達圖呈現(像是以十個回為一個window就還是可以雷達圖呈現)、選手失誤比例和得失分(怎麼贏的，得分往回推前三球種有個得分方程式，失分大概都是甚麼狀況)
-// 雷達圖:戰術分析，可以藉由雷達圖看出選手是哪種類型(EX:攻擊型選手)，把分析結果顯示出來(像是少拍的時候通常都是B贏，代表A在前五拍左右的處理要再更好)，選手贏的拍數distribution，把X-Y軸的label顯示出來
-// 全場失分比例要分成A跟B各自的
-// 失誤:主動失誤、非受破性失誤、受迫性失誤(只是記錄用 我們不用做))
-// 要有兩種網頁(一個釋放ground truth 一個是我們算出來的)
-// 之後可以先用大範圍(小球=放小球 擋小球之類的)
-// 掛網球、小平球拿掉
         //rendering line more than interval
         svg.append("path") 
             .attr("transform", "translate(30,30)")

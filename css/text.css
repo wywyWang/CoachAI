@@ -25,6 +25,7 @@
 #line_chart{
     margin:0px auto;
     margin-top: 30px;
+    margin-bottom: 30px;
 }
 
 svg {
