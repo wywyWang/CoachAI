@@ -78,7 +78,7 @@ function init_linechart(minrally,maxrally){
         var datainterval = [];
         var dataup = [];
         for (var i = 0;i<data.length;i++){
-            console.log(data[i])
+            // console.log(data[i])
             if (data[i].rally < minrally){
                 datadown.push(data[i].stroke);
                 datainterval.push(null);
@@ -438,24 +438,38 @@ function change_interval(){
 }
 
 function get_interval_up(){
-    $.getJSON("../statistics/rally_type.json", function(data) {
-        var i;
-        for(i=1;i<=data.length/2;i+=1)
+    $.getJSON("statistics/rally_count_real.json", function(data) {
+        //filter data to specific set
+        data = data.filter(function(item) {
+            return item.set == set
+        });
+        data = data[0].result
+        maximum = Math.max.apply(Math, data.map(function(d) { 
+            return d.rally;
+        }));  
+        for(var i=1;i<=maximum;i+=1)
         {
             var insertText = '<option value='+i+'>'+i+'</option>';
             //document.getElementById("up").appendChild=insertText;
             $('#up').append(insertText); 
         }
-    });
+    })
 }
 function get_interval_down(){
-    $.getJSON("../statistics/rally_type.json", function(data) {
-        var i;
-        for(i=1;i<=data.length/2;i+=1)
+    $.getJSON("statistics/rally_count_real.json", function(data) {
+        //filter data to specific set
+        data = data.filter(function(item) {
+            return item.set == set
+        });
+        data = data[0].result
+        maximum = Math.max.apply(Math, data.map(function(d) { 
+            return d.rally;
+        }));  
+        for(var i=1;i<=maximum;i+=1)
         {
             var insertText = '<option value='+i+'>'+i+'</option>';
+            //document.getElementById("up").appendChild=insertText;
             $('#down').append(insertText); 
-            //document.getElementById("down").appendChild=insertText;
         }
-    });
+    })
 }

@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://d3js.org/d3.v4.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@0.5.0"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/2.4.1/lodash.min.js"></script>
     <script src="js/d3.js"></script>
     <link rel="stylesheet"  href="css/text.css">
@@ -47,6 +48,9 @@
         <div>
             <form id="interval-form">
                 <div class="form-group col-md-6">
+                    <select id="set">
+                        <script type="text/javascript">get_interval_set();</script>
+                    </select>
                     <select id="down">
                         <script type="text/javascript">get_interval_down();</script>
                     </select>
