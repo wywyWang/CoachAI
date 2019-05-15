@@ -464,3 +464,26 @@ function change_interval(){
     $('#total_balltype').html('<div class="subtitle">全場球種統計</div>'); 
     init_total_balltype(minrally,maxrally);
 }
+
+function get_interval_up(){
+    $.getJSON("../statistics/rally_type.json", function(data) {
+        var i;
+        for(i=1;i<=data.length/2;i+=1)
+        {
+            var insertText = '<option value='+i+'>'+i+'</option>';
+            //document.getElementById("up").appendChild=insertText;
+            $('#up').append(insertText); 
+        }
+    });
+}
+function get_interval_down(){
+    $.getJSON("../statistics/rally_type.json", function(data) {
+        var i;
+        for(i=1;i<=data.length/2;i+=1)
+        {
+            var insertText = '<option value='+i+'>'+i+'</option>';
+            $('#down').append(insertText); 
+            //document.getElementById("down").appendChild=insertText;
+        }
+    });
+}

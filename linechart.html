@@ -49,8 +49,12 @@
         <div>
             <form id="interval-form">
                 <div class="form-group col-md-6">
-                    <input type="text" class="col-lm-2 col-form-label" id="down" placeholder="開始回合">
-                    <input type="text" class="col-lm-2 col-form-label" id="up" placeholder="結束回合">
+                    <select id="down">
+                        <script type="text/javascript">get_interval_down();</script>
+                    </select>
+                    <select id="up">
+                        <script type="text/javascript">get_interval_up();</script>
+                    </select>
                     <button id="interval-submit" type="button" class="btn btn-primary" onclick=change_interval()>查詢</button>
                 </div>
             </form>
