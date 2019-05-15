@@ -1,5 +1,5 @@
 var set = 1;
-function init_test(minrally,maxrally){
+function init_linechart(minrally,maxrally){
     $.getJSON("statistics/rally_count_real.json", function(data) {
         //filter data to specific set
         data = data.filter(function(item) {
@@ -57,6 +57,11 @@ function init_test(minrally,maxrally){
                         fontSize: 16
                     }
                 }]
+            },
+            elements: {
+                line: {
+                    tension: 0 // disables bezier curves
+                }
             }
         };
 
@@ -64,9 +69,20 @@ function init_test(minrally,maxrally){
             return e.rally;
         });
 
-        var data = data.map(function(e) {
+        var datas = data.map(function(e) {
             return e.stroke;
         });
+
+        var pointcolor = [];
+        for (var i = 0;i<data.length;i++){
+            console.log(data[i])
+            if (data[i].rally < minrally || data[i].rally > maxrally)
+                pointcolor.push("rgb(216, 212, 212)");
+            else if(data[i].winner == 'A')
+                pointcolor.push("rgb(66,129,164)");
+            else
+                pointcolor.push("rgb(255,99,132)");
+        }
 
         var chart = new Chart(chartRadarDOM, {
             type: 'line',
@@ -77,12 +93,12 @@ function init_test(minrally,maxrally){
                       fill: false,
                       cubicInterpolationMode:"monotone",
                       backgroundColor: "rgba(66,129,164,0.2)",
-                      borderColor: "rgba(66,129,164,1)",
+                      borderColor: "rgb(255, 210, 136)",
                       pointBorderColor: "#fff",
-                      pointBackgroundColor: "rgba(66,129,164,1)",
+                      pointBackgroundColor:pointcolor,
                       pointRadius: 4,
                       pointHoverRadius: 6,
-                      data: data
+                      data: datas
                     }
                 ]
             },
@@ -352,7 +368,7 @@ function change_interval(){
     var maxrally = document.getElementById("up").value;
 
     //delete old linechart
-    d3.selectAll("svg").remove();
+    $('#line_chart').remove();
     init_linechart(minrally, maxrally);
 
     //delete old doughnut
