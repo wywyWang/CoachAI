@@ -456,25 +456,11 @@ function change_interval(){
     init_total_balltype(minrally,maxrally);
 }
 
-function get_interval_up(){
-    $.getJSON("statistics/rally_count_real.json", function(data) {
-        //filter data to specific set
-        data = data.filter(function(item) {
-            return item.set == set
-        });
-        data = data[0].result
-        maximum = Math.max.apply(Math, data.map(function(d) { 
-            return d.rally;
-        }));  
-        for(var i=1;i<=maximum;i+=1)
-        {
-            var insertText = '<option value='+i+'>'+i+'</option>';
-            //document.getElementById("up").appendChild=insertText;
-            $('#up').append(insertText); 
-        }
-    })
+function get_interval_set(){
+    
 }
-function get_interval_down(){
+
+function get_interval_updown(){
     $.getJSON("statistics/rally_count_real.json", function(data) {
         //filter data to specific set
         data = data.filter(function(item) {
@@ -489,6 +475,7 @@ function get_interval_down(){
             var insertText = '<option value='+i+'>'+i+'</option>';
             //document.getElementById("up").appendChild=insertText;
             $('#down').append(insertText); 
+            $('#up').append(insertText); 
         }
     })
 }
