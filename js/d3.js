@@ -460,6 +460,9 @@ function change_interval(){
     $('#total_balltype_chart').remove();
     $('#total_balltype').html('<div class="subtitle">全場球種統計</div>'); 
     init_total_balltype(minrally,maxrally);
+
+    //use set to update interval dropdown,but has problem,need delete old dropdown
+    get_interval_updown(set);
 }
 
 function get_interval_set(){
@@ -480,10 +483,13 @@ function get_interval_set(){
     });
 }
 
-function get_interval_updown(){
+function get_interval_updown(set){
     $.getJSON("statistics/rally_count_real.json", function(data) {
-        //set need to be solved
-        var set = 1;
+        //init set
+        if (!set){
+            set = 1;
+        }
+
         //filter data to specific set
         data = data.filter(function(item) {
             return item.set == set
