@@ -1,6 +1,10 @@
-var set = 1;
-function init_linechart(minrally,maxrally){
+
+function init_linechart(minrally,maxrally,set){
     $.getJSON("statistics/rally_count_real.json", function(data) {
+        //init set
+        if (!set){
+            set = 1;
+        }
         //filter data to specific set
         data = data.filter(function(item) {
             return item.set == set
@@ -19,6 +23,7 @@ function init_linechart(minrally,maxrally){
                 return d.rally
             }));
         }
+        console.log(set);
         console.log(minrally)
         console.log(maxrally)
 
@@ -439,10 +444,11 @@ function change_interval(){
     //get interval when clicking submit
     var minrally = document.getElementById("down").value;
     var maxrally = document.getElementById("up").value;
+    var set = document.getElementById("set").value;
 
     //delete old linechart
     $('#line_chart').remove();
-    init_linechart(minrally, maxrally);
+    init_linechart(minrally, maxrally, set);
 
     //delete old doughnut
     $('#on_off_court_chart').remove();
@@ -457,11 +463,27 @@ function change_interval(){
 }
 
 function get_interval_set(){
-    
+    $.getJSON("statistics/rally_count_real.json", function(data) {
+        //find max set
+        var maximum = 0;
+        for (var i=0 ; i<data.length ; i++) {
+            if (data[i].set > maximum)
+                maximum = data[i].set;
+        }
+
+        for(var i=1;i<=maximum;i+=1)
+        {
+            var insertText = '<option value='+i+'>'+i+'</option>';
+            //document.getElementById("up").appendChild=insertText;
+            $('#set').append(insertText); 
+        }
+    });
 }
 
 function get_interval_updown(){
     $.getJSON("statistics/rally_count_real.json", function(data) {
+        //set need to be solved
+        var set = 1;
         //filter data to specific set
         data = data.filter(function(item) {
             return item.set == set
