@@ -283,7 +283,7 @@ function init_linechart(minrally,maxrally,set){
     });
 }
 
-function init_on_off_court(minrally,maxrally){
+function init_on_off_court(minrally,maxrally,set){
     var chartRadarDOM;
     var chartRadarData;
     var chartRadarOptions;
@@ -303,7 +303,18 @@ function init_on_off_court(minrally,maxrally){
         // responsive:false
     };
 
-    $.getJSON("statistics/on_off_court.json", function(data) {
+    $.getJSON("statistics/on_off_court_real.json", function(data) {
+        //init set
+        if (!set){
+            set = 1;
+        }
+
+        //filter data to specific set
+        data = data.filter(function(item) {
+            return item.set == set
+        });
+        data = data[0].result;
+
         // init minrally and maxrally if are undefined,null,0,NaN,empty string,false
         if (!minrally){
             minrally = Math.min.apply(Math, data.map(function(d) { 
@@ -316,15 +327,31 @@ function init_on_off_court(minrally,maxrally){
             }));
         }
 
+        //filter data to specific interval
+        data = data.filter(function(item) {
+            return item.rally >= minrally && item.rally <= maxrally
+        });
+
+        console.log(set);
+        console.log(minrally);
+        console.log(maxrally);
+        // console.log(data);
+        
         //count each reason
-        var group_data = Object.keys(_.groupBy(data,"on_off_court"))
+        var group_data = Object.keys(_.groupBy(data,"on_off_court"));
         var sum_data = new Array(group_data.length).fill(0);
-        for(var i = parseInt(minrally);i<=parseInt(maxrally);i++){
-            sum_data[data[i-1].on_off_court] += 1;
+        for(var i = 0;i<data.length;i++){
+            if (data[i].on_off_court == group_data[0])
+                sum_data[0] +=1;
+            else if (data[i].on_off_court == group_data[1])
+                sum_data[1] +=1;
+            else
+                sum_data[2] +=1;
         }
+        
         console.log(sum_data)
         
-        var labels = ["球場內","球場外","掛網"]
+        var labels = group_data
 
         //random color generator
         color = new Array();
@@ -454,7 +481,7 @@ function change_interval(){
     $('#on_off_court_chart').remove();
     $('#on_off_court').html('<div class="subtitle">全場失分比例</div>\
     <canvas id="on_off_court_chart" width="800" height="600"></canvas>'); 
-    init_on_off_court(minrally,maxrally);
+    init_on_off_court(minrally,maxrally,set);
 
     //delete old radar
     $('#total_balltype_chart').remove();
@@ -471,6 +498,12 @@ function change_set() {
     //delete old and refresh new linechart
     $('#line_chart').remove();
     init_linechart(null,null,new_set);
+
+    //delete old doughnut
+    $('#on_off_court_chart').remove();
+    $('#on_off_court').html('<div class="subtitle">全場失分比例</div>\
+    <canvas id="on_off_court_chart" width="800" height="600"></canvas>'); 
+    init_on_off_court(null,null,new_set);
 }
 
 function get_interval_set(){
