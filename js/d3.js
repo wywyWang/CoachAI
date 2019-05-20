@@ -189,7 +189,7 @@ function init_linechart(minrally,maxrally,set){
             if (activepoints[0]){
                 var id = set + '-' + (activepoints[0]['_index']+1)
                 console.log(id)
-                $.getJSON("../statistics/rally_type.json", function(data2) {
+                $.getJSON("../statistics/rally_type_real.json", function(data2) {
                     document.getElementById("rallytitle").innerHTML = id + ' 球種分佈圖';
                     //get index from json file
                     index = data2.findIndex(function(item){
@@ -380,7 +380,7 @@ function init_on_off_court(minrally,maxrally,set){
 }
 
 function init_total_balltype(minrally,maxrally){
-    $.getJSON("../statistics/rally_type.json", function(data) {
+    $.getJSON("../statistics/rally_type_real.json", function(data) {
         var labels = data.map(function(item) {
             return item.result.map(function(e){
                 return e.balltype;            
