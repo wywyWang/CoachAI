@@ -47,16 +47,14 @@
 
         <div>
             <form id="interval-form">
-                <div class="form-group col-md-6">
-                    <select id="set">
+                <div id="dropdown" class="form-group col-md-6">
+                    <select id="set" onchange=change_set()>
                         <script type="text/javascript">get_interval_set();</script>
                     </select>
                     <select id="down">
                         <script type="text/javascript">get_interval_updown();</script>
                     </select>
-                    <select id="up">
-                        <script type="text/javascript"></script>
-                    </select>
+                    <select id="up"></select>
                     <button id="interval-submit" type="button" class="btn btn-primary" onclick=change_interval()>查詢</button>
                 </div>
             </form>

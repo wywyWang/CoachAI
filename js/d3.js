@@ -24,8 +24,8 @@ function init_linechart(minrally,maxrally,set){
             }));
         }
         console.log(set);
-        console.log(minrally)
-        console.log(maxrally)
+        console.log(minrally);
+        console.log(maxrally);
 
         var canv = document.createElement('canvas');
         canv.id = 'line_chart';
@@ -68,9 +68,9 @@ function init_linechart(minrally,maxrally,set){
                     tension: 0 // disables bezier curves
                 }
             },
-            "animation": {
-              "duration": 1,
-              "onComplete": function() {
+            animation: {
+              duration: 1,
+              onComplete: function() {
                 var chartInstance = this.chart,
                   ctx = chartInstance.ctx;
 
@@ -448,7 +448,7 @@ function change_interval(){
 
     //delete old linechart
     $('#line_chart').remove();
-    init_linechart(minrally, maxrally, set);
+    init_linechart(minrally,maxrally,set);
 
     //delete old doughnut
     $('#on_off_court_chart').remove();
@@ -460,9 +460,17 @@ function change_interval(){
     $('#total_balltype_chart').remove();
     $('#total_balltype').html('<div class="subtitle">全場球種統計</div>'); 
     init_total_balltype(minrally,maxrally);
+}
 
-    //use set to update interval dropdown,but has problem,need delete old dropdown
-    get_interval_updown(set);
+function change_set() {
+    new_set = document.getElementById("set").value;
+    $('#down option').remove();
+    $('#up option').remove();
+    get_interval_updown(new_set);
+
+    //delete old and refresh new linechart
+    $('#line_chart').remove();
+    init_linechart(null,null,new_set);
 }
 
 function get_interval_set(){
@@ -501,7 +509,6 @@ function get_interval_updown(set){
         for(var i=1;i<=maximum;i+=1)
         {
             var insertText = '<option value='+i+'>'+i+'</option>';
-            //document.getElementById("up").appendChild=insertText;
             $('#down').append(insertText); 
             $('#up').append(insertText); 
         }
