@@ -3,7 +3,7 @@ function init_linechart(minrally,maxrally,set){
     $.getJSON("statistics/rally_count_real.json", function(data) {
         //init svg legend
         d3.selectAll("svg").remove();
-        
+
         //init set
         if (!set){
             set = 1;
@@ -394,8 +394,35 @@ function init_on_off_court(minrally,maxrally,set){
     });
 }
 
-function init_total_balltype(minrally,maxrally){
+function init_total_balltype(minrally,maxrally,set){
     $.getJSON("../statistics/rally_type_real.json", function(data) {
+        //init set
+        if (!set){
+            set = 1;
+        }
+
+        //filter data to specific set
+        data = data.filter(function(item) {
+            return item.set == set
+        });
+        data = data[0].info;
+
+        // init minrally and maxrally if are undefined,null,0,NaN,empty string,false
+        if (!minrally){
+            minrally = Math.min.apply(Math, data.map(function(d) { 
+                return d.rally; 
+            }));
+        }
+        if (!maxrally){
+            maxrally = Math.max.apply(Math, data.map(function(d) { 
+                return d.rally; 
+            }));
+        }
+
+        console.log(set);
+        console.log(minrally);
+        console.log(maxrally);
+
         var labels = data.map(function(item) {
             return item.result.map(function(e){
                 return e.balltype;            
@@ -409,7 +436,7 @@ function init_total_balltype(minrally,maxrally){
         var dataA = new Array(data[0].result.length).fill(0);
         var dataB = new Array(data[0].result.length).fill(0);
         for(var i = 0;i<data.length;i+=2){
-            rally = parseInt(data[i].rally.split("-")[1]);
+            rally = parseInt(data[i].rally);
             if (rally < minrally || rally > maxrally)
                 continue
             for(var j = 0;j<data[i].result.length;j++){
@@ -501,7 +528,7 @@ function change_interval(){
     //delete old radar
     $('#total_balltype_chart').remove();
     $('#total_balltype').html('<div class="subtitle">全場球種統計</div>'); 
-    init_total_balltype(minrally,maxrally);
+    init_total_balltype(minrally,maxrally,set);
 }
 
 function change_set() {
@@ -519,6 +546,11 @@ function change_set() {
     $('#on_off_court').html('<div class="subtitle">全場失分比例</div>\
     <canvas id="on_off_court_chart" width="800" height="600"></canvas>'); 
     init_on_off_court(null,null,new_set);
+
+    //delete old radar
+    $('#total_balltype_chart').remove();
+    $('#total_balltype').html('<div class="subtitle">全場球種統計</div>'); 
+    init_total_balltype(null,null,new_set);
 }
 
 function get_interval_set(){
