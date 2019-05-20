@@ -46,19 +46,16 @@
         </div>
 
         <div>
-            <form id="interval-form">
-                <div id="dropdown" class="form-group col-md-6">
-                    <select id="set" onchange=change_set()>
-                        <script type="text/javascript">get_interval_set();</script>
-                    </select>
-                    <select id="down">
-                        <script type="text/javascript">get_interval_updown();</script>
-                    </select>
-                    <select id="up"></select>
-                    <button id="interval-submit" type="button" class="btn btn-primary" onclick=change_interval()>查詢</button>
-                </div>
-            </form>
-    
+            <div id="dropdown" class="form-group col-md-6">
+                <select id="set" onchange=change_set()>
+                    <script type="text/javascript">get_interval_set();</script>
+                </select>
+                <select id="down">
+                    <script type="text/javascript">get_interval_updown();</script>
+                </select>
+                <select id="up"></select>
+                <button id="interval-submit" type="button" class="btn btn-primary" onclick=change_interval()>查詢</button>
+            </div>
             <div id="line">
                 <script type="text/javascript">init_linechart();</script>
             </div>

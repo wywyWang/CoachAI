@@ -110,13 +110,6 @@ function init_linechart(minrally,maxrally){
             })))
             .attr("stroke","rgb(216, 212, 212)");
 
-            // 算出贏的球種用雷達圖呈現(像是以十個回為一個window就還是可以雷達圖呈現)、選手失誤比例和得失分(怎麼贏的，得分往回推前三球種有個得分方程式，失分大概都是甚麼狀況)
-// 雷達圖:戰術分析，可以藉由雷達圖看出選手是哪種類型(EX:攻擊型選手)，把分析結果顯示出來(像是少拍的時候通常都是B贏，代表A在前五拍左右的處理要再更好)，選手贏的拍數distribution，把X-Y軸的label顯示出來
-// 全場失分比例要分成A跟B各自的
-// 失誤:主動失誤、非受破性失誤、受迫性失誤(只是記錄用 我們不用做))
-// 要有兩種網頁(一個釋放ground truth 一個是我們算出來的)
-// 之後可以先用大範圍(小球=放小球 擋小球之類的)
-// 掛網球、小平球拿掉
         //rendering line more than interval
         svg.append("path") 
             .attr("transform", "translate(30,30)")

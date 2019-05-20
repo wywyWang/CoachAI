@@ -22,9 +22,13 @@
     width: 100px;
 }
 
+#line{
+    margin-top: 30px;
+}
+
 #line_chart{
     margin:0px auto;
-    margin-top: 30px;
+    margin-top: 10px;
     margin-bottom: 30px;
 }
 

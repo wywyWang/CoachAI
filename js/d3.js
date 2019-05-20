@@ -1,6 +1,9 @@
 
 function init_linechart(minrally,maxrally,set){
     $.getJSON("statistics/rally_count_real.json", function(data) {
+        //init svg legend
+        d3.selectAll("svg").remove();
+        
         //init set
         if (!set){
             set = 1;
@@ -27,10 +30,22 @@ function init_linechart(minrally,maxrally,set){
         console.log(minrally);
         console.log(maxrally);
 
+        // handmade legend
+        var svg_legend = d3.select("#line").append("svg")
+                            .attr("width", 740)
+                            .attr("height", 30)
+
+        svg_legend.append("circle").attr("cx",190).attr("cy",20).attr("r", 6).style("fill", "rgb(66,129,164)")
+        svg_legend.append("circle").attr("cx",470).attr("cy",20).attr("r", 6).style("fill", "rgb(255,99,132)")
+        svg_legend.append("text").attr("class", "d3_legend").attr("x", 200).attr("y", 20)
+                    .text("Player A Win").style("fill","rgb(66,129,164)").attr("alignment-baseline","middle")
+        svg_legend.append("text").attr("class", "d3_legend").attr("x", 480).attr("y", 20)
+                    .text("Player B Win").style("fill","rgb(255,99,132)").attr("alignment-baseline","middle")
+
         var canv = document.createElement('canvas');
         canv.id = 'line_chart';
-        canv.width = 800;
-        canv.height = 600;
+        canv.width = 640;
+        canv.height = 360;
         document.getElementById("line").appendChild(canv);
 
         var chartRadarDOM;
