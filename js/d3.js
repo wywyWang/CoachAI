@@ -206,9 +206,15 @@ function init_linechart(minrally,maxrally,set){
                 console.log(id)
                 $.getJSON("../statistics/rally_type_real.json", function(data2) {
                     document.getElementById("rallytitle").innerHTML = id + ' 球種分佈圖';
+                    //filter data to specific set
+                    data2 = data2.filter(function(item) {
+                        return item.set == set
+                    });
+                    data2 = data2[0].info;
+
                     //get index from json file
                     index = data2.findIndex(function(item){
-                        return id == item.rally;
+                        return id.split('-')[1] == item.rally;
                     });
     
                     var labels = data2.map(function(item) {
