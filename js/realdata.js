@@ -306,18 +306,18 @@ function init_linechart(minrally,maxrally,set){
 
 function init_on_off_court(minrally,maxrally,set){
     //create player info radar
-    $('#on_off_court').html('<div class="subtitle">選手A失分比例</div>\
+    $('#on_off_court .playerA').html('<div class="subtitle">選手A失分比例</div>\
     <canvas id="on_off_court_chartA" width="800" height="600"></canvas>'); 
 
     var canvtitle = document.createElement('div');
     canvtitle.className = 'subtitle';
     canvtitle.innerHTML = "選手B失分比例";
-    document.getElementById("on_off_court").appendChild(canvtitle);
+    tmp = document.getElementById("on_off_court").getElementsByClassName("playerB")[0].appendChild(canvtitle);
     var canv = document.createElement('canvas');
     canv.id = 'on_off_court_chartB';
     canv.width = 800;
     canv.height = 600;
-    document.getElementById("on_off_court").appendChild(canv);
+    document.getElementById("on_off_court").getElementsByClassName("playerB")[0].appendChild(canv);
 
     var chartRadarDOMA;
     var chartRadarDOMB;
@@ -449,23 +449,22 @@ function init_on_off_court(minrally,maxrally,set){
 }
 
 function init_total_balltype(minrally,maxrally,set){
-    // Chart.defaults.global.responsive = false;
-    $('#total_balltype').html('<div class="subtitle">選手A獲勝球種</div>'); 
+    $('#total_balltype .playerA').html('<div class="subtitle">選手A獲勝球種</div>'); 
     var canv = document.createElement('canvas');
     canv.id = 'total_balltype_chartA';
     canv.width = 800;
     canv.height = 600;
-    document.getElementById("total_balltype").appendChild(canv);
+    document.getElementById("total_balltype").getElementsByClassName("playerA")[0].appendChild(canv);
 
     var canvtitle = document.createElement('div');
     canvtitle.className = 'subtitle';
-    canvtitle.innerHTML = "選手B獲勝球種分析";
-    document.getElementById("total_balltype").appendChild(canvtitle);
+    canvtitle.innerHTML = "選手B獲勝球種";
+    document.getElementById("total_balltype").getElementsByClassName("playerB")[0].appendChild(canvtitle);
     var canv = document.createElement('canvas');
     canv.id = 'total_balltype_chartB';
     canv.width = 800;
     canv.height = 600;
-    document.getElementById("total_balltype").appendChild(canv);
+    document.getElementById("total_balltype").getElementsByClassName("playerB")[0].appendChild(canv);
 
     var canvtitle = document.createElement('div');
     canvtitle.className = 'subtitle';
@@ -473,8 +472,8 @@ function init_total_balltype(minrally,maxrally,set){
     document.getElementById("total_balltype").appendChild(canvtitle);
     var canv = document.createElement('canvas');
     canv.id = 'total_balltype_chart';
-    canv.width = 800;
-    canv.height = 600;
+    canv.width = 600;
+    canv.height = 300;
     document.getElementById("total_balltype").appendChild(canv);
     $.getJSON("../statistics/rally_type_real.json", function(data) {
         //init set
@@ -607,7 +606,6 @@ function init_total_balltype(minrally,maxrally,set){
                 }
             };
 
-            console.log(labels[0]);
             console.log(dataA);
             console.log(dataB);
 
@@ -653,7 +651,6 @@ function init_total_balltype(minrally,maxrally,set){
             });
 
             //rendering winner B balltype
-
             chartRadarDOMB = document.getElementById("total_balltype_chartB");
             var chart = new Chart(chartRadarDOMB, {
                 type: 'radar',

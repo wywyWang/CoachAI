@@ -43,15 +43,16 @@
             <select id="up"></select>
             <button id="interval-submit" type="button" class="btn btn-primary" onclick=change_interval()>查詢</button>
         </div>
-        <div class="row">
-            <div id="on_off_court" class="col-md-6">
-                <script type="text/javascript">init_on_off_court();</script>
-            </div>
-            <div id="total_balltype" class="col-md-6">
-                <script type="text/javascript">init_total_balltype();</script>
-            </div>
+        <div id="on_off_court" class="row">
+            <div class="col-md-6 playerA"></div>
+            <div class="col-md-6 playerB"></div>
+            <script type="text/javascript">init_on_off_court();</script>
         </div>
-
+        <div id="total_balltype" class="row">
+            <div class="col-md-6 playerA"></div>
+            <div class="col-md-6 playerB"></div>
+            <script type="text/javascript">init_total_balltype();</script>
+        </div>
         <div>
             <div id="line">
                 <script type="text/javascript">init_linechart();</script>
