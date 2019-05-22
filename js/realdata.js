@@ -710,18 +710,22 @@ function init_total_balltype(minrally,maxrally,set){
 
 function init_stroke_distribution(minrally,maxrally,set){
     //create player info radar
-    $('#stroke_distribution').html('<div class="subtitle">選手A得分拍數</div>\
-    <canvas id="stroke_distribution_chartA" width="800" height="600"></canvas>'); 
+    $('#stroke_distribution .playerA').html('<div class="subtitle">選手A得分拍數</div>'); 
+    var canv = document.createElement('canvas');
+    canv.id = 'stroke_distribution_chartA';
+    canv.width = 800;
+    canv.height = 600;
+    document.getElementById("stroke_distribution").getElementsByClassName("playerA")[0].appendChild(canv);
 
     var canvtitle = document.createElement('div');
     canvtitle.className = 'subtitle';
     canvtitle.innerHTML = "選手B得分拍數";
-    document.getElementById("stroke_distribution").appendChild(canvtitle);
+    document.getElementById("stroke_distribution").getElementsByClassName("playerB")[0].appendChild(canvtitle);
     var canv = document.createElement('canvas');
     canv.id = 'stroke_distribution_chartB';
     canv.width = 800;
     canv.height = 600;
-    document.getElementById("stroke_distribution").appendChild(canv);
+    document.getElementById("stroke_distribution").getElementsByClassName("playerB")[0].appendChild(canv);
 
     var chartRadarDOMA;
     var chartRadarDOMB;
