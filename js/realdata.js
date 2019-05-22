@@ -449,6 +449,33 @@ function init_on_off_court(minrally,maxrally,set){
 }
 
 function init_total_balltype(minrally,maxrally,set){
+    // Chart.defaults.global.responsive = false;
+    $('#total_balltype').html('<div class="subtitle">選手A獲勝球種</div>'); 
+    var canv = document.createElement('canvas');
+    canv.id = 'total_balltype_chartA';
+    canv.width = 800;
+    canv.height = 600;
+    document.getElementById("total_balltype").appendChild(canv);
+
+    var canvtitle = document.createElement('div');
+    canvtitle.className = 'subtitle';
+    canvtitle.innerHTML = "選手B獲勝球種分析";
+    document.getElementById("total_balltype").appendChild(canvtitle);
+    var canv = document.createElement('canvas');
+    canv.id = 'total_balltype_chartB';
+    canv.width = 800;
+    canv.height = 600;
+    document.getElementById("total_balltype").appendChild(canv);
+
+    var canvtitle = document.createElement('div');
+    canvtitle.className = 'subtitle';
+    canvtitle.innerHTML = "全場球種分析";
+    document.getElementById("total_balltype").appendChild(canvtitle);
+    var canv = document.createElement('canvas');
+    canv.id = 'total_balltype_chart';
+    canv.width = 800;
+    canv.height = 600;
+    document.getElementById("total_balltype").appendChild(canv);
     $.getJSON("../statistics/rally_type_real.json", function(data) {
         //init set
         if (!set){
@@ -603,44 +630,31 @@ function init_total_balltype(minrally,maxrally,set){
                 }
             };
 
-            //create player info radar
-            $('#total_balltype').html('<div class="subtitle">選手A獲勝球種分析</div>\
-            <canvas id="total_balltype_chartA" width="800" height="600"></canvas>')
-            .promise().done(function(){
-                chartRadarDOMA = document.getElementById("total_balltype_chartA");
-                var chart = new Chart(chartRadarDOMA, {
-                    type: 'radar',
-                    data:{
-                        labels: labels[0],
-                        datasets: [
-                            {
-                            label: "Player A",
-                            fill: true,
-                            cubicInterpolationMode:"monotone",
-                            backgroundColor: "rgba(66,129,164,0.2)",
-                            borderColor: "rgba(66,129,164,1)",
-                            pointBorderColor: "#fff",
-                            pointBackgroundColor: "rgba(66,129,164,1)",
-                            data: dataA
-                            }
-                        ]
-                    },
-                    options: chartRadarOptionsPlayer
-                });
-            }); 
+            //create player info radar            
+            chartRadarDOMA = document.getElementById("total_balltype_chartA");
+            var chart = new Chart(chartRadarDOMA, {
+                type: 'radar',
+                data:{
+                    labels: labels[0],
+                    datasets: [
+                        {
+                        label: "Player A",
+                        fill: true,
+                        cubicInterpolationMode:"monotone",
+                        backgroundColor: "rgba(66,129,164,0.2)",
+                        borderColor: "rgba(66,129,164,1)",
+                        pointBorderColor: "#fff",
+                        pointBackgroundColor: "rgba(66,129,164,1)",
+                        data: dataA
+                        }
+                    ]
+                },
+                options: chartRadarOptionsPlayer
+            });
 
             //rendering winner B balltype
-            var canvtitle = document.createElement('div');
-            canvtitle.className = 'subtitle';
-            canvtitle.innerHTML = "選手B獲勝球種分析";
-            document.getElementById("total_balltype").appendChild(canvtitle);
-            var canv = document.createElement('canvas');
-            canv.id = 'total_balltype_chartB';
-            canv.width = 800;
-            canv.height = 600;
-            document.getElementById("total_balltype").appendChild(canv);
-            chartRadarDOMB = document.getElementById("total_balltype_chartB");
 
+            chartRadarDOMB = document.getElementById("total_balltype_chartB");
             var chart = new Chart(chartRadarDOMB, {
                 type: 'radar',
                 data:{
@@ -663,19 +677,7 @@ function init_total_balltype(minrally,maxrally,set){
         })
         .done(function(){
             //rendering total balltype
-            var canvtitle = document.createElement('div');
-            canvtitle.className = 'subtitle';
-            canvtitle.innerHTML = "全場球種分析";
-            document.getElementById("total_balltype").appendChild(canvtitle);
-            var canv = document.createElement('canvas');
-            canv.id = 'total_balltype_chart';
-            canv.width = 800;
-            canv.height = 600;
-            document.getElementById("total_balltype").appendChild(canv);
-
-            // Chart.defaults.global.responsive = false;
             var chartRadarDOM = document.getElementById("total_balltype_chart");
-            
             var chart = new Chart(chartRadarDOM, {
                 type: 'radar',
                 data:{
@@ -727,10 +729,9 @@ function change_interval(){
 
     //delete old radar
     $('#total_balltype .subtitle').remove();
-    $('#total_balltype_chart').remove();
     $('#total_balltype_chartA').remove();
     $('#total_balltype_chartB').remove();
-    // $('#total_balltype').html('<div class="subtitle">全場球種統計</div>'); 
+    $('#total_balltype_chart').remove();
     init_total_balltype(minrally,maxrally,set);
 }
 
@@ -752,10 +753,9 @@ function change_set() {
 
     //delete old radar
     $('#total_balltype .subtitle').remove();
-    $('#total_balltype_chart').remove();
     $('#total_balltype_chartA').remove();
     $('#total_balltype_chartB').remove();
-    // $('#total_balltype').html('<div class="subtitle">全場球種統計</div>'); 
+    $('#total_balltype_chart').remove();
     init_total_balltype(null,null,new_set);
 }
 
