@@ -306,12 +306,35 @@ function init_linechart(minrally,maxrally,set){
 }
 
 function init_on_off_court(minrally,maxrally,set){
-    var chartRadarDOM;
+    //create player info radar
+    var canvtitle = document.createElement('div');
+    canvtitle.className = 'subtitle';
+    canvtitle.innerHTML = "選手A失分比例";
+    document.getElementById("on_off_court").appendChild(canvtitle);
+    var canv = document.createElement('canvas');
+    canv.id = 'on_off_court_chartA';
+    canv.width = 800;
+    canv.height = 600;
+    document.getElementById("on_off_court").appendChild(canv);
+
+    var canvtitle = document.createElement('div');
+    canvtitle.className = 'subtitle';
+    canvtitle.innerHTML = "選手B失分比例";
+    document.getElementById("on_off_court").appendChild(canvtitle);
+    var canv = document.createElement('canvas');
+    canv.id = 'on_off_court_chartB';
+    canv.width = 800;
+    canv.height = 600;
+    document.getElementById("on_off_court").appendChild(canv);
+
+    var chartRadarDOMA;
+    var chartRadarDOMB;
     var chartRadarData;
     var chartRadarOptions;
 
     // Chart.defaults.global.responsive = false;
-    chartRadarDOM = document.getElementById("on_off_court_chart");
+    chartRadarDOMA = document.getElementById("on_off_court_chartA");
+    chartRadarDOMB = document.getElementById("on_off_court_chartB");
     //custormized options
     chartRadarOptions = 
     {
@@ -354,26 +377,44 @@ function init_on_off_court(minrally,maxrally,set){
             return item.rally >= minrally && item.rally <= maxrally
         });
 
+        //filter winners
+        dataB = data.filter(function(item){
+            return item.winner == 'A'
+        });
+        dataA = data.filter(function(item){
+            return item.winner == 'B'
+        });
+
         console.log(set);
         console.log(minrally);
         console.log(maxrally);
-        // console.log(data);
         
         //count each reason
         var group_data = Object.keys(_.groupBy(data,"on_off_court"));
-        var sum_data = new Array(group_data.length).fill(0);
-        for(var i = 0;i<data.length;i++){
-            if (data[i].on_off_court == group_data[0])
-                sum_data[0] +=1;
-            else if (data[i].on_off_court == group_data[1])
-                sum_data[1] +=1;
+        var sum_dataA = new Array(group_data.length).fill(0);
+        var sum_dataB = new Array(group_data.length).fill(0);
+        for(var i = 0;i<dataA.length;i++){
+            if (dataA[i].on_off_court == group_data[0])
+                sum_dataA[0] +=1;
+            else if (dataA[i].on_off_court == group_data[1])
+                sum_dataA[1] +=1;
             else
-                sum_data[2] +=1;
+                sum_dataA[2] +=1;
         }
+        for(var i = 0;i<dataB.length;i++){
+            if (dataB[i].on_off_court == group_data[0])
+                sum_dataB[0] +=1;
+            else if (dataB[i].on_off_court == group_data[1])
+                sum_dataB[1] +=1;
+            else
+                sum_dataB[2] +=1;
+        }
+
+        console.log(sum_dataA);
+        console.log(sum_dataB);
         
-        console.log(sum_data)
         
-        var labels = group_data
+        var labels = group_data;
 
         //random color generator
         color = new Array();
@@ -384,7 +425,7 @@ function init_on_off_court(minrally,maxrally,set){
             color.push('rgb(' + r + ', ' + g + ', ' + b + ')');
         }
         
-        var chart = new Chart(chartRadarDOM, {
+        var chart = new Chart(chartRadarDOMA, {
             type: 'doughnut',
             data: {
                 labels: labels,
@@ -393,7 +434,22 @@ function init_on_off_court(minrally,maxrally,set){
                     pointBorderColor: "rgba(0,0,0,0)",
                     borderColor: 'rgb(17, 16, 17)',
                     borderWidth: 1,
-                    data: sum_data
+                    data: sum_dataA
+                }]
+            },
+            options: chartRadarOptions
+        });
+
+        var chart = new Chart(chartRadarDOMB, {
+            type: 'doughnut',
+            data: {
+                labels: labels,
+                datasets: [{
+                    backgroundColor: color,
+                    pointBorderColor: "rgba(0,0,0,0)",
+                    borderColor: 'rgb(17, 16, 17)',
+                    borderWidth: 1,
+                    data: sum_dataB
                 }]
             },
             options: chartRadarOptions
@@ -527,9 +583,9 @@ function change_interval(){
     init_linechart(minrally,maxrally,set);
 
     //delete old doughnut
-    $('#on_off_court_chart').remove();
-    $('#on_off_court').html('<div class="subtitle">全場失分比例</div>\
-    <canvas id="on_off_court_chart" width="800" height="600"></canvas>'); 
+    $('#on_off_court .subtitle').remove();
+    $('#on_off_court_chartA').remove();
+    $('#on_off_court_chartB').remove();
     init_on_off_court(minrally,maxrally,set);
 
     //delete old radar
@@ -549,9 +605,9 @@ function change_set() {
     init_linechart(null,null,new_set);
 
     //delete old doughnut
-    $('#on_off_court_chart').remove();
-    $('#on_off_court').html('<div class="subtitle">全場失分比例</div>\
-    <canvas id="on_off_court_chart" width="800" height="600"></canvas>'); 
+    $('#on_off_court .subtitle').remove();
+    $('#on_off_court_chartA').remove();
+    $('#on_off_court_chartB').remove();
     init_on_off_court(null,null,new_set);
 
     //delete old radar
