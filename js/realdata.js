@@ -87,11 +87,12 @@ function init_linechart(minrally,maxrally,set){
               duration: 1,
               onComplete: function() {
                 var chartInstance = this.chart,
-                  ctx = chartInstance.ctx;
+                ctx = chartInstance.ctx;
 
                 ctx.font = Chart.helpers.fontString(Chart.defaults.global.defaultFontSize, Chart.defaults.global.defaultFontStyle, Chart.defaults.global.defaultFontFamily);
                 ctx.textAlign = 'center';
                 ctx.textBaseline = 'bottom';
+                ctx.fillStyle = 'rgba(0,0,0,1)';
 
                 this.data.datasets.forEach(function(dataset, i) {
                   var meta = chartInstance.controller.getDatasetMeta(i);
