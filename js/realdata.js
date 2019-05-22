@@ -778,8 +778,8 @@ function init_stroke_distribution(minrally,maxrally,set){
         {
             labels[i]=i*5+1+'~'+(i+1)*5;
         }
-        var sum_dataA = new Array(Math.ceil(dataA.length/5)).fill(0);
-        var sum_dataB = new Array(Math.ceil(dataB.length/5)).fill(0);
+        var sum_dataA = new Array(Math.ceil(max_all/5)).fill(0);
+        var sum_dataB = new Array(Math.ceil(max_all/5)).fill(0);
         for(var i = 0;i<dataA.length;i++){
             sum_dataA[Math.ceil(dataA[i].stroke/5)-1]+=1
         }
