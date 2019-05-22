@@ -49,7 +49,6 @@ function init_linechart(minrally,maxrally,set){
         document.getElementById("line").appendChild(canv);
 
         var chartRadarDOM;
-        var chartRadarData;
         var chartRadarOptions;
 
         chartRadarDOM = document.getElementById("line_chart");
@@ -307,15 +306,8 @@ function init_linechart(minrally,maxrally,set){
 
 function init_on_off_court(minrally,maxrally,set){
     //create player info radar
-    var canvtitle = document.createElement('div');
-    canvtitle.className = 'subtitle';
-    canvtitle.innerHTML = "選手A失分比例";
-    document.getElementById("on_off_court").appendChild(canvtitle);
-    var canv = document.createElement('canvas');
-    canv.id = 'on_off_court_chartA';
-    canv.width = 800;
-    canv.height = 600;
-    document.getElementById("on_off_court").appendChild(canv);
+    $('#on_off_court').html('<div class="subtitle">選手A失分比例</div>\
+    <canvas id="on_off_court_chartA" width="800" height="600"></canvas>'); 
 
     var canvtitle = document.createElement('div');
     canvtitle.className = 'subtitle';
@@ -329,7 +321,6 @@ function init_on_off_court(minrally,maxrally,set){
 
     var chartRadarDOMA;
     var chartRadarDOMB;
-    var chartRadarData;
     var chartRadarOptions;
 
     // Chart.defaults.global.responsive = false;
@@ -515,7 +506,6 @@ function init_total_balltype(minrally,maxrally,set){
         document.getElementById("total_balltype").appendChild(canv);
 
         var chartRadarDOM;
-        var chartRadarData;
         var chartRadarOptions;
 
         // Chart.defaults.global.responsive = false;

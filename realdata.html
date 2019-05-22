@@ -33,6 +33,16 @@
         </nav>
     </div>
     <div class="container">
+        <div id="dropdown" class="form-group col-md-6">
+            <select id="set" onchange=change_set()>
+                <script type="text/javascript">get_interval_set();</script>
+            </select>
+            <select id="down">
+                <script type="text/javascript">get_interval_updown();</script>
+            </select>
+            <select id="up"></select>
+            <button id="interval-submit" type="button" class="btn btn-primary" onclick=change_interval()>查詢</button>
+        </div>
         <div class="row">
             <div id="on_off_court" class="col-md-6">
                 <script type="text/javascript">init_on_off_court();</script>
@@ -44,16 +54,6 @@
         </div>
 
         <div>
-            <div id="dropdown" class="form-group col-md-6">
-                <select id="set" onchange=change_set()>
-                    <script type="text/javascript">get_interval_set();</script>
-                </select>
-                <select id="down">
-                    <script type="text/javascript">get_interval_updown();</script>
-                </select>
-                <select id="up"></select>
-                <button id="interval-submit" type="button" class="btn btn-primary" onclick=change_interval()>查詢</button>
-            </div>
             <div id="line">
                 <script type="text/javascript">init_linechart();</script>
             </div>
