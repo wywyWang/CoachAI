@@ -690,6 +690,157 @@ function init_total_balltype(minrally,maxrally,set){
     });
 }
 
+function init_stroke_distribution(minrally,maxrally,set){
+    //create player info radar
+    $('#stroke_distribution .playerA').html('<div class="subtitle">選手A得分拍數</div>\
+    <canvas id="stroke_distribution_chartA" width="800" height="600"></canvas>');
+    $('#stroke_distribution .playerB').html('<div class="subtitle">選手B得分拍數</div>\
+    <canvas id="stroke_distribution_chartB" width="800" height="600"></canvas>');
+
+    var chartRadarDOMA;
+    var chartRadarDOMB;
+    var chartRadarOptions;
+
+    // Chart.defaults.global.responsive = false;
+    chartRadarDOMA = document.getElementById("stroke_distribution_chartA");
+    chartRadarDOMB = document.getElementById("stroke_distribution_chartB");
+    //custormized options
+    chartRadarOptions = 
+    {
+        legend:{
+            labels:{
+                fontColor: 'rgba(248, 184, 82, 1)',
+                fontSize: 16,
+                fontStyle: "bold"
+            }
+        }
+    };
+
+    $.getJSON("statistics/rally_count_real.json", function(data) {
+        //init set
+        if (!set){
+            set = 1;
+        }
+
+        //filter data to specific set
+        data = data.filter(function(item) {
+            return item.set == set
+        });
+        data = data[0].result;
+
+        // init minrally and maxrally if are undefined,null,0,NaN,empty string,false
+        if (!minrally){
+            minrally = Math.min.apply(Math, data.map(function(d) { 
+                return d.rally; 
+            }));
+        }
+        if (!maxrally){
+            maxrally = Math.max.apply(Math, data.map(function(d) { 
+                return d.rally; 
+            }));
+        }
+
+        //filter data to specific interval
+        data = data.filter(function(item) {
+            return item.rally >= minrally && item.rally <= maxrally
+        });
+
+        //filter winners
+        dataA = data.filter(function(item){
+            return item.winner == 'A'
+        });
+        dataB = data.filter(function(item){
+            return item.winner == 'B'
+        });
+
+        console.log(set);
+        console.log(minrally);
+        console.log(maxrally);
+        var maxA=0;
+        for(var i=0;i<dataA.length;i++)
+        {
+            if(dataA[i].stroke>maxA)
+            {
+                maxA=dataA[i].stroke;
+            }
+        }
+        var maxB=0;
+        for(var i=0;i<dataB.length;i++)
+        {
+            if(dataB[i].stroke>maxB)
+            {
+                maxB=dataB[i].stroke;
+            }
+        }
+        var max_all=maxA>maxB?maxA:maxB;
+        var labels = new Array(Math.ceil(max_all/5)).fill('');
+        for(var i=0;i<Math.ceil(max_all/5);i++)
+        {
+            labels[i]=i*5+1+'~'+(i+1)*5;
+        }
+        var sum_dataA = new Array(Math.ceil(dataA.length/5)).fill(0);
+        var sum_dataB = new Array(Math.ceil(dataB.length/5)).fill(0);
+        for(var i = 0;i<dataA.length;i++){
+            sum_dataA[Math.ceil(dataA[i].stroke/5)-1]+=1
+        }
+        for(var i = 0;i<dataB.length;i++){
+            sum_dataB[Math.ceil(dataB[i].stroke/5)-1]+=1
+        }
+        for(var i = 0;i<sum_dataA.length;i++){
+            if(sum_dataA[i]==0){
+                sum_dataA[i]=NaN;
+            }
+        }
+        for(var i = 0;i<sum_dataB.length;i++){
+            if(sum_dataB[i]==0){
+                sum_dataB[i]=NaN;
+            }
+        }
+        console.log(sum_dataA);
+        console.log(sum_dataB);
+
+
+        //random color generator
+        color = new Array();
+        for(var i = 0;i<data.length;i++){
+            r = Math.floor(Math.random() * 256);
+            g = Math.floor(Math.random() * 256);
+            b = Math.floor(Math.random() * 256);
+            color.push('rgb(' + r + ', ' + g + ', ' + b + ')');
+        }
+
+        var chart = new Chart(chartRadarDOMA, {
+            type: 'doughnut',
+            data: {
+                labels: labels,
+                datasets: [{
+                    backgroundColor: color,
+                    pointBorderColor: "rgba(0,0,0,0)",
+                    borderColor: 'rgb(17, 16, 17)',
+                    borderWidth: 1,
+                    data: sum_dataA
+                }]
+            },
+            options: chartRadarOptions
+        });
+
+        var chart = new Chart(chartRadarDOMB, {
+            type: 'doughnut',
+            data: {
+                labels: labels,
+                datasets: [{
+                    backgroundColor: color,
+                    pointBorderColor: "rgba(0,0,0,0)",
+                    borderColor: 'rgb(17, 16, 17)',
+                    borderWidth: 1,
+                    data: sum_dataB
+                }]
+            },
+            options: chartRadarOptions
+        });
+    });
+}
+
 function change_interval(){
     //get interval when clicking submit
     var minrally = document.getElementById("down").value;
@@ -712,6 +863,12 @@ function change_interval(){
     $('#total_balltype_chartB').remove();
     $('#total_balltype_chart').remove();
     init_total_balltype(minrally,maxrally,set);
+
+    //delete old stoke distribution
+    $('#stroke_distribution .subtitle').remove();
+    $('#stroke_distribution_chartA').remove();
+    $('#stroke_distribution_chartB').remove();
+    init_stroke_distribution(minrally,maxrally,set);
 }
 
 function change_set() {
@@ -736,6 +893,12 @@ function change_set() {
     $('#total_balltype_chartB').remove();
     $('#total_balltype_chart').remove();
     init_total_balltype(null,null,new_set);
+
+    //delete old stoke distribution
+    $('#stroke_distribution .subtitle').remove();
+    $('#stroke_distribution_chartA').remove();
+    $('#stroke_distribution_chartB').remove();
+    init_stroke_distribution(null,null,new_set);
 }
 
 function get_interval_set(){
