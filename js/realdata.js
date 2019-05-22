@@ -325,7 +325,7 @@ function init_on_off_court(minrally,maxrally,set){
         // responsive:false
     };
 
-    $.getJSON("statistics/on_off_court_real.json", function(data) {
+    $.getJSON("statistics/rally_count_real.json", function(data) {
         //init set
         if (!set){
             set = 1;

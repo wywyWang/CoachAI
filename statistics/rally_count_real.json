@@ -5,127 +5,152 @@
             {
                 "rally":1,
                 "stroke":19,
-                "winner":"A"
+                "winner":"A",
+                "on_off_court":"\u843d\u5730"
             },
             {
                 "rally":2,
                 "stroke":6,
-                "winner":"B"
+                "winner":"B",
+                "on_off_court":"\u51fa\u754c"
             },
             {
                 "rally":3,
                 "stroke":7,
-                "winner":"A"
+                "winner":"A",
+                "on_off_court":"\u51fa\u754c"
             },
             {
                 "rally":4,
                 "stroke":27,
-                "winner":"B"
+                "winner":"B",
+                "on_off_court":"\u843d\u5730"
             },
             {
                 "rally":5,
                 "stroke":25,
-                "winner":"B"
+                "winner":"B",
+                "on_off_court":"\u672a\u56de\u64ca\u6210\u529f"
             },
             {
                 "rally":6,
                 "stroke":7,
-                "winner":"A"
+                "winner":"A",
+                "on_off_court":"\u672a\u56de\u64ca\u6210\u529f"
             },
             {
                 "rally":7,
                 "stroke":11,
-                "winner":"B"
+                "winner":"B",
+                "on_off_court":"\u843d\u5730"
             },
             {
                 "rally":8,
                 "stroke":8,
-                "winner":"B"
+                "winner":"B",
+                "on_off_court":"\u843d\u5730"
             },
             {
                 "rally":9,
                 "stroke":7,
-                "winner":"B"
+                "winner":"B",
+                "on_off_court":"\u51fa\u754c"
             },
             {
                 "rally":10,
                 "stroke":12,
-                "winner":"A"
+                "winner":"A",
+                "on_off_court":"\u51fa\u754c"
             },
             {
                 "rally":11,
                 "stroke":5,
-                "winner":"B"
+                "winner":"B",
+                "on_off_court":"\u843d\u5730"
             },
             {
                 "rally":12,
                 "stroke":14,
-                "winner":"A"
+                "winner":"A",
+                "on_off_court":"\u843d\u5730"
             },
             {
                 "rally":13,
                 "stroke":14,
-                "winner":"B"
+                "winner":"B",
+                "on_off_court":"\u51fa\u754c"
             },
             {
                 "rally":14,
                 "stroke":11,
-                "winner":"A"
+                "winner":"A",
+                "on_off_court":"\u672a\u56de\u64ca\u6210\u529f"
             },
             {
                 "rally":15,
                 "stroke":9,
-                "winner":"B"
+                "winner":"B",
+                "on_off_court":"\u843d\u5730"
             },
             {
                 "rally":16,
                 "stroke":9,
-                "winner":"A"
+                "winner":"A",
+                "on_off_court":"\u843d\u5730"
             },
             {
                 "rally":17,
                 "stroke":11,
-                "winner":"B"
+                "winner":"B",
+                "on_off_court":"\u843d\u5730"
             },
             {
                 "rally":18,
                 "stroke":16,
-                "winner":"B"
+                "winner":"B",
+                "on_off_court":"\u51fa\u754c"
             },
             {
                 "rally":19,
                 "stroke":14,
-                "winner":"A"
+                "winner":"A",
+                "on_off_court":"\u51fa\u754c"
             },
             {
                 "rally":20,
                 "stroke":11,
-                "winner":"A"
+                "winner":"A",
+                "on_off_court":"\u672a\u56de\u64ca\u6210\u529f"
             },
             {
                 "rally":21,
                 "stroke":19,
-                "winner":"B"
+                "winner":"B",
+                "on_off_court":"\u843d\u5730"
             },
             {
                 "rally":22,
                 "stroke":7,
-                "winner":"A"
+                "winner":"A",
+                "on_off_court":"\u843d\u5730"
             },
             {
                 "rally":23,
                 "stroke":13,
-                "winner":"B"
+                "winner":"B",
+                "on_off_court":"\u51fa\u754c"
             },
             {
                 "rally":24,
                 "stroke":12,
-                "winner":"A"
+                "winner":"A",
+                "on_off_court":"\u51fa\u754c"
             },
             {
                 "rally":25,
                 "stroke":5,
-                "winner":"B"
+                "winner":"B",
+                "on_off_court":"\u51fa\u754c"
             }
         ]
     },
@@ -135,72 +160,86 @@
             {
                 "rally":1,
                 "stroke":14,
-                "winner":"A"
+                "winner":"A",
+                "on_off_court":"\u843d\u5730"
             },
             {
                 "rally":2,
                 "stroke":12,
-                "winner":"A"
+                "winner":"A",
+                "on_off_court":"\u843d\u5730"
             },
             {
                 "rally":3,
                 "stroke":14,
-                "winner":"B"
+                "winner":"B",
+                "on_off_court":"\u51fa\u754c"
             },
             {
                 "rally":4,
                 "stroke":9,
-                "winner":"B"
+                "winner":"B",
+                "on_off_court":"\u51fa\u754c"
             },
             {
                 "rally":5,
                 "stroke":10,
-                "winner":"A"
+                "winner":"A",
+                "on_off_court":"\u843d\u5730"
             },
             {
                 "rally":6,
                 "stroke":21,
-                "winner":"B"
+                "winner":"B",
+                "on_off_court":"\u51fa\u754c"
             },
             {
                 "rally":7,
                 "stroke":10,
-                "winner":"B"
+                "winner":"B",
+                "on_off_court":"\u843d\u5730"
             },
             {
                 "rally":8,
                 "stroke":13,
-                "winner":"B"
+                "winner":"B",
+                "on_off_court":"\u672a\u56de\u64ca\u6210\u529f"
             },
             {
                 "rally":9,
                 "stroke":13,
-                "winner":"B"
+                "winner":"B",
+                "on_off_court":"\u51fa\u754c"
             },
             {
                 "rally":10,
                 "stroke":5,
-                "winner":"A"
+                "winner":"A",
+                "on_off_court":"\u843d\u5730"
             },
             {
                 "rally":11,
                 "stroke":25,
-                "winner":"B"
+                "winner":"B",
+                "on_off_court":"\u672a\u56de\u64ca\u6210\u529f"
             },
             {
                 "rally":12,
                 "stroke":13,
-                "winner":"A"
+                "winner":"A",
+                "on_off_court":"\u843d\u5730"
             },
             {
                 "rally":13,
                 "stroke":25,
-                "winner":"B"
+                "winner":"B",
+                "on_off_court":"\u843d\u5730"
             },
             {
                 "rally":14,
                 "stroke":7,
-                "winner":"B"
+                "winner":"B",
+                "on_off_court":"\u51fa\u754c"
             }
         ]
     }
