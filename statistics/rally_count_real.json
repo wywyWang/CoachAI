@@ -7,175 +7,200 @@
                 "stroke":19,
                 "winner":"A",
                 "on_off_court":"\u843d\u5730",
-                "balltype":"\u6311\u7403"
+                "balltype":"\u6311\u7403",
+                "lose_area":"B4"
             },
             {
                 "rally":2,
                 "stroke":6,
                 "winner":"B",
                 "on_off_court":"\u51fa\u754c",
-                "balltype":"\u5207\u7403"
+                "balltype":"\u5207\u7403",
+                "lose_area":"B5"
             },
             {
                 "rally":3,
                 "stroke":7,
                 "winner":"A",
                 "on_off_court":"\u51fa\u754c",
-                "balltype":"\u6311\u7403"
+                "balltype":"\u6311\u7403",
+                "lose_area":"C5"
             },
             {
                 "rally":4,
                 "stroke":27,
                 "winner":"B",
                 "on_off_court":"\u843d\u5730",
-                "balltype":"\u6bba\u7403"
+                "balltype":"\u6bba\u7403",
+                "lose_area":"A3"
             },
             {
                 "rally":5,
                 "stroke":25,
                 "winner":"B",
                 "on_off_court":"\u672a\u56de\u64ca\u6210\u529f",
-                "balltype":"\u6311\u7403"
+                "balltype":"\u6311\u7403",
+                "lose_area":"B3"
             },
             {
                 "rally":6,
                 "stroke":7,
                 "winner":"A",
                 "on_off_court":"\u672a\u56de\u64ca\u6210\u529f",
-                "balltype":"\u6bba\u7403"
+                "balltype":"\u6bba\u7403",
+                "lose_area":"A2"
             },
             {
                 "rally":7,
                 "stroke":11,
                 "winner":"B",
                 "on_off_court":"\u843d\u5730",
-                "balltype":"\u5207\u7403"
+                "balltype":"\u5207\u7403",
+                "lose_area":"A1"
             },
             {
                 "rally":8,
                 "stroke":8,
                 "winner":"B",
                 "on_off_court":"\u843d\u5730",
-                "balltype":"\u64b2\u7403"
+                "balltype":"\u64b2\u7403",
+                "lose_area":"B5"
             },
             {
                 "rally":9,
                 "stroke":7,
                 "winner":"B",
                 "on_off_court":"\u51fa\u754c",
-                "balltype":"\u5e73\u7403"
+                "balltype":"\u5e73\u7403",
+                "lose_area":"D4"
             },
             {
                 "rally":10,
                 "stroke":12,
                 "winner":"A",
                 "on_off_court":"\u51fa\u754c",
-                "balltype":"\u653e\u5c0f\u7403"
+                "balltype":"\u653e\u5c0f\u7403",
+                "lose_area":"C1"
             },
             {
                 "rally":11,
                 "stroke":5,
                 "winner":"B",
                 "on_off_court":"\u843d\u5730",
-                "balltype":"\u6bba\u7403"
+                "balltype":"\u6bba\u7403",
+                "lose_area":"A3"
             },
             {
                 "rally":12,
                 "stroke":14,
                 "winner":"A",
                 "on_off_court":"\u843d\u5730",
-                "balltype":"\u9577\u7403"
+                "balltype":"\u9577\u7403",
+                "lose_area":"A4"
             },
             {
                 "rally":13,
                 "stroke":14,
                 "winner":"B",
                 "on_off_court":"\u51fa\u754c",
-                "balltype":"\u6311\u7403"
+                "balltype":"\u6311\u7403",
+                "lose_area":"B4"
             },
             {
                 "rally":14,
                 "stroke":11,
                 "winner":"A",
                 "on_off_court":"\u672a\u56de\u64ca\u6210\u529f",
-                "balltype":"\u5e73\u7403"
+                "balltype":"\u5e73\u7403",
+                "lose_area":"A2"
             },
             {
                 "rally":15,
                 "stroke":9,
                 "winner":"B",
                 "on_off_court":"\u843d\u5730",
-                "balltype":"\u6bba\u7403"
+                "balltype":"\u6bba\u7403",
+                "lose_area":"A3"
             },
             {
                 "rally":16,
                 "stroke":9,
                 "winner":"A",
                 "on_off_court":"\u843d\u5730",
-                "balltype":"\u6bba\u7403"
+                "balltype":"\u6bba\u7403",
+                "lose_area":"B3"
             },
             {
                 "rally":17,
                 "stroke":11,
                 "winner":"B",
                 "on_off_court":"\u843d\u5730",
-                "balltype":"\u9577\u7403"
+                "balltype":"\u9577\u7403",
+                "lose_area":"B3"
             },
             {
                 "rally":18,
                 "stroke":16,
                 "winner":"B",
                 "on_off_court":"\u51fa\u754c",
-                "balltype":"\u9577\u7403"
+                "balltype":"\u9577\u7403",
+                "lose_area":"A4"
             },
             {
                 "rally":19,
                 "stroke":14,
                 "winner":"A",
                 "on_off_court":"\u51fa\u754c",
-                "balltype":"\u6311\u7403"
+                "balltype":"\u6311\u7403",
+                "lose_area":"A5"
             },
             {
                 "rally":20,
                 "stroke":11,
                 "winner":"A",
                 "on_off_court":"\u672a\u56de\u64ca\u6210\u529f",
-                "balltype":"\u6bba\u7403"
+                "balltype":"\u6bba\u7403",
+                "lose_area":"A2"
             },
             {
                 "rally":21,
                 "stroke":19,
                 "winner":"B",
                 "on_off_court":"\u843d\u5730",
-                "balltype":"\u5207\u7403"
+                "balltype":"\u5207\u7403",
+                "lose_area":"B2"
             },
             {
                 "rally":22,
                 "stroke":7,
                 "winner":"A",
                 "on_off_court":"\u843d\u5730",
-                "balltype":"\u5207\u7403"
+                "balltype":"\u5207\u7403",
+                "lose_area":"A1"
             },
             {
                 "rally":23,
                 "stroke":13,
                 "winner":"B",
                 "on_off_court":"\u51fa\u754c",
-                "balltype":"\u9577\u7403"
+                "balltype":"\u9577\u7403",
+                "lose_area":"F4"
             },
             {
                 "rally":24,
                 "stroke":12,
                 "winner":"A",
                 "on_off_court":"\u51fa\u754c",
-                "balltype":"\u5207\u7403"
+                "balltype":"\u5207\u7403",
+                "lose_area":"D4"
             },
             {
                 "rally":25,
                 "stroke":5,
                 "winner":"B",
                 "on_off_court":"\u51fa\u754c",
-                "balltype":"\u6bba\u7403"
+                "balltype":"\u6bba\u7403",
+                "lose_area":"D3"
             }
         ]
     },
@@ -187,98 +212,112 @@
                 "stroke":14,
                 "winner":"A",
                 "on_off_court":"\u843d\u5730",
-                "balltype":"\u6bba\u7403"
+                "balltype":"\u6bba\u7403",
+                "lose_area":"B3"
             },
             {
                 "rally":2,
                 "stroke":12,
                 "winner":"A",
                 "on_off_court":"\u843d\u5730",
-                "balltype":"\u5e73\u7403"
+                "balltype":"\u5e73\u7403",
+                "lose_area":"B2"
             },
             {
                 "rally":3,
                 "stroke":14,
                 "winner":"B",
                 "on_off_court":"\u51fa\u754c",
-                "balltype":"\u9577\u7403"
+                "balltype":"\u9577\u7403",
+                "lose_area":"A5"
             },
             {
                 "rally":4,
                 "stroke":9,
                 "winner":"B",
                 "on_off_court":"\u51fa\u754c",
-                "balltype":"\u653e\u5c0f\u7403"
+                "balltype":"\u653e\u5c0f\u7403",
+                "lose_area":"C5"
             },
             {
                 "rally":5,
                 "stroke":10,
                 "winner":"A",
                 "on_off_court":"\u843d\u5730",
-                "balltype":"\u6bba\u7403"
+                "balltype":"\u6bba\u7403",
+                "lose_area":"B3"
             },
             {
                 "rally":6,
                 "stroke":21,
                 "winner":"B",
                 "on_off_court":"\u51fa\u754c",
-                "balltype":"\u653e\u5c0f\u7403"
+                "balltype":"\u653e\u5c0f\u7403",
+                "lose_area":"C1"
             },
             {
                 "rally":7,
                 "stroke":10,
                 "winner":"B",
                 "on_off_court":"\u843d\u5730",
-                "balltype":"\u6bba\u7403"
+                "balltype":"\u6bba\u7403",
+                "lose_area":"A2"
             },
             {
                 "rally":8,
                 "stroke":13,
                 "winner":"B",
                 "on_off_court":"\u672a\u56de\u64ca\u6210\u529f",
-                "balltype":"\u6bba\u7403"
+                "balltype":"\u6bba\u7403",
+                "lose_area":"A2"
             },
             {
                 "rally":9,
                 "stroke":13,
                 "winner":"B",
                 "on_off_court":"\u51fa\u754c",
-                "balltype":"\u6311\u7403"
+                "balltype":"\u6311\u7403",
+                "lose_area":"B5"
             },
             {
                 "rally":10,
                 "stroke":5,
                 "winner":"A",
                 "on_off_court":"\u843d\u5730",
-                "balltype":"\u64b2\u7403"
+                "balltype":"\u64b2\u7403",
+                "lose_area":"B3"
             },
             {
                 "rally":11,
                 "stroke":25,
                 "winner":"B",
                 "on_off_court":"\u672a\u56de\u64ca\u6210\u529f",
-                "balltype":"\u6311\u7403"
+                "balltype":"\u6311\u7403",
+                "lose_area":"A2"
             },
             {
                 "rally":12,
                 "stroke":13,
                 "winner":"A",
                 "on_off_court":"\u843d\u5730",
-                "balltype":"\u5e73\u7403"
+                "balltype":"\u5e73\u7403",
+                "lose_area":"B3"
             },
             {
                 "rally":13,
                 "stroke":25,
                 "winner":"B",
                 "on_off_court":"\u843d\u5730",
-                "balltype":"\u64b2\u7403"
+                "balltype":"\u64b2\u7403",
+                "lose_area":"A3"
             },
             {
                 "rally":14,
                 "stroke":7,
                 "winner":"B",
                 "on_off_court":"\u51fa\u754c",
-                "balltype":"\u6311\u7403"
+                "balltype":"\u6311\u7403",
+                "lose_area":"C4"
             }
         ]
     }

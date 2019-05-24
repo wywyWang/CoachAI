@@ -26,9 +26,9 @@ function init_linechart(minrally,maxrally,set){
                 return d.rally
             }));
         }
-        console.log(set);
-        console.log(minrally);
-        console.log(maxrally);
+        // console.log(set);
+        // console.log(minrally);
+        // console.log(maxrally);
 
         // handmade legend
         var svg_legend = d3.select("#line").append("svg")
@@ -368,9 +368,9 @@ function init_on_off_court(minrally,maxrally,set){
             return item.winner == 'B'
         });
 
-        console.log(set);
-        console.log(minrally);
-        console.log(maxrally);
+        // console.log(set);
+        // console.log(minrally);
+        // console.log(maxrally);
         
         //count each reason
         var group_data = Object.keys(_.groupBy(data,"on_off_court"));
@@ -484,9 +484,9 @@ function init_total_balltype(minrally,maxrally,set){
             return parseInt(item.rally) >= minrally && parseInt(item.rally) <= maxrally;
         });
 
-        console.log(set);
-        console.log(minrally);
-        console.log(maxrally);
+        // console.log(set);
+        // console.log(minrally);
+        // console.log(maxrally);
 
         var labels = data.map(function(item) {
             return item.result.map(function(e){
@@ -508,8 +508,8 @@ function init_total_balltype(minrally,maxrally,set){
             }
         };
 
-        console.log(dataA);
-        console.log(dataB);
+        // console.log(dataA);
+        // console.log(dataB);
 
         //custormized options
         var chartRadarOptions = 
@@ -586,9 +586,9 @@ function init_total_balltype(minrally,maxrally,set){
                 }
             };
 
-            console.log(labels[0]);
-            console.log(dataA);
-            console.log(dataB);
+            // console.log(labels[0]);
+            // console.log(dataA);
+            // console.log(dataB);
 
             var chartRadarOptionsPlayer = 
             {
