@@ -4,28 +4,7 @@ function init_linechart(minrally,maxrally,set){
         //init svg legend
         d3.selectAll("svg").remove();
 
-        //init set
-        if (!set){
-            set = 1;
-        }
-        //filter data to specific set
-        data = data.filter(function(item) {
-            return item.set == set
-        });
-        data = data[0].result
-
-        // init minrally and maxrally if are undefined,null,0,NaN,empty string,false
-        if (!minrally){
-            minrally = Math.min.apply(Math, data.map(function(d) { 
-                return d.rally;
-            }));
-        }
-
-        if (!maxrally){
-            maxrally = Math.max.apply(Math, data.map(function(d) { 
-                return d.rally
-            }));
-        }
+        [data,set,minrally,maxrally] = data_filter(data,set,minrally,maxrally,0);
         // console.log(set);
         // console.log(minrally);
         // console.log(maxrally);
@@ -332,33 +311,7 @@ function init_on_off_court(minrally,maxrally,set){
     };
 
     $.getJSON("statistics/rally_count_real.json", function(data) {
-        //init set
-        if (!set){
-            set = 1;
-        }
-
-        //filter data to specific set
-        data = data.filter(function(item) {
-            return item.set == set
-        });
-        data = data[0].result;
-
-        // init minrally and maxrally if are undefined,null,0,NaN,empty string,false
-        if (!minrally){
-            minrally = Math.min.apply(Math, data.map(function(d) { 
-                return d.rally; 
-            }));
-        }
-        if (!maxrally){
-            maxrally = Math.max.apply(Math, data.map(function(d) { 
-                return d.rally; 
-            }));
-        }
-
-        //filter data to specific interval
-        data = data.filter(function(item) {
-            return item.rally >= minrally && item.rally <= maxrally
-        });
+        [data,set,minrally,maxrally] = data_filter(data,set,minrally,maxrally,1);
 
         //filter winners
         dataB = data.filter(function(item){
@@ -533,33 +486,7 @@ function init_total_balltype(minrally,maxrally,set){
 
         //rendering each player win balltype
         $.getJSON("statistics/rally_count_real.json", function(data2) {
-            //init set
-            if (!set){
-                set = 1;
-            }
-
-            //filter data to specific set
-            data2 = data2.filter(function(item) {
-                return item.set == set
-            });
-            data2 = data2[0].result;
-
-            // init minrally and maxrally if are undefined,null,0,NaN,empty string,false
-            if (!minrally){
-                minrally = Math.min.apply(Math, data2.map(function(d) { 
-                    return d.rally; 
-                }));
-            }
-            if (!maxrally){
-                maxrally = Math.max.apply(Math, data2.map(function(d) { 
-                    return d.rally; 
-                }));
-            }
-
-            //filter data to specific interval
-            data2 = data2.filter(function(item) {
-                return item.rally >= minrally && item.rally <= maxrally
-            });
+            [data2,set,minrally,maxrally] = data_filter(data2,set,minrally,maxrally,1);
 
             //filter winners
             data2A = data2.filter(function(item){
@@ -717,33 +644,7 @@ function init_stroke_distribution(minrally,maxrally,set){
     };
 
     $.getJSON("statistics/rally_count_real.json", function(data) {
-        //init set
-        if (!set){
-            set = 1;
-        }
-
-        //filter data to specific set
-        data = data.filter(function(item) {
-            return item.set == set
-        });
-        data = data[0].result;
-
-        // init minrally and maxrally if are undefined,null,0,NaN,empty string,false
-        if (!minrally){
-            minrally = Math.min.apply(Math, data.map(function(d) { 
-                return d.rally; 
-            }));
-        }
-        if (!maxrally){
-            maxrally = Math.max.apply(Math, data.map(function(d) { 
-                return d.rally; 
-            }));
-        }
-
-        //filter data to specific interval
-        data = data.filter(function(item) {
-            return item.rally >= minrally && item.rally <= maxrally
-        });
+        [data,set,minrally,maxrally] = data_filter(data,set,minrally,maxrally,1);
 
         //filter winners
         dataA = data.filter(function(item){
@@ -874,33 +775,7 @@ function init_court_distribution(minrally,maxrally,set){
     var ctxB = canvB.getContext("2d");
 
     $.getJSON("statistics/rally_count_real.json", function(data) {
-        //init set
-        if (!set){
-            set = 1;
-        }
-
-        //filter data to specific set
-        data = data.filter(function(item) {
-            return item.set == set
-        });
-        data = data[0].result;
-
-        // init minrally and maxrally if are undefined,null,0,NaN,empty string,false
-        if (!minrally){
-            minrally = Math.min.apply(Math, data.map(function(d) { 
-                return d.rally; 
-            }));
-        }
-        if (!maxrally){
-            maxrally = Math.max.apply(Math, data.map(function(d) { 
-                return d.rally; 
-            }));
-        }
-
-        //filter data to specific interval
-        data = data.filter(function(item) {
-            return item.rally >= minrally && item.rally <= maxrally
-        });
+        [data,set,minrally,maxrally] = data_filter(data,set,minrally,maxrally,1);
 
         //filter winners
         dataB = data.filter(function(item){
@@ -1131,4 +1006,38 @@ function get_interval_updown(set){
             $('#up').append(insertText); 
         }
     })
+}
+
+function data_filter(data,set,minrally,maxrally,mode){
+    //init set
+    if (!set){
+        set = 1;
+    }
+
+    //filter data to specific set
+    data = data.filter(function(item) {
+        return item.set == set
+    });
+    data = data[0].result;
+
+    // init minrally and maxrally if are undefined,null,0,NaN,empty string,false
+    if (!minrally){
+        minrally = Math.min.apply(Math, data.map(function(d) { 
+            return d.rally; 
+        }));
+    }
+    if (!maxrally){
+        maxrally = Math.max.apply(Math, data.map(function(d) { 
+            return d.rally; 
+        }));
+    }
+
+    if(mode == 1){
+        //filter data to specific interval
+        data = data.filter(function(item) {
+            return item.rally >= minrally && item.rally <= maxrally
+        });
+    }
+
+    return [data,set,minrally,maxrally];
 }
