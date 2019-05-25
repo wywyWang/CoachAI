@@ -841,6 +841,135 @@ function init_stroke_distribution(minrally,maxrally,set){
     });
 }
 
+function init_court_distribution(minrally,maxrally,set){
+    //左邊是後場 右邊是前場 小戴是A 陳是B
+    $('#total_court .playerA').html('<div class="subtitle">選手A失分分佈</div>\
+    <img id="badminton_courtA" src="../image/badminton_court.jpg" class="img-fluid" width="100%"/>');
+    var imgA = document.getElementById("badminton_courtA");
+    var canv = document.createElement('canvas');
+    canv.id = 'total_court_chartA';
+    canv.width = 500;
+    canv.height = 250;
+    document.getElementById("total_court").getElementsByClassName("playerA")[0].appendChild(canv);
+    var canvA = document.getElementById("total_court_chartA");
+    canvA.style.position = "absolute";
+    canvA.style.left = imgA.offsetLeft + 'px';
+    canvA.style.top = imgA.offsetTop + 'px';
+
+    $('#total_court .playerB').html('<div class="subtitle">選手B失分分佈</div>\
+    <img id="badminton_courtB" src="../image/badminton_court.jpg" class="img-fluid" width="100%"/>');
+    var imgB = document.getElementById("badminton_courtB");
+    var canv = document.createElement('canvas');
+    canv.id = 'total_court_chartB';
+    canv.width = imgB.width;
+    canv.height = imgB.height;
+    document.getElementById("total_court").getElementsByClassName("playerB")[0].appendChild(canv);
+    var canvB = document.getElementById("total_court_chartB");
+    canvB.style.position = "absolute";
+    canvB.style.left = imgB.offsetLeft + 'px';
+    canvB.style.top = imgB.offsetTop + 'px';
+
+    var ctxA = canvA.getContext("2d");
+    var ctxB = canvB.getContext("2d");
+
+    $.getJSON("statistics/rally_count_real.json", function(data) {
+        //init set
+        if (!set){
+            set = 1;
+        }
+
+        //filter data to specific set
+        data = data.filter(function(item) {
+            return item.set == set
+        });
+        data = data[0].result;
+
+        // init minrally and maxrally if are undefined,null,0,NaN,empty string,false
+        if (!minrally){
+            minrally = Math.min.apply(Math, data.map(function(d) { 
+                return d.rally; 
+            }));
+        }
+        if (!maxrally){
+            maxrally = Math.max.apply(Math, data.map(function(d) { 
+                return d.rally; 
+            }));
+        }
+
+        //filter data to specific interval
+        data = data.filter(function(item) {
+            return item.rally >= minrally && item.rally <= maxrally
+        });
+
+        //filter winners
+        dataB = data.filter(function(item){
+            return item.winner == 'A'
+        });
+        dataA = data.filter(function(item){
+            return item.winner == 'B'
+        });
+
+        //count each reason
+        var group_data = Object.keys(_.groupBy(data,"lose_area")).sort();
+        var sum_dataA = new Object();
+        sum_dataA.area = group_data;
+        sum_dataA.value = new Array(group_data.length).fill(0);
+        var sum_dataB = new Object();
+        sum_dataB.area = group_data;
+        sum_dataB.value = new Array(group_data.length).fill(0);
+        var sumA = 0;
+        for(var i = 0;i<dataA.length;i++){
+            for(var j = 0;j<group_data.length;j++){
+                if (dataA[i].lose_area == group_data[j]){
+                    sum_dataA.value[j] +=1;
+                    sumA++;
+                }
+            }
+        }
+        var sumB = 0;
+        for(var i = 0;i<dataB.length;i++){
+            for(var j = 0;j<group_data.length;j++){
+                if (dataB[i].lose_area == group_data[j]){
+                    sum_dataB.value[j] +=1;
+                    sumB++;
+                }
+            }
+        }
+
+        var court = new Object();
+        court.xarea = ['1','2','3','4','5'];
+        court.xcoord_back = [[328,468],[190,328],[53,190],[0,53],[-100,0]];
+        court.xcoord_back = court.xcoord_back.map(function(item){
+            return [(item[0]/935*imgA.width).toFixed(2),(item[1]/935*imgA.width).toFixed(2)];
+        });
+        court.yarea = ['A','B','C','D','E','F'];
+        court.ycoord_back = [[212,392],[32,212],[392,424],[0,32],[424,500],[-100,0]];
+        court.ycoord_back = court.ycoord_back.map(function(item){
+            return [(item[0]/424*imgA.height).toFixed(2),(item[1]/424*imgA.height).toFixed(2)];
+        });
+
+        console.log(court);
+        console.log(sum_dataA);
+
+        for(var i = 0;i<sum_dataA.value.length;i++){
+            if (sum_dataA.value[i] != 0){
+                var ratio = (sum_dataA.value[i]/sumA).toFixed(2);
+                console.log(ratio)
+                var idx = court.xarea.indexOf(sum_dataA.area[i].split('')[1]);
+                var idy = court.yarea.indexOf(sum_dataA.area[i].split('')[0]);
+                console.log(idx);
+                console.log(idy);
+                ctxA.fillStyle = "rgba(66,129,164," + ratio + ")";
+                var w = court.xcoord_back[idx][1]-court.xcoord_back[idx][0];
+                var h = court.ycoord_back[idy][1]-court.ycoord_back[idy][0];
+                ctxA.fillRect(court.xcoord_back[idx][0],court.ycoord_back[idy][1],w,h);
+                ctxA.fillStyle = "rgb(255,255,255)";
+                ctxA.strokeText(ratio,court.xcoord_back[idx][0],court.ycoord_back[idy][1]);
+            }
+        }
+    })
+}
+
 function change_interval(){
     //get interval when clicking submit
     var minrally = document.getElementById("down").value;
@@ -869,6 +998,12 @@ function change_interval(){
     $('#stroke_distribution_chartA').remove();
     $('#stroke_distribution_chartB').remove();
     init_stroke_distribution(minrally,maxrally,set);
+
+    //delete old court distribution
+    $('#total_court .subtitle').remove();
+    $('#total_court_chartA').remove();
+    $('#total_court_chartB').remove();
+    init_court_distribution(minrally,maxrally,set);
 }
 
 function change_set() {
@@ -899,6 +1034,12 @@ function change_set() {
     $('#stroke_distribution_chartA').remove();
     $('#stroke_distribution_chartB').remove();
     init_stroke_distribution(null,null,new_set);
+
+    //delete old court distribution
+    $('#total_court .subtitle').remove();
+    $('#total_court_chartA').remove();
+    $('#total_court_chartB').remove();
+    init_court_distribution(minrally,maxrally,new_set);
 }
 
 function get_interval_set(){
