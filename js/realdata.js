@@ -844,25 +844,26 @@ function init_stroke_distribution(minrally,maxrally,set){
 function init_court_distribution(minrally,maxrally,set){
     //左邊是後場 右邊是前場 小戴是A 陳是B
     $('#total_court .playerA').html('<div class="subtitle">選手A失分分佈</div>\
-    <img id="badminton_courtA" src="../image/badminton_court.jpg" class="img-fluid" width="100%"/>');
+    <img id="badminton_courtA" src="../image/badminton_court.jpg" width="100%"/>');
+    $('#total_court .playerB').html('<div class="subtitle">選手B失分分佈</div>\
+    <img id="badminton_courtB" src="../image/badminton_court.jpg" class="img-fluid" width="100%"/>');
+
     var imgA = document.getElementById("badminton_courtA");
     var canv = document.createElement('canvas');
     canv.id = 'total_court_chartA';
-    canv.width = 500;
-    canv.height = 250;
+    canv.width = imgA.width;
+    canv.height = parseInt(386/832*imgA.width);         //ori height is 386,ori width is 832,need get ori img size
     document.getElementById("total_court").getElementsByClassName("playerA")[0].appendChild(canv);
     var canvA = document.getElementById("total_court_chartA");
     canvA.style.position = "absolute";
     canvA.style.left = imgA.offsetLeft + 'px';
     canvA.style.top = imgA.offsetTop + 'px';
 
-    $('#total_court .playerB').html('<div class="subtitle">選手B失分分佈</div>\
-    <img id="badminton_courtB" src="../image/badminton_court.jpg" class="img-fluid" width="100%"/>');
     var imgB = document.getElementById("badminton_courtB");
     var canv = document.createElement('canvas');
     canv.id = 'total_court_chartB';
     canv.width = imgB.width;
-    canv.height = imgB.height;
+    canv.height = parseInt(386/832*imgB.width);
     document.getElementById("total_court").getElementsByClassName("playerB")[0].appendChild(canv);
     var canvB = document.getElementById("total_court_chartB");
     canvB.style.position = "absolute";
@@ -909,7 +910,7 @@ function init_court_distribution(minrally,maxrally,set){
             return item.winner == 'B'
         });
 
-        //count each reason
+        //count each area
         var group_data = Object.keys(_.groupBy(data,"lose_area")).sort();
         var sum_dataA = new Object();
         sum_dataA.area = group_data;
@@ -917,6 +918,7 @@ function init_court_distribution(minrally,maxrally,set){
         var sum_dataB = new Object();
         sum_dataB.area = group_data;
         sum_dataB.value = new Array(group_data.length).fill(0);
+
         var sumA = 0;
         for(var i = 0;i<dataA.length;i++){
             for(var j = 0;j<group_data.length;j++){
@@ -938,33 +940,76 @@ function init_court_distribution(minrally,maxrally,set){
 
         var court = new Object();
         court.xarea = ['1','2','3','4','5'];
+        court.yarea = ['A','B','C','D','E','F'];
+
         court.xcoord_back = [[328,468],[190,328],[53,190],[0,53],[-100,0]];
         court.xcoord_back = court.xcoord_back.map(function(item){
-            return [(item[0]/935*imgA.width).toFixed(2),(item[1]/935*imgA.width).toFixed(2)];
+            return [parseInt(item[0]/935*imgA.width),parseInt(item[1]/935*imgA.width)];
+        });
+        court.ycoord_back = [[32,212],[212,392],[0,32],[392,424],[-50,0],[424,500]];
+        court.ycoord_back = court.ycoord_back.map(function(item){
+            return [parseInt(item[0]/424*imgA.height),parseInt(item[1]/424*imgA.height)];
+        });
+
+        court.xcoord_front = [[468,608],[608,745],[745,882],[882,935],[935,950]];
+        court.xcoord_front = court.xcoord_front.map(function(item){
+            return [parseInt(item[0]/935*imgA.width),parseInt(item[1]/935*imgA.width)];
         });
         court.yarea = ['A','B','C','D','E','F'];
-        court.ycoord_back = [[212,392],[32,212],[392,424],[0,32],[424,500],[-100,0]];
-        court.ycoord_back = court.ycoord_back.map(function(item){
-            return [(item[0]/424*imgA.height).toFixed(2),(item[1]/424*imgA.height).toFixed(2)];
+        court.ycoord_front = [[212,392],[32,212],[392,424],[0,32],[424,500],[-50,0]];
+        court.ycoord_front = court.ycoord_front.map(function(item){
+            return [parseInt(item[0]/424*imgA.height),parseInt(item[1]/424*imgA.height)];
         });
 
-        console.log(court);
+        // console.log(court);
         console.log(sum_dataA);
+        console.log(sum_dataB);
 
+        //render rectangle ratio area over image
         for(var i = 0;i<sum_dataA.value.length;i++){
             if (sum_dataA.value[i] != 0){
                 var ratio = (sum_dataA.value[i]/sumA).toFixed(2);
-                console.log(ratio)
                 var idx = court.xarea.indexOf(sum_dataA.area[i].split('')[1]);
                 var idy = court.yarea.indexOf(sum_dataA.area[i].split('')[0]);
-                console.log(idx);
-                console.log(idy);
                 ctxA.fillStyle = "rgba(66,129,164," + ratio + ")";
-                var w = court.xcoord_back[idx][1]-court.xcoord_back[idx][0];
-                var h = court.ycoord_back[idy][1]-court.ycoord_back[idy][0];
-                ctxA.fillRect(court.xcoord_back[idx][0],court.ycoord_back[idy][1],w,h);
-                ctxA.fillStyle = "rgb(255,255,255)";
-                ctxA.strokeText(ratio,court.xcoord_back[idx][0],court.ycoord_back[idy][1]);
+                if (set%2 == 1){
+                    var w = court.xcoord_back[idx][1]-court.xcoord_back[idx][0];
+                    var h = court.ycoord_back[idy][1]-court.ycoord_back[idy][0];
+                    ctxA.fillRect(court.xcoord_back[idx][0],court.ycoord_back[idy][0],w,h);
+                    ctxA.fillStyle = "rgb(255,255,255)";
+                    ctxA.strokeText(sum_dataA.area[i] + '=' + ratio,court.xcoord_back[idx][0],court.ycoord_back[idy][0]);
+                }
+                else{
+                    var w = court.xcoord_front[idx][1]-court.xcoord_front[idx][0];
+                    var h = court.ycoord_front[idy][1]-court.ycoord_front[idy][0];
+                    ctxA.fillRect(court.xcoord_front[idx][0],court.ycoord_front[idy][0],w,h);
+                    ctxA.fillStyle = "rgb(255,255,255)";
+                    ctxA.strokeText(sum_dataA.area[i] + '=' + ratio,court.xcoord_front[idx][0],court.ycoord_front[idy][0]);
+                }
+                
+            }
+        }
+
+        for(var i = 0;i<sum_dataB.value.length;i++){
+            if (sum_dataB.value[i] != 0){
+                var ratio = (sum_dataB.value[i]/sumA).toFixed(2);
+                var idx = court.xarea.indexOf(sum_dataB.area[i].split('')[1]);
+                var idy = court.yarea.indexOf(sum_dataB.area[i].split('')[0]);
+                ctxB.fillStyle = "rgba(255,99,132," + ratio + ")";
+                if(set%2 == 1){
+                    var w = court.xcoord_front[idx][1]-court.xcoord_front[idx][0];
+                    var h = court.ycoord_front[idy][1]-court.ycoord_front[idy][0];
+                    ctxB.fillRect(court.xcoord_front[idx][0],court.ycoord_front[idy][0],w,h);
+                    ctxB.fillStyle = "rgb(255,255,255)";
+                    ctxB.strokeText(sum_dataB.area[i] + '=' + ratio,court.xcoord_front[idx][0],court.ycoord_front[idy][0]);
+                }
+                else{
+                    var w = court.xcoord_back[idx][1]-court.xcoord_back[idx][0];
+                    var h = court.ycoord_back[idy][1]-court.ycoord_back[idy][0];
+                    ctxB.fillRect(court.xcoord_back[idx][0],court.ycoord_back[idy][0],w,h);
+                    ctxB.fillStyle = "rgb(255,255,255)";
+                    ctxB.strokeText(sum_dataB.area[i] + '=' + ratio,court.xcoord_back[idx][0],court.ycoord_back[idy][0]);
+                }
             }
         }
     })
@@ -1003,6 +1048,8 @@ function change_interval(){
     $('#total_court .subtitle').remove();
     $('#total_court_chartA').remove();
     $('#total_court_chartB').remove();
+    $('#badminton_courtA').remove();
+    $('#badminton_courtB').remove();
     init_court_distribution(minrally,maxrally,set);
 }
 
@@ -1039,7 +1086,9 @@ function change_set() {
     $('#total_court .subtitle').remove();
     $('#total_court_chartA').remove();
     $('#total_court_chartB').remove();
-    init_court_distribution(minrally,maxrally,new_set);
+    $('#badminton_courtA').remove();
+    $('#badminton_courtB').remove();
+    init_court_distribution(null,null,new_set);
 }
 
 function get_interval_set(){
