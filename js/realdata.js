@@ -399,15 +399,11 @@ function init_total_balltype(minrally,maxrally,set){
     $('#total_balltype .playerB').html('<div class="subtitle">選手B獲勝球種</div>\
     <canvas id="total_balltype_chartB" width="800" height="600"></canvas>');
 
-    var canvtitle = document.createElement('div');
-    canvtitle.className = 'subtitle';
-    canvtitle.innerHTML = "全場球種分析";
-    document.getElementById("total_balltype").appendChild(canvtitle);
-    var canv = document.createElement('canvas');
-    canv.id = 'total_balltype_chart';
-    canv.width = 600;
-    canv.height = 300;
-    document.getElementById("total_balltype").appendChild(canv);
+    $('#sum_balltype .playerA').html('<div class="subtitle">選手A全場球種</div>\
+    <canvas id="sum_balltype_chartA" width="800" height="600"></canvas>');
+    $('#sum_balltype .playerB').html('<div class="subtitle">選手B全場球種</div>\
+    <canvas id="sum_balltype_chartB" width="800" height="600"></canvas>');
+
     $.getJSON("../statistics/rally_type_real.json", function(data) {
         //init set
         if (!set){
@@ -450,19 +446,6 @@ function init_total_balltype(minrally,maxrally,set){
         var total = data.map(function(item){
             return item.result
         });
-
-        var dataA = new Array(data[0].result.length).fill(0);
-        var dataB = new Array(data[0].result.length).fill(0);
-        for(var i = 0;i<data.length;i+=2){
-            rally = parseInt(data[i].rally);
-            for(var j = 0;j<data[i].result.length;j++){
-                dataA[j] += data[i].result[j].count;
-                dataB[j] += data[i+1].result[j].count
-            }
-        };
-
-        // console.log(dataA);
-        // console.log(dataB);
 
         //custormized options
         var chartRadarOptions = 
@@ -582,8 +565,19 @@ function init_total_balltype(minrally,maxrally,set){
             });
         })
         .done(function(){
+            var dataA = new Array(data[0].result.length).fill(0);
+            var dataB = new Array(data[0].result.length).fill(0);
+            for(var i = 0;i<data.length;i+=2){
+                rally = parseInt(data[i].rally);
+                for(var j = 0;j<data[i].result.length;j++){
+                    dataA[j] += data[i].result[j].count;
+                    dataB[j] += data[i+1].result[j].count
+                }
+            };
+            console.log(dataA)
+            console.log(dataB)
             //rendering total balltype
-            var chartRadarDOM = document.getElementById("total_balltype_chart");
+            var chartRadarDOM = document.getElementById("sum_balltype_chartA");
             var chart = new Chart(chartRadarDOM, {
                 type: 'radar',
                 data:{
@@ -598,7 +592,19 @@ function init_total_balltype(minrally,maxrally,set){
                         pointBorderColor: "#fff",
                         pointBackgroundColor: "rgba(66,129,164,1)",
                         data: dataA
-                        }, {
+                        }
+                    ]
+                },
+                options: chartRadarOptions
+            });
+
+            var chartRadarDOM = document.getElementById("sum_balltype_chartB");
+            var chart = new Chart(chartRadarDOM, {
+                type: 'radar',
+                data:{
+                    labels: labels[0],
+                    datasets: [
+                        {
                         label: "Player B",
                         fill: true,
                         cubicInterpolationMode:"monotone",
@@ -867,7 +873,7 @@ function init_court_distribution(minrally,maxrally,set){
 
         for(var i = 0;i<sum_dataB.value.length;i++){
             if (sum_dataB.value[i] != 0){
-                var ratio = (sum_dataB.value[i]/sumA).toFixed(2);
+                var ratio = (sum_dataB.value[i]/sumB).toFixed(2);
                 var idx = court.xarea.indexOf(sum_dataB.area[i].split('')[1]);
                 var idy = court.yarea.indexOf(sum_dataB.area[i].split('')[0]);
                 ctxB.fillStyle = "rgba(255,99,132," + ratio + ")";
@@ -910,7 +916,8 @@ function change_interval(){
     $('#total_balltype .subtitle').remove();
     $('#total_balltype_chartA').remove();
     $('#total_balltype_chartB').remove();
-    $('#total_balltype_chart').remove();
+    $('#sum_balltype_chartA').remove();
+    $('#sum_balltype_chartB').remove();
     init_total_balltype(minrally,maxrally,set);
 
     //delete old stoke distribution
@@ -948,7 +955,8 @@ function change_set() {
     $('#total_balltype .subtitle').remove();
     $('#total_balltype_chartA').remove();
     $('#total_balltype_chartB').remove();
-    $('#total_balltype_chart').remove();
+    $('#sum_balltype_chartA').remove();
+    $('#sum_balltype_chartB').remove();
     init_total_balltype(null,null,new_set);
 
     //delete old stoke distribution
