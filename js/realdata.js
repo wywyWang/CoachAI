@@ -399,9 +399,9 @@ function init_total_balltype(minrally,maxrally,set){
     $('#total_balltype .playerB').html('<div class="subtitle">選手B獲勝球種</div>\
     <canvas id="total_balltype_chartB" width="800" height="600"></canvas>');
 
-    $('#sum_balltype .playerA').html('<div class="subtitle">選手A全場球種</div>\
+    $('#sum_balltype .playerA').html('<div class="subtitle">選手A球種統計</div>\
     <canvas id="sum_balltype_chartA" width="800" height="600"></canvas>');
-    $('#sum_balltype .playerB').html('<div class="subtitle">選手B全場球種</div>\
+    $('#sum_balltype .playerB').html('<div class="subtitle">選手B球種統計</div>\
     <canvas id="sum_balltype_chartB" width="800" height="600"></canvas>');
 
     $.getJSON("../statistics/rally_type_real.json", function(data) {
@@ -764,7 +764,7 @@ function init_court_distribution(minrally,maxrally,set){
     var canvA = document.getElementById("total_court_chartA");
     canvA.style.position = "absolute";
     canvA.style.left = imgA.offsetLeft + 'px';
-    canvA.style.top = imgA.offsetTop + 'px';
+    canvA.style.top = imgA.Top + 'px';
 
     var imgB = document.getElementById("badminton_courtB");
     var canv = document.createElement('canvas');
@@ -775,7 +775,7 @@ function init_court_distribution(minrally,maxrally,set){
     var canvB = document.getElementById("total_court_chartB");
     canvB.style.position = "absolute";
     canvB.style.left = imgB.offsetLeft + 'px';
-    canvB.style.top = imgB.offsetTop + 'px';
+    canvB.style.top = imgB.Top + 'px';
 
     var ctxA = canvA.getContext("2d");
     var ctxB = canvB.getContext("2d");
@@ -1013,6 +1013,7 @@ function get_interval_updown(set){
             $('#down').append(insertText); 
             $('#up').append(insertText); 
         }
+        $('#up').val(maximum); 
     })
 }
 
