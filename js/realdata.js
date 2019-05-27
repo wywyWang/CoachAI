@@ -759,7 +759,7 @@ function init_court_distribution(minrally,maxrally,set){
     var canv = document.createElement('canvas');
     canv.id = 'total_court_chartA';
     canv.width = imgA.width;
-    canv.height = parseInt(386/832*imgA.width);         //ori height is 386,ori width is 832,need get ori img size
+    canv.height = 386/832*imgA.width;         //ori height is 386,ori width is 832,need get ori img size
     document.getElementById("total_court").getElementsByClassName("playerA")[0].appendChild(canv);
     var canvA = document.getElementById("total_court_chartA");
     canvA.style.position = "absolute";
@@ -770,7 +770,7 @@ function init_court_distribution(minrally,maxrally,set){
     var canv = document.createElement('canvas');
     canv.id = 'total_court_chartB';
     canv.width = imgB.width;
-    canv.height = parseInt(386/832*imgB.width);
+    canv.height = 386/832*imgB.width;
     document.getElementById("total_court").getElementsByClassName("playerB")[0].appendChild(canv);
     var canvB = document.getElementById("total_court_chartB");
     canvB.style.position = "absolute";
@@ -853,21 +853,24 @@ function init_court_distribution(minrally,maxrally,set){
                 var idx = court.xarea.indexOf(sum_dataA.area[i].split('')[1]);
                 var idy = court.yarea.indexOf(sum_dataA.area[i].split('')[0]);
                 ctxA.fillStyle = "rgba(66,129,164," + ratio + ")";
+                var topX,topY,w,h;
                 if (set%2 == 1){
-                    var w = court.xcoord_back[idx][1]-court.xcoord_back[idx][0];
-                    var h = court.ycoord_back[idy][1]-court.ycoord_back[idy][0];
-                    ctxA.fillRect(court.xcoord_back[idx][0],court.ycoord_back[idy][0],w,h);
-                    ctxA.fillStyle = "rgb(255,255,255)";
-                    ctxA.strokeText(sum_dataA.area[i] + '=' + ratio,court.xcoord_back[idx][0],court.ycoord_back[idy][0]);
+                    topX = court.xcoord_back[idx][0];
+                    topY = court.ycoord_back[idy][0];
+                    w = court.xcoord_back[idx][1]-court.xcoord_back[idx][0];
+                    h = court.ycoord_back[idy][1]-court.ycoord_back[idy][0];
                 }
                 else{
-                    var w = court.xcoord_front[idx][1]-court.xcoord_front[idx][0];
-                    var h = court.ycoord_front[idy][1]-court.ycoord_front[idy][0];
-                    ctxA.fillRect(court.xcoord_front[idx][0],court.ycoord_front[idy][0],w,h);
-                    ctxA.fillStyle = "rgb(255,255,255)";
-                    ctxA.strokeText(sum_dataA.area[i] + '=' + ratio,court.xcoord_front[idx][0],court.ycoord_front[idy][0]);
+                    topX = court.xcoord_front[idx][0];
+                    topY = court.ycoord_front[idy][0];
+                    w = court.xcoord_front[idx][1]-court.xcoord_front[idx][0];
+                    h = court.ycoord_front[idy][1]-court.ycoord_front[idy][0];
                 }
-                
+                ctxA.fillRect(topX,topY,w,h);
+                ctxA.fillStyle = "rgb(255,255,255)";
+                ctxA.textAlign = "center"; 
+                ctxA.textBaseline = "middle";
+                ctxA.strokeText(sum_dataA.area[i] + '=' + ratio,topX+w/2,topY+h/2);
             }
         }
 
@@ -877,20 +880,24 @@ function init_court_distribution(minrally,maxrally,set){
                 var idx = court.xarea.indexOf(sum_dataB.area[i].split('')[1]);
                 var idy = court.yarea.indexOf(sum_dataB.area[i].split('')[0]);
                 ctxB.fillStyle = "rgba(255,99,132," + ratio + ")";
+                var topX,topY,w,h;
                 if(set%2 == 1){
-                    var w = court.xcoord_front[idx][1]-court.xcoord_front[idx][0];
-                    var h = court.ycoord_front[idy][1]-court.ycoord_front[idy][0];
-                    ctxB.fillRect(court.xcoord_front[idx][0],court.ycoord_front[idy][0],w,h);
-                    ctxB.fillStyle = "rgb(255,255,255)";
-                    ctxB.strokeText(sum_dataB.area[i] + '=' + ratio,court.xcoord_front[idx][0],court.ycoord_front[idy][0]);
+                    topX = court.xcoord_front[idx][0];
+                    topY = court.ycoord_front[idy][0];
+                    w = court.xcoord_front[idx][1]-court.xcoord_front[idx][0];
+                    h = court.ycoord_front[idy][1]-court.ycoord_front[idy][0];
                 }
                 else{
-                    var w = court.xcoord_back[idx][1]-court.xcoord_back[idx][0];
-                    var h = court.ycoord_back[idy][1]-court.ycoord_back[idy][0];
-                    ctxB.fillRect(court.xcoord_back[idx][0],court.ycoord_back[idy][0],w,h);
-                    ctxB.fillStyle = "rgb(255,255,255)";
-                    ctxB.strokeText(sum_dataB.area[i] + '=' + ratio,court.xcoord_back[idx][0],court.ycoord_back[idy][0]);
+                    topX = court.xcoord_back[idx][0];
+                    topY = court.ycoord_back[idy][0];
+                    w = court.xcoord_back[idx][1]-court.xcoord_back[idx][0];
+                    h = court.ycoord_back[idy][1]-court.ycoord_back[idy][0];
                 }
+                ctxB.fillRect(topX,topY,w,h);
+                ctxB.fillStyle = "rgb(255,255,255)";
+                ctxB.textAlign = "center"; 
+                ctxB.textBaseline = "middle";
+                ctxB.strokeText(sum_dataB.area[i] + '=' + ratio,topX+w/2,topY+h/2);
             }
         }
     })
