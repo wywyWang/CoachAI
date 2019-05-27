@@ -15,6 +15,15 @@
     margin-top: 20px;
 }
 
+#dropdown select{
+    margin-right: 10px;
+    margin-left: 3px;
+}
+
+#total_court .subtitle{
+    margin-bottom: 30px;
+}
+
 .form-group{
     margin-left: 50px;
 }

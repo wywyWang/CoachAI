@@ -855,16 +855,32 @@ function init_court_distribution(minrally,maxrally,set){
                 ctxA.fillStyle = "rgba(66,129,164," + ratio + ")";
                 var topX,topY,w,h;
                 if (set%2 == 1){
-                    topX = court.xcoord_back[idx][0];
-                    topY = court.ycoord_back[idy][0];
-                    w = court.xcoord_back[idx][1]-court.xcoord_back[idx][0];
-                    h = court.ycoord_back[idy][1]-court.ycoord_back[idy][0];
+                    if (sum_dataA.area[i].split('')[0] == 'E' || sum_dataA.area[i].split('')[0] == 'F' || sum_dataA.area[i].split('')[1] == '5'){
+                        topX = court.xcoord_front[idx][0];
+                        topY = court.ycoord_front[idy][0];
+                        w = court.xcoord_front[idx][1]-court.xcoord_front[idx][0];
+                        h = court.ycoord_front[idy][1]-court.ycoord_front[idy][0];
+                    }
+                    else{
+                        topX = court.xcoord_back[idx][0];
+                        topY = court.ycoord_back[idy][0];
+                        w = court.xcoord_back[idx][1]-court.xcoord_back[idx][0];
+                        h = court.ycoord_back[idy][1]-court.ycoord_back[idy][0];
+                    }
                 }
                 else{
-                    topX = court.xcoord_front[idx][0];
-                    topY = court.ycoord_front[idy][0];
-                    w = court.xcoord_front[idx][1]-court.xcoord_front[idx][0];
-                    h = court.ycoord_front[idy][1]-court.ycoord_front[idy][0];
+                    if (sum_dataA.area[i].split('')[0] == 'E' || sum_dataA.area[i].split('')[0] == 'F' || sum_dataA.area[i].split('')[1] == '5'){
+                        topX = court.xcoord_back[idx][0];
+                        topY = court.ycoord_back[idy][0];
+                        w = court.xcoord_back[idx][1]-court.xcoord_back[idx][0];
+                        h = court.ycoord_back[idy][1]-court.ycoord_back[idy][0];
+                    }
+                    else{
+                        topX = court.xcoord_front[idx][0];
+                        topY = court.ycoord_front[idy][0];
+                        w = court.xcoord_front[idx][1]-court.xcoord_front[idx][0];
+                        h = court.ycoord_front[idy][1]-court.ycoord_front[idy][0];
+                    }
                 }
                 ctxA.fillRect(topX,topY,w,h);
                 ctxA.fillStyle = "rgb(255,255,255)";
@@ -882,16 +898,32 @@ function init_court_distribution(minrally,maxrally,set){
                 ctxB.fillStyle = "rgba(255,99,132," + ratio + ")";
                 var topX,topY,w,h;
                 if(set%2 == 1){
-                    topX = court.xcoord_front[idx][0];
-                    topY = court.ycoord_front[idy][0];
-                    w = court.xcoord_front[idx][1]-court.xcoord_front[idx][0];
-                    h = court.ycoord_front[idy][1]-court.ycoord_front[idy][0];
+                    if (sum_dataB.area[i].split('')[0] == 'E' || sum_dataB.area[i].split('')[0] == 'F' || sum_dataB.area[i].split('')[1] == '5'){
+                        topX = court.xcoord_back[idx][0];
+                        topY = court.ycoord_back[idy][0];
+                        w = court.xcoord_back[idx][1]-court.xcoord_back[idx][0];
+                        h = court.ycoord_back[idy][1]-court.ycoord_back[idy][0];
+                    }
+                    else{
+                        topX = court.xcoord_front[idx][0];
+                        topY = court.ycoord_front[idy][0];
+                        w = court.xcoord_front[idx][1]-court.xcoord_front[idx][0];
+                        h = court.ycoord_front[idy][1]-court.ycoord_front[idy][0];
+                    }
                 }
                 else{
-                    topX = court.xcoord_back[idx][0];
-                    topY = court.ycoord_back[idy][0];
-                    w = court.xcoord_back[idx][1]-court.xcoord_back[idx][0];
-                    h = court.ycoord_back[idy][1]-court.ycoord_back[idy][0];
+                    if (sum_dataB.area[i].split('')[0] == 'E' || sum_dataB.area[i].split('')[0] == 'F' || sum_dataB.area[i].split('')[1] == '5'){
+                        topX = court.xcoord_front[idx][0];
+                        topY = court.ycoord_front[idy][0];
+                        w = court.xcoord_front[idx][1]-court.xcoord_front[idx][0];
+                        h = court.ycoord_front[idy][1]-court.ycoord_front[idy][0];
+                    }
+                    else{
+                        topX = court.xcoord_back[idx][0];
+                        topY = court.ycoord_back[idy][0];
+                        w = court.xcoord_back[idx][1]-court.xcoord_back[idx][0];
+                        h = court.ycoord_back[idy][1]-court.ycoord_back[idy][0];
+                    }
                 }
                 ctxB.fillRect(topX,topY,w,h);
                 ctxB.fillStyle = "rgb(255,255,255)";
