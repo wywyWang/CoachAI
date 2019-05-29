@@ -752,13 +752,13 @@ function init_court_distribution(minrally,maxrally,set){
     $('#total_court .playerB').html('<div class="subtitle">選手B失分分佈</div>\
     <img id="badminton_courtB" src="../image/badminton_court.jpg" class="img-fluid" width="100%"/>');
 
-    var oriw = 893;
-    var orih = 442
+    var oriw = 930;
+    var orih = 450;
     var imgA = document.getElementById("badminton_courtA");
     var canv = document.createElement('canvas');
     canv.id = 'total_court_chartA';
     canv.width = imgA.width;
-    canv.height = orih/oriw*imgA.width;         //ori height is 442,ori width is 893,need get ori img size
+    canv.height = orih/oriw*imgA.width;         //ori height is 450,ori width is 930,need get ori img size
     document.getElementById("total_court").getElementsByClassName("playerA")[0].appendChild(canv);
     var canvA = document.getElementById("total_court_chartA");
     canvA.style.position = "absolute";
@@ -831,34 +831,36 @@ function init_court_distribution(minrally,maxrally,set){
         }
 
         var court = new Object();
-        var brutew = 41/oriw*canvA.width;
-        var bruteh = 37/orih*canvA.height;
+        var coord_orix = 935;
+        var coord_oriy = 424;
+        var brutew = 61/oriw*canvA.width;
+        var bruteh = 41/orih*canvA.height;
         court.xarea = ['1','2','3','4','5'];
         court.yarea = ['A','B','C','D','E','F'];
-        court.xcoord_back = [[328,468],[190,328],[53,190],[0,53],[-100,0]];
+        court.xcoord_back = [[328,468],[190,328],[53,190],[0,53],[-50,0]];
         court.xcoord_back = court.xcoord_back.map(function(item){
-            return [parseInt(item[0]/935*(canvA.width-2*brutew)+brutew),parseInt(item[1]/935*(canvA.width-2*brutew)+brutew)];
+            return [parseInt(item[0]/coord_orix*(canvA.width-2*brutew)+brutew),parseInt(item[1]/coord_orix*(canvA.width-2*brutew)+brutew)];
         });
         court.ycoord_back = [[32,212],[212,392],[0,32],[392,424],[-50,0],[424,500]];
         court.ycoord_back = court.ycoord_back.map(function(item){
-            return [parseInt(item[0]/424*(canvA.height-2*bruteh)+bruteh),parseInt(item[1]/424*(canvA.height-2*bruteh)+bruteh)];
+            return [parseInt(item[0]/coord_oriy*(canvA.height-2*bruteh)+bruteh),parseInt(item[1]/coord_oriy*(canvA.height-2*bruteh)+bruteh)];
         });
 
         court.xcoord_front = [[468,608],[608,745],[745,882],[882,935],[935,955]];
         court.xcoord_front = court.xcoord_front.map(function(item){
-            return [parseInt(item[0]/935*(canvB.width-2*brutew)+brutew),parseInt(item[1]/935*(canvB.width-2*brutew)+brutew)];
+            return [parseInt(item[0]/coord_orix*(canvB.width-2*brutew)+brutew),parseInt(item[1]/coord_orix*(canvB.width-2*brutew)+brutew)];
         });
         court.yarea = ['A','B','C','D','E','F'];
         court.ycoord_front = [[212,392],[32,212],[392,424],[0,32],[424,500],[-50,0]];
         court.ycoord_front = court.ycoord_front.map(function(item){
-            return [parseInt(item[0]/424*(canvB.height-2*bruteh)+bruteh),parseInt(item[1]/424*(canvB.height-2*bruteh)+bruteh)];
+            return [parseInt(item[0]/coord_oriy*(canvB.height-2*bruteh)+bruteh),parseInt(item[1]/coord_oriy*(canvB.height-2*bruteh)+bruteh)];
         });
 
         // console.log(canvA.width);
         // console.log(canvA.height);
         // console.log(court);
-        console.log(sum_dataA);
-        console.log(sum_dataB);
+        // console.log(sum_dataA);
+        // console.log(sum_dataB);
 
         //render rectangle ratio area over image
         for(var i = 0;i<sum_dataA.value.length;i++){
@@ -900,7 +902,7 @@ function init_court_distribution(minrally,maxrally,set){
                 ctxA.fillStyle = "rgb(255,255,255)";
                 ctxA.textAlign = "center"; 
                 ctxA.textBaseline = "middle";
-                ctxA.strokeText(sum_dataA.area[i] + '=' + ratio,topX+w/2,topY+h/2);
+                ctxA.strokeText(ratio,topX+w/2,topY+h/2);
             }
             if (sum_dataA.selfout[i] != 0){
                 var ratio = (sum_dataA.selfout[i]/sumA).toFixed(2);
@@ -924,7 +926,7 @@ function init_court_distribution(minrally,maxrally,set){
                 ctxA.fillStyle = "rgb(255,255,255)";
                 ctxA.textAlign = "center"; 
                 ctxA.textBaseline = "middle";
-                ctxA.strokeText(sum_dataA.area[i] + '=' + ratio,topX+w/2,topY+h/2);
+                ctxA.strokeText(ratio,topX+w/2,topY+h/2);
             }
         }
 
@@ -967,7 +969,7 @@ function init_court_distribution(minrally,maxrally,set){
                 ctxB.fillStyle = "rgb(255,255,255)";
                 ctxB.textAlign = "center"; 
                 ctxB.textBaseline = "middle";
-                ctxB.strokeText(sum_dataB.area[i] + '=' + ratio,topX+w/2,topY+h/2);
+                ctxB.strokeText(ratio,topX+w/2,topY+h/2);
             }
             if (sum_dataB.selfout[i] != 0){
                 var ratio = (sum_dataB.selfout[i]/sumB).toFixed(2);
@@ -991,7 +993,7 @@ function init_court_distribution(minrally,maxrally,set){
                 ctxA.fillStyle = "rgb(255,255,255)";
                 ctxA.textAlign = "center"; 
                 ctxA.textBaseline = "middle";
-                ctxA.strokeText(sum_dataB.area[i] + '=' + ratio,topX+w/2,topY+h/2);
+                ctxA.strokeText(ratio,topX+w/2,topY+h/2);
             }
         }
     })
