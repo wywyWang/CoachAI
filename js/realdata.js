@@ -571,8 +571,8 @@ function init_total_balltype(minrally,maxrally,set){
                     dataB[j] += data[i+1].result[j].count
                 }
             };
-            console.log(dataA)
-            console.log(dataB)
+            // console.log(dataA)
+            // console.log(dataB)
             //rendering total balltype
             var chartRadarDOM = document.getElementById("sum_balltype_chartA");
             var chart = new Chart(chartRadarDOM, {
@@ -795,15 +795,22 @@ function init_court_distribution(minrally,maxrally,set){
         var sum_dataA = new Object();
         sum_dataA.area = group_data;
         sum_dataA.value = new Array(group_data.length).fill(0);
+        sum_dataA.selfout = new Array(group_data.length).fill(0);
         var sum_dataB = new Object();
         sum_dataB.area = group_data;
         sum_dataB.value = new Array(group_data.length).fill(0);
+        sum_dataB.selfout = new Array(group_data.length).fill(0);
 
         var sumA = 0;
         for(var i = 0;i<dataA.length;i++){
             for(var j = 0;j<group_data.length;j++){
                 if (dataA[i].lose_area == group_data[j]){
-                    sum_dataA.value[j] +=1;
+                    if ((dataA[i].lose_area.split('')[0] == 'F' || dataA[i].lose_area.split('')[0] == 'E' || dataA[i].lose_area.split('')[1] == '5') && dataA[i].on_off_court == '未回擊成功'){
+                        sum_dataA.selfout[j] +=1;
+                    }
+                    else{
+                        sum_dataA.value[j] +=1;
+                    }
                     sumA++;
                 }
             }
@@ -812,7 +819,12 @@ function init_court_distribution(minrally,maxrally,set){
         for(var i = 0;i<dataB.length;i++){
             for(var j = 0;j<group_data.length;j++){
                 if (dataB[i].lose_area == group_data[j]){
-                    sum_dataB.value[j] +=1;
+                    if ((dataB[i].lose_area.split('')[0] == 'F' || dataB[i].lose_area.split('')[0] == 'E' || dataB[i].lose_area.split('')[1] == '5') && dataB[i].on_off_court == '未回擊成功'){
+                        sum_dataB.selfout[j] +=1;
+                    }
+                    else{
+                        sum_dataB.value[j] +=1;
+                    }
                     sumB++;
                 }
             }
@@ -842,9 +854,9 @@ function init_court_distribution(minrally,maxrally,set){
             return [parseInt(item[0]/424*(canvB.height-2*bruteh)+bruteh),parseInt(item[1]/424*(canvB.height-2*bruteh)+bruteh)];
         });
 
-        console.log(canvA.width);
-        console.log(canvA.height);
-        console.log(court);
+        // console.log(canvA.width);
+        // console.log(canvA.height);
+        // console.log(court);
         console.log(sum_dataA);
         console.log(sum_dataB);
 
@@ -883,6 +895,30 @@ function init_court_distribution(minrally,maxrally,set){
                         w = court.xcoord_front[idx][1]-court.xcoord_front[idx][0];
                         h = court.ycoord_front[idy][1]-court.ycoord_front[idy][0];
                     }
+                }
+                ctxA.fillRect(topX,topY,w,h);
+                ctxA.fillStyle = "rgb(255,255,255)";
+                ctxA.textAlign = "center"; 
+                ctxA.textBaseline = "middle";
+                ctxA.strokeText(sum_dataA.area[i] + '=' + ratio,topX+w/2,topY+h/2);
+            }
+            if (sum_dataA.selfout[i] != 0){
+                var ratio = (sum_dataA.selfout[i]/sumA).toFixed(2);
+                var idx = court.xarea.indexOf(sum_dataA.area[i].split('')[1]);
+                var idy = court.yarea.indexOf(sum_dataA.area[i].split('')[0]);
+                ctxA.fillStyle = "rgba(66,129,164," + ratio + ")";
+                var topX,topY,w,h;
+                if (set%2 == 1){
+                    topX = court.xcoord_back[idx][0];
+                    topY = court.ycoord_back[idy][0];
+                    w = court.xcoord_back[idx][1]-court.xcoord_back[idx][0];
+                    h = court.ycoord_back[idy][1]-court.ycoord_back[idy][0];
+                }
+                else{
+                    topX = court.xcoord_front[idx][0];
+                    topY = court.ycoord_front[idy][0];
+                    w = court.xcoord_front[idx][1]-court.xcoord_front[idx][0];
+                    h = court.ycoord_front[idy][1]-court.ycoord_front[idy][0];
                 }
                 ctxA.fillRect(topX,topY,w,h);
                 ctxA.fillStyle = "rgb(255,255,255)";
@@ -932,6 +968,30 @@ function init_court_distribution(minrally,maxrally,set){
                 ctxB.textAlign = "center"; 
                 ctxB.textBaseline = "middle";
                 ctxB.strokeText(sum_dataB.area[i] + '=' + ratio,topX+w/2,topY+h/2);
+            }
+            if (sum_dataB.selfout[i] != 0){
+                var ratio = (sum_dataB.selfout[i]/sumB).toFixed(2);
+                var idx = court.xarea.indexOf(sum_dataB.area[i].split('')[1]);
+                var idy = court.yarea.indexOf(sum_dataB.area[i].split('')[0]);
+                ctxA.fillStyle = "rgba(66,129,164," + ratio + ")";
+                var topX,topY,w,h;
+                if (set%2 == 1){
+                    topX = court.xcoord_front[idx][0];
+                    topY = court.ycoord_front[idy][0];
+                    w = court.xcoord_front[idx][1]-court.xcoord_front[idx][0];
+                    h = court.ycoord_front[idy][1]-court.ycoord_front[idy][0];
+                }
+                else{
+                    topX = court.xcoord_back[idx][0];
+                    topY = court.ycoord_back[idy][0];
+                    w = court.xcoord_back[idx][1]-court.xcoord_back[idx][0];
+                    h = court.ycoord_back[idy][1]-court.ycoord_back[idy][0];
+                }
+                ctxA.fillRect(topX,topY,w,h);
+                ctxA.fillStyle = "rgb(255,255,255)";
+                ctxA.textAlign = "center"; 
+                ctxA.textBaseline = "middle";
+                ctxA.strokeText(sum_dataB.area[i] + '=' + ratio,topX+w/2,topY+h/2);
             }
         }
     })
