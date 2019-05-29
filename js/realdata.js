@@ -1,24 +1,21 @@
 
 function init_linechart(minrally,maxrally,set){
     $.getJSON("statistics/rally_count_real.json", function(data) {
+        [data,set,minrally,maxrally] = data_filter(data,set,minrally,maxrally,0);
+
         //init svg legend
         d3.selectAll("svg").remove();
-
-        [data,set,minrally,maxrally] = data_filter(data,set,minrally,maxrally,0);
-        // console.log(set);
-        // console.log(minrally);
-        // console.log(maxrally);
-
-        // handmade legend
         var svg_legend = d3.select("#line").append("svg")
-                            .attr("width", 740)
-                            .attr("height", 30)
+                            .attr("width", '100%')
+                            .attr("height", '5vh')
 
-        svg_legend.append("circle").attr("cx",190).attr("cy",20).attr("r", 6).style("fill", "rgb(66,129,164)")
-        svg_legend.append("circle").attr("cx",470).attr("cy",20).attr("r", 6).style("fill", "rgb(255,99,132)")
-        svg_legend.append("text").attr("class", "d3_legend").attr("x", 200).attr("y", 20)
+        var posx = 150;
+        var posy = 20;
+        svg_legend.append("circle").attr("cx",posx).attr("cy",posy).attr("r", 6).style("fill", "rgb(66,129,164)")
+        svg_legend.append("circle").attr("cx",posx+200).attr("cy",posy).attr("r", 6).style("fill", "rgb(255,99,132)")
+        svg_legend.append("text").attr("class", "d3_legend").attr("x", posx+10).attr("y", posy)
                     .text("Player A Win").style("fill","rgb(66,129,164)").attr("alignment-baseline","middle")
-        svg_legend.append("text").attr("class", "d3_legend").attr("x", 480).attr("y", 20)
+        svg_legend.append("text").attr("class", "d3_legend").attr("x", posx+200+10).attr("y", posy)
                     .text("Player B Win").style("fill","rgb(255,99,132)").attr("alignment-baseline","middle")
 
         var canv = document.createElement('canvas');
