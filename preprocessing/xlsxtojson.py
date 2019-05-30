@@ -18,13 +18,13 @@ def export_json(filepath,data):
     with open(filepath,'w') as outfile:
         json.dump(json.JSONDecoder().decode(data.to_json(orient='records',date_format='iso')),outfile,indent = 4,separators=(',', ':'))
 
+#process to rally_type_real.json
 result = pd.DataFrame(columns = ["rally","player","balltype","count"])
 
 roundcnt = 1
 for i in list(field.groups.keys()):
     resultA = pd.DataFrame(columns = ["rally","player","balltype","count"])
     resultB = pd.DataFrame(columns = ["rally","player","balltype","count"])
-    # print(i)
     print("========================")
     tmp = pd.Series.to_frame(field.get_group(i).groupby('player')['type'].value_counts())
 
@@ -71,11 +71,6 @@ for i in list(field.groups.keys()):
     resultA['balltype'] = btA
     resultA['count'] = bsA
     resultA = resultA.sort_values(['balltype'])
-
-#         result['rally'] += [resultA['rally']]
-#         result['player'] += [resultA['player']]
-#         result['balltype'] += [resultA['balltype']]
-#         result['count'] += [resultA['count']]
     result = result.append(resultA)
 
     resultA = (resultA.groupby(['rally','player'], as_index=False)
@@ -92,17 +87,59 @@ for i in list(field.groups.keys()):
 
     result = result.append(resultB)
 
-#         resultB = (resultB.groupby(['rally','player'], as_index=False)
-#                  .apply(lambda x: x[['balltype','count']].to_dict('r'))
-#                  .reset_index()
-#                  .rename(columns={0:'result'})
-#                  )
-#         export_json(filepath,resultB)
-
 result = (result.groupby(['rally','player'], as_index=False)
             .apply(lambda x: x[['balltype','count']].to_dict('r'))
             .reset_index()
             .rename(columns={0:'result'})
             )
 print(result)
+export_json(filepath,result)
+
+#process to rally_count_real
+rally = pd.read_excel('./clip_info_new.xlsx')
+rally = rally[['unique_id','rally','ball_round','getpoint_player','lose_reason']]
+rally['unique_id'][0].split('-')
+for i in range(len(rally['unique_id'])):
+    rally['unique_id'][i] = rally['unique_id'][i].split('-')[-2] + '-' + rally['unique_id'][i].split('-')[-1]
+
+field = rally.groupby(['unique_id','rally'])
+
+set = []
+rallys = []
+hit_number = []
+winner = rally['getpoint_player']
+winner = winner.dropna().reset_index(drop=True)
+result = pd.DataFrame(columns = ["set","rally","stroke","winner","on_off_court","balltype","lose_area"])
+for i in range(len(field.groups.keys())):
+    setrally = list(field.groups.keys())[i][0].split('-')
+    set += [int(setrally[1])]
+    rallys +=[list(field.groups.keys())[i][1]]
+    hit_number += [len(field.get_group(list(field.groups.keys())[i])['ball_round'].value_counts())]
+    
+result['set'] = set
+result['rally'] = rallys
+result['stroke'] = hit_number
+result['winner'] = winner
+
+rally2 = pd.read_excel('./clip_info_new.xlsx')
+rally2 = rally2[['hit_area','lose_reason']].dropna().reset_index(drop=True)
+result['on_off_court'] = rally2['lose_reason']
+result['lose_area'] = rally2['hit_area']
+
+rally2 = pd.read_excel('./clip_info_new.xlsx')
+rally2 = rally2[['type','getpoint_player']]
+balltype = []
+for i in range(len(rally)):
+    if rally2['getpoint_player'][i] == 'A' or rally2['getpoint_player'][i] == 'B':
+        balltype += [rally2['type'][i-1]]
+result['balltype'] = balltype
+print(result)
+
+result = (result.groupby(['set'], as_index=False)
+            .apply(lambda x: x[['rally','stroke','winner','on_off_court','balltype','lose_area']].to_dict('r'))
+            .reset_index()
+            .rename(columns={0:'result'})
+            )
+
+filepath = './rally_count_real.json'
 export_json(filepath,result)
