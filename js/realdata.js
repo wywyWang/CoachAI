@@ -620,6 +620,235 @@ function init_total_balltype(minrally,maxrally,set){
     });
 }
 
+function init_balltype_distribution(minrally,maxrally,set){
+    //create player info radar
+    $('#balltype_distribution .playerA').html('<div class="subtitle">選手A球種分佈</div>\
+    <canvas id="balltype_distribution_chartA" width="800" height="600"></canvas>');
+    $('#balltype_distribution .playerB').html('<div class="subtitle">選手B球種分佈</div>\
+    <canvas id="balltype_distribution_chartB" width="800" height="600"></canvas>');
+
+    var chartRadarDOMA;
+    var chartRadarDOMB;
+    var chartRadarOptions;
+
+    chartRadarDOMA = document.getElementById("balltype_distribution_chartA");
+    chartRadarDOMB = document.getElementById("balltype_distribution_chartB");
+    //custormized options
+    chartRadarOptions = 
+    {
+        legend:{
+            display: true
+        },
+        scales:{
+            xAxes: [{
+                scaleLabel:{
+                    display: true,
+                    labelString: '回合',
+                    fontSize: 16
+                }
+            }],
+            yAxes: [{
+                ticks:{
+                    beginAtZero: true,
+                },
+                scaleLabel:{
+                    display: true,
+                    labelString: '球數',
+                    fontSize: 16
+                }
+            }]
+        },
+        elements: {
+            line: {
+                tension: 0 // disables bezier curves
+            }
+        },
+        animation: {
+          duration: 1,
+          onComplete: function() {
+            var chartInstance = this.chart,
+            ctx = chartInstance.ctx;
+
+            ctx.font = Chart.helpers.fontString(Chart.defaults.global.defaultFontSize, Chart.defaults.global.defaultFontStyle, Chart.defaults.global.defaultFontFamily);
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'bottom';
+            ctx.fillStyle = 'rgba(0,0,0,1)';
+
+            this.data.datasets.forEach(function(dataset, i) {
+              var meta = chartInstance.controller.getDatasetMeta(i);
+              meta.data.forEach(function(bar, index) {
+                var data = dataset.data[index];
+                ctx.fillText(data, bar._model.x, bar._model.y - 5);
+              });
+            });
+          }
+        }
+    };
+
+    $.getJSON("statistics/rally_type_real.json", function(data) {
+        //init set
+        if (!set){
+            set = 1;
+        }
+
+        //filter data to specific set
+        data = data.filter(function(item) {
+            return item.set == set
+        });
+        data = data[0].info;
+
+        // init minrally and maxrally if are undefined,null,0,NaN,empty string,false
+        if (!minrally){
+            minrally = Math.min.apply(Math, data.map(function(d) { 
+                return d.rally; 
+            }));
+        }
+        if (!maxrally){
+            maxrally = Math.max.apply(Math, data.map(function(d) { 
+                return d.rally; 
+            }));
+        }
+
+        //filter data to specific interval
+        data = data.filter(function(item) {
+            return parseInt(item.rally) >= minrally && parseInt(item.rally) <= maxrally;
+        });
+
+        //filter winners
+        dataA = data.filter(function(item){
+            return item.player == 'A';
+        });
+        dataB = data.filter(function(item){
+            return item.player == 'B';
+        });
+
+        var labels = dataA.map(function(e) {
+            return e.rally;
+        });
+
+        var group_data = Object.keys(_.groupBy(data[0].result,"balltype"));
+        var sum_dataA = new Array(group_data.length).fill(0);
+        var sum_dataB = new Array(group_data.length).fill(0);
+        for(var i = 0;i < sum_dataA.length;i++){
+            sum_dataA[i] = new Array(maxrally).fill(0);
+            sum_dataB[i] = new Array(maxrally).fill(0);
+        }
+
+        for(var i = 0;i < dataA.length;i++){
+            for(var j = 0;j < dataA[i].result.length;j++){
+                sum_dataA[j][i] += dataA[i].result[j].count;
+            }
+        }
+        for(var i = 0;i < dataB.length;i++){
+            for(var j = 0;j < dataB[i].result.length;j++){
+                sum_dataB[j][i] += dataB[i].result[j].count;
+            }
+        }
+
+        // console.log(sum_dataA);
+        // console.log(sum_dataB);
+        console.log(group_data);
+
+        var chart = new Chart(chartRadarDOMA, {
+            type: 'line',
+            data:{
+                labels: labels,
+                datasets: [
+                    {
+                        label: "切球",
+                        fill: false,
+                        cubicInterpolationMode:"monotone",
+                        backgroundColor: "rgba(66,129,164,0.2)",
+                        borderColor: "rgb(255,0,0)",
+                        pointBorderColor: "#fff",
+                        pointBackgroundColor:"rgb(255,0,0)",
+                        pointRadius: 4,
+                        pointHoverRadius: 6,
+                        data: sum_dataA[0],
+                        hidden: true
+                    },
+                    {
+                        label: "回挑",
+                        fill: false,
+                        cubicInterpolationMode:"monotone",
+                        backgroundColor: "rgba(66,129,164,0.2)",
+                        borderColor: "rgb(0,255,0)",
+                        pointBorderColor: "#fff",
+                        pointBackgroundColor:"rgb(0,255,0)",
+                        pointRadius: 4,
+                        pointHoverRadius: 6,
+                        data: sum_dataA[1],
+                        hidden: true
+                    },
+                    {
+                        label: "平球",
+                        fill: false,
+                        cubicInterpolationMode:"monotone",
+                        backgroundColor: "rgba(66,129,164,0.2)",
+                        borderColor: "rgb(0,0,255)",
+                        pointBorderColor: "#fff",
+                        pointBackgroundColor:"rgb(0,0,255)",
+                        pointRadius: 4,
+                        pointHoverRadius: 6,
+                        data: sum_dataA[2],
+                        hidden: true
+                    }
+                ]
+            },
+            options: chartRadarOptions
+        });
+
+        var chart = new Chart(chartRadarDOMB, {
+            type: 'line',
+            data:{
+                labels: labels,
+                datasets: [
+                    {
+                        label: "切球",
+                        fill: false,
+                        cubicInterpolationMode:"monotone",
+                        backgroundColor: "rgba(66,129,164,0.2)",
+                        borderColor: "rgb(255,0,0)",
+                        pointBorderColor: "#fff",
+                        pointBackgroundColor:"rgb(255,0,0)",
+                        pointRadius: 4,
+                        pointHoverRadius: 6,
+                        data: sum_dataB[0],
+                        hidden: true
+                    },
+                    {
+                        label: "回挑",
+                        fill: false,
+                        cubicInterpolationMode:"monotone",
+                        backgroundColor: "rgba(66,129,164,0.2)",
+                        borderColor: "rgb(0,255,0)",
+                        pointBorderColor: "#fff",
+                        pointBackgroundColor:"rgb(0,255,0)",
+                        pointRadius: 4,
+                        pointHoverRadius: 6,
+                        data: sum_dataB[1],
+                        hidden: true
+                    },
+                    {
+                        label: "平球",
+                        fill: false,
+                        cubicInterpolationMode:"monotone",
+                        backgroundColor: "rgba(66,129,164,0.2)",
+                        borderColor: "rgb(0,0,255)",
+                        pointBorderColor: "#fff",
+                        pointBackgroundColor:"rgb(0,0,255)",
+                        pointRadius: 4,
+                        pointHoverRadius: 6,
+                        data: sum_dataB[2],
+                        hidden: true
+                    }
+                ]
+            },
+            options: chartRadarOptions
+        });
+    });
+}
+
 function init_stroke_distribution(minrally,maxrally,set){
     //create player info radar
     $('#stroke_distribution .playerA').html('<div class="subtitle">選手A得分拍數</div>\
@@ -631,7 +860,6 @@ function init_stroke_distribution(minrally,maxrally,set){
     var chartRadarDOMB;
     var chartRadarOptions;
 
-    // Chart.defaults.global.responsive = false;
     chartRadarDOMA = document.getElementById("stroke_distribution_chartA");
     chartRadarDOMB = document.getElementById("stroke_distribution_chartB");
     //custormized options
@@ -1024,6 +1252,12 @@ function change_interval(){
     init_total_balltype(minrally,maxrally,set);
 
     //delete old stoke distribution
+    $('#balltype_distribution .subtitle').remove();
+    $('#balltype_distribution_chartA').remove();
+    $('#balltype_distribution_chartB').remove();
+    init_balltype_distribution(minrally,maxrally,set);
+
+    //delete old stoke distribution
     $('#stroke_distribution .subtitle').remove();
     $('#stroke_distribution_chartA').remove();
     $('#stroke_distribution_chartB').remove();
@@ -1061,6 +1295,12 @@ function change_set() {
     $('#sum_balltype_chartA').remove();
     $('#sum_balltype_chartB').remove();
     init_total_balltype(null,null,new_set);
+
+    //delete old stoke distribution
+    $('#balltype_distribution .subtitle').remove();
+    $('#balltype_distribution_chartA').remove();
+    $('#balltype_distribution_chartB').remove();
+    init_balltype_distribution(null,null,new_set);
 
     //delete old stoke distribution
     $('#stroke_distribution .subtitle').remove();
