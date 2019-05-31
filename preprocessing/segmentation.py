@@ -304,6 +304,7 @@ def on_off_court(df):
     df['scoreB']=scoreB
     # print(df[['Frame','scoreA','scoreB']])
 
+    #convert to json file
     count = 0
     count_sum=0
     hit_number = []
@@ -315,17 +316,53 @@ def on_off_court(df):
             hit_number += [count]
             count = 0
 
-    result = pd.DataFrame(columns = ["set","rally","stroke","winner","on_off_court"])
+    result = pd.DataFrame(columns = ["set","rally","stroke","winner","on_off_court",'balltype'])
     set = [1 for _ in range(len(hit_number))]
     rally = [_+1 for _ in range(len(hit_number))]
 
+    # get prediction ball type
+    rally2 = pd.read_excel('../Data/TrainTest/clip_info_new.xlsx')
+    rally2 = rally2[['unique_id','getpoint_player','prediction']]
+    balltype = []
+    flag = 0
+    for i in range(len(rally2)):
+        if rally2['getpoint_player'][i] == 'A' or rally2['getpoint_player'][i] == 'B':
+            if len(balltype) == 28 and not flag:
+                flag = 1
+                continue
+            balltype += [rally2['prediction'][i-1]]
+            
+    conv_balltype = { 
+        'cut': '切球', 
+        'drive': '平球', 
+        'lob': '挑球' , 
+        'long': '長球', 
+        'netplay': '小球',
+        'rush': '撲球',
+        'smash': '殺球'
+    }
+
+    conv_onoffcourt = {
+        '0': '出界',
+        '1': '落地',
+        '2': '未回擊成功'
+    }
+            
+    #get lose area,only this is ground truth
+    rally2 = pd.read_excel('../Data/TrainTest/clip_info_new.xlsx')
+    rally2 = rally2[['hit_area','lose_reason']].dropna().reset_index(drop=True)
+
+    result['balltype'] = balltype
+    result['balltype'] = result['balltype'].map(conv_balltype)
+    result['lose_area'] = rally2['hit_area']
     result['set'] = set
     result['rally'] = rally
     result['stroke'] = hit_number
     result['winner'] = who_wins
     result['on_off_court'] = on_off_court
+    result['on_off_court'] = result['on_off_court'].astype(str).map(conv_onoffcourt)
     result = (result.groupby(['set'], as_index=False)
-                .apply(lambda x: x[['rally','stroke','winner','on_off_court']].to_dict('r'))
+                .apply(lambda x: x[['rally','stroke','winner','on_off_court','balltype','lose_area']].to_dict('r'))
                 .reset_index()
                 .rename(columns={0:'result'})
                 )
