@@ -327,20 +327,16 @@ function init_on_off_court(minrally,maxrally,set){
         var sum_dataA = new Array(group_data.length).fill(0);
         var sum_dataB = new Array(group_data.length).fill(0);
         for(var i = 0;i<dataA.length;i++){
-            if (dataA[i].on_off_court == group_data[0])
-                sum_dataA[0] +=1;
-            else if (dataA[i].on_off_court == group_data[1])
-                sum_dataA[1] +=1;
-            else
-                sum_dataA[2] +=1;
+            for(var j = 0;j<group_data.length;j++){
+                if (dataA[i].on_off_court == group_data[j])
+                    sum_dataA[j] +=1;
+            }
         }
         for(var i = 0;i<dataB.length;i++){
-            if (dataB[i].on_off_court == group_data[0])
-                sum_dataB[0] +=1;
-            else if (dataB[i].on_off_court == group_data[1])
-                sum_dataB[1] +=1;
-            else
-                sum_dataB[2] +=1;
+            for(var j = 0;j<group_data.length;j++){
+                if (dataB[i].on_off_court == group_data[j])
+                    sum_dataB[j] +=1;
+            }
         }
 
         console.log(sum_dataA);
@@ -568,11 +564,11 @@ function init_total_balltype(minrally,maxrally,set){
                 rally = parseInt(data[i].rally);
                 for(var j = 0;j<data[i].result.length;j++){
                     dataA[j] += data[i].result[j].count;
-                    dataB[j] += data[i+1].result[j].count
+                    dataB[j] += data[i+1].result[j].count;
                 }
             };
-            // console.log(dataA)
-            // console.log(dataB)
+            console.log(dataA)
+            console.log(dataB)
             //rendering total balltype
             var chartRadarDOM = document.getElementById("sum_balltype_chartA");
             var chart = new Chart(chartRadarDOM, {
