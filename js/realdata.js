@@ -1,6 +1,17 @@
 
-function init_linechart(minrally,maxrally,set){
-    $.getJSON("statistics/rally_count_real.json", function(data) {
+function init_linechart(minrally,maxrally,set,game){
+    //init game
+    if (!game){
+        game = 1;
+    }
+    var game_name;
+    if (game == 1)
+        game_name = '_tai';
+    if (game == 2)
+        game_name = '_2019亞錦賽-周天成VS石宇奇';
+    filename = 'statistics/rally_count_real' + game_name + '.json';
+
+    $.getJSON(filename, function(data) {
         [data,set,minrally,maxrally] = data_filter(data,set,minrally,maxrally,0);
 
         //init svg legend
@@ -180,7 +191,15 @@ function init_linechart(minrally,maxrally,set){
             if (activepoints[0]){
                 var id = set + '-' + (activepoints[0]['_index']+1)
                 console.log(id)
-                $.getJSON("../statistics/rally_type_real.json", function(data2) {
+
+                var game_name;
+                if (game == 1)
+                    game_name = '_tai';
+                if (game == 2)
+                    game_name = '_2019亞錦賽-周天成VS石宇奇';
+                filename = 'statistics/rally_type_real' + game_name + '.json';
+
+                $.getJSON(filename, function(data2) {
                     document.getElementById("rallytitle").innerHTML = id + ' 球種分佈圖';
                     //filter data to specific set
                     data2 = data2.filter(function(item) {
@@ -280,7 +299,7 @@ function init_linechart(minrally,maxrally,set){
     });
 }
 
-function init_on_off_court(minrally,maxrally,set){
+function init_on_off_court(minrally,maxrally,set,game){
     //create player info radar
     $('#on_off_court .playerA').html('<div class="subtitle">選手A失分比例</div>\
     <canvas id="on_off_court_chartA" width="800" height="600"></canvas>');
@@ -307,7 +326,18 @@ function init_on_off_court(minrally,maxrally,set){
         // responsive:false
     };
 
-    $.getJSON("statistics/rally_count_real.json", function(data) {
+    //init game
+    if (!game){
+        game = 1;
+    }
+    var game_name;
+    if (game == 1)
+        game_name = '_tai';
+    if (game == 2)
+        game_name = '_2019亞錦賽-周天成VS石宇奇';
+    filename = 'statistics/rally_count_real' + game_name + '.json';
+
+    $.getJSON(filename, function(data) {
         [data,set,minrally,maxrally] = data_filter(data,set,minrally,maxrally,1);
 
         //filter winners
@@ -341,7 +371,6 @@ function init_on_off_court(minrally,maxrally,set){
 
         console.log(sum_dataA);
         console.log(sum_dataB);
-        
         
         var labels = group_data;
 
@@ -386,7 +415,7 @@ function init_on_off_court(minrally,maxrally,set){
     });
 }
 
-function init_total_balltype(minrally,maxrally,set){
+function init_total_balltype(minrally,maxrally,set,game){
     $('#total_balltype .playerA').html('<div class="subtitle">選手A獲勝球種</div>\
     <canvas id="total_balltype_chartA" width="800" height="600"></canvas>');
     $('#total_balltype .playerB').html('<div class="subtitle">選手B獲勝球種</div>\
@@ -397,7 +426,18 @@ function init_total_balltype(minrally,maxrally,set){
     $('#sum_balltype .playerB').html('<div class="subtitle">選手B球種統計</div>\
     <canvas id="sum_balltype_chartB" width="800" height="600"></canvas>');
 
-    $.getJSON("../statistics/rally_type_real.json", function(data) {
+    //init game
+    if (!game){
+        game = 1;
+    }
+    var game_name;
+    if (game == 1)
+        game_name = '_tai';
+    if (game == 2)
+        game_name = '_2019亞錦賽-周天成VS石宇奇';
+    filename = 'statistics/rally_type_real' + game_name + '.json';
+
+    $.getJSON(filename, function(data) {
         //init set
         if (!set){
             set = 1;
@@ -460,8 +500,15 @@ function init_total_balltype(minrally,maxrally,set){
             }
         };
 
+        var game_name;
+        if (game == 1)
+            game_name = '_tai';
+        if (game == 2)
+            game_name = '_2019亞錦賽-周天成VS石宇奇';
+        filename = 'statistics/rally_count_real' + game_name + '.json';
+
         //rendering each player win balltype
-        $.getJSON("statistics/rally_count_real.json", function(data2) {
+        $.getJSON(filename, function(data2) {
             [data2,set,minrally,maxrally] = data_filter(data2,set,minrally,maxrally,1);
 
             //filter winners
@@ -616,7 +663,7 @@ function init_total_balltype(minrally,maxrally,set){
     });
 }
 
-function init_stroke_distribution(minrally,maxrally,set){
+function init_stroke_distribution(minrally,maxrally,set,game){
     //create player info radar
     $('#stroke_distribution .playerA').html('<div class="subtitle">選手A得分拍數</div>\
     <canvas id="stroke_distribution_chartA" width="800" height="600"></canvas>');
@@ -642,7 +689,18 @@ function init_stroke_distribution(minrally,maxrally,set){
         }
     };
 
-    $.getJSON("statistics/rally_count_real.json", function(data) {
+    //init game
+    if (!game){
+        game = 1;
+    }
+    var game_name;
+    if (game == 1)
+        game_name = '_tai';
+    if (game == 2)
+        game_name = '_2019亞錦賽-周天成VS石宇奇';
+    filename = 'statistics/rally_count_real' + game_name + '.json';
+
+    $.getJSON(filename, function(data) {
         [data,set,minrally,maxrally] = data_filter(data,set,minrally,maxrally,1);
 
         //filter winners
@@ -741,7 +799,7 @@ function init_stroke_distribution(minrally,maxrally,set){
     });
 }
 
-function init_court_distribution(minrally,maxrally,set){
+function init_court_distribution(minrally,maxrally,set,game){
     //左邊是後場 右邊是前場 小戴是A 陳是B
     $('#total_court .playerA').html('<div class="subtitle">選手A失分分佈</div>\
     <img id="badminton_courtA" src="../image/badminton_court.jpg" width="100%"/>');
@@ -775,7 +833,18 @@ function init_court_distribution(minrally,maxrally,set){
     var ctxA = canvA.getContext("2d");
     var ctxB = canvB.getContext("2d");
 
-    $.getJSON("statistics/rally_count_real.json", function(data) {
+    //init game
+    if (!game){
+        game = 1;
+    }
+    var game_name;
+    if (game == 1)
+        game_name = '_tai';
+    if (game == 2)
+        game_name = '_2019亞錦賽-周天成VS石宇奇';
+    filename = 'statistics/rally_count_real' + game_name + '.json';
+
+    $.getJSON(filename, function(data) {
         [data,set,minrally,maxrally] = data_filter(data,set,minrally,maxrally,1);
 
         //filter winners
@@ -855,8 +924,8 @@ function init_court_distribution(minrally,maxrally,set){
         // console.log(canvA.width);
         // console.log(canvA.height);
         // console.log(court);
-        // console.log(sum_dataA);
-        // console.log(sum_dataB);
+        console.log(sum_dataA);
+        console.log(sum_dataB);
 
         //render rectangle ratio area over image
         for(var i = 0;i<sum_dataA.value.length;i++){
@@ -1000,16 +1069,17 @@ function change_interval(){
     var minrally = document.getElementById("down").value;
     var maxrally = document.getElementById("up").value;
     var set = document.getElementById("set").value;
+    var game = document.getElementById("game").value;
 
     //delete old linechart
     $('#line_chart').remove();
-    init_linechart(minrally,maxrally,set);
+    init_linechart(minrally,maxrally,set,game);
 
     //delete old doughnut
     $('#on_off_court .subtitle').remove();
     $('#on_off_court_chartA').remove();
     $('#on_off_court_chartB').remove();
-    init_on_off_court(minrally,maxrally,set);
+    init_on_off_court(minrally,maxrally,set,game);
 
     //delete old radar
     $('#total_balltype .subtitle').remove();
@@ -1017,13 +1087,13 @@ function change_interval(){
     $('#total_balltype_chartB').remove();
     $('#sum_balltype_chartA').remove();
     $('#sum_balltype_chartB').remove();
-    init_total_balltype(minrally,maxrally,set);
+    init_total_balltype(minrally,maxrally,set,game);
 
     //delete old stoke distribution
     $('#stroke_distribution .subtitle').remove();
     $('#stroke_distribution_chartA').remove();
     $('#stroke_distribution_chartB').remove();
-    init_stroke_distribution(minrally,maxrally,set);
+    init_stroke_distribution(minrally,maxrally,set,game);
 
     //delete old court distribution
     $('#total_court .subtitle').remove();
@@ -1031,24 +1101,25 @@ function change_interval(){
     $('#total_court_chartB').remove();
     $('#badminton_courtA').remove();
     $('#badminton_courtB').remove();
-    init_court_distribution(minrally,maxrally,set);
+    init_court_distribution(minrally,maxrally,set,game);
 }
 
 function change_set() {
+    game = document.getElementById("game").value;
     new_set = document.getElementById("set").value;
     $('#down option').remove();
     $('#up option').remove();
-    get_interval_updown(new_set);
+    get_interval_updown(new_set,game);
 
     //delete old and refresh new linechart
     $('#line_chart').remove();
-    init_linechart(null,null,new_set);
+    init_linechart(null,null,new_set,game);
 
     //delete old doughnut
     $('#on_off_court .subtitle').remove();
     $('#on_off_court_chartA').remove();
     $('#on_off_court_chartB').remove();
-    init_on_off_court(null,null,new_set);
+    init_on_off_court(null,null,new_set,game);
 
     //delete old radar
     $('#total_balltype .subtitle').remove();
@@ -1056,13 +1127,13 @@ function change_set() {
     $('#total_balltype_chartB').remove();
     $('#sum_balltype_chartA').remove();
     $('#sum_balltype_chartB').remove();
-    init_total_balltype(null,null,new_set);
+    init_total_balltype(null,null,new_set,game);
 
     //delete old stoke distribution
     $('#stroke_distribution .subtitle').remove();
     $('#stroke_distribution_chartA').remove();
     $('#stroke_distribution_chartB').remove();
-    init_stroke_distribution(null,null,new_set);
+    init_stroke_distribution(null,null,new_set,game);
 
     //delete old court distribution
     $('#total_court .subtitle').remove();
@@ -1070,11 +1141,36 @@ function change_set() {
     $('#total_court_chartB').remove();
     $('#badminton_courtA').remove();
     $('#badminton_courtB').remove();
-    init_court_distribution(null,null,new_set);
+    init_court_distribution(null,null,new_set,game);
 }
 
-function get_interval_set(){
-    $.getJSON("statistics/rally_count_real.json", function(data) {
+function change_game() {
+    new_game = document.getElementById("game").value;
+    $('#set option').remove();
+    get_interval_set(new_game);
+    change_set();
+}
+
+function get_interval_game(){
+    var insertText = '<option value='+ 1 +'>'+ 'Game 1' +'</option>';
+    $('#game').append(insertText); 
+    var insertText = '<option value='+ 2 +'>'+ 'Game 2' +'</option>';
+    $('#game').append(insertText); 
+}
+
+function get_interval_set(game){
+    //init game
+    if (!game){
+        game = 1;
+    }
+    var game_name;
+    if (game == 1)
+        game_name = '_tai';
+    if (game == 2)
+        game_name = '_2019亞錦賽-周天成VS石宇奇';
+    filename = 'statistics/rally_count_real' + game_name + '.json';
+
+    $.getJSON(filename, function(data) {
         //find max set
         var maximum = 0;
         for (var i=0 ; i<data.length ; i++) {
@@ -1085,14 +1181,24 @@ function get_interval_set(){
         for(var i=1;i<=maximum;i+=1)
         {
             var insertText = '<option value='+i+'>'+i+'</option>';
-            //document.getElementById("up").appendChild=insertText;
             $('#set').append(insertText); 
         }
     });
 }
 
-function get_interval_updown(set){
-    $.getJSON("statistics/rally_count_real.json", function(data) {
+function get_interval_updown(set,game){
+    //init game
+    if (!game){
+        game = 1;
+    }
+    var game_name;
+    if (game == 1)
+        game_name = '_tai';
+    if (game == 2)
+        game_name = '_2019亞錦賽-周天成VS石宇奇';
+    filename = 'statistics/rally_count_real' + game_name + '.json';
+
+    $.getJSON(filename, function(data) {
         //init set
         if (!set){
             set = 1;
