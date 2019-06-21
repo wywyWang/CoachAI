@@ -232,6 +232,17 @@ function init_linechart(minrally,maxrally,set,game){
                     console.log(dataB)
 
                     $("#radarChart").show(function(event){
+                        // show win_reason and lose balltype on each rally
+                        
+                        //filter data to specific rally
+                        data_choose = data.filter(function(item) {
+                            return item.rally == id.split('-')[1];
+                        });
+                        data_choose = data_choose[0];
+                        console.log(data_choose);
+                        document.getElementById("lose_reason").innerHTML = '失分原因：' + data_choose.on_off_court;
+                        document.getElementById("lose_balltype").innerHTML = '失分球種：' + data_choose.balltype;
+
                         var modal = $(this);
                         var canvas = modal.find('.modal-body canvas');
                         var ctx = canvas[0].getContext("2d"); 
@@ -288,7 +299,9 @@ function init_linechart(minrally,maxrally,set,game){
                                 var canvas = modal.find('.modal-body canvas');
                                 var ctx = canvas[0].getContext("2d"); 
                                 $(".modal-body canvas").remove();
-                                $(".modal-body").html('<canvas id="canvas" width="1000" height="800"></canvas>');
+                                $(".modal-body").html('<canvas id="canvas" width="1000" height="800"></canvas>\
+                                                    <div class="modal-text" id="lose_reason">獲勝原因:測試</div>\
+                                                    <div class="modal-text" id="lose_balltype">失分球種:殺球</div>');
                             });
                         });
                     });

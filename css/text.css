@@ -75,3 +75,9 @@ path {
 .d3_legend{
     font-size: 1.2em;
 }
+
+.modal-text{
+    font-size: 1.3em;
+    text-align: right;
+    font-weight: bold;
+}
