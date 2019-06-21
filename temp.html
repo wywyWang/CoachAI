@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="shortcut icon" href="image/badminton.ico"/>
+    <link rel="bookmark" href="image/badminton.ico"/>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <title>CoachAI</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css?family=PT+Sans+Narrow" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@0.5.0"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/2.4.1/lodash.min.js"></script>
+    <script src="js/realdata.js"></script>
+    <link rel="stylesheet"  href="css/text.css">
+</head>
+<body>
+    <div class="navbar">
+        <nav class="navbar navbar-inverse">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="./home.html">CoachAI</a>
+                </div>
+                <ul class="nav navbar-nav">
+                <li><a href="./home.html">Home</a></li>
+                <li><a href="./realdata.html">Real Data</a></li>
+                <li><a href="./ourdata.html">Our Data</a></li>
+                <li class="active"><a href="./temp.html">Tracjectory</a></li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+    <button id="next" type="button">下一球</button>
+    <button id="back" type="button">上一球</button>
+    <canvas id="canvas" width="1200" height="600"></canvas>
+
+<script>
+	var canvas = document.getElementById('canvas');
+	var ctx = canvas.getContext('2d');
+    var i=1;
+    game_name = '_2019亞錦賽-周天成VS石宇奇';
+    filename = 'statistics/rally_detail_real' + game_name + '.json';
+    $.getJSON(filename, function(data) {
+        set = 1;
+
+        //filter data to specific set
+        data = data.filter(function(item) {
+            return item.set == set
+        });
+        data = data[0].info;
+        //filter data to specific rally
+        data = data.filter(function(item) {
+            return parseInt(item.rally) == 4;
+        });
+        data = data[0].result;
+        console.log(data);
+        var maxrally;
+        if (!maxrally){
+            maxrally = Math.max.apply(Math, data.map(function(d) { 
+                return d.order; 
+            }));
+        }
+
+        function initial() {
+            ctx.beginPath();
+            ctx.strokeStyle = "black";
+            //球場外框
+            ctx.rect(100,100,935,424);
+            //直的線
+            ctx.moveTo(153,100);
+            ctx.lineTo(153,524);
+            ctx.moveTo(290,100);
+            ctx.lineTo(290,524);
+            ctx.moveTo(428,100);
+            ctx.lineTo(428,524);
+            ctx.moveTo(568,100);
+            ctx.lineTo(568,524);
+            ctx.moveTo(708,100);
+            ctx.lineTo(708,524);
+            ctx.moveTo(845,100);
+            ctx.lineTo(845,524);	
+            ctx.moveTo(982,100);
+            ctx.lineTo(982,524);
+            //橫的線
+            ctx.moveTo(100,132);
+            ctx.lineTo(1035,132);
+            ctx.moveTo(100,492);
+            ctx.lineTo(1035,492);
+            ctx.moveTo(100,312);
+            ctx.lineTo(428,312);
+            ctx.moveTo(708,312);
+            ctx.lineTo(1035,312);
+            ctx.closePath();
+            ctx.stroke();
+        }
+        
+        initial();
+        ctx.beginPath();
+        ctx.arc(data[0].detail_hit_pos[1]+100,data[0].detail_hit_pos[0]+100,5,0,Math.PI*2,true);
+        ctx.strokeStyle = "black";
+        ctx.closePath();
+        ctx.stroke();
+        $("#next").click(function(){
+            if(i>3)	{
+                ctx.beginPath();
+                ctx.clearRect(100,100,935,424);
+                ctx.closePath();
+                ctx.stroke();
+                initial();
+                //faded
+                for(var j=0;j<i-3;j++) {
+                    ctx.beginPath();
+                    ctx.arc(data[j].detail_hit_pos[1]+100,data[j].detail_hit_pos[0]+100,5,0,Math.PI*2,true);
+                    ctx.strokeStyle = "rgb(236, 239, 239)";
+                    ctx.closePath();
+                    ctx.stroke();
+                    ctx.beginPath();
+                    ctx.moveTo(data[j].detail_hit_pos[1]+100,data[j].detail_hit_pos[0]+100);
+                    ctx.lineTo(data[j+1].detail_hit_pos[1]+100,data[j+1].detail_hit_pos[0]+100);
+                    ctx.strokeStyle = "rgb(236, 239, 239)";
+                    ctx.closePath();
+                    ctx.stroke();
+                }
+                //normal
+                for(var j=i-3;j<i;j++) {
+                    ctx.beginPath();
+                    ctx.arc(data[j].detail_hit_pos[1]+100,data[j].detail_hit_pos[0]+100,5,0,Math.PI*2,true);
+                    ctx.strokeStyle = "black";
+                    ctx.closePath();
+                    ctx.stroke();
+                    ctx.beginPath();
+                    ctx.moveTo(data[j].detail_hit_pos[1]+100,data[j].detail_hit_pos[0]+100);
+                    ctx.lineTo(data[j+1].detail_hit_pos[1]+100,data[j+1].detail_hit_pos[0]+100);
+                    ctx.strokeStyle = "black";
+                    ctx.closePath();
+                    ctx.stroke();
+                }
+            }
+            ctx.beginPath();
+            ctx.arc(data[i].detail_hit_pos[1]+100,data[i].detail_hit_pos[0]+100,5,0,Math.PI*2,true);
+            ctx.strokeStyle = "black";
+            ctx.closePath();
+            ctx.stroke();
+            ctx.beginPath();
+            ctx.moveTo(data[i-1].detail_hit_pos[1]+100,data[i-1].detail_hit_pos[0]+100);
+            ctx.lineTo(data[i].detail_hit_pos[1]+100,data[i].detail_hit_pos[0]+100);
+            ctx.strokeStyle = "black";
+            ctx.closePath();
+            ctx.stroke();
+            if(i!=maxrally-1) {
+                i+=1;
+            }
+        })
+
+        $("#back").click(function(){
+            ctx.beginPath();
+            ctx.clearRect(100,100,935,424);
+            ctx.closePath();
+            ctx.stroke();
+            initial();
+            if(i>4)	{
+                //faded
+                for(var j=0;j<i-3;j++) {
+                    ctx.beginPath();
+                    ctx.arc(data[j].detail_hit_pos[1]+100,data[j].detail_hit_pos[0]+100,5,0,Math.PI*2,true);
+                    if(j==i-4) {
+                        ctx.strokeStyle = "black";
+                    }
+                    else {
+                        ctx.strokeStyle = "rgb(236, 239, 239)";
+                    }
+                    ctx.closePath();
+                    ctx.stroke();
+                    ctx.beginPath();
+                    ctx.moveTo(data[j].detail_hit_pos[1]+100,data[j].detail_hit_pos[0]+100);
+                    ctx.lineTo(data[j+1].detail_hit_pos[1]+100,data[j+1].detail_hit_pos[0]+100);
+                    ctx.strokeStyle = "rgb(236, 239, 239)";
+                    ctx.closePath();
+                    ctx.stroke();
+                }
+                //normal
+                for(var j=i-3;j<i;j++) {
+                    ctx.beginPath();
+                    ctx.arc(data[j].detail_hit_pos[1]+100,data[j].detail_hit_pos[0]+100,5,0,Math.PI*2,true);
+                    ctx.strokeStyle = "black";
+                    ctx.closePath();
+                    ctx.stroke();
+                    ctx.beginPath();
+                    ctx.moveTo(data[j-1].detail_hit_pos[1]+100,data[j-1].detail_hit_pos[0]+100);
+                    ctx.lineTo(data[j].detail_hit_pos[1]+100,data[j].detail_hit_pos[0]+100);
+                    ctx.strokeStyle = "black";
+                    ctx.closePath();
+                    ctx.stroke();
+                }
+            }
+            else {
+                ctx.beginPath();
+                //ctx.arc(ball_place[0].hit_y+100,ball_place[0].hit_x+100,5,0,Math.PI*2,true);
+                ctx.arc(data[0].detail_hit_pos[1]+100,data[0].detail_hit_pos[0]+100,5,0,Math.PI*2,true);
+                ctx.strokeStyle = "black";
+                ctx.closePath();
+                ctx.stroke();
+                for(var j=1;j<i;j++) {
+                    ctx.beginPath();
+                    //ctx.arc(ball_place[j].hit_y+100,ball_place[j].hit_x+100,5,0,Math.PI*2,true);
+                    ctx.arc(data[j].detail_hit_pos[1]+100,data[j].detail_hit_pos[0]+100,5,0,Math.PI*2,true);
+                    ctx.strokeStyle = "black";
+                    ctx.closePath();
+                    ctx.stroke();
+                    ctx.beginPath();
+                    ctx.moveTo(data[j-1].detail_hit_pos[1]+100,data[j-1].detail_hit_pos[0]+100);
+                    ctx.lineTo(data[j].detail_hit_pos[1]+100,data[j].detail_hit_pos[0]+100);
+                    ctx.strokeStyle = "black";
+                    ctx.closePath();
+                    ctx.stroke();
+                }
+            }
+            if(i!=1) {
+                i-=1;
+            }
+        })
+    });
+
+
+
+	function move_back() {
+		
+	}                        
+</script>
+</body>
+</html>
