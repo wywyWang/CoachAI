@@ -300,8 +300,8 @@ function init_linechart(minrally,maxrally,set,game){
                                 var ctx = canvas[0].getContext("2d"); 
                                 $(".modal-body canvas").remove();
                                 $(".modal-body").html('<canvas id="canvas" width="1000" height="800"></canvas>\
-                                                    <div class="modal-text" id="lose_reason">獲勝原因:測試</div>\
-                                                    <div class="modal-text" id="lose_balltype">失分球種:殺球</div>');
+                                                    <div class="modal-text" id="lose_reason"></div>\
+                                                    <div class="modal-text" id="lose_balltype"></div>');
                             });
                         });
                     });
