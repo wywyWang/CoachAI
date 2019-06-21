@@ -4,7 +4,7 @@
         "result":[
             {
                 "rally":1,
-                "stroke":10,
+                "stroke":9,
                 "winner":"B",
                 "on_off_court":"\u843d\u5730",
                 "balltype":"\u6bba\u7403",
@@ -12,7 +12,7 @@
             },
             {
                 "rally":2,
-                "stroke":6,
+                "stroke":5,
                 "winner":"B",
                 "on_off_court":"\u843d\u5730",
                 "balltype":"\u5e73\u7403",
@@ -20,7 +20,7 @@
             },
             {
                 "rally":3,
-                "stroke":8,
+                "stroke":7,
                 "winner":"B",
                 "on_off_court":"\u843d\u5730",
                 "balltype":"\u5207\u7403",
@@ -28,7 +28,7 @@
             },
             {
                 "rally":4,
-                "stroke":18,
+                "stroke":17,
                 "winner":"A",
                 "on_off_court":"\u51fa\u754c",
                 "balltype":"\u9577\u7403",
@@ -36,7 +36,7 @@
             },
             {
                 "rally":5,
-                "stroke":5,
+                "stroke":4,
                 "winner":"A",
                 "on_off_court":"\u672a\u56de\u64ca\u6210\u529f",
                 "balltype":"\u64cb\u5c0f\u7403",
@@ -44,7 +44,7 @@
             },
             {
                 "rally":6,
-                "stroke":19,
+                "stroke":18,
                 "winner":"A",
                 "on_off_court":"\u672a\u56de\u64ca\u6210\u529f",
                 "balltype":"\u64cb\u5c0f\u7403",
@@ -52,7 +52,7 @@
             },
             {
                 "rally":7,
-                "stroke":13,
+                "stroke":12,
                 "winner":"A",
                 "on_off_court":"\u51fa\u754c",
                 "balltype":"\u6311\u7403",
@@ -60,7 +60,7 @@
             },
             {
                 "rally":8,
-                "stroke":13,
+                "stroke":12,
                 "winner":"A",
                 "on_off_court":"\u51fa\u754c",
                 "balltype":"\u6311\u7403",
@@ -68,7 +68,7 @@
             },
             {
                 "rally":9,
-                "stroke":6,
+                "stroke":5,
                 "winner":"A",
                 "on_off_court":"\u843d\u5730",
                 "balltype":"\u653e\u5c0f\u7403",
@@ -76,7 +76,7 @@
             },
             {
                 "rally":10,
-                "stroke":5,
+                "stroke":4,
                 "winner":"A",
                 "on_off_court":"\u51fa\u754c",
                 "balltype":"\u5207\u7403",
@@ -84,7 +84,7 @@
             },
             {
                 "rally":11,
-                "stroke":20,
+                "stroke":19,
                 "winner":"B",
                 "on_off_court":"\u51fa\u754c",
                 "balltype":"\u5207\u7403",
@@ -92,7 +92,7 @@
             },
             {
                 "rally":12,
-                "stroke":5,
+                "stroke":4,
                 "winner":"A",
                 "on_off_court":"\u843d\u5730",
                 "balltype":"\u64b2\u7403",
@@ -100,7 +100,7 @@
             },
             {
                 "rally":13,
-                "stroke":13,
+                "stroke":12,
                 "winner":"A",
                 "on_off_court":"\u51fa\u754c",
                 "balltype":"\u6311\u7403",
@@ -108,7 +108,7 @@
             },
             {
                 "rally":14,
-                "stroke":5,
+                "stroke":4,
                 "winner":"A",
                 "on_off_court":"\u672a\u56de\u64ca\u6210\u529f",
                 "balltype":"\u653e\u5c0f\u7403",
@@ -116,7 +116,7 @@
             },
             {
                 "rally":15,
-                "stroke":7,
+                "stroke":6,
                 "winner":"A",
                 "on_off_court":"\u51fa\u754c",
                 "balltype":"\u6bba\u7403",
@@ -124,7 +124,7 @@
             },
             {
                 "rally":16,
-                "stroke":9,
+                "stroke":8,
                 "winner":"A",
                 "on_off_court":"\u51fa\u754c",
                 "balltype":"\u6311\u7403",
@@ -132,7 +132,7 @@
             },
             {
                 "rally":17,
-                "stroke":6,
+                "stroke":5,
                 "winner":"B",
                 "on_off_court":"\u672a\u56de\u64ca\u6210\u529f",
                 "balltype":"\u653e\u5c0f\u7403",
@@ -140,7 +140,7 @@
             },
             {
                 "rally":18,
-                "stroke":7,
+                "stroke":6,
                 "winner":"B",
                 "on_off_court":"\u672a\u56de\u64ca\u6210\u529f",
                 "balltype":"\u64cb\u5c0f\u7403",
@@ -148,7 +148,7 @@
             },
             {
                 "rally":19,
-                "stroke":7,
+                "stroke":6,
                 "winner":"A",
                 "on_off_court":"\u843d\u5730",
                 "balltype":"\u6311\u7403",
@@ -156,7 +156,7 @@
             },
             {
                 "rally":20,
-                "stroke":5,
+                "stroke":4,
                 "winner":"A",
                 "on_off_court":"\u51fa\u754c",
                 "balltype":"\u9577\u7403",
@@ -164,7 +164,7 @@
             },
             {
                 "rally":21,
-                "stroke":5,
+                "stroke":4,
                 "winner":"B",
                 "on_off_court":"\u843d\u5730",
                 "balltype":"\u6bba\u7403",
@@ -172,7 +172,7 @@
             },
             {
                 "rally":22,
-                "stroke":6,
+                "stroke":5,
                 "winner":"B",
                 "on_off_court":"\u843d\u5730",
                 "balltype":"\u6bba\u7403",
@@ -180,7 +180,7 @@
             },
             {
                 "rally":23,
-                "stroke":27,
+                "stroke":26,
                 "winner":"B",
                 "on_off_court":"\u672a\u56de\u64ca\u6210\u529f",
                 "balltype":"\u64cb\u5c0f\u7403",
@@ -188,7 +188,7 @@
             },
             {
                 "rally":24,
-                "stroke":12,
+                "stroke":11,
                 "winner":"A",
                 "on_off_court":"\u51fa\u754c",
                 "balltype":"\u5207\u7403",
@@ -196,7 +196,7 @@
             },
             {
                 "rally":25,
-                "stroke":6,
+                "stroke":5,
                 "winner":"A",
                 "on_off_court":"\u843d\u5730",
                 "balltype":"\u6bba\u7403",
@@ -204,7 +204,7 @@
             },
             {
                 "rally":26,
-                "stroke":20,
+                "stroke":19,
                 "winner":"B",
                 "on_off_court":"\u672a\u56de\u64ca\u6210\u529f",
                 "balltype":"\u64cb\u5c0f\u7403",
@@ -212,7 +212,7 @@
             },
             {
                 "rally":27,
-                "stroke":9,
+                "stroke":8,
                 "winner":"B",
                 "on_off_court":"\u51fa\u754c",
                 "balltype":"\u653e\u5c0f\u7403",
@@ -220,7 +220,7 @@
             },
             {
                 "rally":28,
-                "stroke":15,
+                "stroke":14,
                 "winner":"B",
                 "on_off_court":"\u672a\u56de\u64ca\u6210\u529f",
                 "balltype":"\u64cb\u5c0f\u7403",
@@ -228,7 +228,7 @@
             },
             {
                 "rally":29,
-                "stroke":30,
+                "stroke":29,
                 "winner":"B",
                 "on_off_court":"\u843d\u5730",
                 "balltype":"\u653e\u5c0f\u7403",
@@ -236,7 +236,7 @@
             },
             {
                 "rally":30,
-                "stroke":10,
+                "stroke":9,
                 "winner":"B",
                 "on_off_court":"\u843d\u5730",
                 "balltype":"\u6bba\u7403",
@@ -244,7 +244,7 @@
             },
             {
                 "rally":31,
-                "stroke":16,
+                "stroke":15,
                 "winner":"A",
                 "on_off_court":"\u51fa\u754c",
                 "balltype":"\u6bba\u7403",
@@ -252,7 +252,7 @@
             },
             {
                 "rally":32,
-                "stroke":9,
+                "stroke":8,
                 "winner":"B",
                 "on_off_court":"\u843d\u5730",
                 "balltype":"\u64b2\u7403",
@@ -260,7 +260,7 @@
             },
             {
                 "rally":33,
-                "stroke":8,
+                "stroke":7,
                 "winner":"A",
                 "on_off_court":"\u672a\u56de\u64ca\u6210\u529f",
                 "balltype":"\u653e\u5c0f\u7403",
@@ -268,7 +268,7 @@
             },
             {
                 "rally":34,
-                "stroke":7,
+                "stroke":6,
                 "winner":"B",
                 "on_off_court":"\u843d\u5730",
                 "balltype":"\u64b2\u7403",
@@ -276,7 +276,7 @@
             },
             {
                 "rally":35,
-                "stroke":20,
+                "stroke":19,
                 "winner":"B",
                 "on_off_court":"\u843d\u5730",
                 "balltype":"\u6bba\u7403",
@@ -284,7 +284,7 @@
             },
             {
                 "rally":36,
-                "stroke":17,
+                "stroke":16,
                 "winner":"B",
                 "on_off_court":"\u672a\u56de\u64ca\u6210\u529f",
                 "balltype":"\u64cb\u5c0f\u7403",
@@ -292,7 +292,7 @@
             },
             {
                 "rally":37,
-                "stroke":14,
+                "stroke":13,
                 "winner":"B",
                 "on_off_court":"\u843d\u5730",
                 "balltype":"\u64b2\u7403",
@@ -300,7 +300,7 @@
             },
             {
                 "rally":38,
-                "stroke":6,
+                "stroke":5,
                 "winner":"A",
                 "on_off_court":"\u51fa\u754c",
                 "balltype":"\u9577\u7403",
@@ -308,7 +308,7 @@
             },
             {
                 "rally":39,
-                "stroke":5,
+                "stroke":4,
                 "winner":"A",
                 "on_off_court":"\u672a\u56de\u64ca\u6210\u529f",
                 "balltype":"\u653e\u5c0f\u7403",
@@ -316,7 +316,7 @@
             },
             {
                 "rally":40,
-                "stroke":5,
+                "stroke":4,
                 "winner":"B",
                 "on_off_court":"\u843d\u5730",
                 "balltype":"\u64b2\u7403",
@@ -324,7 +324,7 @@
             },
             {
                 "rally":41,
-                "stroke":6,
+                "stroke":5,
                 "winner":"B",
                 "on_off_court":"\u843d\u5730",
                 "balltype":"\u9577\u7403",
@@ -332,7 +332,7 @@
             },
             {
                 "rally":42,
-                "stroke":10,
+                "stroke":9,
                 "winner":"B",
                 "on_off_court":"\u843d\u5730",
                 "balltype":"\u6bba\u7403",
@@ -345,7 +345,7 @@
         "result":[
             {
                 "rally":1,
-                "stroke":14,
+                "stroke":13,
                 "winner":"A",
                 "on_off_court":"\u51fa\u754c",
                 "balltype":"\u653e\u5c0f\u7403",
@@ -353,7 +353,7 @@
             },
             {
                 "rally":2,
-                "stroke":8,
+                "stroke":7,
                 "winner":"B",
                 "on_off_court":"\u51fa\u754c",
                 "balltype":"\u9577\u7403",
@@ -361,7 +361,7 @@
             },
             {
                 "rally":3,
-                "stroke":8,
+                "stroke":7,
                 "winner":"B",
                 "on_off_court":"\u843d\u5730",
                 "balltype":"\u5207\u7403",
@@ -369,7 +369,7 @@
             },
             {
                 "rally":4,
-                "stroke":5,
+                "stroke":4,
                 "winner":"B",
                 "on_off_court":"\u672a\u56de\u64ca\u6210\u529f",
                 "balltype":"\u64cb\u5c0f\u7403",
@@ -377,7 +377,7 @@
             },
             {
                 "rally":5,
-                "stroke":9,
+                "stroke":8,
                 "winner":"A",
                 "on_off_court":"\u843d\u5730",
                 "balltype":"\u653e\u5c0f\u7403",
@@ -385,7 +385,7 @@
             },
             {
                 "rally":6,
-                "stroke":12,
+                "stroke":11,
                 "winner":"B",
                 "on_off_court":"\u672a\u56de\u64ca\u6210\u529f",
                 "balltype":"\u64cb\u5c0f\u7403",
@@ -393,7 +393,7 @@
             },
             {
                 "rally":7,
-                "stroke":4,
+                "stroke":3,
                 "winner":"A",
                 "on_off_court":"\u672a\u56de\u64ca\u6210\u529f",
                 "balltype":"\u653e\u5c0f\u7403",
@@ -401,7 +401,7 @@
             },
             {
                 "rally":8,
-                "stroke":13,
+                "stroke":12,
                 "winner":"B",
                 "on_off_court":"\u843d\u5730",
                 "balltype":"\u64b2\u7403",
@@ -409,7 +409,7 @@
             },
             {
                 "rally":9,
-                "stroke":16,
+                "stroke":15,
                 "winner":"A",
                 "on_off_court":"\u672a\u56de\u64ca\u6210\u529f",
                 "balltype":"\u64cb\u5c0f\u7403",
@@ -417,7 +417,7 @@
             },
             {
                 "rally":10,
-                "stroke":21,
+                "stroke":20,
                 "winner":"A",
                 "on_off_court":"\u672a\u56de\u64ca\u6210\u529f",
                 "balltype":"\u5207\u7403",
@@ -425,7 +425,7 @@
             },
             {
                 "rally":11,
-                "stroke":6,
+                "stroke":5,
                 "winner":"B",
                 "on_off_court":"\u672a\u56de\u64ca\u6210\u529f",
                 "balltype":"\u5e73\u7403",
@@ -433,7 +433,7 @@
             },
             {
                 "rally":12,
-                "stroke":6,
+                "stroke":5,
                 "winner":"A",
                 "on_off_court":"\u672a\u56de\u64ca\u6210\u529f",
                 "balltype":"\u64cb\u5c0f\u7403",
@@ -441,7 +441,7 @@
             },
             {
                 "rally":13,
-                "stroke":16,
+                "stroke":15,
                 "winner":"B",
                 "on_off_court":"\u672a\u56de\u64ca\u6210\u529f",
                 "balltype":"\u64cb\u5c0f\u7403",
@@ -449,7 +449,7 @@
             },
             {
                 "rally":14,
-                "stroke":17,
+                "stroke":16,
                 "winner":"B",
                 "on_off_court":"\u672a\u56de\u64ca\u6210\u529f",
                 "balltype":"\u653e\u5c0f\u7403",
@@ -457,7 +457,7 @@
             },
             {
                 "rally":15,
-                "stroke":3,
+                "stroke":2,
                 "winner":"B",
                 "on_off_court":"\u51fa\u754c",
                 "balltype":"\u6311\u7403",
@@ -465,7 +465,7 @@
             },
             {
                 "rally":16,
-                "stroke":11,
+                "stroke":10,
                 "winner":"A",
                 "on_off_court":"\u843d\u5730",
                 "balltype":"\u5207\u7403",
@@ -473,7 +473,7 @@
             },
             {
                 "rally":17,
-                "stroke":5,
+                "stroke":4,
                 "winner":"B",
                 "on_off_court":"\u843d\u5730",
                 "balltype":"\u6311\u7403",
@@ -481,7 +481,7 @@
             },
             {
                 "rally":18,
-                "stroke":4,
+                "stroke":3,
                 "winner":"B",
                 "on_off_court":"\u843d\u5730",
                 "balltype":"\u9577\u7403",
@@ -489,7 +489,7 @@
             },
             {
                 "rally":19,
-                "stroke":20,
+                "stroke":19,
                 "winner":"B",
                 "on_off_court":"\u843d\u5730",
                 "balltype":"\u653e\u5c0f\u7403",
@@ -497,7 +497,7 @@
             },
             {
                 "rally":20,
-                "stroke":4,
+                "stroke":3,
                 "winner":"A",
                 "on_off_court":"\u51fa\u754c",
                 "balltype":"\u6bba\u7403",
@@ -505,7 +505,7 @@
             },
             {
                 "rally":21,
-                "stroke":8,
+                "stroke":7,
                 "winner":"B",
                 "on_off_court":"\u51fa\u754c",
                 "balltype":"\u6311\u7403",
@@ -513,7 +513,7 @@
             },
             {
                 "rally":22,
-                "stroke":24,
+                "stroke":23,
                 "winner":"A",
                 "on_off_court":"\u672a\u56de\u64ca\u6210\u529f",
                 "balltype":"\u64cb\u5c0f\u7403",
@@ -521,7 +521,7 @@
             },
             {
                 "rally":23,
-                "stroke":11,
+                "stroke":10,
                 "winner":"A",
                 "on_off_court":"\u672a\u56de\u64ca\u6210\u529f",
                 "balltype":"\u653e\u5c0f\u7403",
@@ -529,7 +529,7 @@
             },
             {
                 "rally":24,
-                "stroke":7,
+                "stroke":6,
                 "winner":"A",
                 "on_off_court":"\u672a\u56de\u64ca\u6210\u529f",
                 "balltype":"\u653e\u5c0f\u7403",
@@ -537,7 +537,7 @@
             },
             {
                 "rally":25,
-                "stroke":8,
+                "stroke":7,
                 "winner":"A",
                 "on_off_court":"\u843d\u5730",
                 "balltype":"\u6bba\u7403",
@@ -545,7 +545,7 @@
             },
             {
                 "rally":26,
-                "stroke":2,
+                "stroke":1,
                 "winner":"B",
                 "on_off_court":"\u767c\u7403\u72af\u898f",
                 "balltype":"\u767c\u9577\u7403",
@@ -553,7 +553,7 @@
             },
             {
                 "rally":27,
-                "stroke":5,
+                "stroke":4,
                 "winner":"B",
                 "on_off_court":"\u51fa\u754c",
                 "balltype":"\u6bba\u7403",
@@ -561,7 +561,7 @@
             },
             {
                 "rally":28,
-                "stroke":7,
+                "stroke":6,
                 "winner":"B",
                 "on_off_court":"\u672a\u56de\u64ca\u6210\u529f",
                 "balltype":"\u653e\u5c0f\u7403",
@@ -569,7 +569,7 @@
             },
             {
                 "rally":29,
-                "stroke":13,
+                "stroke":12,
                 "winner":"A",
                 "on_off_court":"\u843d\u5730",
                 "balltype":"\u64b2\u7403",
@@ -577,7 +577,7 @@
             },
             {
                 "rally":30,
-                "stroke":34,
+                "stroke":33,
                 "winner":"A",
                 "on_off_court":"\u843d\u5730",
                 "balltype":"\u64b2\u7403",
@@ -585,7 +585,7 @@
             },
             {
                 "rally":31,
-                "stroke":6,
+                "stroke":5,
                 "winner":"B",
                 "on_off_court":"\u672a\u56de\u64ca\u6210\u529f",
                 "balltype":"\u653e\u5c0f\u7403",
@@ -593,7 +593,7 @@
             },
             {
                 "rally":32,
-                "stroke":4,
+                "stroke":3,
                 "winner":"A",
                 "on_off_court":"\u672a\u56de\u64ca\u6210\u529f",
                 "balltype":"\u653e\u5c0f\u7403",
@@ -601,7 +601,7 @@
             },
             {
                 "rally":33,
-                "stroke":9,
+                "stroke":8,
                 "winner":"A",
                 "on_off_court":"\u672a\u56de\u64ca\u6210\u529f",
                 "balltype":"\u64cb\u5c0f\u7403",
@@ -609,7 +609,7 @@
             },
             {
                 "rally":34,
-                "stroke":6,
+                "stroke":5,
                 "winner":"A",
                 "on_off_court":"\u843d\u5730",
                 "balltype":"\u64b2\u7403",
@@ -617,7 +617,7 @@
             },
             {
                 "rally":35,
-                "stroke":4,
+                "stroke":3,
                 "winner":"B",
                 "on_off_court":"\u672a\u56de\u64ca\u6210\u529f",
                 "balltype":"\u653e\u5c0f\u7403",
@@ -625,7 +625,7 @@
             },
             {
                 "rally":36,
-                "stroke":19,
+                "stroke":18,
                 "winner":"B",
                 "on_off_court":"\u51fa\u754c",
                 "balltype":"\u6311\u7403",
@@ -633,7 +633,7 @@
             },
             {
                 "rally":37,
-                "stroke":3,
+                "stroke":2,
                 "winner":"B",
                 "on_off_court":"\u51fa\u754c",
                 "balltype":"\u6bba\u7403",
@@ -641,7 +641,7 @@
             },
             {
                 "rally":38,
-                "stroke":5,
+                "stroke":4,
                 "winner":"A",
                 "on_off_court":"\u843d\u5730",
                 "balltype":"\u6311\u7403",
@@ -649,7 +649,7 @@
             },
             {
                 "rally":39,
-                "stroke":6,
+                "stroke":5,
                 "winner":"B",
                 "on_off_court":"\u672a\u56de\u64ca\u6210\u529f",
                 "balltype":"\u64b2\u7403",
