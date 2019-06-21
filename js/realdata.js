@@ -232,14 +232,14 @@ function init_linechart(minrally,maxrally,set,game){
                     console.log(dataB)
 
                     $("#radarChart").show(function(event){
-                        // show win_reason and lose balltype on each rally
-                        
                         //filter data to specific rally
                         data_choose = data.filter(function(item) {
                             return item.rally == id.split('-')[1];
                         });
                         data_choose = data_choose[0];
-                        console.log(data_choose);
+                        // console.log(data_choose);
+                        
+                        // show win_reason and lose balltype on each rally
                         document.getElementById("lose_reason").innerHTML = '失分原因：' + data_choose.on_off_court;
                         document.getElementById("lose_balltype").innerHTML = '失分球種：' + data_choose.balltype;
 
