@@ -112,12 +112,9 @@
                 });
                 data = data[0].result;
                 console.log(data);
-                var maxrally;
-                if (!maxrally){
-                    maxrally = Math.max.apply(Math, data.map(function(d) { 
-                        return d.order; 
-                    }));
-                }
+                var maxorder = Math.max.apply(Math, data.map(function(d) { 
+                    return d.order; 
+                }));
         
                 function initial() {
                     ctx.beginPath();
@@ -159,90 +156,96 @@
                 ctx.closePath();
                 ctx.stroke();
                 $("#next").click(function(){
-                    if(i>2) {
-                        ctx.beginPath();
-                        ctx.clearRect(50,50,985,474);
-                        ctx.closePath();
-                        ctx.stroke();
-                        initial();
-                        //faded
-                        for(var j=0;j<i-2;j++) {
+                    if(i != maxorder-1){
+                        if(i>2) {
                             ctx.beginPath();
-                            ctx.arc(data[j].detail_hit_pos[1]+100,data[j].detail_hit_pos[0]+100,5,0,Math.PI*2,true);
-                            ctx.strokeStyle = "rgb(236, 239, 239)";
+                            ctx.clearRect(50,50,985,474);
                             ctx.closePath();
                             ctx.stroke();
+                            initial();
+                            //faded
+                            for(var j=0;j<i-2;j++) {
+                                ctx.beginPath();
+                                ctx.arc(data[j].detail_hit_pos[1]+100,data[j].detail_hit_pos[0]+100,5,0,Math.PI*2,true);
+                                ctx.strokeStyle = "rgb(229, 226, 222)";
+                                ctx.closePath();
+                                ctx.stroke();
+                                ctx.beginPath();
+                                ctx.moveTo(data[j].detail_hit_pos[1]+100,data[j].detail_hit_pos[0]+100);
+                                ctx.lineTo(data[j+1].detail_hit_pos[1]+100,data[j+1].detail_hit_pos[0]+100);
+                                ctx.strokeStyle = "rgb(229, 226, 222)";
+                                ctx.closePath();
+                                ctx.stroke();
+                            }
+                            //normal
+                            for(var j=i-2;j<i+1;j++) {
+                                ctx.beginPath();
+                                ctx.arc(data[j].detail_hit_pos[1]+100,data[j].detail_hit_pos[0]+100,5,0,Math.PI*2,true);
+                                ctx.strokeStyle = "black";
+                                ctx.closePath();
+                                ctx.stroke();
+                                ctx.beginPath();
+                                ctx.moveTo(data[j].detail_hit_pos[1]+100,data[j].detail_hit_pos[0]+100);
+                                ctx.lineTo(data[j+1].detail_hit_pos[1]+100,data[j+1].detail_hit_pos[0]+100);
+                                if(j==i-2){
+                                    ctx.strokeStyle = "rgb(252, 133, 133)";
+                                }
+                                if(j==i-1){
+                                    ctx.strokeStyle = "rgb(173, 34, 34)";
+                                }
+                                if(j==i){
+                                    ctx.strokeStyle = "rgb(91, 0, 0)";
+                                }
+                                ctx.closePath();
+                                ctx.stroke();
+                            }
                             ctx.beginPath();
-                            ctx.moveTo(data[j].detail_hit_pos[1]+100,data[j].detail_hit_pos[0]+100);
-                            ctx.lineTo(data[j+1].detail_hit_pos[1]+100,data[j+1].detail_hit_pos[0]+100);
-                            ctx.strokeStyle = "rgb(236, 239, 239)";
-                            ctx.closePath();
-                            ctx.stroke();
-                        }
-                        //normal
-                        for(var j=i-2;j<i+1;j++) {
-                            ctx.beginPath();
-                            ctx.arc(data[j].detail_hit_pos[1]+100,data[j].detail_hit_pos[0]+100,5,0,Math.PI*2,true);
+                            ctx.arc(data[i+1].detail_hit_pos[1]+100,data[i+1].detail_hit_pos[0]+100,5,0,Math.PI*2,true);
                             ctx.strokeStyle = "black";
                             ctx.closePath();
                             ctx.stroke();
+                        }
+                        else {
                             ctx.beginPath();
-                            ctx.moveTo(data[j].detail_hit_pos[1]+100,data[j].detail_hit_pos[0]+100);
-                            ctx.lineTo(data[j+1].detail_hit_pos[1]+100,data[j+1].detail_hit_pos[0]+100);
-                            if(j==i-2){
-                                ctx.strokeStyle = "rgb(94, 107, 209)";
-                            }
-                            if(j==i-1){
-                                ctx.strokeStyle = "rgb(32, 44, 140)";
-                            }
-                            if(j==i){
-                                ctx.strokeStyle = "rgb(0, 11, 99)";
-                            }
+                            ctx.clearRect(50,50,985,474);
                             ctx.closePath();
                             ctx.stroke();
-                        }
-                        ctx.beginPath();
-                        ctx.arc(data[i+1].detail_hit_pos[1]+100,data[i+1].detail_hit_pos[0]+100,5,0,Math.PI*2,true);
-                        ctx.strokeStyle = "black";
-                        ctx.closePath();
-                        ctx.stroke();
-                    }
-                    else {
-                        ctx.beginPath();
-                        ctx.clearRect(50,50,985,474);
-                        ctx.closePath();
-                        ctx.stroke();
-                        initial();
-                        ctx.beginPath();
-                        ctx.arc(data[0].detail_hit_pos[1]+100,data[0].detail_hit_pos[0]+100,5,0,Math.PI*2,true);
-                        ctx.strokeStyle = "black";
-                        ctx.closePath();
-                        ctx.stroke();
-                        for(var j=i+1;j>0;j--) {
+                            initial();
                             ctx.beginPath();
-                            ctx.arc(data[j].detail_hit_pos[1]+100,data[j].detail_hit_pos[0]+100,5,0,Math.PI*2,true);
+                            ctx.arc(data[0].detail_hit_pos[1]+100,data[0].detail_hit_pos[0]+100,5,0,Math.PI*2,true);
                             ctx.strokeStyle = "black";
                             ctx.closePath();
                             ctx.stroke();
-                            ctx.beginPath();
-                            ctx.moveTo(data[j].detail_hit_pos[1]+100,data[j].detail_hit_pos[0]+100);
-                            ctx.lineTo(data[j-1].detail_hit_pos[1]+100,data[j-1].detail_hit_pos[0]+100);
-                            if(j==i-1){
-                                ctx.strokeStyle = "rgb(94, 107, 209)";
+                            for(var j=i+1;j>0;j--) {
+                                ctx.beginPath();
+                                ctx.arc(data[j].detail_hit_pos[1]+100,data[j].detail_hit_pos[0]+100,5,0,Math.PI*2,true);
+                                ctx.strokeStyle = "black";
+                                ctx.closePath();
+                                ctx.stroke();
+                                ctx.beginPath();
+                                ctx.moveTo(data[j].detail_hit_pos[1]+100,data[j].detail_hit_pos[0]+100);
+                                ctx.lineTo(data[j-1].detail_hit_pos[1]+100,data[j-1].detail_hit_pos[0]+100);
+                                if(j==i-1){
+                                    ctx.strokeStyle = "rgb(252, 133, 133)";
+                                }
+                                if(j==i){
+                                    ctx.strokeStyle = "rgb(173, 34, 34)";
+                                }
+                                if(j==i+1){
+                                    ctx.strokeStyle = "rgb(91, 0, 0)";
+                                }
+                                ctx.closePath();
+                                ctx.stroke();
                             }
-                            if(j==i){
-                                ctx.strokeStyle = "rgb(32, 44, 140)";
-                            }
-                            if(j==i+1){
-                                ctx.strokeStyle = "rgb(0, 11, 99)";
-                            }
-                            ctx.closePath();
-                            ctx.stroke();
+                        }
+                        if(i!=maxorder-2) {
+                            i+=1;
+                        }
+                        else{
+                            i = maxorder - 1;
                         }
                     }
-                    if(i!=maxrally-2) {
-                        i+=1;
-                    }
+                    
                 });
             
                 $("#back").click(function(){
@@ -256,13 +259,13 @@
                         for(var j=0;j<i-4;j++) {
                             ctx.beginPath();
                             ctx.arc(data[j].detail_hit_pos[1]+100,data[j].detail_hit_pos[0]+100,5,0,Math.PI*2,true);
-                            ctx.strokeStyle = "rgb(236, 239, 239)";
+                            ctx.strokeStyle = "rgb(229, 226, 222)";
                             ctx.closePath();
                             ctx.stroke();
                             ctx.beginPath();
                             ctx.moveTo(data[j].detail_hit_pos[1]+100,data[j].detail_hit_pos[0]+100);
                             ctx.lineTo(data[j+1].detail_hit_pos[1]+100,data[j+1].detail_hit_pos[0]+100);
-                            ctx.strokeStyle = "rgb(236, 239, 239)";
+                            ctx.strokeStyle = "rgb(229, 226, 222)";
                             ctx.closePath();
                             ctx.stroke();
                         }
@@ -277,13 +280,13 @@
                             ctx.moveTo(data[j+1].detail_hit_pos[1]+100,data[j+1].detail_hit_pos[0]+100);
                             ctx.lineTo(data[j].detail_hit_pos[1]+100,data[j].detail_hit_pos[0]+100);
                             if(j==i-4){
-                                ctx.strokeStyle = "rgb(94, 107, 209)";
+                                ctx.strokeStyle = "rgb(252, 133, 133)";
                             }
                             if(j==i-3){
-                                ctx.strokeStyle = "rgb(32, 44, 140)";
+                                ctx.strokeStyle = "rgb(173, 34, 34)";
                             }
                             if(j==i-2){
-                                ctx.strokeStyle = "rgb(0, 11, 99)";
+                                ctx.strokeStyle = "rgb(91, 0, 0)";
                             }
                             
                             ctx.closePath();
@@ -319,13 +322,13 @@
                             ctx.moveTo(data[j].detail_hit_pos[1]+100,data[j].detail_hit_pos[0]+100);
                             ctx.lineTo(data[j-1].detail_hit_pos[1]+100,data[j-1].detail_hit_pos[0]+100);
                             if(j==i-3){
-                                ctx.strokeStyle = "rgb(94, 107, 209)";
+                                ctx.strokeStyle = "rgb(252, 133, 133)";
                             }
                             if(j==i-2){
-                                ctx.strokeStyle = "rgb(32, 44, 140)";
+                                ctx.strokeStyle = "rgb(173, 34, 34)";
                             }
                             if(j==i-1){
-                                ctx.strokeStyle = "rgb(0, 11, 99)";
+                                ctx.strokeStyle = "rgb(91, 0, 0)";
                             }
                             ctx.closePath();
                             ctx.stroke();
