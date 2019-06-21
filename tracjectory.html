@@ -19,10 +19,11 @@
         function change_set(){
             new_set = document.getElementById("set").value;
             $('#rally option').remove();
-            change_rally(new_set);
+            change_rally();
         }
 
-        function change_rally(set){
+        function change_rally(){
+            var set=document.getElementById("set").value;
             if(!set){
                 set = 1;
             }
@@ -87,7 +88,7 @@
             var rally = document.getElementById("rally").value;
             var canvas = document.getElementById('canvas');
             var ctx = canvas.getContext('2d');
-            var i=1;
+            var i=0;
             ctx.clearRect(100,100,935,424);
             game_name = '_2019亞錦賽-周天成VS石宇奇';
             filename = 'statistics/rally_detail_real' + game_name + '.json';
@@ -158,14 +159,14 @@
                 ctx.closePath();
                 ctx.stroke();
                 $("#next").click(function(){
-                    if(i>3) {
+                    if(i>2) {
                         ctx.beginPath();
                         ctx.clearRect(50,50,985,474);
                         ctx.closePath();
                         ctx.stroke();
                         initial();
                         //faded
-                        for(var j=0;j<i-3;j++) {
+                        for(var j=0;j<i-2;j++) {
                             ctx.beginPath();
                             ctx.arc(data[j].detail_hit_pos[1]+100,data[j].detail_hit_pos[0]+100,5,0,Math.PI*2,true);
                             ctx.strokeStyle = "rgb(236, 239, 239)";
@@ -179,7 +180,7 @@
                             ctx.stroke();
                         }
                         //normal
-                        for(var j=i-3;j<i;j++) {
+                        for(var j=i-2;j<i+1;j++) {
                             ctx.beginPath();
                             ctx.arc(data[j].detail_hit_pos[1]+100,data[j].detail_hit_pos[0]+100,5,0,Math.PI*2,true);
                             ctx.strokeStyle = "black";
@@ -188,21 +189,20 @@
                             ctx.beginPath();
                             ctx.moveTo(data[j].detail_hit_pos[1]+100,data[j].detail_hit_pos[0]+100);
                             ctx.lineTo(data[j+1].detail_hit_pos[1]+100,data[j+1].detail_hit_pos[0]+100);
-                            ctx.arc(data[j].detail_hit_pos[1]+100,data[j].detail_hit_pos[0]+100,5,0,Math.PI*2,true);
-                            if(j==i-3){
+                            if(j==i-2){
                                 ctx.strokeStyle = "rgb(94, 107, 209)";
                             }
-                            if(j==i-2){
+                            if(j==i-1){
                                 ctx.strokeStyle = "rgb(32, 44, 140)";
                             }
-                            if(j==i-1){
+                            if(j==i){
                                 ctx.strokeStyle = "rgb(0, 11, 99)";
                             }
                             ctx.closePath();
                             ctx.stroke();
                         }
                         ctx.beginPath();
-                        ctx.arc(data[i].detail_hit_pos[1]+100,data[i].detail_hit_pos[0]+100,5,0,Math.PI*2,true);
+                        ctx.arc(data[i+1].detail_hit_pos[1]+100,data[i+1].detail_hit_pos[0]+100,5,0,Math.PI*2,true);
                         ctx.strokeStyle = "black";
                         ctx.closePath();
                         ctx.stroke();
@@ -218,7 +218,7 @@
                         ctx.strokeStyle = "black";
                         ctx.closePath();
                         ctx.stroke();
-                        for(var j=i-1;j>=0;j--) {
+                        for(var j=i+1;j>0;j--) {
                             ctx.beginPath();
                             ctx.arc(data[j].detail_hit_pos[1]+100,data[j].detail_hit_pos[0]+100,5,0,Math.PI*2,true);
                             ctx.strokeStyle = "black";
@@ -226,27 +226,21 @@
                             ctx.stroke();
                             ctx.beginPath();
                             ctx.moveTo(data[j].detail_hit_pos[1]+100,data[j].detail_hit_pos[0]+100);
-                            ctx.lineTo(data[j+1].detail_hit_pos[1]+100,data[j+1].detail_hit_pos[0]+100);
-                            ctx.arc(data[j].detail_hit_pos[1]+100,data[j].detail_hit_pos[0]+100,5,0,Math.PI*2,true);
-                            if(j==i-3){
+                            ctx.lineTo(data[j-1].detail_hit_pos[1]+100,data[j-1].detail_hit_pos[0]+100);
+                            if(j==i-1){
                                 ctx.strokeStyle = "rgb(94, 107, 209)";
                             }
-                            if(j==i-2){
+                            if(j==i){
                                 ctx.strokeStyle = "rgb(32, 44, 140)";
                             }
-                            if(j==i-1){
+                            if(j==i+1){
                                 ctx.strokeStyle = "rgb(0, 11, 99)";
                             }
                             ctx.closePath();
                             ctx.stroke();
                         }
                     }
-                    ctx.beginPath();
-                    ctx.arc(data[i].detail_hit_pos[1]+100,data[i].detail_hit_pos[0]+100,5,0,Math.PI*2,true);
-                    ctx.strokeStyle = "black";
-                    ctx.closePath();
-                    ctx.stroke();
-                    if(i!=maxrally-1) {
+                    if(i!=maxrally-2) {
                         i+=1;
                     }
                 });
@@ -259,15 +253,10 @@
                     initial();
                     if(i>4) {
                         //faded
-                        for(var j=0;j<i-3;j++) {
+                        for(var j=0;j<i-4;j++) {
                             ctx.beginPath();
                             ctx.arc(data[j].detail_hit_pos[1]+100,data[j].detail_hit_pos[0]+100,5,0,Math.PI*2,true);
-                            if(j==i-4) {
-                                ctx.strokeStyle = "black";
-                            }
-                            else {
-                                ctx.strokeStyle = "rgb(236, 239, 239)";
-                            }
+                            ctx.strokeStyle = "rgb(236, 239, 239)";
                             ctx.closePath();
                             ctx.stroke();
                             ctx.beginPath();
@@ -285,7 +274,7 @@
                             ctx.closePath();
                             ctx.stroke();
                             ctx.beginPath();
-                            ctx.moveTo(data[j-1].detail_hit_pos[1]+100,data[j-1].detail_hit_pos[0]+100);
+                            ctx.moveTo(data[j+1].detail_hit_pos[1]+100,data[j+1].detail_hit_pos[0]+100);
                             ctx.lineTo(data[j].detail_hit_pos[1]+100,data[j].detail_hit_pos[0]+100);
                             if(j==i-4){
                                 ctx.strokeStyle = "rgb(94, 107, 209)";
@@ -301,7 +290,7 @@
                             ctx.stroke();
                         }
                         ctx.beginPath();
-                        ctx.arc(data[i-5].detail_hit_pos[1]+100,data[i-5].detail_hit_pos[0]+100,5,0,Math.PI*2,true);
+                        ctx.arc(data[i-1].detail_hit_pos[1]+100,data[i-1].detail_hit_pos[0]+100,5,0,Math.PI*2,true);
                         ctx.strokeStyle = "black";
                         ctx.closePath();
                         ctx.stroke();
@@ -319,7 +308,7 @@
                         // ctx.strokeStyle = "black";
                         // ctx.closePath();
                         // ctx.stroke();
-                        for(var j=i-2;j>=1;j--) {
+                        for(var j=i-1;j>=1;j--) {
                             ctx.beginPath();
                             //ctx.arc(ball_place[j].hit_y+100,ball_place[j].hit_x+100,5,0,Math.PI*2,true);
                             ctx.arc(data[j].detail_hit_pos[1]+100,data[j].detail_hit_pos[0]+100,5,0,Math.PI*2,true);
@@ -342,7 +331,7 @@
                             ctx.stroke();
                         }
                     }
-                    if(i!=1) {
+                    if(i!=0) {
                         i-=1;
                     }
                 })
