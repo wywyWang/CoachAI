@@ -81,3 +81,7 @@ path {
     text-align: right;
     font-weight: bold;
 }
+
+option {
+    font-size: 16px;
+}
