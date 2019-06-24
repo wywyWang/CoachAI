@@ -53,9 +53,10 @@ function get_interval_rally(set){
             return d.rally; 
         }));
         
-        for(var i=1;i<=maximum;i+=1)
+        for(var i=0;i<maximum;i+=1)
         {
-            var insertText = '<option value='+i+'>'+i+'</option>';
+            var score = data[i].score;
+            var insertText = '<option value=' + (i+1) + '>' + score + '</option>';
             $('#rally').append(insertText); 
         } 
     })
