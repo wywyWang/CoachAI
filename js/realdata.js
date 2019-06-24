@@ -913,23 +913,22 @@ function init_court_distribution(minrally,maxrally,set,game){
         var coord_oriy = 424;
         var brutew = 61/oriw*canvA.width;
         var bruteh = 41/orih*canvA.height;
-        court.xarea = ['1','2','3','4','5'];
-        court.yarea = ['A','B','C','D','E','F'];
-        court.xcoord_back = [[328,468],[190,328],[53,190],[0,53],[-50,0]];
+        court.xarea = ['1','2','3','4'];
+        court.yarea = ['A','B','C','D','E'];
+        court.xcoord_back = [[307,468],[74,307],[0,74],[-60,0]];
         court.xcoord_back = court.xcoord_back.map(function(item){
             return [parseInt(item[0]/coord_orix*(canvA.width-2*brutew)+brutew),parseInt(item[1]/coord_orix*(canvA.width-2*brutew)+brutew)];
         });
-        court.ycoord_back = [[32,212],[212,392],[0,32],[392,424],[-50,0],[424,500]];
+        court.ycoord_back = [[152,272],[272,392],[32,152],[392,500],[-50,32]];
         court.ycoord_back = court.ycoord_back.map(function(item){
             return [parseInt(item[0]/coord_oriy*(canvA.height-2*bruteh)+bruteh),parseInt(item[1]/coord_oriy*(canvA.height-2*bruteh)+bruteh)];
         });
 
-        court.xcoord_front = [[468,608],[608,745],[745,882],[882,935],[935,955]];
+        court.xcoord_front = [[468,629],[629,861],[861,935],[935,995]];
         court.xcoord_front = court.xcoord_front.map(function(item){
             return [parseInt(item[0]/coord_orix*(canvB.width-2*brutew)+brutew),parseInt(item[1]/coord_orix*(canvB.width-2*brutew)+brutew)];
         });
-        court.yarea = ['A','B','C','D','E','F'];
-        court.ycoord_front = [[212,392],[32,212],[392,424],[0,32],[424,500],[-50,0]];
+        court.ycoord_front = [[152,272],[32,152],[272,392],[-50,32],[392,500]];
         court.ycoord_front = court.ycoord_front.map(function(item){
             return [parseInt(item[0]/coord_oriy*(canvB.height-2*bruteh)+bruteh),parseInt(item[1]/coord_oriy*(canvB.height-2*bruteh)+bruteh)];
         });
@@ -940,13 +939,18 @@ function init_court_distribution(minrally,maxrally,set,game){
         console.log(sum_dataA);
         console.log(sum_dataB);
 
+        //render middle line on courtA and courtB
+        ctxA.fillStyle = "rgb(0,0,0)";
+        ctxA.fillRect(court.xcoord_back[0][1]-2,court.ycoord_back[4][0],4,court.ycoord_back[3][1] - court.ycoord_back[4][0]);
+        ctxB.fillStyle = "rgb(0,0,0)";
+        ctxB.fillRect(court.xcoord_back[0][1]-2,court.ycoord_back[4][0],4,court.ycoord_back[3][1] - court.ycoord_back[4][0]);
+
         //render rectangle ratio area over image
         for(var i = 0;i<sum_dataA.value.length;i++){
             if (sum_dataA.value[i] != 0){
                 var ratio = (sum_dataA.value[i]/sumA).toFixed(2);
                 var idx = court.xarea.indexOf(sum_dataA.area[i].split('')[1]);
                 var idy = court.yarea.indexOf(sum_dataA.area[i].split('')[0]);
-                ctxA.fillStyle = "rgba(66,129,164," + ratio + ")";
                 var topX,topY,w,h;
                 if (set%2 == 1){
                     if (sum_dataA.area[i].split('')[0] == 'E' || sum_dataA.area[i].split('')[0] == 'F' || sum_dataA.area[i].split('')[1] == '5'){
@@ -976,8 +980,9 @@ function init_court_distribution(minrally,maxrally,set,game){
                         h = court.ycoord_front[idy][1]-court.ycoord_front[idy][0];
                     }
                 }
+                ctxA.fillStyle = "rgba(66,129,164," + ratio + ")";
                 ctxA.fillRect(topX,topY,w,h);
-                ctxA.fillStyle = "rgb(255,255,255)";
+                ctxA.fillStyle = "rgb(0,0,0)";
                 ctxA.textAlign = "center"; 
                 ctxA.textBaseline = "middle";
                 ctxA.strokeText(ratio,topX+w/2,topY+h/2);
@@ -986,7 +991,6 @@ function init_court_distribution(minrally,maxrally,set,game){
                 var ratio = (sum_dataA.selfout[i]/sumA).toFixed(2);
                 var idx = court.xarea.indexOf(sum_dataA.area[i].split('')[1]);
                 var idy = court.yarea.indexOf(sum_dataA.area[i].split('')[0]);
-                ctxA.fillStyle = "rgba(66,129,164," + ratio + ")";
                 var topX,topY,w,h;
                 if (set%2 == 1){
                     topX = court.xcoord_back[idx][0];
@@ -1000,8 +1004,9 @@ function init_court_distribution(minrally,maxrally,set,game){
                     w = court.xcoord_front[idx][1]-court.xcoord_front[idx][0];
                     h = court.ycoord_front[idy][1]-court.ycoord_front[idy][0];
                 }
+                ctxA.fillStyle = "rgba(66,129,164," + ratio + ")";
                 ctxA.fillRect(topX,topY,w,h);
-                ctxA.fillStyle = "rgb(255,255,255)";
+                ctxA.fillStyle = "rgb(0,0,0)";
                 ctxA.textAlign = "center"; 
                 ctxA.textBaseline = "middle";
                 ctxA.strokeText(ratio,topX+w/2,topY+h/2);
@@ -1013,7 +1018,6 @@ function init_court_distribution(minrally,maxrally,set,game){
                 var ratio = (sum_dataB.value[i]/sumB).toFixed(2);
                 var idx = court.xarea.indexOf(sum_dataB.area[i].split('')[1]);
                 var idy = court.yarea.indexOf(sum_dataB.area[i].split('')[0]);
-                ctxB.fillStyle = "rgba(255,99,132," + ratio + ")";
                 var topX,topY,w,h;
                 if(set%2 == 1){
                     if (sum_dataB.area[i].split('')[0] == 'E' || sum_dataB.area[i].split('')[0] == 'F' || sum_dataB.area[i].split('')[1] == '5'){
@@ -1043,8 +1047,9 @@ function init_court_distribution(minrally,maxrally,set,game){
                         h = court.ycoord_back[idy][1]-court.ycoord_back[idy][0];
                     }
                 }
+                ctxB.fillStyle = "rgba(255,99,132," + ratio + ")";
                 ctxB.fillRect(topX,topY,w,h);
-                ctxB.fillStyle = "rgb(255,255,255)";
+                ctxB.fillStyle = "rgb(0,0,0)";
                 ctxB.textAlign = "center"; 
                 ctxB.textBaseline = "middle";
                 ctxB.strokeText(ratio,topX+w/2,topY+h/2);
@@ -1053,7 +1058,6 @@ function init_court_distribution(minrally,maxrally,set,game){
                 var ratio = (sum_dataB.selfout[i]/sumB).toFixed(2);
                 var idx = court.xarea.indexOf(sum_dataB.area[i].split('')[1]);
                 var idy = court.yarea.indexOf(sum_dataB.area[i].split('')[0]);
-                ctxA.fillStyle = "rgba(66,129,164," + ratio + ")";
                 var topX,topY,w,h;
                 if (set%2 == 1){
                     topX = court.xcoord_front[idx][0];
@@ -1067,8 +1071,9 @@ function init_court_distribution(minrally,maxrally,set,game){
                     w = court.xcoord_back[idx][1]-court.xcoord_back[idx][0];
                     h = court.ycoord_back[idy][1]-court.ycoord_back[idy][0];
                 }
+                ctxA.fillStyle = "rgba(66,129,164," + ratio + ")";
                 ctxA.fillRect(topX,topY,w,h);
-                ctxA.fillStyle = "rgb(255,255,255)";
+                ctxA.fillStyle = "rgb(0,0,0)";
                 ctxA.textAlign = "center"; 
                 ctxA.textBaseline = "middle";
                 ctxA.strokeText(ratio,topX+w/2,topY+h/2);
