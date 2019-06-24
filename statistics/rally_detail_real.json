@@ -4,6 +4,7 @@
         "info":[
             {
                 "rally":1,
+                "score":"0:1",
                 "result":[
                     {
                         "order":1,
@@ -148,7 +149,13 @@
                             363,
                             347
                         ]
-                    },
+                    }
+                ]
+            },
+            {
+                "rally":1,
+                "score":"1:1",
+                "result":[
                     {
                         "order":19,
                         "detail_type":"\u672a\u64ca\u7403",
@@ -161,6 +168,7 @@
             },
             {
                 "rally":2,
+                "score":"2:2",
                 "result":[
                     {
                         "order":1,
@@ -201,7 +209,13 @@
                             151,
                             278
                         ]
-                    },
+                    }
+                ]
+            },
+            {
+                "rally":2,
+                "score":"2:3",
+                "result":[
                     {
                         "order":6,
                         "detail_type":"\u672a\u64ca\u7403",
@@ -214,6 +228,7 @@
             },
             {
                 "rally":3,
+                "score":"2:3",
                 "result":[
                     {
                         "order":1,
@@ -254,7 +269,13 @@
                             345,
                             193
                         ]
-                    },
+                    }
+                ]
+            },
+            {
+                "rally":3,
+                "score":"3:3",
+                "result":[
                     {
                         "order":6,
                         "detail_type":"\u6311\u7403",
@@ -262,7 +283,13 @@
                             123,
                             605
                         ]
-                    },
+                    }
+                ]
+            },
+            {
+                "rally":3,
+                "score":"4:3",
+                "result":[
                     {
                         "order":7,
                         "detail_type":"\u672a\u64ca\u7403",
@@ -275,6 +302,7 @@
             },
             {
                 "rally":4,
+                "score":"4:3",
                 "result":[
                     {
                         "order":1,
@@ -483,7 +511,13 @@
                             353,
                             709
                         ]
-                    },
+                    }
+                ]
+            },
+            {
+                "rally":4,
+                "score":"4:4",
+                "result":[
                     {
                         "order":27,
                         "detail_type":"\u672a\u64ca\u7403",
@@ -496,6 +530,7 @@
             },
             {
                 "rally":5,
+                "score":"5:5",
                 "result":[
                     {
                         "order":1,
@@ -688,7 +723,13 @@
                             93,
                             637
                         ]
-                    },
+                    }
+                ]
+            },
+            {
+                "rally":5,
+                "score":"5:6",
+                "result":[
                     {
                         "order":25,
                         "detail_type":"\u639b\u7db2\u7403",
@@ -701,6 +742,7 @@
             },
             {
                 "rally":6,
+                "score":"5:8",
                 "result":[
                     {
                         "order":1,
@@ -749,7 +791,13 @@
                             235,
                             24
                         ]
-                    },
+                    }
+                ]
+            },
+            {
+                "rally":6,
+                "score":"6:8",
+                "result":[
                     {
                         "order":7,
                         "detail_type":"\u639b\u7db2\u7403",
@@ -762,6 +810,7 @@
             },
             {
                 "rally":7,
+                "score":"6:8",
                 "result":[
                     {
                         "order":1,
@@ -842,7 +891,13 @@
                             342,
                             812
                         ]
-                    },
+                    }
+                ]
+            },
+            {
+                "rally":7,
+                "score":"6:9",
+                "result":[
                     {
                         "order":11,
                         "detail_type":"\u672a\u64ca\u7403",
@@ -855,6 +910,7 @@
             },
             {
                 "rally":8,
+                "score":"8:10",
                 "result":[
                     {
                         "order":1,
@@ -911,7 +967,13 @@
                             316,
                             548
                         ]
-                    },
+                    }
+                ]
+            },
+            {
+                "rally":8,
+                "score":"8:11",
+                "result":[
                     {
                         "order":8,
                         "detail_type":"\u672a\u64ca\u7403",
@@ -924,6 +986,7 @@
             },
             {
                 "rally":9,
+                "score":"8:11",
                 "result":[
                     {
                         "order":1,
@@ -972,7 +1035,13 @@
                             304,
                             257
                         ]
-                    },
+                    }
+                ]
+            },
+            {
+                "rally":9,
+                "score":"8:12",
+                "result":[
                     {
                         "order":7,
                         "detail_type":"\u672a\u64ca\u7403",
@@ -985,6 +1054,7 @@
             },
             {
                 "rally":10,
+                "score":"8:12",
                 "result":[
                     {
                         "order":1,
@@ -1073,7 +1143,13 @@
                             336,
                             561
                         ]
-                    },
+                    }
+                ]
+            },
+            {
+                "rally":10,
+                "score":"9:12",
+                "result":[
                     {
                         "order":12,
                         "detail_type":"\u672a\u64ca\u7403",
@@ -1086,6 +1162,7 @@
             },
             {
                 "rally":11,
+                "score":"11:12",
                 "result":[
                     {
                         "order":1,
@@ -1118,7 +1195,13 @@
                             53,
                             793
                         ]
-                    },
+                    }
+                ]
+            },
+            {
+                "rally":11,
+                "score":"11:13",
+                "result":[
                     {
                         "order":5,
                         "detail_type":"\u672a\u64ca\u7403",
@@ -1131,6 +1214,7 @@
             },
             {
                 "rally":12,
+                "score":"12:13",
                 "result":[
                     {
                         "order":1,
@@ -1235,7 +1319,13 @@
                             277,
                             27
                         ]
-                    },
+                    }
+                ]
+            },
+            {
+                "rally":12,
+                "score":"13:13",
+                "result":[
                     {
                         "order":14,
                         "detail_type":"\u672a\u64ca\u7403",
@@ -1248,6 +1338,7 @@
             },
             {
                 "rally":13,
+                "score":"13:13",
                 "result":[
                     {
                         "order":1,
@@ -1352,7 +1443,13 @@
                             349,
                             202
                         ]
-                    },
+                    }
+                ]
+            },
+            {
+                "rally":13,
+                "score":"13:14",
+                "result":[
                     {
                         "order":14,
                         "detail_type":"\u672a\u64ca\u7403",
@@ -1365,6 +1462,7 @@
             },
             {
                 "rally":14,
+                "score":"13:14",
                 "result":[
                     {
                         "order":1,
@@ -1445,7 +1543,13 @@
                             132,
                             40
                         ]
-                    },
+                    }
+                ]
+            },
+            {
+                "rally":14,
+                "score":"14:14",
+                "result":[
                     {
                         "order":11,
                         "detail_type":"\u672a\u904e\u7db2",
@@ -1458,6 +1562,7 @@
             },
             {
                 "rally":15,
+                "score":"14:14",
                 "result":[
                     {
                         "order":1,
@@ -1522,7 +1627,13 @@
                             132,
                             753
                         ]
-                    },
+                    }
+                ]
+            },
+            {
+                "rally":15,
+                "score":"14:15",
+                "result":[
                     {
                         "order":9,
                         "detail_type":"\u672a\u64ca\u7403",
@@ -1535,6 +1646,7 @@
             },
             {
                 "rally":16,
+                "score":"14:15",
                 "result":[
                     {
                         "order":1,
@@ -1599,7 +1711,13 @@
                             334,
                             356
                         ]
-                    },
+                    }
+                ]
+            },
+            {
+                "rally":16,
+                "score":"15:15",
+                "result":[
                     {
                         "order":9,
                         "detail_type":"\u672a\u64ca\u7403",
@@ -1612,6 +1730,7 @@
             },
             {
                 "rally":17,
+                "score":"16:15",
                 "result":[
                     {
                         "order":1,
@@ -1692,7 +1811,13 @@
                             98,
                             769
                         ]
-                    },
+                    }
+                ]
+            },
+            {
+                "rally":17,
+                "score":"16:16",
+                "result":[
                     {
                         "order":11,
                         "detail_type":"\u672a\u64ca\u7403",
@@ -1705,6 +1830,7 @@
             },
             {
                 "rally":18,
+                "score":"17:16",
                 "result":[
                     {
                         "order":1,
@@ -1825,7 +1951,13 @@
                             312,
                             24
                         ]
-                    },
+                    }
+                ]
+            },
+            {
+                "rally":18,
+                "score":"17:17",
+                "result":[
                     {
                         "order":16,
                         "detail_type":"\u672a\u64ca\u7403",
@@ -1838,6 +1970,7 @@
             },
             {
                 "rally":19,
+                "score":"17:17",
                 "result":[
                     {
                         "order":1,
@@ -1942,7 +2075,13 @@
                             74,
                             562
                         ]
-                    },
+                    }
+                ]
+            },
+            {
+                "rally":19,
+                "score":"18:17",
+                "result":[
                     {
                         "order":14,
                         "detail_type":"\u672a\u64ca\u7403",
@@ -1955,6 +2094,7 @@
             },
             {
                 "rally":20,
+                "score":"18:18",
                 "result":[
                     {
                         "order":1,
@@ -2035,7 +2175,13 @@
                             128,
                             86
                         ]
-                    },
+                    }
+                ]
+            },
+            {
+                "rally":20,
+                "score":"19:18",
+                "result":[
                     {
                         "order":11,
                         "detail_type":"\u672a\u904e\u7db2",
@@ -2048,6 +2194,7 @@
             },
             {
                 "rally":21,
+                "score":"19:18",
                 "result":[
                     {
                         "order":1,
@@ -2192,7 +2339,13 @@
                             344,
                             903
                         ]
-                    },
+                    }
+                ]
+            },
+            {
+                "rally":21,
+                "score":"19:19",
+                "result":[
                     {
                         "order":19,
                         "detail_type":"\u672a\u64ca\u7403",
@@ -2205,6 +2358,7 @@
             },
             {
                 "rally":22,
+                "score":"19:19",
                 "result":[
                     {
                         "order":1,
@@ -2253,7 +2407,13 @@
                             88,
                             170
                         ]
-                    },
+                    }
+                ]
+            },
+            {
+                "rally":22,
+                "score":"20:19",
+                "result":[
                     {
                         "order":7,
                         "detail_type":"\u672a\u64ca\u7403",
@@ -2266,6 +2426,7 @@
             },
             {
                 "rally":23,
+                "score":"20:20",
                 "result":[
                     {
                         "order":1,
@@ -2362,7 +2523,13 @@
                             342,
                             68
                         ]
-                    },
+                    }
+                ]
+            },
+            {
+                "rally":23,
+                "score":"20:21",
+                "result":[
                     {
                         "order":13,
                         "detail_type":"\u672a\u64ca\u7403",
@@ -2375,6 +2542,7 @@
             },
             {
                 "rally":24,
+                "score":"20:21",
                 "result":[
                     {
                         "order":1,
@@ -2463,7 +2631,13 @@
                             195,
                             751
                         ]
-                    },
+                    }
+                ]
+            },
+            {
+                "rally":24,
+                "score":"21:21",
+                "result":[
                     {
                         "order":12,
                         "detail_type":"\u672a\u64ca\u7403",
@@ -2476,6 +2650,7 @@
             },
             {
                 "rally":25,
+                "score":"21:22",
                 "result":[
                     {
                         "order":1,
@@ -2508,7 +2683,13 @@
                             165,
                             26
                         ]
-                    },
+                    }
+                ]
+            },
+            {
+                "rally":25,
+                "score":"21:23",
+                "result":[
                     {
                         "order":5,
                         "detail_type":"\u672a\u64ca\u7403",
@@ -2526,6 +2707,7 @@
         "info":[
             {
                 "rally":1,
+                "score":"1:0",
                 "result":[
                     {
                         "order":1,
@@ -2630,7 +2812,13 @@
                             145,
                             561
                         ]
-                    },
+                    }
+                ]
+            },
+            {
+                "rally":1,
+                "score":"2:0",
+                "result":[
                     {
                         "order":14,
                         "detail_type":"\u672a\u64ca\u7403",
@@ -2643,6 +2831,7 @@
             },
             {
                 "rally":2,
+                "score":"5:0",
                 "result":[
                     {
                         "order":1,
@@ -2731,7 +2920,13 @@
                             340,
                             660
                         ]
-                    },
+                    }
+                ]
+            },
+            {
+                "rally":2,
+                "score":"6:0",
+                "result":[
                     {
                         "order":12,
                         "detail_type":"\u672a\u64ca\u7403",
@@ -2744,6 +2939,7 @@
             },
             {
                 "rally":3,
+                "score":"6:0",
                 "result":[
                     {
                         "order":1,
@@ -2848,7 +3044,13 @@
                             128,
                             540
                         ]
-                    },
+                    }
+                ]
+            },
+            {
+                "rally":3,
+                "score":"6:1",
+                "result":[
                     {
                         "order":14,
                         "detail_type":"\u672a\u64ca\u7403",
@@ -2861,6 +3063,7 @@
             },
             {
                 "rally":4,
+                "score":"6:2",
                 "result":[
                     {
                         "order":1,
@@ -2925,7 +3128,13 @@
                             282,
                             594
                         ]
-                    },
+                    }
+                ]
+            },
+            {
+                "rally":4,
+                "score":"6:3",
+                "result":[
                     {
                         "order":9,
                         "detail_type":"\u672a\u64ca\u7403",
@@ -2938,6 +3147,7 @@
             },
             {
                 "rally":5,
+                "score":"7:3",
                 "result":[
                     {
                         "order":1,
@@ -3010,7 +3220,13 @@
                             114,
                             809
                         ]
-                    },
+                    }
+                ]
+            },
+            {
+                "rally":5,
+                "score":"8:3",
+                "result":[
                     {
                         "order":10,
                         "detail_type":"\u672a\u64ca\u7403",
@@ -3023,6 +3239,7 @@
             },
             {
                 "rally":6,
+                "score":"9:6",
                 "result":[
                     {
                         "order":1,
@@ -3183,7 +3400,13 @@
                             377,
                             662
                         ]
-                    },
+                    }
+                ]
+            },
+            {
+                "rally":6,
+                "score":"9:7",
+                "result":[
                     {
                         "order":21,
                         "detail_type":"\u672a\u64ca\u7403",
@@ -3196,6 +3419,7 @@
             },
             {
                 "rally":7,
+                "score":"9:7",
                 "result":[
                     {
                         "order":1,
@@ -3268,7 +3492,13 @@
                             334,
                             62
                         ]
-                    },
+                    }
+                ]
+            },
+            {
+                "rally":7,
+                "score":"9:8",
+                "result":[
                     {
                         "order":10,
                         "detail_type":"\u672a\u64ca\u7403",
@@ -3281,6 +3511,7 @@
             },
             {
                 "rally":8,
+                "score":"10:8",
                 "result":[
                     {
                         "order":1,
@@ -3377,7 +3608,13 @@
                             123,
                             343
                         ]
-                    },
+                    }
+                ]
+            },
+            {
+                "rally":8,
+                "score":"10:9",
+                "result":[
                     {
                         "order":13,
                         "detail_type":"\u672a\u904e\u7db2",
@@ -3390,6 +3627,29 @@
             },
             {
                 "rally":9,
+                "score":"10:10",
+                "result":[
+                    {
+                        "order":12,
+                        "detail_type":"\u6311\u7403",
+                        "detail_hit_pos":[
+                            139,
+                            544
+                        ]
+                    },
+                    {
+                        "order":13,
+                        "detail_type":"\u672a\u64ca\u7403",
+                        "detail_hit_pos":[
+                            145,
+                            -49
+                        ]
+                    }
+                ]
+            },
+            {
+                "rally":9,
+                "score":"10:9",
                 "result":[
                     {
                         "order":1,
@@ -3478,27 +3738,12 @@
                             192,
                             121
                         ]
-                    },
-                    {
-                        "order":12,
-                        "detail_type":"\u6311\u7403",
-                        "detail_hit_pos":[
-                            139,
-                            544
-                        ]
-                    },
-                    {
-                        "order":13,
-                        "detail_type":"\u672a\u64ca\u7403",
-                        "detail_hit_pos":[
-                            145,
-                            -49
-                        ]
                     }
                 ]
             },
             {
                 "rally":10,
+                "score":"10:10",
                 "result":[
                     {
                         "order":1,
@@ -3531,7 +3776,13 @@
                             110,
                             576
                         ]
-                    },
+                    }
+                ]
+            },
+            {
+                "rally":10,
+                "score":"11:10",
+                "result":[
                     {
                         "order":5,
                         "detail_type":"\u672a\u64ca\u7403",
@@ -3544,6 +3795,7 @@
             },
             {
                 "rally":11,
+                "score":"12:10",
                 "result":[
                     {
                         "order":1,
@@ -3736,7 +3988,13 @@
                             74,
                             371
                         ]
-                    },
+                    }
+                ]
+            },
+            {
+                "rally":11,
+                "score":"12:11",
+                "result":[
                     {
                         "order":25,
                         "detail_type":"\u672a\u904e\u7db2",
@@ -3749,6 +4007,7 @@
             },
             {
                 "rally":12,
+                "score":"12:11",
                 "result":[
                     {
                         "order":1,
@@ -3845,7 +4104,13 @@
                             338,
                             807
                         ]
-                    },
+                    }
+                ]
+            },
+            {
+                "rally":12,
+                "score":"13:11",
+                "result":[
                     {
                         "order":13,
                         "detail_type":"\u672a\u64ca\u7403",
@@ -3858,6 +4123,7 @@
             },
             {
                 "rally":13,
+                "score":"13:11",
                 "result":[
                     {
                         "order":1,
@@ -4050,7 +4316,13 @@
                             304,
                             414
                         ]
-                    },
+                    }
+                ]
+            },
+            {
+                "rally":13,
+                "score":"13:12",
+                "result":[
                     {
                         "order":25,
                         "detail_type":"\u672a\u64ca\u7403",
@@ -4063,6 +4335,7 @@
             },
             {
                 "rally":14,
+                "score":"13:12",
                 "result":[
                     {
                         "order":1,
@@ -4103,7 +4376,13 @@
                             102,
                             365
                         ]
-                    },
+                    }
+                ]
+            },
+            {
+                "rally":14,
+                "score":"13:13",
+                "result":[
                     {
                         "order":6,
                         "detail_type":"\u6311\u7403",
