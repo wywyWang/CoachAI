@@ -1185,6 +1185,7 @@ function get_interval_set(game){
 
     $.getJSON(filename, function(data) {
         //find max set
+        console.log(data)
         var maximum = 0;
         for (var i=0 ; i<data.length ; i++) {
             if (data[i].set > maximum)
@@ -1212,6 +1213,7 @@ function get_interval_updown(set,game){
     filename = 'statistics/rally_count_real' + game_name + '.json';
 
     $.getJSON(filename, function(data) {
+        console.log(data)
         //init set
         if (!set){
             set = 1;
@@ -1225,9 +1227,10 @@ function get_interval_updown(set,game){
         maximum = Math.max.apply(Math, data.map(function(d) { 
             return d.rally;
         }));  
-        for(var i=1;i<=maximum;i+=1)
+        for(var i=0;i<maximum;i+=1)
         {
-            var insertText = '<option value='+i+'>'+i+'</option>';
+            var score = data[i].score;
+            var insertText = '<option value=' + (i+1) + '>' + score + '</option>';
             $('#down').append(insertText); 
             $('#up').append(insertText); 
         }
