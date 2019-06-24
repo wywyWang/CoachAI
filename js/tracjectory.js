@@ -72,6 +72,7 @@ function init_tracjectory(set){
     var canvas = document.getElementById('canvas');
     var ctx = canvas.getContext('2d');
     var i=0;
+    var total_y_length=424;
     ctx.clearRect(100,100,935,424);
     game_name = '_2019亞錦賽-周天成VS石宇奇';
     filename = 'statistics/rally_detail_real' + game_name + '.json';
@@ -136,7 +137,7 @@ function init_tracjectory(set){
         initial();
         ctx.lineWidth = 3;
         ctx.beginPath();
-        ctx.arc(data[0].detail_hit_pos[1]+100,data[0].detail_hit_pos[0]+100,5,0,Math.PI*2,true);
+        ctx.arc(data[0].detail_hit_pos[1]+100,total_y_length-data[0].detail_hit_pos[0]+100,5,0,Math.PI*2,true);
         ctx.strokeStyle = "black";
         ctx.closePath();
         ctx.stroke();
@@ -152,13 +153,13 @@ function init_tracjectory(set){
                     ctx.lineWidth = 3;
                     for(var j=0;j<i-2;j++) {
                         ctx.beginPath();
-                        ctx.arc(data[j].detail_hit_pos[1]+100,data[j].detail_hit_pos[0]+100,5,0,Math.PI*2,true);
+                        ctx.arc(data[j].detail_hit_pos[1]+100,total_y_length-data[j].detail_hit_pos[0]+100,5,0,Math.PI*2,true);
                         ctx.strokeStyle = "rgb(229, 226, 222)";
                         ctx.closePath();
                         ctx.stroke();
                         ctx.beginPath();
-                        ctx.moveTo(data[j].detail_hit_pos[1]+100,data[j].detail_hit_pos[0]+100);
-                        ctx.lineTo(data[j+1].detail_hit_pos[1]+100,data[j+1].detail_hit_pos[0]+100);
+                        ctx.moveTo(data[j].detail_hit_pos[1]+100,total_y_length-data[j].detail_hit_pos[0]+100);
+                        ctx.lineTo(data[j+1].detail_hit_pos[1]+100,total_y_length-data[j+1].detail_hit_pos[0]+100);
                         ctx.strokeStyle = "rgb(229, 226, 222)";
                         ctx.closePath();
                         ctx.stroke();
@@ -166,13 +167,13 @@ function init_tracjectory(set){
                     //normal
                     for(var j=i-2;j<i+1;j++) {
                         ctx.beginPath();
-                        ctx.arc(data[j].detail_hit_pos[1]+100,data[j].detail_hit_pos[0]+100,5,0,Math.PI*2,true);
+                        ctx.arc(data[j].detail_hit_pos[1]+100,total_y_length-data[j].detail_hit_pos[0]+100,5,0,Math.PI*2,true);
                         ctx.strokeStyle = "black";
                         ctx.closePath();
                         ctx.stroke();
                         ctx.beginPath();
-                        ctx.moveTo(data[j].detail_hit_pos[1]+100,data[j].detail_hit_pos[0]+100);
-                        ctx.lineTo(data[j+1].detail_hit_pos[1]+100,data[j+1].detail_hit_pos[0]+100);
+                        ctx.moveTo(data[j].detail_hit_pos[1]+100,total_y_length-data[j].detail_hit_pos[0]+100);
+                        ctx.lineTo(data[j+1].detail_hit_pos[1]+100,total_y_length-data[j+1].detail_hit_pos[0]+100);
                         if(j==i-2){
                             ctx.strokeStyle = "rgb(252, 133, 133)";
                         }
@@ -186,7 +187,7 @@ function init_tracjectory(set){
                         ctx.stroke();
                     }
                     ctx.beginPath();
-                    ctx.arc(data[i+1].detail_hit_pos[1]+100,data[i+1].detail_hit_pos[0]+100,5,0,Math.PI*2,true);
+                    ctx.arc(data[i+1].detail_hit_pos[1]+100,total_y_length-data[i+1].detail_hit_pos[0]+100,5,0,Math.PI*2,true);
                     ctx.strokeStyle = "black";
                     ctx.closePath();
                     ctx.stroke();
@@ -199,19 +200,19 @@ function init_tracjectory(set){
                     initial();
                     ctx.lineWidth = 3;
                     ctx.beginPath();
-                    ctx.arc(data[0].detail_hit_pos[1]+100,data[0].detail_hit_pos[0]+100,5,0,Math.PI*2,true);
+                    ctx.arc(data[0].detail_hit_pos[1]+100,total_y_length-data[0].detail_hit_pos[0]+100,5,0,Math.PI*2,true);
                     ctx.strokeStyle = "black";
                     ctx.closePath();
                     ctx.stroke();
                     for(var j=i+1;j>0;j--) {
                         ctx.beginPath();
-                        ctx.arc(data[j].detail_hit_pos[1]+100,data[j].detail_hit_pos[0]+100,5,0,Math.PI*2,true);
+                        ctx.arc(data[j].detail_hit_pos[1]+100,total_y_length-data[j].detail_hit_pos[0]+100,5,0,Math.PI*2,true);
                         ctx.strokeStyle = "black";
                         ctx.closePath();
                         ctx.stroke();
                         ctx.beginPath();
-                        ctx.moveTo(data[j].detail_hit_pos[1]+100,data[j].detail_hit_pos[0]+100);
-                        ctx.lineTo(data[j-1].detail_hit_pos[1]+100,data[j-1].detail_hit_pos[0]+100);
+                        ctx.moveTo(data[j].detail_hit_pos[1]+100,total_y_length-data[j].detail_hit_pos[0]+100);
+                        ctx.lineTo(data[j-1].detail_hit_pos[1]+100,total_y_length-data[j-1].detail_hit_pos[0]+100);
                         if(j==i-1){
                             ctx.strokeStyle = "rgb(252, 133, 133)";
                         }
@@ -247,13 +248,13 @@ function init_tracjectory(set){
                 //faded
                 for(var j=0;j<i-4;j++) {
                     ctx.beginPath();
-                    ctx.arc(data[j].detail_hit_pos[1]+100,data[j].detail_hit_pos[0]+100,5,0,Math.PI*2,true);
+                    ctx.arc(data[j].detail_hit_pos[1]+100,total_y_length-data[j].detail_hit_pos[0]+100,5,0,Math.PI*2,true);
                     ctx.strokeStyle = "rgb(229, 226, 222)";
                     ctx.closePath();
                     ctx.stroke();
                     ctx.beginPath();
-                    ctx.moveTo(data[j].detail_hit_pos[1]+100,data[j].detail_hit_pos[0]+100);
-                    ctx.lineTo(data[j+1].detail_hit_pos[1]+100,data[j+1].detail_hit_pos[0]+100);
+                    ctx.moveTo(data[j].detail_hit_pos[1]+100,total_y_length-data[j].detail_hit_pos[0]+100);
+                    ctx.lineTo(data[j+1].detail_hit_pos[1]+100,total_y_length-data[j+1].detail_hit_pos[0]+100);
                     ctx.strokeStyle = "rgb(229, 226, 222)";
                     ctx.closePath();
                     ctx.stroke();
@@ -261,13 +262,13 @@ function init_tracjectory(set){
                 //normal
                 for(var j=i-4;j<i-1;j++) {
                     ctx.beginPath();
-                    ctx.arc(data[j].detail_hit_pos[1]+100,data[j].detail_hit_pos[0]+100,5,0,Math.PI*2,true);
+                    ctx.arc(data[j].detail_hit_pos[1]+100,total_y_length-data[j].detail_hit_pos[0]+100,5,0,Math.PI*2,true);
                     ctx.strokeStyle = "black";
                     ctx.closePath();
                     ctx.stroke();
                     ctx.beginPath();
-                    ctx.moveTo(data[j+1].detail_hit_pos[1]+100,data[j+1].detail_hit_pos[0]+100);
-                    ctx.lineTo(data[j].detail_hit_pos[1]+100,data[j].detail_hit_pos[0]+100);
+                    ctx.moveTo(data[j+1].detail_hit_pos[1]+100,total_y_length-data[j+1].detail_hit_pos[0]+100);
+                    ctx.lineTo(data[j].detail_hit_pos[1]+100,total_y_length-data[j].detail_hit_pos[0]+100);
                     if(j==i-4){
                         ctx.strokeStyle = "rgb(252, 133, 133)";
                     }
@@ -282,27 +283,27 @@ function init_tracjectory(set){
                     ctx.stroke();
                 }
                 ctx.beginPath();
-                ctx.arc(data[i-1].detail_hit_pos[1]+100,data[i-1].detail_hit_pos[0]+100,5,0,Math.PI*2,true);
+                ctx.arc(data[i-1].detail_hit_pos[1]+100,total_y_length-data[i-1].detail_hit_pos[0]+100,5,0,Math.PI*2,true);
                 ctx.strokeStyle = "black";
                 ctx.closePath();
                 ctx.stroke();
             }
             else {
                 ctx.beginPath();
-                ctx.arc(data[0].detail_hit_pos[1]+100,data[0].detail_hit_pos[0]+100,5,0,Math.PI*2,true);
+                ctx.arc(data[0].detail_hit_pos[1]+100,total_y_length-data[0].detail_hit_pos[0]+100,5,0,Math.PI*2,true);
                 ctx.strokeStyle = "black";
                 ctx.closePath();
                 ctx.stroke();
 
                 for(var j=i-1;j>=1;j--) {
                     ctx.beginPath();
-                    ctx.arc(data[j].detail_hit_pos[1]+100,data[j].detail_hit_pos[0]+100,5,0,Math.PI*2,true);
+                    ctx.arc(data[j].detail_hit_pos[1]+100,total_y_length-data[j].detail_hit_pos[0]+100,5,0,Math.PI*2,true);
                     ctx.strokeStyle = "black";
                     ctx.closePath();
                     ctx.stroke();
                     ctx.beginPath();
-                    ctx.moveTo(data[j].detail_hit_pos[1]+100,data[j].detail_hit_pos[0]+100);
-                    ctx.lineTo(data[j-1].detail_hit_pos[1]+100,data[j-1].detail_hit_pos[0]+100);
+                    ctx.moveTo(data[j].detail_hit_pos[1]+100,total_y_length-data[j].detail_hit_pos[0]+100);
+                    ctx.lineTo(data[j-1].detail_hit_pos[1]+100,total_y_length-data[j-1].detail_hit_pos[0]+100);
                     if(j==i-3){
                         ctx.strokeStyle = "rgb(252, 133, 133)";
                     }
