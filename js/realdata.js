@@ -104,7 +104,6 @@ function init_linechart(minrally,maxrally,set,game){
         var datainterval = [];
         var dataup = [];
         for (var i = 0;i<data.length;i++){
-            // console.log(data[i])
             if (data[i].rally < minrally){
                 datadown.push(data[i].stroke);
                 datainterval.push(null);
@@ -131,7 +130,6 @@ function init_linechart(minrally,maxrally,set,game){
                     datainterval.push(data[i].stroke);
                     dataup.push(null);
                 }
-                
             }
                 
             if (data[i].rally < minrally || data[i].rally > maxrally)
@@ -142,45 +140,164 @@ function init_linechart(minrally,maxrally,set,game){
                 pointcolor.push("rgb(255,99,132)");
         }
 
+        // for (var i = 0;i<data.length;) {
+        //     if (data[i].rally < minrally || data[i].rally >= maxrally) {
+        //         pointcolor.push("rgb(216, 212, 212)");
+        //         i+=1;
+        //         continue;
+        //     }
+        //     var count=0;
+        //     while(data[i+count].winner=='A'){
+        //         count+=1;
+        //         if(i+count>=data.length){
+        //             break;
+        //         }
+        //     }
+        //     if(count!=0){
+        //         for(var j=0;j<count;j++){
+        //             pointcolor.push("rgba(66, 129, 164, "+0.2*count*count+")");
+        //         }
+        //         i+=count;
+        //         continue;
+        //     }
+        //     count=0;
+        //     while(data[i+count].winner=='B'){
+        //         count+=1;
+        //         if(i+count>=data.length){
+        //             break;
+        //         }
+        //     }
+        //     if(count!=0){
+        //         for(var j=0;j<count;j++){
+        //             pointcolor.push("rgba(255, 99, 132, "+0.2*count*count+")");
+        //         }
+        //         i+=count;
+        //         continue;
+        //     }
+        // }
+        var segment_data=[];
+        var consec_point=[];
+        for (var i = 0;i<data.length-1;) {
+            var point_data=[];
+            if (data[i].rally < minrally || data[i].rally >= maxrally) {
+                i+=1;
+                continue;
+            }
+            if(i==data.length-2){
+                point_data.push(i);
+                point_data.push(i+1);
+                segment_data.push(point_data);
+                break;
+            }
+            
+            if(data[i].winner==data[i+1].winner){
+                consec_point.push(i);
+                while(data[i].winner==data[i+1].winner){
+                    if(i>=data.length-2){
+                        point_data.push(i);
+                        i+=1;
+                        break;
+                    }
+                    point_data.push(i);
+                    i+=1;
+                }
+                point_data.push(i);
+            }
+            else if(data[i].winner!=data[i+1].winner){
+                while(data[i].winner!=data[i+1].winner){
+                    if(i>=data.length-2){
+                        point_data.push(i);
+                        i+=1;
+                        break;
+                    }
+                    point_data.push(i);
+                    i+=1;
+                }
+                point_data.push(i);
+            }
+            segment_data.push(point_data);
+            if(i==data.length-1){
+                break;
+            }
+        }
+        var final_data=new Array();
+        for (var i = 0;i<data.length;i++) {
+            final_data[i]=new Array();
+        }
+        for (var i = 0;i<segment_data.length;i++) {
+            for(var j = 0;j<data.length;j++){
+                var match=0;
+                for(var k=0;k<segment_data[i].length;k++){
+                    if(j==segment_data[i][k]){
+                        match=1;
+                        break;
+                    }
+                }
+                if(match==1){
+                    final_data[i].push(data[j].stroke);
+                }
+                else{
+                    final_data[i].push(null);
+                }                   
+            }
+        }
+        var present_data=[];
+        for (var i = 0;i<segment_data.length;i++) {
+            var linecolor;
+            for(var j=0;j<consec_point.length;j++){
+                if(segment_data[i][0]==consec_point[j]){
+                    linecolor="rgba(0,255,0,"+segment_data[i].length*0.2+")";
+                    //"rgb("+(255-segment_data[i].length*10)+","+(236-segment_data[i].length*10)+","+(203-segment_data[i].length*10)+")";
+                    break;
+                }
+                else{
+                    linecolor="rgb(255, 236, 203)";
+                }
+            }
+            
+            present_data.push({fill: false,
+                        cubicInterpolationMode:"monotone",
+                        backgroundColor: "rgba(66,129,164,0.2)",
+                        borderColor: linecolor,
+                        pointBorderColor: "#fff",
+                        pointBackgroundColor:pointcolor,
+                        pointRadius: 4,
+                        pointHoverRadius: 6,
+                        data: final_data[i]});
+        }
+        var datatotal=[
+                        {
+                            fill: false,
+                            cubicInterpolationMode:"monotone",
+                            backgroundColor: "rgba(66,129,164,0.2)",
+                            borderColor: "rgba(216, 212, 212, 0.5)",
+                            pointBorderColor: "#fff",
+                            pointBackgroundColor:pointcolor,
+                            pointRadius: 4,
+                            pointHoverRadius: 6,
+                            data: datadown
+                        }
+                      ];
+        for(var i=0;i<segment_data.length;i++){
+            datatotal.push(present_data[i]);
+        }
+        datatotal.push({
+                            fill: false,
+                            cubicInterpolationMode:"monotone",
+                            backgroundColor: "rgba(66,129,164,0.2)",
+                            borderColor: "rgba(216, 212, 212, 0.5)",
+                            pointBorderColor: "#fff",
+                            pointBackgroundColor:pointcolor,
+                            pointRadius: 4,
+                            pointHoverRadius: 6,
+                            data: dataup
+                        });
+
         var chart = new Chart(chartRadarDOM, {
             type: 'line',
             data:{
                 labels: labels,
-                datasets: [
-                    {
-                        fill: false,
-                        cubicInterpolationMode:"monotone",
-                        backgroundColor: "rgba(66,129,164,0.2)",
-                        borderColor: "rgb(216, 212, 212)",
-                        pointBorderColor: "#fff",
-                        pointBackgroundColor:pointcolor,
-                        pointRadius: 4,
-                        pointHoverRadius: 6,
-                        data: datadown
-                    },
-                    {
-                        fill: false,
-                        cubicInterpolationMode:"monotone",
-                        backgroundColor: "rgba(66,129,164,0.2)",
-                        borderColor: "rgb(255, 210, 136)",
-                        pointBorderColor: "#fff",
-                        pointBackgroundColor:pointcolor,
-                        pointRadius: 4,
-                        pointHoverRadius: 6,
-                        data: datainterval
-                    },
-                    {
-                        fill: false,
-                        cubicInterpolationMode:"monotone",
-                        backgroundColor: "rgba(66,129,164,0.2)",
-                        borderColor: "rgb(216, 212, 212)",
-                        pointBorderColor: "#fff",
-                        pointBackgroundColor:pointcolor,
-                        pointRadius: 4,
-                        pointHoverRadius: 6,
-                        data: dataup
-                    }
-                ]
+                datasets:datatotal
             },
             options: chartRadarOptions
         });
