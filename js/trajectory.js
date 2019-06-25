@@ -14,7 +14,7 @@ function change_rally(){
     $('#back').remove();
     $('#canvas').remove();
     get_interval_rally(set);
-    init_tracjectory(set);
+    init_trajectory(set);
 }
 
 function get_interval_set(){
@@ -62,8 +62,8 @@ function get_interval_rally(set){
     })
 }
 
-function init_tracjectory(set){
-    $('.ball_tracjectory').html('<div class="row">\
+function init_trajectory(set){
+    $('.ball_trajectory').html('<div class="row">\
                                 <button class="btn" id="next" type="button">下一球</button>\
                                 <button class="btn" id="back" type="button">上一球</button>\
                                 </div>\
