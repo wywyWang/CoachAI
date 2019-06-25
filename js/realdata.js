@@ -140,41 +140,6 @@ function init_linechart(minrally,maxrally,set,game){
                 pointcolor.push("rgb(255,99,132)");
         }
 
-        // for (var i = 0;i<data.length;) {
-        //     if (data[i].rally < minrally || data[i].rally >= maxrally) {
-        //         pointcolor.push("rgb(216, 212, 212)");
-        //         i+=1;
-        //         continue;
-        //     }
-        //     var count=0;
-        //     while(data[i+count].winner=='A'){
-        //         count+=1;
-        //         if(i+count>=data.length){
-        //             break;
-        //         }
-        //     }
-        //     if(count!=0){
-        //         for(var j=0;j<count;j++){
-        //             pointcolor.push("rgba(66, 129, 164, "+0.2*count*count+")");
-        //         }
-        //         i+=count;
-        //         continue;
-        //     }
-        //     count=0;
-        //     while(data[i+count].winner=='B'){
-        //         count+=1;
-        //         if(i+count>=data.length){
-        //             break;
-        //         }
-        //     }
-        //     if(count!=0){
-        //         for(var j=0;j<count;j++){
-        //             pointcolor.push("rgba(255, 99, 132, "+0.2*count*count+")");
-        //         }
-        //         i+=count;
-        //         continue;
-        //     }
-        // }
         var segment_data=[];
         var consec_point=[];
         for (var i = 0;i<data.length-1;) {
@@ -1307,7 +1272,6 @@ function get_interval_set(game){
 
     $.getJSON(filename, function(data) {
         //find max set
-        console.log(data)
         var maximum = 0;
         for (var i=0 ; i<data.length ; i++) {
             if (data[i].set > maximum)
@@ -1335,7 +1299,6 @@ function get_interval_updown(set,game){
     filename = 'statistics/rally_count_real' + game_name + '.json';
 
     $.getJSON(filename, function(data) {
-        console.log(data)
         //init set
         if (!set){
             set = 1;
