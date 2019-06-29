@@ -8,17 +8,17 @@ def readData():
     dupl=[]
     df_complete = df[0:numFrame]
 
-    i=0
     # Prune unseen frames
     df = df[df.Visibility == 1].reset_index(drop=True)
 
-    while i < len(df) :
+    init=0
+    while init < len(df) :
         dupl+=[0]
-        i+=1
-    i=0
-
+        init+=1
     df['Dup']=dupl
 
+    #record consecutive frame 
+    i=0
     while i < len(df)-4:
         if df['X'][i]==df['X'][i+1] and df['Y'][i]==df['Y'][i+1] and df['X'][i]==df['X'][i+2] and df['Y'][i]==df['Y'][i+2] and df['X'][i]==df['X'][i+3] and df['Y'][i]==df['Y'][i+3] and df['X'][i]==df['X'][i+4] and df['Y'][i]==df['Y'][i+4]:
             df['Dup'][i]=1
@@ -97,6 +97,7 @@ def segmentation(df):
             if ans[0]<1100 and ans[0]>df["X"][i] :
                 count+=1
 
+            #in court condition will probably be hitpoint
             if count==2 :
                 if (df['vecX'][i]**2+df['vecY'][i]**2+df['vecX'][i+1]**2+df['vecY'][i+1]**2+df['vecX'][i+2]**2+df['vecY'][i+2]**2)>=50:
                     # Calculate vector change in X
@@ -107,7 +108,6 @@ def segmentation(df):
                             pass
                         else:
                             hitpoint[i] = 1
-
 
                     # Calculate vector change in Y
                     if abs(df['vecY'][i]-df['vecY'][i-1]) >= 8 :
@@ -180,9 +180,9 @@ def on_off_court(df):
     court_top_right_x=835
     court_top_right_y=319
     court_down_left_x=358
-    court_down_left_y=678
+    court_down_left_y=680
     court_down_right_x=967
-    court_down_right_y=678
+    court_down_right_y=680
 
     small_court_top_left_x=450
     small_court_top_left_y=427
@@ -227,16 +227,17 @@ def on_off_court(df):
                     on_off_court += [2]
                     continue
                                 
-                    
-            if df["Y"][i-7] > court_top_right_y and df["Y"][i-7] < court_down_right_y :
+            thr = 7
+            
+            if df["Y"][i-thr] > court_top_right_y and df["Y"][i-thr] < court_down_right_y :
                 point_x=100
-                point_y=df["Y"][i-7]
+                point_y=df["Y"][i-thr]
                 m1 = (court_down_left_y - court_top_left_y)/(court_down_left_x - court_top_left_x)
                 a = np.array([[0,1],[m1,-1]])
                 b = np.array([point_y,-(court_top_left_y-m1*court_top_left_x)])
                 ans=np.linalg.solve(a,b)
                 
-                if ans[0]>100 and ans[0]<df["X"][i-7] :
+                if ans[0]>100 and ans[0]<df["X"][i-thr] :
                     count+=1
                     
                 point_x=1000
@@ -245,7 +246,7 @@ def on_off_court(df):
                 b = np.array([point_y,-(court_top_right_y-m2*court_top_right_x)])
                 ans=np.linalg.solve(a,b)
                 
-                if ans[0]<1000 and ans[0]>df["X"][i-7] :
+                if ans[0]<1000 and ans[0]>df["X"][i-thr] :
                     count+=1
                 
                 if count == 2 :
@@ -255,11 +256,6 @@ def on_off_court(df):
             
         count=0
 
-    #preprocessing to json
-    idx = [_+1 for _ in range(len(on_off_court))]
-    on_off_court_json = {'rally' : idx,'on_off_court' : on_off_court}
-    on_off_court_json = pd.DataFrame(on_off_court_json)
-
     on_off_court = {'on_off_court' : on_off_court}
     on_off_court = pd.DataFrame(on_off_court)
 
@@ -267,7 +263,6 @@ def on_off_court(df):
     name = 'In Field', 'Out Field', 'On Net'
     plt.pie(on_off_court.groupby('on_off_court').size(), labels = name, autopct = make_autopct(on_off_court.groupby('on_off_court').size()), radius = 2, shadow = True, startangle=90, textprops={'fontsize': 14})
     plt.savefig('../Data/Statistics/Loss_reason.jpg', pad_inches = 0.5, transparent=True, bbox_inches = 'tight')
-    export_json('../Data/Statistics/on_off_court.json',on_off_court_json)
 
     #judge score
     scoreA = [0 for _ in range(len(df))]
@@ -277,24 +272,51 @@ def on_off_court(df):
     scoreBtmp = 0
 
     index = 0
+    sets = 1
 
     for i in range(len(df)) :
+        #because rally 29 and last rally are accidentally missed in before,so forced the answer in here
+        if index==28 and df['Frame'][i]==13300:
+            scoreBtmp+=1
+            who_wins+='B'
+            scoreA[i] = scoreAtmp
+            scoreB[i] = scoreBtmp
+            continue
+        if i+thr <len(df):
+            thr = 7
+        else:
+            thr = 0
         if index == 25 :
             scoreAtmp = 0
             scoreBtmp = 0
-        if df['end'][i] == 1:
-            if on_off_court['on_off_court'][index] == 0 and df['Y'][i] < 450 :
-                scoreAtmp+=1
-                who_wins+='A'
-            if (on_off_court['on_off_court'][index] == 1 or on_off_court['on_off_court'][index] == 2) and df['Y'][i] < 450 :
-                scoreBtmp+=1
-                who_wins+='B'
-            if on_off_court['on_off_court'][index] == 0 and df['Y'][i] > 450 :
-                scoreBtmp+=1
-                who_wins+='B'
-            if (on_off_court['on_off_court'][index] == 1 or on_off_court['on_off_court'][index] == 2) and df['Y'][i] > 450 :
-                scoreAtmp+=1
-                who_wins+='A'
+            sets = 2
+        if end[i] == 1:
+            if sets == 1:
+                if on_off_court['on_off_court'][index] == 0 and df['Y'][i+thr] < 450 :
+                    scoreAtmp+=1
+                    who_wins+='A'
+                if (on_off_court['on_off_court'][index] == 1 or on_off_court['on_off_court'][index] == 2) and df['Y'][i+thr] < 450 :
+                    scoreBtmp+=1
+                    who_wins+='B'
+                if on_off_court['on_off_court'][index] == 0 and df['Y'][i+thr] > 450 :
+                    scoreBtmp+=1
+                    who_wins+='B'
+                if (on_off_court['on_off_court'][index] == 1 or on_off_court['on_off_court'][index] == 2) and df['Y'][i+thr] > 450 :
+                    scoreAtmp+=1
+                    who_wins+='A'
+            else:
+                if on_off_court['on_off_court'][index] == 0 and df['Y'][i+thr] < 450 :
+                    scoreBtmp+=1
+                    who_wins+='B'
+                if (on_off_court['on_off_court'][index] == 1 or on_off_court['on_off_court'][index] == 2) and df['Y'][i+thr] < 450 :
+                    scoreAtmp+=1
+                    who_wins+='A'
+                if on_off_court['on_off_court'][index] == 0 and df['Y'][i+thr] > 450 :
+                    scoreAtmp+=1
+                    who_wins+='A'
+                if (on_off_court['on_off_court'][index] == 1 or on_off_court['on_off_court'][index] == 2) and df['Y'][i+thr] > 450 :
+                    scoreBtmp+=1
+                    who_wins+='B'
             index+=1     
             
         scoreA[i] = scoreAtmp
@@ -302,7 +324,7 @@ def on_off_court(df):
 
     df['scoreA']=scoreA
     df['scoreB']=scoreB
-    # print(df[['Frame','scoreA','scoreB']])
+
 
     #convert to json file
     count = 0
@@ -321,7 +343,7 @@ def on_off_court(df):
     rally = [_+1 for _ in range(len(hit_number))]
 
     # get prediction ball type
-    rally2 = pd.read_excel('../Data/TrainTest/clip_info_new.xlsx')
+    rally2 = pd.read_excel('../Data/TrainTest/clip_info_tai.xlsx')
     rally2 = rally2[['unique_id','getpoint_player','prediction']]
     balltype = []
     flag = 0
@@ -377,13 +399,14 @@ def on_off_court(df):
     for i in range(len(hit_number)):
         plt.text(i, hit_number[i]+0.3, hit_number[i], ha='center', va='bottom', fontsize=12)
     plt.savefig('../Data/Statistics/Rally_count.jpg', pad_inches = 0.5, transparent=True, bbox_inches = 'tight')
+
     export_json('../Data/Statistics/rally_count.json',result)
 
     check_accuracy(df)
 
 def check_accuracy(df):
     count=0
-    rally = pd.read_excel('../Data/TrainTest/clip_info.xlsx')
+    rally = pd.read_excel('../Data/TrainTest/clip_info_tai.xlsx')
     rally = rally[['rally','ball_round','frame_num','server','type','lose_reason']]
     record = rally[rally['type'] != '未擊球'].reset_index(drop=True)
     record = record[rally['type'] != '未過網'].reset_index(drop=True)
@@ -405,8 +428,8 @@ def check_accuracy(df):
     print("Total Calculate number = ",total)
     print("Total Correct number = ",len(record))
     print("Correct number = ",count)
-    print("Accuracy = ",float(count/len(record)))
-    print("Accuracy = ",float(count/total))
+    print("Precision = ",float(count/len(record)))
+    print("Recall = ",float(count/total))
     print("=========================================")
 
     #get ground truth rally start and rally end
@@ -440,8 +463,8 @@ def check_accuracy(df):
     print("Total Calculate number = ",total)
     print("Total Correct number = ",len(rallyend))
     print("Correct number = ",count)
-    print("Accuracy = ",float(count/len(rallyend)))
-    print("Accuracy = ",float(count/(len(df['end'][df['end']==1]))))
+    print("Precision = ",float(count/len(rallyend)))
+    print("Recall = ",float(count/(len(df['end'][df['end']==1]))))
     print("==========================================")
 
 def export_json(filepath,data):
@@ -552,7 +575,6 @@ def generateVideo(df,df_complete,numFrame):
     df_complete['realscoreB']=realscoreB
 
     #5.Video Generation
-    import cv2
     # Get video FPS and size
     input_video_path = '../Data/PredictVideo/TAI Tzu Ying vs CHEN Yufei 2018 Indonesia Open Final.mp4'
     video = cv2.VideoCapture(input_video_path)
@@ -623,6 +645,8 @@ if __name__ == "__main__":
     import math
     import numpy as np
     import json
+    import cv2
     np.set_printoptions(suppress=True)
     readData()
-    generateVideo(df,df_complete,numFrame)
+
+    generateVideo(df,df_complete,numFrame)      #if don't need can comment out

@@ -1001,7 +1001,7 @@ function init_court_distribution(minrally,maxrally,set,game){
         court.xcoord_back = court.xcoord_back.map(function(item){
             return [parseInt(item[0]/coord_orix*(canvA.width-2*brutew)+brutew),parseInt(item[1]/coord_orix*(canvA.width-2*brutew)+brutew)];
         });
-        court.ycoord_back = [[152,272],[272,392],[32,152],[392,500],[-50,32]];
+        court.ycoord_back = [[108,316],[316,392],[32,108],[392,500],[-50,32]];
         court.ycoord_back = court.ycoord_back.map(function(item){
             return [parseInt(item[0]/coord_oriy*(canvA.height-2*bruteh)+bruteh),parseInt(item[1]/coord_oriy*(canvA.height-2*bruteh)+bruteh)];
         });
@@ -1010,7 +1010,7 @@ function init_court_distribution(minrally,maxrally,set,game){
         court.xcoord_front = court.xcoord_front.map(function(item){
             return [parseInt(item[0]/coord_orix*(canvB.width-2*brutew)+brutew),parseInt(item[1]/coord_orix*(canvB.width-2*brutew)+brutew)];
         });
-        court.ycoord_front = [[152,272],[32,152],[272,392],[-50,32],[392,500]];
+        court.ycoord_front = [[108,316],[32,108],[316,392],[-50,32],[392,500]];
         court.ycoord_front = court.ycoord_front.map(function(item){
             return [parseInt(item[0]/coord_oriy*(canvB.height-2*bruteh)+bruteh),parseInt(item[1]/coord_oriy*(canvB.height-2*bruteh)+bruteh)];
         });
