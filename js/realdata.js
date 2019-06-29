@@ -1034,8 +1034,10 @@ function init_court_distribution(minrally,maxrally,set,game){
                 var idx = court.xarea.indexOf(sum_dataA.area[i].split('')[1]);
                 var idy = court.yarea.indexOf(sum_dataA.area[i].split('')[0]);
                 var topX,topY,w,h;
+
+                //out-field ball will on opposite field
                 if (set%2 == 1){
-                    if (sum_dataA.area[i].split('')[0] == 'E' || sum_dataA.area[i].split('')[0] == 'F' || sum_dataA.area[i].split('')[1] == '5'){
+                    if (sum_dataA.area[i].split('')[0] == 'D' || sum_dataA.area[i].split('')[0] == 'E' || sum_dataA.area[i].split('')[1] == '4'){
                         topX = court.xcoord_front[idx][0];
                         topY = court.ycoord_front[idy][0];
                         w = court.xcoord_front[idx][1]-court.xcoord_front[idx][0];
@@ -1049,7 +1051,7 @@ function init_court_distribution(minrally,maxrally,set,game){
                     }
                 }
                 else{
-                    if (sum_dataA.area[i].split('')[0] == 'E' || sum_dataA.area[i].split('')[0] == 'F' || sum_dataA.area[i].split('')[1] == '5'){
+                    if (sum_dataA.area[i].split('')[0] == 'D' || sum_dataA.area[i].split('')[0] == 'E' || sum_dataA.area[i].split('')[1] == '4'){
                         topX = court.xcoord_back[idx][0];
                         topY = court.ycoord_back[idy][0];
                         w = court.xcoord_back[idx][1]-court.xcoord_back[idx][0];
@@ -1102,7 +1104,7 @@ function init_court_distribution(minrally,maxrally,set,game){
                 var idy = court.yarea.indexOf(sum_dataB.area[i].split('')[0]);
                 var topX,topY,w,h;
                 if(set%2 == 1){
-                    if (sum_dataB.area[i].split('')[0] == 'E' || sum_dataB.area[i].split('')[0] == 'F' || sum_dataB.area[i].split('')[1] == '5'){
+                    if (sum_dataB.area[i].split('')[0] == 'D' || sum_dataB.area[i].split('')[0] == 'E' || sum_dataB.area[i].split('')[1] == '4'){
                         topX = court.xcoord_back[idx][0];
                         topY = court.ycoord_back[idy][0];
                         w = court.xcoord_back[idx][1]-court.xcoord_back[idx][0];
@@ -1116,7 +1118,7 @@ function init_court_distribution(minrally,maxrally,set,game){
                     }
                 }
                 else{
-                    if (sum_dataB.area[i].split('')[0] == 'E' || sum_dataB.area[i].split('')[0] == 'F' || sum_dataB.area[i].split('')[1] == '5'){
+                    if (sum_dataB.area[i].split('')[0] == 'D' || sum_dataB.area[i].split('')[0] == 'E' || sum_dataB.area[i].split('')[1] == '4'){
                         topX = court.xcoord_front[idx][0];
                         topY = court.ycoord_front[idy][0];
                         w = court.xcoord_front[idx][1]-court.xcoord_front[idx][0];
