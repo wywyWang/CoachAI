@@ -4,7 +4,7 @@
         "result":[
             {
                 "rally":1,
-                "score":"0:1",
+                "score":"1:1",
                 "stroke":18,
                 "winner":"A",
                 "on_off_court":"\u843d\u5730",
@@ -13,7 +13,7 @@
             },
             {
                 "rally":2,
-                "score":"2:2",
+                "score":"3:2",
                 "stroke":5,
                 "winner":"A",
                 "on_off_court":"\u843d\u5730",
@@ -22,7 +22,7 @@
             },
             {
                 "rally":3,
-                "score":"3:3",
+                "score":"4:3",
                 "stroke":6,
                 "winner":"A",
                 "on_off_court":"\u51fa\u754c",
@@ -31,7 +31,7 @@
             },
             {
                 "rally":4,
-                "score":"4:3",
+                "score":"4:4",
                 "stroke":28,
                 "winner":"B",
                 "on_off_court":"\u843d\u5730",
@@ -40,7 +40,7 @@
             },
             {
                 "rally":5,
-                "score":"5:5",
+                "score":"5:6",
                 "stroke":25,
                 "winner":"B",
                 "on_off_court":"\u672a\u56de\u64ca\u6210\u529f",
@@ -49,7 +49,7 @@
             },
             {
                 "rally":6,
-                "score":"5:8",
+                "score":"6:8",
                 "stroke":7,
                 "winner":"A",
                 "on_off_court":"\u672a\u56de\u64ca\u6210\u529f",
@@ -58,7 +58,7 @@
             },
             {
                 "rally":7,
-                "score":"6:8",
+                "score":"6:9",
                 "stroke":10,
                 "winner":"B",
                 "on_off_court":"\u843d\u5730",
@@ -67,7 +67,7 @@
             },
             {
                 "rally":8,
-                "score":"8:10",
+                "score":"8:11",
                 "stroke":7,
                 "winner":"B",
                 "on_off_court":"\u843d\u5730",
@@ -76,7 +76,7 @@
             },
             {
                 "rally":9,
-                "score":"8:11",
+                "score":"8:12",
                 "stroke":6,
                 "winner":"B",
                 "on_off_court":"\u51fa\u754c",
@@ -85,7 +85,7 @@
             },
             {
                 "rally":10,
-                "score":"8:12",
+                "score":"9:12",
                 "stroke":11,
                 "winner":"A",
                 "on_off_court":"\u51fa\u754c",
@@ -94,7 +94,7 @@
             },
             {
                 "rally":11,
-                "score":"11:12",
+                "score":"11:13",
                 "stroke":4,
                 "winner":"B",
                 "on_off_court":"\u843d\u5730",
@@ -103,7 +103,7 @@
             },
             {
                 "rally":12,
-                "score":"12:13",
+                "score":"13:13",
                 "stroke":13,
                 "winner":"A",
                 "on_off_court":"\u51fa\u754c",
@@ -112,7 +112,7 @@
             },
             {
                 "rally":13,
-                "score":"13:13",
+                "score":"13:14",
                 "stroke":13,
                 "winner":"B",
                 "on_off_court":"\u672a\u56de\u64ca\u6210\u529f",
@@ -121,7 +121,7 @@
             },
             {
                 "rally":14,
-                "score":"13:14",
+                "score":"14:14",
                 "stroke":11,
                 "winner":"A",
                 "on_off_court":"\u843d\u5730",
@@ -130,7 +130,7 @@
             },
             {
                 "rally":15,
-                "score":"14:14",
+                "score":"14:15",
                 "stroke":8,
                 "winner":"B",
                 "on_off_court":"\u843d\u5730",
@@ -139,7 +139,7 @@
             },
             {
                 "rally":16,
-                "score":"14:15",
+                "score":"15:15",
                 "stroke":8,
                 "winner":"A",
                 "on_off_court":"\u843d\u5730",
@@ -148,7 +148,7 @@
             },
             {
                 "rally":17,
-                "score":"16:15",
+                "score":"16:16",
                 "stroke":10,
                 "winner":"B",
                 "on_off_court":"\u51fa\u754c",
@@ -157,7 +157,7 @@
             },
             {
                 "rally":18,
-                "score":"17:16",
+                "score":"17:17",
                 "stroke":15,
                 "winner":"B",
                 "on_off_court":"\u51fa\u754c",
@@ -166,7 +166,7 @@
             },
             {
                 "rally":19,
-                "score":"17:17",
+                "score":"18:17",
                 "stroke":13,
                 "winner":"A",
                 "on_off_court":"\u672a\u56de\u64ca\u6210\u529f",
@@ -175,7 +175,7 @@
             },
             {
                 "rally":20,
-                "score":"18:18",
+                "score":"19:18",
                 "stroke":11,
                 "winner":"A",
                 "on_off_court":"\u843d\u5730",
@@ -184,7 +184,7 @@
             },
             {
                 "rally":21,
-                "score":"19:18",
+                "score":"19:19",
                 "stroke":18,
                 "winner":"B",
                 "on_off_court":"\u843d\u5730",
@@ -193,7 +193,7 @@
             },
             {
                 "rally":22,
-                "score":"19:19",
+                "score":"20:19",
                 "stroke":6,
                 "winner":"A",
                 "on_off_court":"\u51fa\u754c",
@@ -202,7 +202,7 @@
             },
             {
                 "rally":23,
-                "score":"20:20",
+                "score":"20:21",
                 "stroke":12,
                 "winner":"B",
                 "on_off_court":"\u672a\u56de\u64ca\u6210\u529f",
@@ -211,7 +211,7 @@
             },
             {
                 "rally":24,
-                "score":"20:21",
+                "score":"21:21",
                 "stroke":13,
                 "winner":"A",
                 "on_off_court":"\u51fa\u754c",
@@ -220,7 +220,7 @@
             },
             {
                 "rally":25,
-                "score":"21:22",
+                "score":"21:23",
                 "stroke":6,
                 "winner":"B",
                 "on_off_court":"\u843d\u5730",
@@ -234,7 +234,7 @@
         "result":[
             {
                 "rally":1,
-                "score":"1:0",
+                "score":"2:0",
                 "stroke":13,
                 "winner":"A",
                 "on_off_court":"\u843d\u5730",
@@ -243,7 +243,7 @@
             },
             {
                 "rally":2,
-                "score":"5:0",
+                "score":"6:0",
                 "stroke":11,
                 "winner":"A",
                 "on_off_court":"\u51fa\u754c",
@@ -252,7 +252,7 @@
             },
             {
                 "rally":3,
-                "score":"6:0",
+                "score":"6:1",
                 "stroke":13,
                 "winner":"B",
                 "on_off_court":"\u51fa\u754c",
@@ -261,7 +261,7 @@
             },
             {
                 "rally":4,
-                "score":"6:2",
+                "score":"6:3",
                 "stroke":8,
                 "winner":"B",
                 "on_off_court":"\u672a\u56de\u64ca\u6210\u529f",
@@ -270,7 +270,7 @@
             },
             {
                 "rally":5,
-                "score":"7:3",
+                "score":"8:3",
                 "stroke":10,
                 "winner":"A",
                 "on_off_court":"\u51fa\u754c",
@@ -279,7 +279,7 @@
             },
             {
                 "rally":6,
-                "score":"9:6",
+                "score":"9:7",
                 "stroke":20,
                 "winner":"B",
                 "on_off_court":"\u843d\u5730",
@@ -288,7 +288,7 @@
             },
             {
                 "rally":7,
-                "score":"9:7",
+                "score":"9:8",
                 "stroke":9,
                 "winner":"B",
                 "on_off_court":"\u672a\u56de\u64ca\u6210\u529f",
@@ -297,7 +297,7 @@
             },
             {
                 "rally":8,
-                "score":"10:8",
+                "score":"10:9",
                 "stroke":13,
                 "winner":"B",
                 "on_off_court":"\u51fa\u754c",
@@ -306,7 +306,7 @@
             },
             {
                 "rally":9,
-                "score":"10:9",
+                "score":"10:10",
                 "stroke":12,
                 "winner":"B",
                 "on_off_court":"\u843d\u5730",
@@ -315,7 +315,7 @@
             },
             {
                 "rally":10,
-                "score":"10:10",
+                "score":"11:10",
                 "stroke":4,
                 "winner":"A",
                 "on_off_court":"\u672a\u56de\u64ca\u6210\u529f",
@@ -324,7 +324,7 @@
             },
             {
                 "rally":11,
-                "score":"12:10",
+                "score":"12:11",
                 "stroke":25,
                 "winner":"B",
                 "on_off_court":"\u843d\u5730",
@@ -333,7 +333,7 @@
             },
             {
                 "rally":12,
-                "score":"12:11",
+                "score":"13:11",
                 "stroke":12,
                 "winner":"A",
                 "on_off_court":"\u843d\u5730",
@@ -342,7 +342,7 @@
             },
             {
                 "rally":13,
-                "score":"13:11",
+                "score":"13:12",
                 "stroke":26,
                 "winner":"B",
                 "on_off_court":"\u51fa\u754c",
@@ -351,7 +351,7 @@
             },
             {
                 "rally":14,
-                "score":"13:12",
+                "score":"13:13",
                 "stroke":8,
                 "winner":"B",
                 "on_off_court":null,

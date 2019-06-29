@@ -1315,7 +1315,7 @@ function get_interval_updown(set,game){
         for(var i=0;i<maximum;i+=1)
         {
             var score = data[i].score;
-            var insertText = '<option value=' + (i+1) + '>' + score + '</option>';
+            var insertText = '<option value=' + (i+1) + '>' + score + ' (' + (i+1) + ')' + '</option>';
             $('#down').append(insertText); 
             $('#up').append(insertText); 
         }
