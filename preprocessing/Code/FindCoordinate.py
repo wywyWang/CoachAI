@@ -52,6 +52,7 @@ for filename in total:
 visino = 0
 visiyes = 0
 predict_name = heatmap_path.split('/')[-2]
+#### You may need to change the path ####
 record_ballsize_file='/home/ino/Projects/ai-badminton/Data/AccuracyResult/record_circle_ballsize_'+predict_name + '.csv'
 with open(record_ballsize_file,'w',encoding='utf-8') as f:
     c=csv.writer(f,lineterminator='\n')

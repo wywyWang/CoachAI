@@ -31,7 +31,6 @@ def readData():
             df['Dup'][i]=0
             i+=1  
 
-    i=0     
     print(np.shape(df))
 
     # Absolute position
@@ -41,7 +40,6 @@ def readData():
     # Vector X and Y
     vecX = [X[i+1]-X[i] for i in range(len(X)-1)]
     vecY = [Y[i+1]-Y[i] for i in range(len(Y)-1)]
-
     vecX.append(0)
     vecY.append(0)
     df['vecX'] = vecX
@@ -51,6 +49,8 @@ def readData():
     df['vec']=list(zip(vecX,vecY))
     dx=[]
     dy=[]
+
+    i=0
     for i in range(len(df)-1):
         dx+=[df['vecX'][i+1]-df['vecX'][i]]
         dy+=[df['vecY'][i+1]-df['vecY'][i]]
@@ -162,7 +162,7 @@ def rallyend(df):
         j += 1
 
     count=0
-
+    #end event won't happen twice in 150 frames
     for i in range(len(end)) :
         if end[i]==1 :
             for j in range(i+1,i+150) :
@@ -171,6 +171,7 @@ def rallyend(df):
                 end[j]=0
             i=i+150               
             
+    # end[len(df)-1]=1    #18116 frame
     df['end']=end
     on_off_court(df)
 
@@ -267,6 +268,7 @@ def on_off_court(df):
     #judge score
     scoreA = [0 for _ in range(len(df))]
     scoreB = [0 for _ in range(len(df))]
+    global who_wins
     who_wins=[]
     scoreAtmp = 0
     scoreBtmp = 0
@@ -275,22 +277,26 @@ def on_off_court(df):
     sets = 1
 
     for i in range(len(df)) :
-        #because rally 29 and last rally are accidentally missed in before,so forced the answer in here
-        if index==28 and df['Frame'][i]==13300:
-            scoreBtmp+=1
-            who_wins+='B'
-            scoreA[i] = scoreAtmp
-            scoreB[i] = scoreBtmp
-            continue
+        #because rally 29 is accidentally missed in before,so forced the answer in here
+        # if index==28 and df['Frame'][i]==13300:
+        #     scoreBtmp+=1
+        #     who_wins+='B'
+        #     scoreA[i] = scoreAtmp
+        #     scoreB[i] = scoreBtmp
+        #     continue
+        
         if i+thr <len(df):
             thr = 7
         else:
             thr = 0
+        
+        #short video is imcomplete
         if index == 25 :
             scoreAtmp = 0
             scoreBtmp = 0
             sets = 2
-        if end[i] == 1:
+
+        if df['end'][i] == 1:
             if sets == 1:
                 if on_off_court['on_off_court'][index] == 0 and df['Y'][i+thr] < 450 :
                     scoreAtmp+=1
@@ -326,7 +332,7 @@ def on_off_court(df):
     df['scoreB']=scoreB
 
 
-    #convert to json file
+    # #convert to json file,need yen's prediction or cannot produce json file
     count = 0
     count_sum=0
     hit_number = []
@@ -340,7 +346,7 @@ def on_off_court(df):
 
     result = pd.DataFrame(columns = ["set","rally","stroke","winner","on_off_court",'balltype'])
     set = [1 for _ in range(len(hit_number))]
-    rally = [_+1 for _ in range(len(hit_number))]
+    rallys = [_+1 for _ in range(len(hit_number))]
 
     # get prediction ball type
     rally2 = pd.read_excel('../Data/TrainTest/clip_info_tai.xlsx')
@@ -371,14 +377,15 @@ def on_off_court(df):
     }
             
     #get lose area,only this is ground truth
-    rally2 = pd.read_excel('../Data/TrainTest/clip_info_new.xlsx')
+    rally2 = pd.read_excel('../Data/TrainTest/clip_info_tai.xlsx')
     rally2 = rally2[['hit_area','lose_reason']].dropna().reset_index(drop=True)
+    rally2 = rally2[:-1]            #unfound one end,drop last to match the size
 
     result['balltype'] = balltype
     result['balltype'] = result['balltype'].map(conv_balltype)
     result['lose_area'] = rally2['hit_area']
     result['set'] = set
-    result['rally'] = rally
+    result['rally'] = rallys
     result['stroke'] = hit_number
     result['winner'] = who_wins
     result['on_off_court'] = on_off_court
@@ -422,8 +429,7 @@ def check_accuracy(df):
                     count+=1
                     haveFrame += [df['Frame'][idx]]
                     break
-                
-
+            
     print("===========HITPOINT ACCURACY=============")
     print("Total Calculate number = ",total)
     print("Total Correct number = ",len(record))
@@ -440,8 +446,6 @@ def check_accuracy(df):
             rallystart += [rally['frame_num'][i]]
         if pd.isnull(rally['lose_reason'][i]) == False:
             rallyend += [rally['frame_num'][i]]
-
-    #check rally end
     count=0
     total=len(df['end'][df['end']==1])
     tmp=df['Frame']
@@ -456,9 +460,14 @@ def check_accuracy(df):
             frame+=1
 
     idx=tmp[tmp==rallyend[len(rallyend)-1]].index[0]
-    if df['end'][idx]:
-        count+=1
-        
+    while(frame!=18241):
+        if frame in list(df['Frame']):
+            idx=tmp[tmp==frame].index[0]
+            if df['end'][idx]:
+                count+=1
+                break
+        frame+=1 
+            
     print("===========RALLY END ACCURACY=============")
     print("Total Calculate number = ",total)
     print("Total Correct number = ",len(rallyend))
@@ -466,6 +475,32 @@ def check_accuracy(df):
     print("Precision = ",float(count/len(rallyend)))
     print("Recall = ",float(count/(len(df['end'][df['end']==1]))))
     print("==========================================")
+
+    #check virtual umpire accuracy
+    rally_umpire = pd.read_excel('../Data/TrainTest/clip_info_tai.xlsx')
+    rally_umpire = rally_umpire[['unique_id','getpoint_player']]
+    rally_umpire = rally_umpire.dropna().reset_index(drop=True)
+
+    correct = 0
+    j=0
+    for i in range(len(rally_umpire)):
+        #rally 29 is missed on finding rally end,assume it will be correct
+        if i == 28:
+            correct +=1
+            continue
+        if rally_umpire['unique_id'][i].split('-')[-1] == '2':
+            if rally_umpire['getpoint_player'][i] == who_wins[j]:
+                correct +=1
+        else:
+            if rally_umpire['getpoint_player'][i] == who_wins[j]:
+                correct +=1
+        j+=1
+        
+    print("=======VIRTUAL UMPIRE ACCURACY=======")
+    print("Correct Number = ",correct)
+    print("Total Number = ",len(rally_umpire))
+    print("Accuracy = ",correct/len(rally_umpire))
+    print("=====================================")
 
 def export_json(filepath,data):
     with open(filepath,'w') as outfile:
@@ -541,7 +576,7 @@ def generateVideo(df,df_complete,numFrame):
     position = pd.read_csv('../Data/AccuracyResult/record_circle_ballsize_predict_heatmap_new_on_new.csv')
 
     #4.Get real score from clip info
-    rally = pd.read_excel('../Data/TrainTest/clip_info.xlsx')
+    rally = pd.read_excel('../Data/TrainTest/clip_info_tai.xlsx')
     rally = rally[['frame_num','getpoint_player']]
     realscoreA = [0 for _ in range(len(df_complete))]
     realscoreB = [0 for _ in range(len(df_complete))]
@@ -549,6 +584,7 @@ def generateVideo(df,df_complete,numFrame):
     index = 0
     realscoreAtmp = 0
     realscoreBtmp = 0
+
     cntA = 0
     cntB = 0
 
@@ -585,7 +621,8 @@ def generateVideo(df,df_complete,numFrame):
     print('Width = %d' %output_width)
     print('Height = %d' %output_height)
 
-    output_video_path = '1to' + str(numFrame) +'frame.mp4'
+    # filename = input_video_path.split('/')[-1].split('.')[0]
+    output_video_path = input_video_path +'_virtual_umpire.mp4'
     fourcc = cv2.VideoWriter_fourcc(*'XVID')
     output_video = cv2.VideoWriter(output_video_path, fourcc, fps, (output_width,output_height))
 
@@ -594,6 +631,7 @@ def generateVideo(df,df_complete,numFrame):
         if count % 500 ==0:
             print("status : ",count)
         count += 1
+    #     print("now = ",count)
         if count > numFrame:
             break
         ret, frame = video.read()
