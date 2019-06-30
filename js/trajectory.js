@@ -9,9 +9,7 @@ function change_rally(){
     if(!set){
         set = 1;
     }
-    //delete old button
-    $('#next').remove();
-    $('#back').remove();
+    //delete old canvas
     $('#canvas').remove();
     get_interval_rally(set);
     init_trajectory(set);
@@ -63,11 +61,7 @@ function get_interval_rally(set){
 }
 
 function init_trajectory(set){
-    $('.ball_trajectory').html('<div class="row">\
-                                <button class="btn" id="next" type="button">下一球</button>\
-                                <button class="btn" id="back" type="button">上一球</button>\
-                                </div>\
-                                <canvas id="canvas" width="1200" height="600"></canvas>');
+    $('.ball_trajectory').html('<canvas id="canvas" width="1200" height="600"></canvas>');
     var rally = document.getElementById("rally").value;
     var canvas = document.getElementById('canvas');
     var ctx = canvas.getContext('2d');
@@ -145,7 +139,7 @@ function init_trajectory(set){
             if(i != maxorder-1){
                 if(i>2) {
                     ctx.beginPath();
-                    ctx.clearRect(50,50,985,474);
+                    ctx.clearRect(50,50,1000,600);
                     ctx.closePath();
                     ctx.stroke();
                     initial();
@@ -194,7 +188,7 @@ function init_trajectory(set){
                 }
                 else {
                     ctx.beginPath();
-                    ctx.clearRect(50,50,985,474);
+                    ctx.clearRect(50,50,1000,600);
                     ctx.closePath();
                     ctx.stroke();
                     initial();
@@ -239,7 +233,7 @@ function init_trajectory(set){
         $("#back").click(function(){
             ctx.lineWidth = 3;
             ctx.beginPath();
-            ctx.clearRect(50,50,985,474);
+            ctx.clearRect(50,50,1000,600);
             ctx.closePath();
             ctx.stroke();
             initial();
