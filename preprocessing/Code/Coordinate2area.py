@@ -1,6 +1,6 @@
 import pandas as pd
 
-filename = '../../clip_info_2019亞錦賽-周天成VS石宇奇'
+filename = '../../clip_info_CS'
 df = pd.read_excel(filename + '.xlsx')
 hitarea = []
 for i in range(len(df)):
@@ -85,4 +85,4 @@ for i in range(len(df)):
 	if df['hit_y'][i] > 935 and df['hit_x'][i] > 392:
 		hitarea += ["D4"]
 df['hit_area']=hitarea
-export_excel = df.to_excel (r'../../clip_info_2019亞錦賽-周天成VS石宇奇.xlsx', index = None, header=True) #Don't forget to add '.xlsx' at the end of the path
+export_excel = df.to_excel (r'../../clip_info_CS.xlsx', index = None, header=True) #Don't forget to add '.xlsx' at the end of the path

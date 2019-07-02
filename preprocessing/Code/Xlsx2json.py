@@ -6,7 +6,7 @@ import itertools  as it
 
 #Process rally type
 #### May need to modify file path and file name ####
-filename = './clip_info_2019亞錦賽-周天成VS石宇奇'
+filename = './clip_info_CS'
 filepath = './Statistics/rally_type_real_' + filename.split('_')[-1] + '.json'
 
 rally = pd.read_excel(filename + '.xlsx')
@@ -225,7 +225,7 @@ export_json(filepath,result)
 
 #Process rally count real
 #### May need to modify file path and file name ####
-filename = './clip_info_tai'
+filename = './clip_info_TC'
 filepath = './Statistics/rally_count_real_' + filename.split('_')[-1] + '.json'
 
 rally = pd.read_excel(filename + '.xlsx')
@@ -286,7 +286,7 @@ export_json(filepath,result)
 
 #Process detail data real
 #### May need to modify file path and file name ####
-filename = './clip_info_tai'
+filename = './clip_info_TC'
 filepath = './Statistics/rally_detail_real_' + filename.split('_')[-1] + '.json'
 
 rally = pd.read_excel(filename + '.xlsx')

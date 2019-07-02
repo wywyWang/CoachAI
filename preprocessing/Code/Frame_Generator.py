@@ -3,7 +3,7 @@ import csv
 import os
 
 # Directory
-videoName = '/home/ino/Projects/Yao_tmp/TMP/Data/PredictVideo/TAI Tzu Ying vs CHEN Yufei 2018 Indonesia Open Final_skeleton(body25).mp4'
+videoName = '/home/ino/Projects/Yao_tmp/TMP/Data/PredictVideo/video.mp4'
 #inputPath = '/home/hychih/notebook/Badminton/Data/VideoToFrame/video_frames_/'
 #inputFile = 'Label.csv'
 outputPath = '/home/ino/Projects/Yao_tmp/TMP/Data/PredictVideo/lalala/'

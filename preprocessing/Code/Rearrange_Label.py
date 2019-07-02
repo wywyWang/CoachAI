@@ -3,7 +3,7 @@ import csv
 import os
 
 # Directory
-inputFile = '/home/ino/Projects/ai-adminton/Data/Train_Test/OHORI Aya vs TAI Tzu Ying.csv'
+inputFile = '/home/ino/Projects/ai-adminton/Data/Train_Test/OT.csv'
 outputPath = '/home/ino/Projects/ai-adminton/Data/VideoToFrame/video_frames/'
 outputFile = 'Label.csv'
 

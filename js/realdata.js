@@ -6,9 +6,9 @@ function init_linechart(minrally,maxrally,set,game){
     }
     var game_name;
     if (game == 1)
-        game_name = '_tai';
+        game_name = '_TC';
     if (game == 2)
-        game_name = '_2019亞錦賽-周天成VS石宇奇';
+        game_name = '_CS';
     filename = 'statistics/rally_count_real' + game_name + '.json';
 
     $.getJSON(filename, function(data) {
@@ -276,9 +276,9 @@ function init_linechart(minrally,maxrally,set,game){
 
                 var game_name;
                 if (game == 1)
-                    game_name = '_tai';
+                    game_name = '_TC';
                 if (game == 2)
-                    game_name = '_2019亞錦賽-周天成VS石宇奇';
+                    game_name = '_CS';
                 filename = 'statistics/rally_type_real' + game_name + '.json';
 
                 $.getJSON(filename, function(data2) {
@@ -427,9 +427,9 @@ function init_on_off_court(minrally,maxrally,set,game){
     }
     var game_name;
     if (game == 1)
-        game_name = '_tai';
+        game_name = '_TC';
     if (game == 2)
-        game_name = '_2019亞錦賽-周天成VS石宇奇';
+        game_name = '_CS';
     filename = 'statistics/rally_count_real' + game_name + '.json';
 
     $.getJSON(filename, function(data) {
@@ -527,9 +527,9 @@ function init_total_balltype(minrally,maxrally,set,game){
     }
     var game_name;
     if (game == 1)
-        game_name = '_tai';
+        game_name = '_TC';
     if (game == 2)
-        game_name = '_2019亞錦賽-周天成VS石宇奇';
+        game_name = '_CS';
     filename = 'statistics/rally_type_real' + game_name + '.json';
 
     $.getJSON(filename, function(data) {
@@ -597,9 +597,9 @@ function init_total_balltype(minrally,maxrally,set,game){
 
         var game_name;
         if (game == 1)
-            game_name = '_tai';
+            game_name = '_TC';
         if (game == 2)
-            game_name = '_2019亞錦賽-周天成VS石宇奇';
+            game_name = '_CS';
         filename = 'statistics/rally_count_real' + game_name + '.json';
 
         //rendering each player win balltype
@@ -790,9 +790,9 @@ function init_stroke_distribution(minrally,maxrally,set,game){
     }
     var game_name;
     if (game == 1)
-        game_name = '_tai';
+        game_name = '_TC';
     if (game == 2)
-        game_name = '_2019亞錦賽-周天成VS石宇奇';
+        game_name = '_CS';
     filename = 'statistics/rally_count_real' + game_name + '.json';
 
     $.getJSON(filename, function(data) {
@@ -934,9 +934,9 @@ function init_court_distribution(minrally,maxrally,set,game){
     }
     var game_name;
     if (game == 1)
-        game_name = '_tai';
+        game_name = '_TC';
     if (game == 2)
-        game_name = '_2019亞錦賽-周天成VS石宇奇';
+        game_name = '_CS';
     filename = 'statistics/rally_count_real' + game_name + '.json';
 
     $.getJSON(filename, function(data) {
@@ -1267,9 +1267,9 @@ function get_interval_set(game){
     }
     var game_name;
     if (game == 1)
-        game_name = '_tai';
+        game_name = '_TC';
     if (game == 2)
-        game_name = '_2019亞錦賽-周天成VS石宇奇';
+        game_name = '_CS';
     filename = 'statistics/rally_count_real' + game_name + '.json';
 
     $.getJSON(filename, function(data) {
@@ -1295,9 +1295,9 @@ function get_interval_updown(set,game){
     }
     var game_name;
     if (game == 1)
-        game_name = '_tai';
+        game_name = '_TC';
     if (game == 2)
-        game_name = '_2019亞錦賽-周天成VS石宇奇';
+        game_name = '_CS';
     filename = 'statistics/rally_count_real' + game_name + '.json';
 
     $.getJSON(filename, function(data) {

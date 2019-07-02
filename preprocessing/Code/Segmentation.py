@@ -349,7 +349,7 @@ def on_off_court(df):
     rallys = [_+1 for _ in range(len(hit_number))]
 
     # get prediction ball type
-    rally2 = pd.read_excel('../Data/TrainTest/clip_info_tai.xlsx')
+    rally2 = pd.read_excel('../Data/TrainTest/clip_info_TC.xlsx')
     rally2 = rally2[['unique_id','getpoint_player','prediction']]
     balltype = []
     flag = 0
@@ -377,7 +377,7 @@ def on_off_court(df):
     }
             
     #get lose area,only this is ground truth
-    rally2 = pd.read_excel('../Data/TrainTest/clip_info_tai.xlsx')
+    rally2 = pd.read_excel('../Data/TrainTest/clip_info_TC.xlsx')
     rally2 = rally2[['hit_area','lose_reason']].dropna().reset_index(drop=True)
     rally2 = rally2[:-1]            #unfound one end,drop last to match the size
 
@@ -413,7 +413,7 @@ def on_off_court(df):
 
 def check_accuracy(df):
     count=0
-    rally = pd.read_excel('../Data/TrainTest/clip_info_tai.xlsx')
+    rally = pd.read_excel('../Data/TrainTest/clip_info_TC.xlsx')
     rally = rally[['rally','ball_round','frame_num','server','type','lose_reason']]
     record = rally[rally['type'] != '未擊球'].reset_index(drop=True)
     record = record[rally['type'] != '未過網'].reset_index(drop=True)
@@ -477,7 +477,7 @@ def check_accuracy(df):
     print("==========================================")
 
     #check virtual umpire accuracy
-    rally_umpire = pd.read_excel('../Data/TrainTest/clip_info_tai.xlsx')
+    rally_umpire = pd.read_excel('../Data/TrainTest/clip_info_TC.xlsx')
     rally_umpire = rally_umpire[['unique_id','getpoint_player']]
     rally_umpire = rally_umpire.dropna().reset_index(drop=True)
 
@@ -576,7 +576,7 @@ def generateVideo(df,df_complete,numFrame):
     position = pd.read_csv('../Data/AccuracyResult/record_circle_ballsize_predict_heatmap_new_on_new.csv')
 
     #4.Get real score from clip info
-    rally = pd.read_excel('../Data/TrainTest/clip_info_tai.xlsx')
+    rally = pd.read_excel('../Data/TrainTest/clip_info_TC.xlsx')
     rally = rally[['frame_num','getpoint_player']]
     realscoreA = [0 for _ in range(len(df_complete))]
     realscoreB = [0 for _ in range(len(df_complete))]
@@ -612,7 +612,7 @@ def generateVideo(df,df_complete,numFrame):
 
     #5.Video Generation
     # Get video FPS and size
-    input_video_path = '../Data/PredictVideo/TAI Tzu Ying vs CHEN Yufei 2018 Indonesia Open Final.mp4'
+    input_video_path = '../Data/PredictVideo/video.mp4'
     video = cv2.VideoCapture(input_video_path)
     fps = int(video.get(cv2.CAP_PROP_FPS))
     output_width = int(video.get(cv2.CAP_PROP_FRAME_WIDTH))

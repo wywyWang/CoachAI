@@ -16,7 +16,7 @@ function change_rally(){
 }
 
 function get_interval_set(){
-    game_name = '_2019亞錦賽-周天成VS石宇奇';
+    game_name = '_CS';
     filename = 'statistics/rally_detail_real' + game_name + '.json';
 
     $.getJSON(filename, function(data) {
@@ -34,7 +34,7 @@ function get_interval_set(){
 }
 
 function get_interval_rally(set){
-    game_name = '_2019亞錦賽-周天成VS石宇奇';
+    game_name = '_CS';
     filename = 'statistics/rally_detail_real' + game_name + '.json';
     $.getJSON(filename, function(data) {
         //init set
@@ -68,7 +68,7 @@ function init_trajectory(set){
     var i=0;
     var total_y_length=424;
     ctx.clearRect(100,100,935,424);
-    game_name = '_2019亞錦賽-周天成VS石宇奇';
+    game_name = '_CS';
     filename = 'statistics/rally_detail_real' + game_name + '.json';
 
     $.getJSON(filename, function(data) {
