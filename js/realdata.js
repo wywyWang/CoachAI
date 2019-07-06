@@ -211,7 +211,12 @@ function init_linechart(minrally,maxrally,set,game){
             var linecolor;
             for(var j=0;j<consec_point.length;j++){
                 if(segment_data[i][0]==consec_point[j]){
-                    linecolor="rgba(0,255,0,"+segment_data[i].length*0.2+")";
+                	if(data[segment_data[i][0]].winner=='A'){
+                		linecolor="rgba(66,129,164,"+segment_data[i].length*0.2+")";
+                	}               			
+                	if(data[segment_data[i][0]].winner=='B')    {
+                		linecolor="rgba(255,99,132,"+segment_data[i].length*0.2+")";
+                	}               		
                     //"rgb("+(255-segment_data[i].length*10)+","+(236-segment_data[i].length*10)+","+(203-segment_data[i].length*10)+")";
                     break;
                 }
