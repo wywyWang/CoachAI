@@ -17,7 +17,7 @@ def readData():
         init+=1
     df['Dup']=dupl
 
-    #record consecutive frame 
+    #record consecutive same frame ,threshold is 4
     i=0
     while i < len(df)-4:
         if df['X'][i]==df['X'][i+1] and df['Y'][i]==df['Y'][i+1] and df['X'][i]==df['X'][i+2] and df['Y'][i]==df['Y'][i+2] and df['X'][i]==df['X'][i+3] and df['Y'][i]==df['Y'][i+3] and df['X'][i]==df['X'][i+4] and df['Y'][i]==df['Y'][i+4]:
@@ -45,24 +45,10 @@ def readData():
     df['vecX'] = vecX
     df['vecY'] = vecY
 
-    #Preprocess data
-    df['vec']=list(zip(vecX,vecY))
-    dx=[]
-    dy=[]
-
-    i=0
-    for i in range(len(df)-1):
-        dx+=[df['vecX'][i+1]-df['vecX'][i]]
-        dy+=[df['vecY'][i+1]-df['vecY'][i]]
-    dx.append(0)
-    dy.append(0)
-    df['dvecX']=dx
-    df['dvecY']=dy
-
     segmentation(df)
 
 def segmentation(df):
-    #Algorithm
+    #Court refer to TAI vs CHEN
     court_top_left_x=470
     court_top_left_y=127
     court_top_right_x=895
@@ -77,8 +63,8 @@ def segmentation(df):
     # Hit-point Detection
     for i in range(2, len(df['vecY'])-2) :
         count=0
-        if df["Y"][i] > 127 and df["Y"][i] < 570 :
-            point_x=100
+        if df["Y"][i] > court_top_left_y and df["Y"][i] < court_down_left_y :
+            point_x=100         #select a point left out of trapezoid
             point_y=df["Y"][i]
             m1 = (court_down_left_y - court_top_left_y)/(court_down_left_x - court_top_left_x)
             a = np.array([[0,1],[m1,-1]])
@@ -88,7 +74,7 @@ def segmentation(df):
             if ans[0]>100 and ans[0]<df["X"][i] :
                 count+=1
 
-            point_x=1100
+            point_x=1100        #select a point right out of trapezoid
             m2 = (court_down_right_y - court_top_right_y)/(court_down_right_x - court_top_right_x)
             a = np.array([[0,1],[m2,-1]])
             b = np.array([point_y,-(court_top_right_y-m2*court_top_right_x)])
@@ -97,11 +83,13 @@ def segmentation(df):
             if ans[0]<1100 and ans[0]>df["X"][i] :
                 count+=1
 
-            #in court condition will probably be hitpoint
+            #in court(count=2) condition will probably be hitpoint
             if count==2 :
+                #check i~i+2 frame's shuttlecock variation,because image width is wider than height,y's each variation is more imfluence
                 if (df['vecX'][i]**2+df['vecY'][i]**2+df['vecX'][i+1]**2+df['vecY'][i+1]**2+df['vecX'][i+2]**2+df['vecY'][i+2]**2)>=50:
                     # Calculate vector change in X
                     if abs(df['vecX'][i]-df['vecX'][i-1]) >= 10 :
+                        # <0 means direction change,is hitpoint candidate
                         if sum(df['vecX'][i:i+5]) * sum(df['vecX'][i-5:i]) > 0:
                             pass
                         elif df['Dup'][i]==1:
@@ -124,7 +112,6 @@ def segmentation(df):
     i=0
     j=0
     count=0
-    count1=1
     while i < len(df)-10: 
         if df['hitpoint'][i] == 1 :
             j=i+1
@@ -145,6 +132,7 @@ def rallyend(df):
     end = [0 for _ in range(len(df))]
 
     for i in range(len(df)-5):
+        # Consecutive 5 frames' variation < 5 pixels,select as rally end candidate
         if abs(df['vecX'][i])+abs(df['vecX'][i+1])+abs(df['vecX'][i+2])+abs(df['vecX'][i+3])+abs(df['vecX'][i+4])+abs(df['vecY'][i+4])+abs(df['vecY'][i])+abs(df['vecY'][i+1])+abs(df['vecY'][i+2])+abs(df['vecY'][i+3]) < 3 :
             end[i]=1
 
@@ -162,7 +150,7 @@ def rallyend(df):
         j += 1
 
     count=0
-    #end event won't happen twice in 150 frames
+    #end event won't happen twice in 150 frames by observation
     for i in range(len(end)) :
         if end[i]==1 :
             for j in range(i+1,i+150) :
@@ -204,8 +192,9 @@ def on_off_court(df):
 
     for i in range(len(df)) :
         if df["end"][i]==1 :
+            #Determine whether in net
             if df["Y"][i] > small_court_top_left_y and df["Y"][i] < small_court_down_right_y :
-                point_x=100
+                point_x=100         #select a point left out of trapezoid
                 point_y=df["Y"][i]
                 m1 = (small_court_down_left_y - small_court_top_left_y)/(small_court_down_left_x - small_court_top_left_x)
                 a = np.array([[0,1],[m1,-1]])
@@ -215,7 +204,7 @@ def on_off_court(df):
                 if ans[0]>100 and ans[0]<df["X"][i] :
                     count+=1
                     
-                point_x=1000
+                point_x=1000        #select a point right out of trapezoid
                 m2 = (small_court_down_right_y - small_court_top_right_y)/(small_court_down_right_x - small_court_top_right_x)
                 a = np.array([[0,1],[m2,-1]])
                 b = np.array([point_y,-(small_court_top_right_y-m2*small_court_top_right_x)])
@@ -421,6 +410,7 @@ def check_accuracy(df):
     haveFrame = [0 for _ in range(len(record))]
     total=len(df['hitpoint'][df['hitpoint']==1])
     for i in record['frame_num']:
+        # Hitpoint event deviation in +- 5 frames is correct
         for j in range(-5,5):
             if i+j in list(df['Frame']):
                 tmp=df['Frame']
@@ -449,6 +439,7 @@ def check_accuracy(df):
     count=0
     total=len(df['end'][df['end']==1])
     tmp=df['Frame']
+    # Rally end event correct between end to start in ground truth will be correct
     for i in range(1,len(rallystart)):
         frame=rallyend[i-1]
         while(frame!=rallystart[i]):
@@ -458,7 +449,7 @@ def check_accuracy(df):
                     count+=1
                     break
             frame+=1
-
+    
     idx=tmp[tmp==rallyend[len(rallyend)-1]].index[0]
     while(frame!=18241):
         if frame in list(df['Frame']):
@@ -612,8 +603,8 @@ def generateVideo(df,df_complete,numFrame):
 
     #5.Video Generation
     # Get video FPS and size
-    input_video_path = '../Data/PredictVideo/video.mp4'
-    video = cv2.VideoCapture(input_video_path)
+    input_video_path = '../Data/PredictVideo/TAI Tzu Ying vs CHEN Yufei 2018 Indonesia Open Final'
+    video = cv2.VideoCapture(input_video_path + '.mp4')
     fps = int(video.get(cv2.CAP_PROP_FPS))
     output_width = int(video.get(cv2.CAP_PROP_FRAME_WIDTH))
     output_height = int(video.get(cv2.CAP_PROP_FRAME_HEIGHT))
