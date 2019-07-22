@@ -11,6 +11,9 @@ function change_rally(){
     }
     //delete old canvas
     $('#canvas').remove();
+    $('#balltype_table').remove();
+    $('.btn').remove();
+
     get_interval_rally(set);
     init_trajectory(set);
 }
@@ -34,6 +37,13 @@ function get_interval_set(){
 }
 
 function get_interval_rally(set){
+    var insertText = '<button id="interval-submit" type="button" class="btn btn-primary" onclick=change_rally()>查詢</button>';
+    $('#dropdown').append(insertText); 
+    var insertText = '<button class="btn btn-default" id="next" type="button">下一球</button>';
+    $('#dropdown').append(insertText); 
+    var insertText = '<button class="btn btn-default" id="back" type="button">上一球</button>';
+    $('#dropdown').append(insertText); 
+
     game_name = '_CS';
     filename = 'statistics/rally_detail_real' + game_name + '.json';
     $.getJSON(filename, function(data) {
@@ -66,6 +76,7 @@ function init_trajectory(set){
     var canvas = document.getElementById('canvas');
     var ctx = canvas.getContext('2d');
     var current = 0;
+    var currentTableIdx = 0;
     var total_y_length = 424;
     ctx.clearRect(100,100,935,424);
     game_name = '_CS';
@@ -93,6 +104,11 @@ function init_trajectory(set){
         var maxorder = Math.max.apply(Math, data.map(function(d) { 
             return d.order; 
         }));
+
+        //balltype table initial
+        $('#balltype_table').remove();
+        var insertText = '<table class="table" id="balltype_table"><thead><tr><th>Balltpye</th></tr></thead><tbody class="tbody_detail"></tbody></table>';
+        $('.ball_trajectory').append(insertText); 
 
         function initial() {
             ctx.lineWidth = 1;
@@ -142,7 +158,20 @@ function init_trajectory(set){
         ctx.strokeStyle = "black";
         ctx.closePath();
         ctx.stroke();
-        $("#next").click(function(){
+        $("#next").click(function(){    
+            //add next balltype to table
+            if(currentTableIdx != maxorder-1){
+                var insertText;
+                if(CheckSmash(data[currentTableIdx])){
+                    insertText = '<tr class="danger"><td><b>' + data[currentTableIdx].detail_type + '</b></td></tr>';
+                }
+                else{
+                    insertText = '<tr><td>' + data[currentTableIdx].detail_type + '</td></tr>';
+                }
+                $('.tbody_detail').append(insertText); 
+                currentTableIdx += 1;
+            }
+
             if(current != maxorder-1){
                 if(current>2) {
                     ctx.beginPath();
@@ -268,6 +297,14 @@ function init_trajectory(set){
         });
     
         $("#back").click(function(){
+            //delete last table row
+            var table = document.getElementById('balltype_table');
+            var rowCount = table.rows.length;
+            if(currentTableIdx > 0){
+                table.deleteRow(-1);
+                currentTableIdx -= 1;
+            }
+
             ctx.lineWidth = 3;
             ctx.beginPath();
             ctx.clearRect(50,50,1000,600);
