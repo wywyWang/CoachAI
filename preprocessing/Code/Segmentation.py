@@ -3,7 +3,7 @@ def readData():
     numFrame = 18241
     # Import data
     global df,df_complete
-    df = pd.read_csv('../Data/TrainTest/Badminton_label.csv')
+    df = pd.read_csv('../Data/TrainTest/Badminton_label_CS.csv')
     df = df[0:numFrame]
     dupl=[]
     df_complete = df[0:numFrame]
@@ -252,7 +252,7 @@ def on_off_court(df):
     #plot compute result
     name = 'In Field', 'Out Field', 'On Net'
     plt.pie(on_off_court.groupby('on_off_court').size(), labels = name, autopct = make_autopct(on_off_court.groupby('on_off_court').size()), radius = 2, shadow = True, startangle=90, textprops={'fontsize': 14})
-    plt.savefig('../Data/Statistics/Loss_reason.jpg', pad_inches = 0.5, transparent=True, bbox_inches = 'tight')
+    plt.savefig('../Data/Statistics/Loss_reason_CS.jpg', pad_inches = 0.5, transparent=True, bbox_inches = 'tight')
 
     #judge score
     scoreA = [0 for _ in range(len(df))]
@@ -402,7 +402,7 @@ def on_off_court(df):
 
 def check_accuracy(df):
     count=0
-    rally = pd.read_excel('../Data/TrainTest/clip_info_TC.xlsx')
+    rally = pd.read_excel('../Data/TrainTest/clip_info_CS.xlsx')
     rally = rally[['rally','ball_round','frame_num','server','type','lose_reason']]
     record = rally[rally['type'] != '未擊球'].reset_index(drop=True)
     record = record[rally['type'] != '未過網'].reset_index(drop=True)
@@ -468,7 +468,7 @@ def check_accuracy(df):
     print("==========================================")
 
     #check virtual umpire accuracy
-    rally_umpire = pd.read_excel('../Data/TrainTest/clip_info_TC.xlsx')
+    rally_umpire = pd.read_excel('../Data/TrainTest/clip_info_CS.xlsx')
     rally_umpire = rally_umpire[['unique_id','getpoint_player']]
     rally_umpire = rally_umpire.dropna().reset_index(drop=True)
 
@@ -678,4 +678,4 @@ if __name__ == "__main__":
     np.set_printoptions(suppress=True)
     readData()
 
-    generateVideo(df,df_complete,numFrame)      #if don't need can comment out
+    # generateVideo(df,df_complete,numFrame)      #if don't need can comment out

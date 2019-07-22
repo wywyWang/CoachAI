@@ -65,8 +65,8 @@ function init_trajectory(set){
     var rally = document.getElementById("rally").value;
     var canvas = document.getElementById('canvas');
     var ctx = canvas.getContext('2d');
-    var i=0;
-    var total_y_length=424;
+    var current = 0;
+    var total_y_length = 424;
     ctx.clearRect(100,100,935,424);
     game_name = '_CS';
     filename = 'statistics/rally_detail_real' + game_name + '.json';
@@ -127,6 +127,13 @@ function init_trajectory(set){
             ctx.closePath();
             ctx.stroke();
         }
+
+        function CheckSmash(point){
+            if(point.detail_type == '殺球'){
+                return true;
+            }
+            return false;
+        }
         
         initial();
         ctx.lineWidth = 3;
@@ -136,8 +143,8 @@ function init_trajectory(set){
         ctx.closePath();
         ctx.stroke();
         $("#next").click(function(){
-            if(i != maxorder-1){
-                if(i>2) {
+            if(current != maxorder-1){
+                if(current>2) {
                     ctx.beginPath();
                     ctx.clearRect(50,50,1000,600);
                     ctx.closePath();
@@ -145,7 +152,7 @@ function init_trajectory(set){
                     initial();
                     //faded
                     ctx.lineWidth = 3;
-                    for(var j=0;j<i-2;j++) {
+                    for(var j=0;j<current-2;j++) {
                         ctx.beginPath();
                         ctx.arc(data[j].detail_hit_pos[1]+100,total_y_length-data[j].detail_hit_pos[0]+100,5,0,Math.PI*2,true);
                         ctx.strokeStyle = "rgb(229, 226, 222)";
@@ -159,7 +166,7 @@ function init_trajectory(set){
                         ctx.stroke();
                     }
                     //normal
-                    for(var j=i-2;j<i+1;j++) {
+                    for(var j=current-2;j<current+1;j++) {
                         ctx.beginPath();
                         ctx.arc(data[j].detail_hit_pos[1]+100,total_y_length-data[j].detail_hit_pos[0]+100,5,0,Math.PI*2,true);
                         ctx.strokeStyle = "black";
@@ -168,20 +175,35 @@ function init_trajectory(set){
                         ctx.beginPath();
                         ctx.moveTo(data[j].detail_hit_pos[1]+100,total_y_length-data[j].detail_hit_pos[0]+100);
                         ctx.lineTo(data[j+1].detail_hit_pos[1]+100,total_y_length-data[j+1].detail_hit_pos[0]+100);
-                        if(j==i-2){
-                            ctx.strokeStyle = "rgb(252, 133, 133)";
+                        if(j==current-2){
+                            if(CheckSmash(data[j])){
+                                ctx.strokeStyle = "rgb(66, 245, 147)";
+                            }
+                            else{
+                                ctx.strokeStyle = "rgb(252, 133, 133)";
+                            }
                         }
-                        if(j==i-1){
-                            ctx.strokeStyle = "rgb(173, 34, 34)";
+                        if(j==current-1){
+                            if(CheckSmash(data[j])){
+                                ctx.strokeStyle = "rgb(66, 245, 147)";
+                            }
+                            else{
+                                ctx.strokeStyle = "rgb(173, 34, 34)";
+                            }
                         }
-                        if(j==i){
-                            ctx.strokeStyle = "rgb(91, 0, 0)";
+                        if(j==current){
+                            if(CheckSmash(data[j])){
+                                ctx.strokeStyle = "rgb(66, 245, 147)";
+                            }
+                            else{
+                                ctx.strokeStyle = "rgb(91, 0, 0)";
+                            }
                         }
                         ctx.closePath();
                         ctx.stroke();
                     }
                     ctx.beginPath();
-                    ctx.arc(data[i+1].detail_hit_pos[1]+100,total_y_length-data[i+1].detail_hit_pos[0]+100,5,0,Math.PI*2,true);
+                    ctx.arc(data[current+1].detail_hit_pos[1]+100,total_y_length-data[current+1].detail_hit_pos[0]+100,5,0,Math.PI*2,true);
                     ctx.strokeStyle = "black";
                     ctx.closePath();
                     ctx.stroke();
@@ -198,7 +220,7 @@ function init_trajectory(set){
                     ctx.strokeStyle = "black";
                     ctx.closePath();
                     ctx.stroke();
-                    for(var j=i+1;j>0;j--) {
+                    for(var j=current+1;j>0;j--) {
                         ctx.beginPath();
                         ctx.arc(data[j].detail_hit_pos[1]+100,total_y_length-data[j].detail_hit_pos[0]+100,5,0,Math.PI*2,true);
                         ctx.strokeStyle = "black";
@@ -207,24 +229,39 @@ function init_trajectory(set){
                         ctx.beginPath();
                         ctx.moveTo(data[j].detail_hit_pos[1]+100,total_y_length-data[j].detail_hit_pos[0]+100);
                         ctx.lineTo(data[j-1].detail_hit_pos[1]+100,total_y_length-data[j-1].detail_hit_pos[0]+100);
-                        if(j==i-1){
-                            ctx.strokeStyle = "rgb(252, 133, 133)";
+                        if(j==current-1){
+                            if(CheckSmash(data[j])){
+                                ctx.strokeStyle = "rgb(66, 245, 147)";
+                            }
+                            else{
+                                ctx.strokeStyle = "rgb(252, 133, 133)";
+                            }
                         }
-                        if(j==i){
-                            ctx.strokeStyle = "rgb(173, 34, 34)";
+                        if(j==current){
+                            if(CheckSmash(data[j])){
+                                ctx.strokeStyle = "rgb(66, 245, 147)";
+                            }
+                            else{
+                                ctx.strokeStyle = "rgb(173, 34, 34)";
+                            }
                         }
-                        if(j==i+1){
-                            ctx.strokeStyle = "rgb(91, 0, 0)";
+                        if(j==current+1){
+                            if(CheckSmash(data[j])){
+                                ctx.strokeStyle = "rgb(66, 245, 147)";
+                            }
+                            else{
+                                ctx.strokeStyle = "rgb(91, 0, 0)";
+                            }
                         }
                         ctx.closePath();
                         ctx.stroke();
                     }
                 }
-                if(i!=maxorder-2) {
-                    i+=1;
+                if(current!=maxorder-2) {
+                    current+=1;
                 }
                 else{
-                    i = maxorder - 1;
+                    current = maxorder - 1;
                 }
             }
             
@@ -238,9 +275,9 @@ function init_trajectory(set){
             ctx.stroke();
             initial();
             ctx.lineWidth = 3;
-            if(i>4) {
+            if(current>4) {
                 //faded
-                for(var j=0;j<i-4;j++) {
+                for(var j=0;j<current-4;j++) {
                     ctx.beginPath();
                     ctx.arc(data[j].detail_hit_pos[1]+100,total_y_length-data[j].detail_hit_pos[0]+100,5,0,Math.PI*2,true);
                     ctx.strokeStyle = "rgb(229, 226, 222)";
@@ -254,7 +291,7 @@ function init_trajectory(set){
                     ctx.stroke();
                 }
                 //normal
-                for(var j=i-4;j<i-1;j++) {
+                for(var j=current-4;j<current-1;j++) {
                     ctx.beginPath();
                     ctx.arc(data[j].detail_hit_pos[1]+100,total_y_length-data[j].detail_hit_pos[0]+100,5,0,Math.PI*2,true);
                     ctx.strokeStyle = "black";
@@ -263,21 +300,36 @@ function init_trajectory(set){
                     ctx.beginPath();
                     ctx.moveTo(data[j+1].detail_hit_pos[1]+100,total_y_length-data[j+1].detail_hit_pos[0]+100);
                     ctx.lineTo(data[j].detail_hit_pos[1]+100,total_y_length-data[j].detail_hit_pos[0]+100);
-                    if(j==i-4){
-                        ctx.strokeStyle = "rgb(252, 133, 133)";
+                    if(j==current-4){
+                        if(CheckSmash(data[j])){
+                            ctx.strokeStyle = "rgb(66, 245, 147)";
+                        }
+                        else{
+                            ctx.strokeStyle = "rgb(252, 133, 133)";
+                        }
                     }
-                    if(j==i-3){
-                        ctx.strokeStyle = "rgb(173, 34, 34)";
+                    if(j==current-3){
+                        if(CheckSmash(data[j])){
+                            ctx.strokeStyle = "rgb(66, 245, 147)";
+                        }
+                        else{
+                            ctx.strokeStyle = "rgb(173, 34, 34)";
+                        }
                     }
-                    if(j==i-2){
-                        ctx.strokeStyle = "rgb(91, 0, 0)";
+                    if(j==current-2){
+                        if(CheckSmash(data[j])){
+                            ctx.strokeStyle = "rgb(66, 245, 147)";
+                        }
+                        else{
+                            ctx.strokeStyle = "rgb(91, 0, 0)";
+                        }
                     }
                     
                     ctx.closePath();
                     ctx.stroke();
                 }
                 ctx.beginPath();
-                ctx.arc(data[i-1].detail_hit_pos[1]+100,total_y_length-data[i-1].detail_hit_pos[0]+100,5,0,Math.PI*2,true);
+                ctx.arc(data[current-1].detail_hit_pos[1]+100,total_y_length-data[current-1].detail_hit_pos[0]+100,5,0,Math.PI*2,true);
                 ctx.strokeStyle = "black";
                 ctx.closePath();
                 ctx.stroke();
@@ -289,7 +341,7 @@ function init_trajectory(set){
                 ctx.closePath();
                 ctx.stroke();
 
-                for(var j=i-1;j>=1;j--) {
+                for(var j=current-1;j>=1;j--) {
                     ctx.beginPath();
                     ctx.arc(data[j].detail_hit_pos[1]+100,total_y_length-data[j].detail_hit_pos[0]+100,5,0,Math.PI*2,true);
                     ctx.strokeStyle = "black";
@@ -298,21 +350,36 @@ function init_trajectory(set){
                     ctx.beginPath();
                     ctx.moveTo(data[j].detail_hit_pos[1]+100,total_y_length-data[j].detail_hit_pos[0]+100);
                     ctx.lineTo(data[j-1].detail_hit_pos[1]+100,total_y_length-data[j-1].detail_hit_pos[0]+100);
-                    if(j==i-3){
-                        ctx.strokeStyle = "rgb(252, 133, 133)";
+                    if(j==current-3){
+                        if(CheckSmash(data[j])){
+                            ctx.strokeStyle = "rgb(66, 245, 147)";
+                        }
+                        else{
+                            ctx.strokeStyle = "rgb(252, 133, 133)";
+                        }
                     }
-                    if(j==i-2){
-                        ctx.strokeStyle = "rgb(173, 34, 34)";
+                    if(j==current-2){
+                        if(CheckSmash(data[j])){
+                            ctx.strokeStyle = "rgb(66, 245, 147)";
+                        }
+                        else{
+                            ctx.strokeStyle = "rgb(173, 34, 34)";
+                        }
                     }
-                    if(j==i-1){
-                        ctx.strokeStyle = "rgb(91, 0, 0)";
+                    if(j==current-1){
+                        if(CheckSmash(data[j])){
+                            ctx.strokeStyle = "rgb(66, 245, 147)";
+                        }
+                        else{
+                            ctx.strokeStyle = "rgb(91, 0, 0)";
+                        }
                     }
                     ctx.closePath();
                     ctx.stroke();
                 }
             }
-            if(i!=0) {
-                i-=1;
+            if(current!=0) {
+                current-=1;
             }
         })
     });
