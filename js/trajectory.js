@@ -107,7 +107,7 @@ function init_trajectory(set){
 
         //balltype table initial
         $('#balltype_table').remove();
-        var insertText = '<table class="table" id="balltype_table"><thead><tr><th>Balltpye</th></tr></thead><tbody class="tbody_detail"></tbody></table>';
+        var insertText = '<table class="table table-bordered" id="balltype_table"><thead><tr><th>Balltpye</th></tr></thead><tbody class="tbody_detail"></tbody></table>';
         $('.ball_trajectory').append(insertText); 
 
         function initial() {
@@ -163,7 +163,7 @@ function init_trajectory(set){
             if(currentTableIdx != maxorder-1){
                 var insertText;
                 if(CheckSmash(data[currentTableIdx])){
-                    insertText = '<tr class="danger"><td><b>' + data[currentTableIdx].detail_type + '</b></td></tr>';
+                    insertText = '<tr class="success"><td><b>' + data[currentTableIdx].detail_type + '</b></td></tr>';
                 }
                 else{
                     insertText = '<tr><td>' + data[currentTableIdx].detail_type + '</td></tr>';
