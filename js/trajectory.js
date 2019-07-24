@@ -71,14 +71,20 @@ function get_interval_rally(set){
 }
 
 function init_trajectory(set){
-    $('.ball_trajectory').html('<canvas id="canvas" width="1200" height="600"></canvas>');
+    var cwidth = "1200";
+    var cheight = "600";
+    $('.ball_trajectory').html('<canvas id="canvas" width=' + cwidth + ' height=' + cheight + '></canvas>');
     var rally = document.getElementById("rally").value;
     var canvas = document.getElementById('canvas');
     var ctx = canvas.getContext('2d');
     var current = 0;
     var currentTableIdx = 0;
     var total_y_length = 424;
-    ctx.clearRect(100,100,935,424);
+    var TopLeftX = 100;
+    var TopLeftY = 100;
+    var CourtW = 935;
+    var CourtH = 424;
+    ctx.clearRect(TopLeftX,TopLeftY,CourtW,CourtH);
     game_name = '_CS';
     filename = 'statistics/rally_detail_real' + game_name + '.json';
 
@@ -115,31 +121,31 @@ function init_trajectory(set){
             ctx.beginPath();
             ctx.strokeStyle = "black";
             //球場外框
-            ctx.rect(100,100,935,424);
+            ctx.rect(TopLeftX,TopLeftY,CourtW,CourtH);
             //直的線
-            ctx.moveTo(153,100);
-            ctx.lineTo(153,524);
-            ctx.moveTo(290,100);
-            ctx.lineTo(290,524);
-            ctx.moveTo(428,100);
-            ctx.lineTo(428,524);
-            ctx.moveTo(568,100);
-            ctx.lineTo(568,524);
-            ctx.moveTo(708,100);
-            ctx.lineTo(708,524);
-            ctx.moveTo(845,100);
-            ctx.lineTo(845,524);	
-            ctx.moveTo(982,100);
-            ctx.lineTo(982,524);
+            ctx.moveTo(TopLeftX+53,TopLeftY);
+            ctx.lineTo(TopLeftX+53,TopLeftY+CourtH);
+            ctx.moveTo(TopLeftX+190,TopLeftY);
+            ctx.lineTo(TopLeftX+190,TopLeftY+CourtH);
+            ctx.moveTo(TopLeftX+328,TopLeftY);
+            ctx.lineTo(TopLeftX+328,TopLeftY+CourtH);
+            ctx.moveTo(TopLeftX+468,TopLeftY);
+            ctx.lineTo(TopLeftX+468,TopLeftY+CourtH);
+            ctx.moveTo(TopLeftX+608,TopLeftY);
+            ctx.lineTo(TopLeftX+608,TopLeftY+CourtH);
+            ctx.moveTo(TopLeftX+745,TopLeftY);
+            ctx.lineTo(TopLeftX+745,TopLeftY+CourtH);	
+            ctx.moveTo(TopLeftX+882,TopLeftY);
+            ctx.lineTo(TopLeftX+882,TopLeftY+CourtH);
             //橫的線
-            ctx.moveTo(100,132);
-            ctx.lineTo(1035,132);
-            ctx.moveTo(100,492);
-            ctx.lineTo(1035,492);
-            ctx.moveTo(100,312);
-            ctx.lineTo(428,312);
-            ctx.moveTo(708,312);
-            ctx.lineTo(1035,312);
+            ctx.moveTo(TopLeftX,TopLeftY+32);
+            ctx.lineTo(TopLeftX+CourtW,TopLeftY+32);
+            ctx.moveTo(TopLeftX,TopLeftY+392);
+            ctx.lineTo(TopLeftX+CourtW,TopLeftY+392);
+            ctx.moveTo(TopLeftX,TopLeftY+212);
+            ctx.lineTo(TopLeftX+328,TopLeftY+212);
+            ctx.moveTo(TopLeftX+608,TopLeftY+212);
+            ctx.lineTo(TopLeftX+CourtW,TopLeftY+212);
             ctx.closePath();
             ctx.stroke();
         }
