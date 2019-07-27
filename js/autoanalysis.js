@@ -25,15 +25,15 @@ $(function () {
             data: data, // serializes the form's elements.
             success: function(data)
             {
-                console.log(data)
-                // alert(data); // show response from the php script.
+                // console.log(data)
             },
             error: function(error) {
                 console.log('Error: ' + error);
             }
         }).done(function(data) {
             console.log(data)
-            alert('finished python script');
+            $('.container').append(data);
+            // alert('finished python script');
         });
 
     });
