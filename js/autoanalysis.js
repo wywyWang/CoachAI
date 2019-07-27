@@ -21,7 +21,7 @@ $(function () {
 
         $.ajax({
             type: "POST",
-            url: '../cgi-bin/test_auto.py',
+            url: '../cgi-bin/test_main.py',
             data: data, // serializes the form's elements.
             success: function(data)
             {

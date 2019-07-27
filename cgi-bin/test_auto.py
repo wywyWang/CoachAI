@@ -13,27 +13,13 @@
 # correct = 60
 # rally_umpire = 80
 
-# def test():
-#     print("=======VIRTUAL UMPIRE ACCURACY=======")
-#     print("Correct Number = ",correct)
-#     print("Total Number = ",rally_umpire)
-#     print("Accuracy = ",correct/rally_umpire)
-#     print("=====================================")
-
-# if __name__ == "__main__":
-#     import pandas as pd
-#     import matplotlib.pyplot as plt
-#     import math
-#     import numpy as np
-#     import json
-#     import cv2
-#     np.set_printoptions(suppress=True)
-
-#     print("Content-Type: text/plain")    # plain is following
-#     print()                             # blank line, end of headers
-    
-#     test()
-
+import pandas as pd
+import matplotlib.pyplot as plt
+import math
+import numpy as np
+import json
+import cv2
+np.set_printoptions(suppress=True)
 
 def readData():
     global numFrame
@@ -705,18 +691,7 @@ def generateVideo(df,df_complete,numFrame):
     output_video.release()
     cv2.destroyAllWindows()
 
-if __name__ == "__main__":
-    import pandas as pd
-    import matplotlib.pyplot as plt
-    import math
-    import numpy as np
-    import json
-    import cv2
-    np.set_printoptions(suppress=True)
-
-    print("Content-Type: text/plain")    # plain is following
-    print()                             # blank line, end of headers
-
+def begin():
     readData()
 
     # generateVideo(df,df_complete,numFrame)      #if don't need can comment out
