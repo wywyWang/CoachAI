@@ -15,20 +15,25 @@ function checkfile(sender) {
 $(function () {
     $('#submit-video').submit(function(e) {
         e.preventDefault(); // avoid to execute the actual submit of the form.
-        alert("HIHI")
-        var data = $(this).serialize();
-        var url = $(this).attr("action");
-        console.log("data")
+        var data = $('#submit-video').serialize();
+        // var url = $(this).attr("action");
+        console.log(data);
 
         $.ajax({
             type: "POST",
-            url: url,
+            url: '../cgi-bin/test_auto.py',
             data: data, // serializes the form's elements.
             success: function(data)
             {
                 console.log(data)
-                alert(data); // show response from the php script.
+                // alert(data); // show response from the php script.
+            },
+            error: function(error) {
+                console.log('Error: ' + error);
             }
+        }).done(function(data) {
+            console.log(data)
+            alert('finished python script');
         });
 
     });
