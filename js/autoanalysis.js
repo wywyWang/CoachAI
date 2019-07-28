@@ -14,19 +14,27 @@ function checkfile(sender) {
 
 $(function () {
     $('#submit-video').submit(function(e) {
+        // avoid empty file upload
         if(document.getElementById('video-uploader').value.length == 0){
             alert("Please upload file.");
             return false;
         }
         e.preventDefault(); // avoid to execute the actual submit of the form.
-        var data = $('#submit-video').serialize();
+
+        var formData = new FormData();
+        var dataFile = document.getElementById('video-uploader').files[0];
+        formData.append('video', dataFile);
         // var url = $(this).attr("action");
-        console.log(data);
+
+        for (var key of formData.entries()) {
+            console.log(key[0] + ', ' + key[1]);
+        }
 
         $.ajax({
             type: "POST",
             url: '../cgi-bin/test_main.py',
-            data: data, // serializes the form's elements.
+            data: formData, // serializes the form's elements.
+            processData: false,
             success: function(data)
             {
                 // console.log(data)
