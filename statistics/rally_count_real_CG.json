@@ -27,7 +27,7 @@
                 "winner":"A",
                 "on_off_court":"\u672a\u56de\u64ca\u6210\u529f",
                 "balltype":"\u653e\u5c0f\u7403",
-                "lose_area":"A0"
+                "lose_area":"A1"
             },
             {
                 "rally":4,
@@ -153,7 +153,7 @@
                 "winner":"A",
                 "on_off_court":"\u672a\u56de\u64ca\u6210\u529f",
                 "balltype":"\u6311\u7403",
-                "lose_area":"A0"
+                "lose_area":"A1"
             },
             {
                 "rally":18,
@@ -635,7 +635,7 @@
                 "winner":"B",
                 "on_off_court":"\u672a\u56de\u64ca\u6210\u529f",
                 "balltype":"\u653e\u5c0f\u7403",
-                "lose_area":"B0"
+                "lose_area":"B1"
             },
             {
                 "rally":33,
@@ -680,7 +680,7 @@
                 "winner":"B",
                 "on_off_court":"\u672a\u56de\u64ca\u6210\u529f",
                 "balltype":"\u653e\u5c0f\u7403",
-                "lose_area":"B0"
+                "lose_area":"B1"
             },
             {
                 "rally":38,

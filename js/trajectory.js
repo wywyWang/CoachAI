@@ -1,10 +1,19 @@
+function change_game() {
+    new_game = document.getElementById("game").value;
+    $('#set option').remove();
+    get_interval_set(new_game);
+    change_set();
+}
+
 function change_set(){
+    game = document.getElementById("game").value;
     new_set = document.getElementById("set").value;
     $('#rally option').remove();
     change_rally();
 }
 
 function change_rally(){
+    var game = document.getElementById("game").value;
     var set=document.getElementById("set").value;
     if(!set){
         set = 1;
@@ -14,12 +23,32 @@ function change_rally(){
     $('#balltype_table').remove();
     $('.btn').remove();
 
-    get_interval_rally(set);
-    init_trajectory(set);
+    get_interval_rally(set,game);
+    init_trajectory(set,game);
 }
 
-function get_interval_set(){
-    game_name = '_CS';
+function get_interval_game(){
+    var insertText = '<option value='+ 1 +'>'+ 'Game 1' +'</option>';
+    $('#game').append(insertText); 
+    var insertText = '<option value='+ 2 +'>'+ 'Game 2' +'</option>';
+    $('#game').append(insertText); 
+    var insertText = '<option value='+ 3 +'>'+ 'Game 3' +'</option>';
+    $('#game').append(insertText); 
+}
+
+function get_interval_set(game){
+    //init game
+    if (!game){
+        game = 1;
+    }
+    var game_name;
+    if (game == 1)
+        game_name = '_TC';
+    if (game == 2)
+        game_name = '_CS';
+    if (game == 3)
+        game_name = '_CG';
+
     filename = 'statistics/rally_detail_real' + game_name + '.json';
 
     $.getJSON(filename, function(data) {
@@ -36,7 +65,7 @@ function get_interval_set(){
     });
 }
 
-function get_interval_rally(set){
+function get_interval_rally(set,game){
     var insertText = '<button id="interval-submit" type="button" class="btn btn-primary" onclick=change_rally()>查詢</button>';
     $('#dropdown').append(insertText); 
     var insertText = '<button class="btn btn-default" id="next" type="button">下一球</button>';
@@ -44,8 +73,20 @@ function get_interval_rally(set){
     var insertText = '<button class="btn btn-default" id="back" type="button">上一球</button>';
     $('#dropdown').append(insertText); 
 
-    game_name = '_CS';
+    //init game
+    if (!game){
+        game = 1;
+    }
+    var game_name;
+    if (game == 1)
+        game_name = '_TC';
+    if (game == 2)
+        game_name = '_CS';
+    if (game == 3)
+        game_name = '_CG';
+        
     filename = 'statistics/rally_detail_real' + game_name + '.json';
+
     $.getJSON(filename, function(data) {
         //init set
         if (!set){
@@ -70,7 +111,7 @@ function get_interval_rally(set){
     })
 }
 
-function init_trajectory(set){
+function init_trajectory(set,game){
     var cwidth = "1200";
     var cheight = "600";
     $('.ball_trajectory').html('<canvas id="canvas" width=' + cwidth + ' height=' + cheight + '></canvas>');
@@ -85,7 +126,19 @@ function init_trajectory(set){
     var CourtW = 935;
     var CourtH = 424;
     ctx.clearRect(TopLeftX,TopLeftY,CourtW,CourtH);
-    game_name = '_CS';
+    
+    //init game
+    if (!game){
+        game = 1;
+    }
+    var game_name;
+    if (game == 1)
+        game_name = '_TC';
+    if (game == 2)
+        game_name = '_CS';
+    if (game == 3)
+        game_name = '_CG';
+        
     filename = 'statistics/rally_detail_real' + game_name + '.json';
 
     $.getJSON(filename, function(data) {

@@ -34,6 +34,10 @@
         </nav>
     </div>
     <div id="dropdown" class="row form-group form-inline">
+        <label for="game">Game:</label>
+        <select id="game" class="form-control" onchange=change_game()>
+            <script type="text/javascript">get_interval_game();</script>
+        </select>
         <label for="set">Set:</label>
         <select id="set" class="form-control" onchange=change_set()>
             <script type="text/javascript">get_interval_set();</script>
