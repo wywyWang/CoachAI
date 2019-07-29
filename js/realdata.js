@@ -9,6 +9,8 @@ function init_linechart(minrally,maxrally,set,game){
         game_name = '_TC';
     if (game == 2)
         game_name = '_CS';
+    if (game == 3)
+        game_name = '_CG';
     filename = 'statistics/rally_count_real' + game_name + '.json';
 
     $.getJSON(filename, function(data) {
@@ -284,6 +286,8 @@ function init_linechart(minrally,maxrally,set,game){
                     game_name = '_TC';
                 if (game == 2)
                     game_name = '_CS';
+                if (game == 3)
+                    game_name = '_CG';
                 filename = 'statistics/rally_type_real' + game_name + '.json';
 
                 $.getJSON(filename, function(data2) {
@@ -435,6 +439,8 @@ function init_on_off_court(minrally,maxrally,set,game){
         game_name = '_TC';
     if (game == 2)
         game_name = '_CS';
+    if (game == 3)
+        game_name = '_CG';
     filename = 'statistics/rally_count_real' + game_name + '.json';
 
     $.getJSON(filename, function(data) {
@@ -535,6 +541,8 @@ function init_total_balltype(minrally,maxrally,set,game){
         game_name = '_TC';
     if (game == 2)
         game_name = '_CS';
+    if (game == 3)
+        game_name = '_CG';
     filename = 'statistics/rally_type_real' + game_name + '.json';
 
     $.getJSON(filename, function(data) {
@@ -605,6 +613,8 @@ function init_total_balltype(minrally,maxrally,set,game){
             game_name = '_TC';
         if (game == 2)
             game_name = '_CS';
+        if (game == 3)
+            game_name = '_CG';
         filename = 'statistics/rally_count_real' + game_name + '.json';
 
         //rendering each player win balltype
@@ -798,6 +808,8 @@ function init_stroke_distribution(minrally,maxrally,set,game){
         game_name = '_TC';
     if (game == 2)
         game_name = '_CS';
+    if (game == 3)
+        game_name = '_CG';
     filename = 'statistics/rally_count_real' + game_name + '.json';
 
     $.getJSON(filename, function(data) {
@@ -942,6 +954,8 @@ function init_court_distribution(minrally,maxrally,set,game){
         game_name = '_TC';
     if (game == 2)
         game_name = '_CS';
+    if (game == 3)
+        game_name = '_CG';
     filename = 'statistics/rally_count_real' + game_name + '.json';
 
     $.getJSON(filename, function(data) {
@@ -1263,6 +1277,8 @@ function get_interval_game(){
     $('#game').append(insertText); 
     var insertText = '<option value='+ 2 +'>'+ 'Game 2' +'</option>';
     $('#game').append(insertText); 
+    var insertText = '<option value='+ 3 +'>'+ 'Game 3' +'</option>';
+    $('#game').append(insertText); 
 }
 
 function get_interval_set(game){
@@ -1275,6 +1291,8 @@ function get_interval_set(game){
         game_name = '_TC';
     if (game == 2)
         game_name = '_CS';
+    if (game == 3)
+        game_name = '_CG';
     filename = 'statistics/rally_count_real' + game_name + '.json';
 
     $.getJSON(filename, function(data) {
@@ -1303,6 +1321,8 @@ function get_interval_updown(set,game){
         game_name = '_TC';
     if (game == 2)
         game_name = '_CS';
+    if (game == 3)
+        game_name = '_CG';
     filename = 'statistics/rally_count_real' + game_name + '.json';
 
     $.getJSON(filename, function(data) {
