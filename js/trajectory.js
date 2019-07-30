@@ -309,6 +309,7 @@ function init_trajectory(set,game){
                     ctx.closePath();
                     ctx.stroke();
                     for(var j=current+1;j>0;j--) {
+                        console.log(j);
                         ctx.beginPath();
                         ctx.arc(data[j].detail_hit_pos[1]+100,total_y_length-data[j].detail_hit_pos[0]+100,5,0,Math.PI*2,true);
                         ctx.strokeStyle = "black";
@@ -318,7 +319,8 @@ function init_trajectory(set,game){
                         ctx.moveTo(data[j].detail_hit_pos[1]+100,total_y_length-data[j].detail_hit_pos[0]+100);
                         ctx.lineTo(data[j-1].detail_hit_pos[1]+100,total_y_length-data[j-1].detail_hit_pos[0]+100);
                         if(j==current-1){
-                            if(CheckSmash(data[j])){
+                            if(CheckSmash(data[j-1])){
+                                console.log("current-1");
                                 ctx.strokeStyle = "rgb(66, 245, 147)";
                             }
                             else{
@@ -326,7 +328,8 @@ function init_trajectory(set,game){
                             }
                         }
                         if(j==current){
-                            if(CheckSmash(data[j])){
+                            if(CheckSmash(data[j-1])){
+                                console.log("current");
                                 ctx.strokeStyle = "rgb(66, 245, 147)";
                             }
                             else{
@@ -334,7 +337,8 @@ function init_trajectory(set,game){
                             }
                         }
                         if(j==current+1){
-                            if(CheckSmash(data[j])){
+                            if(CheckSmash(data[j-1])){
+                                console.log("current+1");
                                 ctx.strokeStyle = "rgb(66, 245, 147)";
                             }
                             else{
@@ -447,7 +451,7 @@ function init_trajectory(set,game){
                     ctx.moveTo(data[j].detail_hit_pos[1]+100,total_y_length-data[j].detail_hit_pos[0]+100);
                     ctx.lineTo(data[j-1].detail_hit_pos[1]+100,total_y_length-data[j-1].detail_hit_pos[0]+100);
                     if(j==current-3){
-                        if(CheckSmash(data[j])){
+                        if(CheckSmash(data[j-1])){
                             ctx.strokeStyle = "rgb(66, 245, 147)";
                         }
                         else{
@@ -455,7 +459,7 @@ function init_trajectory(set,game){
                         }
                     }
                     if(j==current-2){
-                        if(CheckSmash(data[j])){
+                        if(CheckSmash(data[j-1])){
                             ctx.strokeStyle = "rgb(66, 245, 147)";
                         }
                         else{
@@ -463,7 +467,7 @@ function init_trajectory(set,game){
                         }
                     }
                     if(j==current-1){
-                        if(CheckSmash(data[j])){
+                        if(CheckSmash(data[j-1])){
                             ctx.strokeStyle = "rgb(66, 245, 147)";
                         }
                         else{
