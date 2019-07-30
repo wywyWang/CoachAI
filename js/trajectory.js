@@ -1,10 +1,19 @@
+function change_game() {
+    new_game = document.getElementById("game").value;
+    $('#set option').remove();
+    get_interval_set(new_game);
+    change_set();
+}
+
 function change_set(){
+    game = document.getElementById("game").value;
     new_set = document.getElementById("set").value;
     $('#rally option').remove();
     change_rally();
 }
 
 function change_rally(){
+    var game = document.getElementById("game").value;
     var set=document.getElementById("set").value;
     if(!set){
         set = 1;
@@ -14,12 +23,32 @@ function change_rally(){
     $('#balltype_table').remove();
     $('.btn').remove();
 
-    get_interval_rally(set);
-    init_trajectory(set);
+    get_interval_rally(set,game);
+    init_trajectory(set,game);
 }
 
-function get_interval_set(){
-    game_name = '_CS';
+function get_interval_game(){
+    var insertText = '<option value='+ 1 +'>'+ 'Game 1' +'</option>';
+    $('#game').append(insertText); 
+    var insertText = '<option value='+ 2 +'>'+ 'Game 2' +'</option>';
+    $('#game').append(insertText); 
+    var insertText = '<option value='+ 3 +'>'+ 'Game 3' +'</option>';
+    $('#game').append(insertText); 
+}
+
+function get_interval_set(game){
+    //init game
+    if (!game){
+        game = 1;
+    }
+    var game_name;
+    if (game == 1)
+        game_name = '_TC';
+    if (game == 2)
+        game_name = '_CS';
+    if (game == 3)
+        game_name = '_CG';
+
     filename = 'statistics/rally_detail_real' + game_name + '.json';
 
     $.getJSON(filename, function(data) {
@@ -36,7 +65,7 @@ function get_interval_set(){
     });
 }
 
-function get_interval_rally(set){
+function get_interval_rally(set,game){
     var insertText = '<button id="interval-submit" type="button" class="btn btn-primary" onclick=change_rally()>查詢</button>';
     $('#dropdown').append(insertText); 
     var insertText = '<button class="btn btn-default" id="next" type="button">下一球</button>';
@@ -44,8 +73,20 @@ function get_interval_rally(set){
     var insertText = '<button class="btn btn-default" id="back" type="button">上一球</button>';
     $('#dropdown').append(insertText); 
 
-    game_name = '_CS';
+    //init game
+    if (!game){
+        game = 1;
+    }
+    var game_name;
+    if (game == 1)
+        game_name = '_TC';
+    if (game == 2)
+        game_name = '_CS';
+    if (game == 3)
+        game_name = '_CG';
+        
     filename = 'statistics/rally_detail_real' + game_name + '.json';
+
     $.getJSON(filename, function(data) {
         //init set
         if (!set){
@@ -70,7 +111,7 @@ function get_interval_rally(set){
     })
 }
 
-function init_trajectory(set){
+function init_trajectory(set,game){
     var cwidth = "1200";
     var cheight = "600";
     $('.ball_trajectory').html('<canvas id="canvas" width=' + cwidth + ' height=' + cheight + '></canvas>');
@@ -85,7 +126,19 @@ function init_trajectory(set){
     var CourtW = 935;
     var CourtH = 424;
     ctx.clearRect(TopLeftX,TopLeftY,CourtW,CourtH);
-    game_name = '_CS';
+    
+    //init game
+    if (!game){
+        game = 1;
+    }
+    var game_name;
+    if (game == 1)
+        game_name = '_TC';
+    if (game == 2)
+        game_name = '_CS';
+    if (game == 3)
+        game_name = '_CG';
+        
     filename = 'statistics/rally_detail_real' + game_name + '.json';
 
     $.getJSON(filename, function(data) {
@@ -256,6 +309,7 @@ function init_trajectory(set){
                     ctx.closePath();
                     ctx.stroke();
                     for(var j=current+1;j>0;j--) {
+                        console.log(j);
                         ctx.beginPath();
                         ctx.arc(data[j].detail_hit_pos[1]+100,total_y_length-data[j].detail_hit_pos[0]+100,5,0,Math.PI*2,true);
                         ctx.strokeStyle = "black";
@@ -265,7 +319,8 @@ function init_trajectory(set){
                         ctx.moveTo(data[j].detail_hit_pos[1]+100,total_y_length-data[j].detail_hit_pos[0]+100);
                         ctx.lineTo(data[j-1].detail_hit_pos[1]+100,total_y_length-data[j-1].detail_hit_pos[0]+100);
                         if(j==current-1){
-                            if(CheckSmash(data[j])){
+                            if(CheckSmash(data[j-1])){
+                                console.log("current-1");
                                 ctx.strokeStyle = "rgb(66, 245, 147)";
                             }
                             else{
@@ -273,7 +328,8 @@ function init_trajectory(set){
                             }
                         }
                         if(j==current){
-                            if(CheckSmash(data[j])){
+                            if(CheckSmash(data[j-1])){
+                                console.log("current");
                                 ctx.strokeStyle = "rgb(66, 245, 147)";
                             }
                             else{
@@ -281,7 +337,8 @@ function init_trajectory(set){
                             }
                         }
                         if(j==current+1){
-                            if(CheckSmash(data[j])){
+                            if(CheckSmash(data[j-1])){
+                                console.log("current+1");
                                 ctx.strokeStyle = "rgb(66, 245, 147)";
                             }
                             else{
@@ -394,7 +451,7 @@ function init_trajectory(set){
                     ctx.moveTo(data[j].detail_hit_pos[1]+100,total_y_length-data[j].detail_hit_pos[0]+100);
                     ctx.lineTo(data[j-1].detail_hit_pos[1]+100,total_y_length-data[j-1].detail_hit_pos[0]+100);
                     if(j==current-3){
-                        if(CheckSmash(data[j])){
+                        if(CheckSmash(data[j-1])){
                             ctx.strokeStyle = "rgb(66, 245, 147)";
                         }
                         else{
@@ -402,7 +459,7 @@ function init_trajectory(set){
                         }
                     }
                     if(j==current-2){
-                        if(CheckSmash(data[j])){
+                        if(CheckSmash(data[j-1])){
                             ctx.strokeStyle = "rgb(66, 245, 147)";
                         }
                         else{
@@ -410,7 +467,7 @@ function init_trajectory(set){
                         }
                     }
                     if(j==current-1){
-                        if(CheckSmash(data[j])){
+                        if(CheckSmash(data[j-1])){
                             ctx.strokeStyle = "rgb(66, 245, 147)";
                         }
                         else{

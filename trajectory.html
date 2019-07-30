@@ -28,11 +28,16 @@
                 <li><a href="./realdata.html">Real Data</a></li>
                 <li><a href="./ourdata.html">Our Data</a></li>
                 <li class="active"><a href="./trajectory.html">Trajectory</a></li>
+                <li><a href="./autoanalysis.html">Auto Analysis</a></li>
                 </ul>
             </div>
         </nav>
     </div>
     <div id="dropdown" class="row form-group form-inline">
+        <label for="game">Game:</label>
+        <select id="game" class="form-control" onchange=change_game()>
+            <script type="text/javascript">get_interval_game();</script>
+        </select>
         <label for="set">Set:</label>
         <select id="set" class="form-control" onchange=change_set()>
             <script type="text/javascript">get_interval_set();</script>

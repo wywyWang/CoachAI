@@ -32,10 +32,10 @@
     </div>
 
     <div class="container">
-        <form id="submit-video">
+        <form id="submit-video" enctype="multipart/form-data">
             <div class="form-group">
               <label for="video-uploader">Please upload .mp4 file：</label>
-              <input type="file" id="video-uploader" accept=".mp4" onchange="checkfile(this);"/>
+              <input type="file" id="video-uploader" name="video-name" accept=".mp4" onchange="checkfile(this);"/>
             </div>
             <button type="submit" class="btn btn-default">Submit</button>
         </form>
