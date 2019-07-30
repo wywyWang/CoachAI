@@ -32,7 +32,7 @@ $(function () {
 
         $.ajax({
             type: "POST",
-            url: '../cgi-bin/test_main.py',
+            url: '../cgi-bin/auto_main.py',
             data: formData, // serializes the form's elements.
             processData: false,
             success: function(data)

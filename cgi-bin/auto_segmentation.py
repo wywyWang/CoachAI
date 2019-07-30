@@ -1,18 +1,5 @@
 #!C:\Users\User\AppData\Local\Programs\Python\Python36
 
-# temp=100
-# print("Content-Type: text/html")    # HTML is following
-# print()                             # blank line, end of headers
-# print("<!doctype html>")
-# print("<html><head><title>Example</title></head><body>")
-# print("<p>Temperature is:",temp)
-# print("</p>")
-# print('<a href="#">Reload<a>')
-# print("</body></html>")
-
-# correct = 60
-# rally_umpire = 80
-
 import pandas as pd
 import matplotlib.pyplot as plt
 import math
@@ -693,5 +680,6 @@ def generateVideo(df,df_complete,numFrame):
 
 def begin():
     readData()
+    generateVideo(df,df_complete,numFrame)      #if don't need can comment out
 
-    # generateVideo(df,df_complete,numFrame)      #if don't need can comment out
+    print("SEGMENTATION DONE.")
