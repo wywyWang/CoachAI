@@ -1,13 +1,14 @@
+import auto_segmentation
 import training
 import predict
 
-pre_dir = "./training/data/"
-result_dir = "./training/result/"
-model_path = "./training/model/0730.joblib.dat"
+pre_dir = "./preprocessing/Data/training/data/"
+result_dir = "./preprocessing/Data/training/result/"
+model_path = "./preprocessing/Data/training/model/model.joblib.dat"
 
 name_train = "video3_train"
 name_predict = "tai_train"
-name_result = "0730_test"
+name_result = "model_test"
 
 ext = ".csv"
 
@@ -19,6 +20,9 @@ if __name__ == "__main__":
     print("Content-Type: text/plain")    # plain is following
     print()                             # blank line, end of headers
     
+    # Run segmentation
+    auto_segmentation.begin()
+
     # training and prediction
     training.verify(pre_dir, filename_train, model_path)
     predict.verify(pre_dir, filename_predict, model_path, result_dir, filename_result)
