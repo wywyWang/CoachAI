@@ -34,6 +34,8 @@ function get_interval_game(){
     $('#game').append(insertText); 
     var insertText = '<option value='+ 3 +'>'+ 'Game 3' +'</option>';
     $('#game').append(insertText); 
+    var insertText = '<option value='+ 4 +'>'+ 'Game 4' +'</option>';
+    $('#game').append(insertText); 
 }
 
 function get_interval_set(game){
@@ -48,6 +50,8 @@ function get_interval_set(game){
         game_name = '_CS';
     if (game == 3)
         game_name = '_CG';
+    if (game == 4)
+        game_name = '_CJ';
 
     filename = 'statistics/rally_detail_real' + game_name + '.json';
 
@@ -84,6 +88,8 @@ function get_interval_rally(set,game){
         game_name = '_CS';
     if (game == 3)
         game_name = '_CG';
+    if (game == 4)
+        game_name = '_CJ';
         
     filename = 'statistics/rally_detail_real' + game_name + '.json';
 
@@ -138,6 +144,8 @@ function init_trajectory(set,game){
         game_name = '_CS';
     if (game == 3)
         game_name = '_CG';
+    if (game == 4)
+        game_name = '_CJ';
         
     filename = 'statistics/rally_detail_real' + game_name + '.json';
 

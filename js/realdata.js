@@ -11,6 +11,8 @@ function init_linechart(minrally,maxrally,set,game){
         game_name = '_CS';
     if (game == 3)
         game_name = '_CG';
+    if (game == 4)
+        game_name = '_CJ';
     filename = 'statistics/rally_count_real' + game_name + '.json';
 
     $.getJSON(filename, function(data) {
@@ -288,6 +290,8 @@ function init_linechart(minrally,maxrally,set,game){
                     game_name = '_CS';
                 if (game == 3)
                     game_name = '_CG';
+                if (game == 4)
+                    game_name = '_CJ';
                 filename = 'statistics/rally_type_real' + game_name + '.json';
 
                 $.getJSON(filename, function(data2) {
@@ -441,6 +445,8 @@ function init_on_off_court(minrally,maxrally,set,game){
         game_name = '_CS';
     if (game == 3)
         game_name = '_CG';
+    if (game == 4)
+        game_name = '_CJ';
     filename = 'statistics/rally_count_real' + game_name + '.json';
 
     $.getJSON(filename, function(data) {
@@ -453,10 +459,8 @@ function init_on_off_court(minrally,maxrally,set,game){
         dataA = data.filter(function(item){
             return item.winner == 'B'
         });
-
-        // console.log(set);
-        // console.log(minrally);
-        // console.log(maxrally);
+        console.log("dataA = ",dataA.length);
+        console.log("dataB = ",dataB.length);
         
         //count each reason
         var group_data = Object.keys(_.groupBy(data,"on_off_court"));
@@ -464,8 +468,9 @@ function init_on_off_court(minrally,maxrally,set,game){
         var sum_dataB = new Array(group_data.length).fill(0);
         for(var i = 0;i<dataA.length;i++){
             for(var j = 0;j<group_data.length;j++){
-                if (dataA[i].on_off_court == group_data[j])
+                if (dataA[i].on_off_court == group_data[j]){
                     sum_dataA[j] +=1;
+                }
             }
         }
         for(var i = 0;i<dataB.length;i++){
@@ -543,6 +548,8 @@ function init_total_balltype(minrally,maxrally,set,game){
         game_name = '_CS';
     if (game == 3)
         game_name = '_CG';
+    if (game == 4)
+        game_name = '_CJ';
     filename = 'statistics/rally_type_real' + game_name + '.json';
 
     $.getJSON(filename, function(data) {
@@ -615,6 +622,8 @@ function init_total_balltype(minrally,maxrally,set,game){
             game_name = '_CS';
         if (game == 3)
             game_name = '_CG';
+        if (game == 4)
+            game_name = '_CJ';
         filename = 'statistics/rally_count_real' + game_name + '.json';
 
         //rendering each player win balltype
@@ -810,6 +819,8 @@ function init_stroke_distribution(minrally,maxrally,set,game){
         game_name = '_CS';
     if (game == 3)
         game_name = '_CG';
+    if (game == 4)
+        game_name = '_CJ';
     filename = 'statistics/rally_count_real' + game_name + '.json';
 
     $.getJSON(filename, function(data) {
@@ -956,6 +967,8 @@ function init_court_distribution(minrally,maxrally,set,game){
         game_name = '_CS';
     if (game == 3)
         game_name = '_CG';
+    if (game == 4)
+        game_name = '_CJ';
     filename = 'statistics/rally_count_real' + game_name + '.json';
 
     $.getJSON(filename, function(data) {
@@ -1279,6 +1292,8 @@ function get_interval_game(){
     $('#game').append(insertText); 
     var insertText = '<option value='+ 3 +'>'+ 'Game 3' +'</option>';
     $('#game').append(insertText); 
+    var insertText = '<option value='+ 4 +'>'+ 'Game 4' +'</option>';
+    $('#game').append(insertText); 
 }
 
 function get_interval_set(game){
@@ -1293,6 +1308,8 @@ function get_interval_set(game){
         game_name = '_CS';
     if (game == 3)
         game_name = '_CG';
+    if (game == 4)
+        game_name = '_CJ';
     filename = 'statistics/rally_count_real' + game_name + '.json';
 
     $.getJSON(filename, function(data) {
@@ -1323,6 +1340,8 @@ function get_interval_updown(set,game){
         game_name = '_CS';
     if (game == 3)
         game_name = '_CG';
+    if (game == 4)
+        game_name = '_CJ';
     filename = 'statistics/rally_count_real' + game_name + '.json';
 
     $.getJSON(filename, function(data) {
