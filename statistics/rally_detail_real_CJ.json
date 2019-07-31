@@ -48,7 +48,7 @@
                     },
                     {
                         "order":6,
-                        "detail_type":"\u672a\u64ca\u7403",
+                        "detail_type":"\u672a\u904e\u7db2",
                         "detail_hit_pos":[
                             115,
                             503
@@ -346,7 +346,7 @@
                     },
                     {
                         "order":6,
-                        "detail_type":"\u672a\u64ca\u7403",
+                        "detail_type":"\u639b\u7db2\u7403",
                         "detail_hit_pos":[
                             156,
                             480
@@ -368,7 +368,7 @@
                     },
                     {
                         "order":2,
-                        "detail_type":"\u672a\u64ca\u7403",
+                        "detail_type":"\u639b\u7db2\u7403",
                         "detail_hit_pos":[
                             250,
                             393
@@ -446,7 +446,7 @@
                     },
                     {
                         "order":9,
-                        "detail_type":"\u672a\u64ca\u7403",
+                        "detail_type":"\u639b\u7db2\u7403",
                         "detail_hit_pos":[
                             127,
                             395
@@ -1506,7 +1506,7 @@
                     },
                     {
                         "order":24,
-                        "detail_type":"\u672a\u64ca\u7403",
+                        "detail_type":"\u639b\u7db2\u7403",
                         "detail_hit_pos":[
                             98,
                             492
@@ -1678,7 +1678,7 @@
                     },
                     {
                         "order":6,
-                        "detail_type":"\u672a\u64ca\u7403",
+                        "detail_type":"\u672a\u904e\u7db2",
                         "detail_hit_pos":[
                             409,
                             809
@@ -2104,7 +2104,7 @@
                     },
                     {
                         "order":29,
-                        "detail_type":"\u672a\u64ca\u7403",
+                        "detail_type":"\u639b\u7db2\u7403",
                         "detail_hit_pos":[
                             140,
                             485
@@ -2254,7 +2254,7 @@
                     },
                     {
                         "order":18,
-                        "detail_type":"\u672a\u64ca\u7403",
+                        "detail_type":"\u672a\u904e\u7db2",
                         "detail_hit_pos":[
                             256,
                             772
@@ -2504,7 +2504,7 @@
                     },
                     {
                         "order":15,
-                        "detail_type":"\u672a\u64ca\u7403",
+                        "detail_type":"\u639b\u7db2\u7403",
                         "detail_hit_pos":[
                             206,
                             456
@@ -2612,7 +2612,7 @@
                     },
                     {
                         "order":4,
-                        "detail_type":"\u672a\u64ca\u7403",
+                        "detail_type":"\u672a\u904e\u7db2",
                         "detail_hit_pos":[
                             270,
                             483
@@ -2754,7 +2754,7 @@
                     },
                     {
                         "order":17,
-                        "detail_type":"\u672a\u64ca\u7403",
+                        "detail_type":"\u672a\u904e\u7db2",
                         "detail_hit_pos":[
                             -6,
                             703
@@ -2904,7 +2904,7 @@
                     },
                     {
                         "order":18,
-                        "detail_type":"\u672a\u64ca\u7403",
+                        "detail_type":"\u672a\u904e\u7db2",
                         "detail_hit_pos":[
                             339,
                             384
@@ -3168,7 +3168,7 @@
                     },
                     {
                         "order":9,
-                        "detail_type":"\u672a\u64ca\u7403",
+                        "detail_type":"\u672a\u904e\u7db2",
                         "detail_hit_pos":[
                             140,
                             161
@@ -3316,7 +3316,7 @@
                     },
                     {
                         "order":11,
-                        "detail_type":"\u672a\u64ca\u7403",
+                        "detail_type":"\u639b\u7db2\u7403",
                         "detail_hit_pos":[
                             229,
                             766
@@ -3540,7 +3540,7 @@
                     },
                     {
                         "order":6,
-                        "detail_type":"\u672a\u64ca\u7403",
+                        "detail_type":"\u639b\u7db2\u7403",
                         "detail_hit_pos":[
                             97,
                             492
@@ -3570,7 +3570,7 @@
                     },
                     {
                         "order":3,
-                        "detail_type":"\u672a\u64ca\u7403",
+                        "detail_type":"\u639b\u7db2\u7403",
                         "detail_hit_pos":[
                             145,
                             481
@@ -3857,7 +3857,7 @@
                     },
                     {
                         "order":7,
-                        "detail_type":"\u672a\u64ca\u7403",
+                        "detail_type":"\u639b\u7db2\u7403",
                         "detail_hit_pos":[
                             88,
                             467
@@ -4249,7 +4249,7 @@
                     },
                     {
                         "order":3,
-                        "detail_type":"\u672a\u64ca\u7403",
+                        "detail_type":"\u639b\u7db2\u7403",
                         "detail_hit_pos":[
                             121,
                             462
@@ -4989,7 +4989,7 @@
                     },
                     {
                         "order":4,
-                        "detail_type":"\u672a\u64ca\u7403",
+                        "detail_type":"\u639b\u7db2\u7403",
                         "detail_hit_pos":[
                             376,
                             469
@@ -5067,7 +5067,7 @@
                     },
                     {
                         "order":9,
-                        "detail_type":"\u672a\u64ca\u7403",
+                        "detail_type":"\u639b\u7db2\u7403",
                         "detail_hit_pos":[
                             345,
                             467
@@ -5239,7 +5239,7 @@
                     },
                     {
                         "order":9,
-                        "detail_type":"\u672a\u64ca\u7403",
+                        "detail_type":"\u639b\u7db2\u7403",
                         "detail_hit_pos":[
                             270,
                             462
@@ -5739,7 +5739,7 @@
                     },
                     {
                         "order":3,
-                        "detail_type":"\u672a\u64ca\u7403",
+                        "detail_type":"\u639b\u7db2\u7403",
                         "detail_hit_pos":[
                             81,
                             469
@@ -5793,7 +5793,7 @@
                     },
                     {
                         "order":6,
-                        "detail_type":"\u672a\u64ca\u7403",
+                        "detail_type":"\u639b\u7db2\u7403",
                         "detail_hit_pos":[
                             101,
                             466
@@ -6145,7 +6145,7 @@
                     },
                     {
                         "order":5,
-                        "detail_type":"\u672a\u64ca\u7403",
+                        "detail_type":"\u639b\u7db2\u7403",
                         "detail_hit_pos":[
                             135,
                             462
@@ -6223,7 +6223,7 @@
                     },
                     {
                         "order":9,
-                        "detail_type":"\u672a\u64ca\u7403",
+                        "detail_type":"\u639b\u7db2\u7403",
                         "detail_hit_pos":[
                             343,
                             461
@@ -6371,7 +6371,7 @@
                     },
                     {
                         "order":4,
-                        "detail_type":"\u672a\u64ca\u7403",
+                        "detail_type":"\u639b\u7db2\u7403",
                         "detail_hit_pos":[
                             88,
                             462
@@ -6519,7 +6519,7 @@
                     },
                     {
                         "order":10,
-                        "detail_type":"\u672a\u64ca\u7403",
+                        "detail_type":"\u639b\u7db2\u7403",
                         "detail_hit_pos":[
                             297,
                             469
@@ -7216,7 +7216,7 @@
                     },
                     {
                         "order":8,
-                        "detail_type":"\u672a\u64ca\u7403",
+                        "detail_type":"\u639b\u7db2\u7403",
                         "detail_hit_pos":[
                             167,
                             476
@@ -7348,7 +7348,7 @@
                     },
                     {
                         "order":8,
-                        "detail_type":"\u672a\u64ca\u7403",
+                        "detail_type":"\u639b\u7db2\u7403",
                         "detail_hit_pos":[
                             323,
                             471
@@ -8012,7 +8012,7 @@
                     },
                     {
                         "order":13,
-                        "detail_type":"\u672a\u64ca\u7403",
+                        "detail_type":"\u672a\u904e\u7db2",
                         "detail_hit_pos":[
                             95,
                             313
@@ -8272,7 +8272,7 @@
                     },
                     {
                         "order":22,
-                        "detail_type":"\u672a\u64ca\u7403",
+                        "detail_type":"\u639b\u7db2\u7403",
                         "detail_hit_pos":[
                             275,
                             588
@@ -8816,7 +8816,7 @@
                     },
                     {
                         "order":14,
-                        "detail_type":"\u672a\u64ca\u7403",
+                        "detail_type":"\u639b\u7db2\u7403",
                         "detail_hit_pos":[
                             246,
                             462
@@ -8948,7 +8948,7 @@
                     },
                     {
                         "order":7,
-                        "detail_type":"\u653e\u5c0f\u7403",
+                        "detail_type":"\u639b\u7db2\u7403",
                         "detail_hit_pos":[
                             273,
                             454
@@ -9160,7 +9160,7 @@
                     },
                     {
                         "order":20,
-                        "detail_type":"\u672a\u64ca\u7403",
+                        "detail_type":"\u639b\u7db2\u7403",
                         "detail_hit_pos":[
                             165,
                             461
@@ -9220,7 +9220,7 @@
                     },
                     {
                         "order":3,
-                        "detail_type":"\u672a\u64ca\u7403",
+                        "detail_type":"\u639b\u7db2\u7403",
                         "detail_hit_pos":[
                             251,
                             469
@@ -9274,7 +9274,7 @@
                     },
                     {
                         "order":6,
-                        "detail_type":"\u672a\u64ca\u7403",
+                        "detail_type":"\u639b\u7db2\u7403",
                         "detail_hit_pos":[
                             429,
                             733
@@ -9790,7 +9790,7 @@
                     },
                     {
                         "order":16,
-                        "detail_type":"\u672a\u64ca\u7403",
+                        "detail_type":"\u639b\u7db2\u7403",
                         "detail_hit_pos":[
                             332,
                             469
