@@ -6,13 +6,13 @@ function init_linechart(minrally,maxrally,set,game){
     }
     var game_name;
     if (game == 1)
-        game_name = '_TC';
+        game_name = '_18IND_TC';
     if (game == 2)
-        game_name = '_CS';
+        game_name = '_19ASI_CS';
     if (game == 3)
-        game_name = '_CG';
+        game_name = '_19SIN_CG';
     if (game == 4)
-        game_name = '_CJ';
+        game_name = '_19AUS_CJ';
     filename = 'statistics/rally_count_real' + game_name + '.json';
 
     $.getJSON(filename, function(data) {
@@ -285,13 +285,13 @@ function init_linechart(minrally,maxrally,set,game){
 
                 var game_name;
                 if (game == 1)
-                    game_name = '_TC';
+                    game_name = '_18IND_TC';
                 if (game == 2)
-                    game_name = '_CS';
+                    game_name = '_19ASI_CS';
                 if (game == 3)
-                    game_name = '_CG';
+                    game_name = '_19SIN_CG';
                 if (game == 4)
-                    game_name = '_CJ';
+                    game_name = '_19AUS_CJ';
                 filename = 'statistics/rally_type_real' + game_name + '.json';
 
                 $.getJSON(filename, function(data2) {
@@ -440,13 +440,13 @@ function init_on_off_court(minrally,maxrally,set,game){
     }
     var game_name;
     if (game == 1)
-        game_name = '_TC';
+        game_name = '_18IND_TC';
     if (game == 2)
-        game_name = '_CS';
+        game_name = '_19ASI_CS';
     if (game == 3)
-        game_name = '_CG';
+        game_name = '_19SIN_CG';
     if (game == 4)
-        game_name = '_CJ';
+        game_name = '_19AUS_CJ';
     filename = 'statistics/rally_count_real' + game_name + '.json';
 
     $.getJSON(filename, function(data) {
@@ -543,13 +543,13 @@ function init_total_balltype(minrally,maxrally,set,game){
     }
     var game_name;
     if (game == 1)
-        game_name = '_TC';
+        game_name = '_18IND_TC';
     if (game == 2)
-        game_name = '_CS';
+        game_name = '_19ASI_CS';
     if (game == 3)
-        game_name = '_CG';
+        game_name = '_19SIN_CG';
     if (game == 4)
-        game_name = '_CJ';
+        game_name = '_19AUS_CJ';
     filename = 'statistics/rally_type_real' + game_name + '.json';
 
     $.getJSON(filename, function(data) {
@@ -617,13 +617,13 @@ function init_total_balltype(minrally,maxrally,set,game){
 
         var game_name;
         if (game == 1)
-            game_name = '_TC';
+            game_name = '_18IND_TC';
         if (game == 2)
-            game_name = '_CS';
+            game_name = '_19ASI_CS';
         if (game == 3)
-            game_name = '_CG';
+            game_name = '_19SIN_CG';
         if (game == 4)
-            game_name = '_CJ';
+            game_name = '_19AUS_CJ';
         filename = 'statistics/rally_count_real' + game_name + '.json';
 
         //rendering each player win balltype
@@ -814,13 +814,13 @@ function init_stroke_distribution(minrally,maxrally,set,game){
     }
     var game_name;
     if (game == 1)
-        game_name = '_TC';
+        game_name = '_18IND_TC';
     if (game == 2)
-        game_name = '_CS';
+        game_name = '_19ASI_CS';
     if (game == 3)
-        game_name = '_CG';
+        game_name = '_19SIN_CG';
     if (game == 4)
-        game_name = '_CJ';
+        game_name = '_19AUS_CJ';
     filename = 'statistics/rally_count_real' + game_name + '.json';
 
     $.getJSON(filename, function(data) {
@@ -962,13 +962,13 @@ function init_court_distribution(minrally,maxrally,set,game){
     }
     var game_name;
     if (game == 1)
-        game_name = '_TC';
+        game_name = '_18IND_TC';
     if (game == 2)
-        game_name = '_CS';
+        game_name = '_19ASI_CS';
     if (game == 3)
-        game_name = '_CG';
+        game_name = '_19SIN_CG';
     if (game == 4)
-        game_name = '_CJ';
+        game_name = '_19AUS_CJ';
     filename = 'statistics/rally_count_real' + game_name + '.json';
 
     $.getJSON(filename, function(data) {
@@ -1303,13 +1303,13 @@ function get_interval_set(game){
     }
     var game_name;
     if (game == 1)
-        game_name = '_TC';
+        game_name = '_18IND_TC';
     if (game == 2)
-        game_name = '_CS';
+        game_name = '_19ASI_CS';
     if (game == 3)
-        game_name = '_CG';
+        game_name = '_19SIN_CG';
     if (game == 4)
-        game_name = '_CJ';
+        game_name = '_19AUS_CJ';
     filename = 'statistics/rally_count_real' + game_name + '.json';
 
     $.getJSON(filename, function(data) {
@@ -1335,13 +1335,13 @@ function get_interval_updown(set,game){
     }
     var game_name;
     if (game == 1)
-        game_name = '_TC';
+        game_name = '_18IND_TC';
     if (game == 2)
-        game_name = '_CS';
+        game_name = '_19ASI_CS';
     if (game == 3)
-        game_name = '_CG';
+        game_name = '_19SIN_CG';
     if (game == 4)
-        game_name = '_CJ';
+        game_name = '_19AUS_CJ';
     filename = 'statistics/rally_count_real' + game_name + '.json';
 
     $.getJSON(filename, function(data) {

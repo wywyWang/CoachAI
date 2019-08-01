@@ -45,13 +45,13 @@ function get_interval_set(game){
     }
     var game_name;
     if (game == 1)
-        game_name = '_TC';
+        game_name = '_18IND_TC';
     if (game == 2)
-        game_name = '_CS';
+        game_name = '_19ASI_CS';
     if (game == 3)
-        game_name = '_CG';
+        game_name = '_19SIN_CG';
     if (game == 4)
-        game_name = '_CJ';
+        game_name = '_19AUS_CJ';
 
     filename = 'statistics/rally_detail_real' + game_name + '.json';
 
@@ -83,13 +83,13 @@ function get_interval_rally(set,game){
     }
     var game_name;
     if (game == 1)
-        game_name = '_TC';
+        game_name = '_18IND_TC';
     if (game == 2)
-        game_name = '_CS';
+        game_name = '_19ASI_CS';
     if (game == 3)
-        game_name = '_CG';
+        game_name = '_19SIN_CG';
     if (game == 4)
-        game_name = '_CJ';
+        game_name = '_19AUS_CJ';
         
     filename = 'statistics/rally_detail_real' + game_name + '.json';
 
@@ -139,13 +139,13 @@ function init_trajectory(set,game){
     }
     var game_name;
     if (game == 1)
-        game_name = '_TC';
+        game_name = '_18IND_TC';
     if (game == 2)
-        game_name = '_CS';
+        game_name = '_19ASI_CS';
     if (game == 3)
-        game_name = '_CG';
+        game_name = '_19SIN_CG';
     if (game == 4)
-        game_name = '_CJ';
+        game_name = '_19AUS_CJ';
         
     filename = 'statistics/rally_detail_real' + game_name + '.json';
 
