@@ -228,8 +228,10 @@ def on_off_court(df):
                 if count == 2 :
                     on_off_court += [2]
                     continue
-                                
-            thr = 7
+            if i < 7 :
+            	thr=i
+            else :                    
+            	thr = 7
             
             if df["Y"][i-thr] > court_top_right_y and df["Y"][i-thr] < court_down_right_y :
                 point_x=100

@@ -43,8 +43,8 @@ if __name__ == "__main__":
     
     # Run segmentation
     auto_segmentation.begin()
-
-	# training and prediction    
-	training_preprocess.run(raw_data, training_data_savename, unique_id, player_pos_option, frame_option)
-    training.verify(pre_dir, filename_train, model_path)
-    predict.verify(pre_dir, filename_predict, model_path, result_dir, filename_result)
+    
+	# training and prediction
+	# training_preprocess.run(raw_data, training_data_savename, unique_id, player_pos_option, frame_option)
+	# training.verify(pre_dir, filename_train, model_path)
+	# predict.verify(pre_dir, filename_predict, model_path, result_dir, filename_result)

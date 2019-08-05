@@ -6,6 +6,7 @@ import math
 import numpy as np
 import json
 import cv2
+import csv
 np.set_printoptions(suppress=True)
 
 def readData():
@@ -134,7 +135,19 @@ def segmentation(df):
                     break
                 j+=1              
         i+=1
-            
+    
+    record_hitpoint_file='./preprocessing/Data/AccuracyResult/record_segmentation.csv'
+    with open(record_hitpoint_file,'w',encoding='utf-8') as f:
+	    c=csv.writer(f,lineterminator='\n')
+	    f.write('Frame,X,Y\n')
+	    for i in range(len(df)):
+	        tmp=[]
+	        if df['hitpoint'][i]==1 :
+	        	tmp.append(df['Frame'][i])
+	        	tmp.append(df['X'][i])
+	        	tmp.append(df['Y'][i])
+	        	c.writerow(tmp)
+
     print('After pruning the consecutive detections, number of detected hit-point = %d' %count)
     rallyend(df)
 
@@ -227,7 +240,10 @@ def on_off_court(df):
                     on_off_court += [2]
                     continue
                                 
-            thr = 7
+            if i < 7 :
+            	thr=i
+            else :                    
+            	thr = 7
             
             if df["Y"][i-thr] > court_top_right_y and df["Y"][i-thr] < court_down_right_y :
                 point_x=100
@@ -680,6 +696,6 @@ def generateVideo(df,df_complete,numFrame):
 
 def begin():
     readData()
-    generateVideo(df,df_complete,numFrame)      #if don't need can comment out
+    # generateVideo(df,df_complete,numFrame)      #if don't need can comment out
 
     print("SEGMENTATION DONE.")
