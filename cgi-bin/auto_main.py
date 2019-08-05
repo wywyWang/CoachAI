@@ -29,6 +29,9 @@ player_pos_file = ""
 frame_option = 0
 specific_frame_file = ""
 
+# unique_id for get_velocity function
+unique_id = ''
+
 raw_data += ext
 training_data_savename = raw_data + "_train" + ext
 player_pos_file += ext
@@ -42,6 +45,6 @@ if __name__ == "__main__":
     auto_segmentation.begin()
 
 	# training and prediction    
-	training_preprocess.run(raw_data, training_data_savename, player_pos_option, frame_option)
+	training_preprocess.run(raw_data, training_data_savename, unique_id, player_pos_option, frame_option)
     training.verify(pre_dir, filename_train, model_path)
     predict.verify(pre_dir, filename_predict, model_path, result_dir, filename_result)

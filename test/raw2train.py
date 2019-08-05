@@ -3,54 +3,8 @@ import pandas as pd
 import math
 import functions
 
-# initial columns
-def init_params():
-    output_data = pd.DataFrame([])
-
-    ball_type_new = []
-    hit_direct = []
-    hit_distance = []
-    hit_height_new = []
-    landing_direct = []
-    landing_distance = []
-    landing_height_new = []
-    x_direct = []
-    x_distance = []
-    y_direct = []
-    y_distance = []
-
-def load_data(filename):
-    data = pd.read_csv(filename)
-
-    data_num = data.shape[0]
-
-    frame = data["frame_num"]
-    ball_type = data["type"]
-    hit_area = data["hit_area"]
-    hit_height = data["hit_height"]
-    lose_reason = data["lose_reason"]
-    landing_area = data["landing_area"]
-    landing_x = data["landing_x"]
-    landing_y = data["landing_y"]
-    landing_height = data["landing_height"]
-
-def option_check(player_pos_option, frame_option, player_pos_file, specific_frame_file):
-    # If there is player position info
-    if player_pos_option == 1:
-        df = pd.read_csv(player_pos_file)
-        need_frame = df.values
-        data_num = need_frame.shape[0]
-
-    # Decide if trained with the specific frame
-    if frame_option == 1:
-        df = pd.read_csv(specific_frame_file)
-        need_frame = df.values
-        data_num = need_frame.shape[0]
-
-    return need_frame, data_num
-
 def get_velocity(filename, unique_id, savename):
-    data = pd.read_csv(filename)
+    data = pd.read_csv(filename, encoding = 'utf-8')
 
     # extract columns
     time = data['time']
@@ -71,9 +25,9 @@ def get_velocity(filename, unique_id, savename):
     for i in range(data_num):
         
         if type(lose_reason[i]) != float:
-            velocity.append('')
+            velocity.append('0')
             direction.append('')
-            continue 
+            continue
         
         # velocity
         v = functions.velocity(time[i],time[i+1],hit_x[i],hit_y[i],landing_x[i],landing_y[i])
@@ -86,11 +40,52 @@ def get_velocity(filename, unique_id, savename):
     data['velocity'] = velocity
     data['direction'] = direction
     data.insert(loc=0, column='unique_id', value=unique_id)
-
-    data.to_csv(savename,index=False)
+    data.to_csv(savename,index=False, encoding='utf-8')
         
+def exec(filename, player_pos_option, frame_option, player_pos_file, specific_frame_file):
 
-def exec(need_frame, data_num, savename):
+    ball_type_new = []
+    hit_direct = []
+    hit_distance = []
+    hit_height_new = []
+    landing_direct = []
+    landing_distance = []
+    landing_height_new = []
+    x_direct = []
+    x_distance = []
+    y_direct = []
+    y_distance = []
+
+    data = pd.read_csv(filename, encoding = 'utf-8')
+
+    data_num = data.shape[0]
+
+    frame = data["frame_num"]
+    ball_type = data["type"]
+    hit_area = data["hit_area"]
+    hit_height = data["hit_height"]
+    lose_reason = data["lose_reason"]
+    landing_area = data["landing_area"]
+    landing_x = data["landing_x"]
+    landing_y = data["landing_y"]
+    landing_height = data["landing_height"]
+    velocity = data["velocity"]
+
+    need_frame = 0
+    data_num = data.shape[0]
+
+    # If there is player position info
+    if player_pos_option == 1:
+        df = pd.read_csv(player_pos_file)
+        data_num = need_frame.shape[0]
+
+    # Decide if trained with the specific frame
+    if frame_option == 1:
+        df = pd.read_csv(specific_frame_file)
+        need_frame = df.values
+        data_num = need_frame.shape[0]
+
+    # start
     for j in range(data_num):
         if frame_option == 1:
             result = np.where(frame == need_frame[j])
@@ -112,10 +107,10 @@ def exec(need_frame, data_num, savename):
             y_direct.append(y_dir)
             y_distance.append(y_dis)
         else:
-            x_direct.append('')
-            x_distance.append('')
-            y_direct.append('')
-            y_distance.append('')
+            x_direct.append('0')
+            x_distance.append('0')
+            y_direct.append('0')
+            y_distance.append('0')
 
         # hit direct & hit distance
         h_dir , h_dis = functions.hit_convertion_9(hit_area[i])
@@ -142,7 +137,8 @@ def exec(need_frame, data_num, savename):
         ball_type_new.append(bt)
         if bt == 'error':
             print('error ball_type: ',i,ball_type[i])
-        
+
+    output_data = pd.DataFrame([]) 
     output_data["hit_direct"] = hit_direct
     output_data["hit_distance"] = hit_distance
     output_data["hit_height"] = hit_height_new
@@ -155,15 +151,18 @@ def exec(need_frame, data_num, savename):
     output_data["y_direct"] = y_direct
     output_data["y_distance"] = y_distance
 
+    output_data["velocity"] = velocity
     output_data["ball_type"] = ball_type_new
 
-    output_data.to_csv(savename,index=False)
+    output_data.to_csv(filename,index=False, encoding = 'utf-8')
 
 def run(filename, savename, unique_id, player_pos_option, frame_option, player_pos_file, specific_frame_file):
-    init_params()
+    print("Getting velocity...")
     get_velocity(filename, unique_id, savename)
-    load_data(savename)
-    need_frame, data_num = option_check(player_pos_option, frame_option, player_pos_file, specific_frame_file)
-    exec(need_frame, data_num, savename)
+    print("Getting velocity done...")
+    print("")
+    print("Starting main...")
+    exec(savename, player_pos_option, frame_option, player_pos_file, specific_frame_file)
+    print("All done...")
 
-# run("set1.csv", "set1_after.csv", "", 0, 0, "", "")
+run("set1.csv", "set1_after.csv", '', 0, 0, '', '')
