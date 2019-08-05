@@ -45,7 +45,7 @@ if __name__ == "__main__":
     print()                             # blank line, end of headers
     
     # Run segmentation
-    #auto_segmentation.begin()
+    auto_segmentation.begin()
 
 	# training and prediction
     training_preprocess.run(raw_data, preprocessed_filename, unique_id, player_pos_option, frame_option, player_pos_file, specific_frame_file)
