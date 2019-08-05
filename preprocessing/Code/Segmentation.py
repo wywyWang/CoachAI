@@ -124,7 +124,19 @@ def segmentation(df):
                     break
                 j+=1              
         i+=1
-            
+    
+    record_hitpoint_file='../Data/AccuracyResult/record_segmentation.csv'
+    with open(record_hitpoint_file,'w',encoding='utf-8') as f:
+	    c=csv.writer(f,lineterminator='\n')
+	    f.write('Frame,X,Y\n')
+	    for i in range(len(df)):
+	        tmp=[]
+	        if df['hitpoint'][i]==1 :
+	        	tmp.append(df['Frame'][i])
+	        	tmp.append(df['X'][i])
+	        	tmp.append(df['Y'][i])
+	        	c.writerow(tmp)
+
     print('After pruning the consecutive detections, number of detected hit-point = %d' %count)
     rallyend(df)
 
@@ -675,6 +687,7 @@ if __name__ == "__main__":
     import numpy as np
     import json
     import cv2
+    import csv
     np.set_printoptions(suppress=True)
     readData()
 
