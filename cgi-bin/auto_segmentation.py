@@ -6,6 +6,7 @@ import math
 import numpy as np
 import json
 import cv2
+import csv
 np.set_printoptions(suppress=True)
 
 def readData():
@@ -134,7 +135,19 @@ def segmentation(df):
                     break
                 j+=1              
         i+=1
-            
+    
+    record_hitpoint_file='./preprocessing/Data/AccuracyResult/record_segmentation.csv'
+    with open(record_hitpoint_file,'w',encoding='utf-8') as f:
+	    c=csv.writer(f,lineterminator='\n')
+	    f.write('Frame,X,Y\n')
+	    for i in range(len(df)):
+	        tmp=[]
+	        if df['hitpoint'][i]==1 :
+	        	tmp.append(df['Frame'][i])
+	        	tmp.append(df['X'][i])
+	        	tmp.append(df['Y'][i])
+	        	c.writerow(tmp)
+
     print('After pruning the consecutive detections, number of detected hit-point = %d' %count)
     rallyend(df)
 
@@ -227,7 +240,10 @@ def on_off_court(df):
                     on_off_court += [2]
                     continue
                                 
-            thr = 7
+            if i < 7 :
+            	thr=i
+            else :                    
+            	thr = 7
             
             if df["Y"][i-thr] > court_top_right_y and df["Y"][i-thr] < court_down_right_y :
                 point_x=100
@@ -348,7 +364,7 @@ def on_off_court(df):
     rallys = [_+1 for _ in range(len(hit_number))]
 
     # get prediction ball type
-    rally2 = pd.read_excel('./preprocessing/Data/TrainTest/clip_info_TC.xlsx')
+    rally2 = pd.read_excel('./preprocessing/Data/TrainTest/clip_info_18IND_TC.xlsx')
     rally2 = rally2[['unique_id','getpoint_player','prediction']]
     balltype = []
     flag = 0
@@ -376,7 +392,7 @@ def on_off_court(df):
     }
             
     #get lose area,only this is ground truth
-    rally2 = pd.read_excel('./preprocessing/Data/TrainTest/clip_info_TC.xlsx')
+    rally2 = pd.read_excel('./preprocessing/Data/TrainTest/clip_info_18IND_TC.xlsx')
     rally2 = rally2[['hit_area','lose_reason']].dropna().reset_index(drop=True)
     rally2 = rally2[:-1]            #unfound one end,drop last to match the size
 
@@ -412,7 +428,7 @@ def on_off_court(df):
 
 def check_accuracy(df):
     count=0
-    rally = pd.read_excel('./preprocessing/Data/TrainTest/clip_info_TC.xlsx')
+    rally = pd.read_excel('./preprocessing/Data/TrainTest/clip_info_18IND_TC.xlsx')
     rally = rally[['rally','ball_round','frame_num','server','type','lose_reason']]
     record = rally[rally['type'] != '未擊球'].reset_index(drop=True)
     record = record[rally['type'] != '未過網'].reset_index(drop=True)
@@ -478,7 +494,7 @@ def check_accuracy(df):
     print("==========================================")
 
     #check virtual umpire accuracy
-    rally_umpire = pd.read_excel('./preprocessing/Data/TrainTest/clip_info_TC.xlsx')
+    rally_umpire = pd.read_excel('./preprocessing/Data/TrainTest/clip_info_18IND_TC.xlsx')
     rally_umpire = rally_umpire[['unique_id','getpoint_player']]
     rally_umpire = rally_umpire.dropna().reset_index(drop=True)
 
@@ -577,7 +593,7 @@ def generateVideo(df,df_complete,numFrame):
     position = pd.read_csv('./preprocessing/Data/AccuracyResult/record_circle_ballsize_predict_heatmap_new_on_new.csv')
 
     #4.Get real score from clip info
-    rally = pd.read_excel('./preprocessing/Data/TrainTest/clip_info_TC.xlsx')
+    rally = pd.read_excel('./preprocessing/Data/TrainTest/clip_info_18IND_TC.xlsx')
     rally = rally[['frame_num','getpoint_player']]
     realscoreA = [0 for _ in range(len(df_complete))]
     realscoreB = [0 for _ in range(len(df_complete))]
@@ -680,6 +696,6 @@ def generateVideo(df,df_complete,numFrame):
 
 def begin():
     readData()
-    generateVideo(df,df_complete,numFrame)      #if don't need can comment out
+    # generateVideo(df,df_complete,numFrame)      #if don't need can comment out
 
     print("SEGMENTATION DONE.")
