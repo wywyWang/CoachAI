@@ -15,8 +15,6 @@ from matplotlib import pyplot
 
 warnings.filterwarnings('ignore')
 
-
-
 def feature_importance(xgbc):
     plot_importance(xgbc)
     plt.savefig('featureimp.png')
@@ -99,10 +97,8 @@ def radar_chart(new_dict, type_labels, groundtruth, grid_predictions):
 def result_chart(xgbc, groundtruth, grid_predictions, type_labels, new_dict):
     # feature importance
     feature_importance(xgbc)
-    
     # confusion matrix
     confusion_matrix_chart(groundtruth, grid_predictions, type_labels)
-
     # radar chart
     radar_chart(new_dict, type_labels, groundtruth, grid_predictions)
 
@@ -148,7 +144,7 @@ def exec(filename_predict, model_path, filename_result):
     pd.DataFrame(grid_predictions,columns=['prediction']).to_csv(filename_result,index=None)
 
     # plot graph
-    result_chart(xgboost_model, data_predict[:, -1], grid_predictions, type_labels, new_dict)
+    #result_chart(xgboost_model, data_predict[:, -1], grid_predictions, type_labels, new_dict)
 
     # print precision and recall
     print("Precision: "+str(precision_score(data_predict[:, -1], grid_predictions, labels = ['cut', 'drive', 'lob', 'long', 'netplay', 'rush', 'smash'], average=None)))
@@ -167,7 +163,7 @@ def verify(pre_dir, filename_predict, model_path, result_dir, filename_result):
             os.mkdir(result_dir)
 
         print("Start predict...")
-        exec(filename_predict, model_path, filename_result)
+        exec(filename_predict, model_path, result_dir+'/'+filename_result)
         print("Prediction done...")
         
     else:
@@ -180,4 +176,4 @@ def verify(pre_dir, filename_predict, model_path, result_dir, filename_result):
         if os.path.isfile(filename_result):
             print("Already exist result file: "+str(filename_result))
 
-verify("./", "set1_after.csv", "../preprocessing/Data/training/model/model.joblib.dat", "./rrr", "resulttttt.csv")
+verify("./", "set1_after.csv", "../preprocessing/Data/training/model/model.joblib.dat", "./rrr", "./rrr/resulttttt.csv")

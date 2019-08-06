@@ -5,7 +5,7 @@ import math
 def velocity(time_current,time_next,hit_x,hit_y,landing_x,landing_y):
     
     if type(time_current) == float:
-        return('')
+        return('0')
 
     hhmm1 = time_current.split(':',2)
     if len(hhmm1) == 2:
