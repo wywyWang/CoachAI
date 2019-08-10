@@ -146,6 +146,7 @@ def segmentation(df):
 	        	tmp.append(df['Frame'][i])
 	        	tmp.append(df['X'][i])
 	        	tmp.append(df['Y'][i])
+	        	tmp.append(df['Time'][i])
 	        	c.writerow(tmp)
 
     print('After pruning the consecutive detections, number of detected hit-point = %d' %count)
