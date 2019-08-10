@@ -3,7 +3,7 @@ def readData():
     numFrame = 18241
     # Import data
     global df,df_complete
-    df = pd.read_csv('../Data/TrainTest/Badminton_label.csv')
+    df = pd.read_csv('../Data/TrainTest/TAI_Tzu_Ying_vs_CHEN_Yufei_2018_Indonesia_Open_Final_predict.csv')
     df = df[0:numFrame]
     dupl=[]
     df_complete = df[0:numFrame]
@@ -11,6 +11,8 @@ def readData():
     # Prune unseen frames
     df = df[df.Visibility == 1].reset_index(drop=True)
 
+    df = df[['Frame','Visibility','X','Y']]
+    
     init=0
     while init < len(df) :
         dupl+=[0]
@@ -125,17 +127,22 @@ def segmentation(df):
                 j+=1              
         i+=1
     
+    time = pd.read_csv('../Data/TrainTest/TAI_Tzu_Ying_vs_CHEN_Yufei_2018_Indonesia_Open_Final_predict.csv')
+    time = time[0:numFrame]
+    time = time[time.Visibility == 1].reset_index(drop=True)
+    time = time[['Time']]
+
     record_hitpoint_file='../Data/AccuracyResult/record_segmentation.csv'
     with open(record_hitpoint_file,'w',encoding='utf-8') as f:
-	    c=csv.writer(f,lineterminator='\n')
-	    f.write('Frame,X,Y\n')
-	    for i in range(len(df)):
-	        tmp=[]
-	        if df['hitpoint'][i]==1 :
-	        	tmp.append(df['Frame'][i])
-	        	tmp.append(df['X'][i])
-	        	tmp.append(df['Y'][i])
-	        	c.writerow(tmp)
+        c=csv.writer(f,lineterminator='\n')
+        f.write('Frame,X,Y\n')
+        for i in range(len(df)):
+            tmp=[]
+            if df['hitpoint'][i]==1 :
+                tmp.append(df['Frame'][i])
+                tmp.append(df['X'][i])
+                tmp.append(df['Y'][i])
+                c.writerow(tmp)
 
     print('After pruning the consecutive detections, number of detected hit-point = %d' %count)
     rallyend(df)
@@ -264,7 +271,22 @@ def on_off_court(df):
     on_off_court = pd.DataFrame(on_off_court)
 
     #plot compute result
-    name = 'In Field', 'Out Field', 'On Net'
+    if len(on_off_court.groupby('on_off_court').size()) < 3 :
+        data=on_off_court.groupby('on_off_court')
+        if 0 in data.groups :
+            name = ('In Field',)
+        if 1 in data.groups :
+            name = ('Out Field',)
+        if 2 in data.groups :
+            name = ('On Net',)
+        if 0 in data.groups and 1 in data.groups :
+            name = 'In Field', 'Out Field'
+        if 0 in data.groups and 2 in data.groups :
+            name = 'In Field', 'On Net'
+        if 1 in data.groups and 2 in data.groups :
+            name = 'Out Field', 'On Net'    
+    else :
+        name = 'In Field', 'Out Field', 'On Net'
     plt.pie(on_off_court.groupby('on_off_court').size(), labels = name, autopct = make_autopct(on_off_court.groupby('on_off_court').size()), radius = 2, shadow = True, startangle=90, textprops={'fontsize': 14})
     plt.savefig('../Data/Statistics/Loss_reason.jpg', pad_inches = 0.5, transparent=True, bbox_inches = 'tight')
 
@@ -380,37 +402,37 @@ def on_off_court(df):
     }
             
     #get lose area,only this is ground truth
-    rally2 = pd.read_excel('../Data/TrainTest/clip_info_18IND_TC.xlsx')
-    rally2 = rally2[['hit_area','lose_reason']].dropna().reset_index(drop=True)
-    rally2 = rally2[:-1]            #unfound one end,drop last to match the size
+    # rally2 = pd.read_excel('../Data/TrainTest/clip_info_18IND_TC.xlsx')
+    # rally2 = rally2[['hit_area','lose_reason']].dropna().reset_index(drop=True)
+    # rally2 = rally2[:-1]            #unfound one end,drop last to match the size
 
-    result['balltype'] = balltype
-    result['balltype'] = result['balltype'].map(conv_balltype)
-    result['lose_area'] = rally2['hit_area']
-    result['set'] = set
-    result['rally'] = rallys
-    result['stroke'] = hit_number
-    result['winner'] = who_wins
-    result['on_off_court'] = on_off_court
-    result['on_off_court'] = result['on_off_court'].astype(str).map(conv_onoffcourt)
-    result = (result.groupby(['set'], as_index=False)
-                .apply(lambda x: x[['rally','stroke','winner','on_off_court','balltype','lose_area']].to_dict('r'))
-                .reset_index()
-                .rename(columns={0:'result'})
-                )
+    # result['balltype'] = balltype
+    # result['balltype'] = result['balltype'].map(conv_balltype)
+    # result['lose_area'] = rally2['hit_area']
+    # result['set'] = set
+    # result['rally'] = rallys
+    # result['stroke'] = hit_number
+    # result['winner'] = who_wins
+    # result['on_off_court'] = on_off_court
+    # result['on_off_court'] = result['on_off_court'].astype(str).map(conv_onoffcourt)
+    # result = (result.groupby(['set'], as_index=False)
+    #             .apply(lambda x: x[['rally','stroke','winner','on_off_court','balltype','lose_area']].to_dict('r'))
+    #             .reset_index()
+    #             .rename(columns={0:'result'})
+    #             )
 
-    #plot counting result
-    plt.figure(figsize = (12,6))
-    plt.grid()
-    plt.title('Stroke counting in rallies', fontsize = 16)
-    plt.xlabel('Rally', fontsize = 16)
-    plt.ylabel('Count', fontsize = 16)
-    plt.plot(hit_number, marker = 'o', color = 'magenta', linestyle = 'dashed')
-    for i in range(len(hit_number)):
-        plt.text(i, hit_number[i]+0.3, hit_number[i], ha='center', va='bottom', fontsize=12)
-    plt.savefig('../Data/Statistics/Rally_count.jpg', pad_inches = 0.5, transparent=True, bbox_inches = 'tight')
+    # #plot counting result
+    # plt.figure(figsize = (12,6))
+    # plt.grid()
+    # plt.title('Stroke counting in rallies', fontsize = 16)
+    # plt.xlabel('Rally', fontsize = 16)
+    # plt.ylabel('Count', fontsize = 16)
+    # plt.plot(hit_number, marker = 'o', color = 'magenta', linestyle = 'dashed')
+    # for i in range(len(hit_number)):
+    #     plt.text(i, hit_number[i]+0.3, hit_number[i], ha='center', va='bottom', fontsize=12)
+    # plt.savefig('../Data/Statistics/Rally_count.jpg', pad_inches = 0.5, transparent=True, bbox_inches = 'tight')
 
-    export_json('../Data/Statistics/rally_count.json',result)
+    # export_json('../Data/Statistics/rally_count.json',result)
 
     check_accuracy(df)
 
