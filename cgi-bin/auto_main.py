@@ -2,10 +2,11 @@ import auto_segmentation
 import raw2train as training_preprocess
 import training
 import predict
+import coordinate as coordinate_adjust
 
 # training data preprocessing input params
 pre_dir = "./preprocessing/Data/training/data/"
-raw_data = "set1"
+raw_data = "out"
 ext = ".csv"
 
 # has players' position info? 1/0 : yes/no
@@ -34,11 +35,18 @@ result_dir = "./preprocessing/Data/training/result/"
 model_path = "./preprocessing/Data/training/model/model.joblib.dat"
 
 name_train = "video3_train"
-name_result = "0806_predict_result"
+name_result = "0811_predict_result"
 
 filename_train = pre_dir + name_train + ext
 filename_result = result_dir + name_result + ext
 
+# segmentation filename
+segmentation_path = "./preprocessing/Data/AccuracyResult/"
+segmentation_input = ""
+segmentation_output = "record_segmentation"
+
+segmentation_input = segmentation_path + segmentation_input + ext
+segmentation_output = segmentation_path + segmentation_output + ext
 
 if __name__ == "__main__":
     print("Content-Type: text/plain")    # plain is following
@@ -48,6 +56,7 @@ if __name__ == "__main__":
     auto_segmentation.begin()
 
 	# training and prediction
+    coordinate_adjust.run(segmentation_output, raw_data)
     training_preprocess.run(raw_data, preprocessed_filename, unique_id, player_pos_option, frame_option, player_pos_file, specific_frame_file)  #preprocess data
     #training.verify(pre_dir, filename_train, model_path)  #train model
     predict.verify(pre_dir, preprocessed_filename, model_path, result_dir, filename_result) #predict testing data

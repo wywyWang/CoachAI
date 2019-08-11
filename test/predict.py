@@ -163,7 +163,7 @@ def verify(pre_dir, filename_predict, model_path, result_dir, filename_result):
             os.mkdir(result_dir)
 
         print("Start predict...")
-        exec(filename_predict, model_path, result_dir+'/'+filename_result)
+        exec(filename_predict, model_path, filename_result)
         print("Prediction done...")
         
     else:
@@ -176,4 +176,4 @@ def verify(pre_dir, filename_predict, model_path, result_dir, filename_result):
         if os.path.isfile(filename_result):
             print("Already exist result file: "+str(filename_result))
 
-verify("./", "set1_after.csv", "../preprocessing/Data/training/model/model.joblib.dat", "./rrr", "./rrr/resulttttt.csv")
+verify("./", "out_after.csv", "../preprocessing/Data/training/model/model.joblib.dat", "./rrr", "./rrr/resulttttt.csv")

@@ -22,7 +22,7 @@ def get_velocity(filename, unique_id, savename):
 
     velocity = []
     direction = []
-    print(data_num)
+
     for i in range(data_num):
         
         if type(lose_reason[i]) != float:
@@ -134,20 +134,23 @@ def exec(filename, player_pos_option, frame_option, player_pos_file, specific_fr
         # height
         #hit_height_new.append(int(hit_height[i]))
         #landing_height_new.append(int(landing_height[i]))
-        
+        hit_height_new.append('0')
+        landing_height_new.append('0')
+
         # ball type
         #bt = functions.ball_type_convertion(ball_type[i])
         #ball_type_new.append(bt)
         #if bt == 'error':
         #    print('error ball_type: ',i,ball_type[i])
+        ball_type_new.append('unknown')
 
     output_data = pd.DataFrame([]) 
     output_data["hit_direct"] = hit_direct
     output_data["hit_distance"] = hit_distance
-    #output_data["hit_height"] = hit_height_new
+    output_data["hit_height"] = hit_height_new
     output_data["landing_direct"] = landing_direct
     output_data["landing_distance"] = landing_distance
-    #output_data["landing_height"] = landing_height_new
+    output_data["landing_height"] = landing_height_new
 
     output_data["x_direct"] = x_direct
     output_data["x_distance"] = x_distance
@@ -155,7 +158,7 @@ def exec(filename, player_pos_option, frame_option, player_pos_file, specific_fr
     output_data["y_distance"] = y_distance
 
     output_data["velocity"] = velocity
-    #output_data["ball_type"] = ball_type_new
+    output_data["ball_type"] = ball_type_new
 
     output_data.to_csv(filename,index=False, encoding = 'utf-8')
 
@@ -168,4 +171,4 @@ def run(filename, savename, unique_id, player_pos_option, frame_option, player_p
     exec(savename, player_pos_option, frame_option, player_pos_file, specific_frame_file)
     print("All done...")
 
-run("out.csv", "out_after.csv", '', 0, 0, '', '')
+#run("out.csv", "out_after.csv", '', 0, 0, '', '')
