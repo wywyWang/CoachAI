@@ -9,9 +9,9 @@ python3 segmentation.py
 ```
 
 ### Input csv format :
-| Frame | Visibility | X | Y |
-| --- | -------- | --- | --- |
-| 1 | 0 | 0 | 0 |
+| Frame | Visibility | X | Y | Time |
+| ----- | ---------- | --- | --- | ---- |
+| 1 | 0 | 0 | 0 | 00:00:00.123 |
 ### Output :
 - csv format :
   - | Set | Rally | Frame | X | Y | Time | Getpoint_player | Lose_reason |
