@@ -38,6 +38,8 @@ function get_interval_game(){
     $('#game').append(insertText); 
     var insertText = '<option value='+ 5 +'>'+ 'Game 5' +'</option>';
     $('#game').append(insertText); 
+    var insertText = '<option value='+ 6 +'>'+ 'Game 6' +'</option>';
+    $('#game').append(insertText); 
 }
 
 function get_interval_set(game){
@@ -56,6 +58,8 @@ function get_interval_set(game){
         game_name = '_19AUS_CJ';
     if (game == 5)
         game_name = '_19SIN_CJ';
+    if (game == 6)
+        game_name = '_19IND_KH';
 
     filename = 'statistics/rally_detail_real' + game_name + '.json';
 
@@ -96,6 +100,8 @@ function get_interval_rally(set,game){
         game_name = '_19AUS_CJ';
     if (game == 5)
         game_name = '_19SIN_CJ';
+    if (game == 6)
+        game_name = '_19IND_KH';
         
     filename = 'statistics/rally_detail_real' + game_name + '.json';
 
@@ -154,6 +160,8 @@ function init_trajectory(set,game){
         game_name = '_19AUS_CJ';
     if (game == 5)
         game_name = '_19SIN_CJ';
+    if (game == 6)
+        game_name = '_19IND_KH';
         
     filename = 'statistics/rally_detail_real' + game_name + '.json';
 
