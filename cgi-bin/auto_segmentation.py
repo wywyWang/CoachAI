@@ -10,11 +10,10 @@ import csv
 np.set_printoptions(suppress=True)
 
 def readData():
-    global numFrame
+    global numFrame,df,df_complete,time
     numFrame = 18241
     # Import data
-    global df,df_complete
-    df = pd.read_csv('./preprocessing/Data/TrainTest/TAI_Tzu_Ying_vs_CHEN_Yufei_2018_Indonesia_Open_Final_predict.csv')
+    df = pd.read_csv('./preprocessing/Data/TrainTest/Badminton_label_TC.csv')
     df = df[0:numFrame]
     dupl=[]
     df_complete = df[0:numFrame]
@@ -22,8 +21,9 @@ def readData():
     # Prune unseen frames
     df = df[df.Visibility == 1].reset_index(drop=True)
 
+    time = df[['Time']]
     df = df[['Frame','Visibility','X','Y']]
-
+    
     init=0
     while init < len(df) :
         dupl+=[0]
@@ -58,9 +58,9 @@ def readData():
     df['vecX'] = vecX
     df['vecY'] = vecY
 
-    segmentation(df)
+    segmentation()
 
-def segmentation(df):
+def segmentation():
     #Court refer to TAI vs CHEN
     court_top_left_x=470
     court_top_left_y=127
@@ -138,28 +138,24 @@ def segmentation(df):
                 j+=1              
         i+=1
     
-    time = pd.read_csv('./preprocessing/Data/TrainTest/TAI_Tzu_Ying_vs_CHEN_Yufei_2018_Indonesia_Open_Final_predict.csv')
-    time = time[0:numFrame]
-    time = time[time.Visibility == 1].reset_index(drop=True)
-    time = time[['Time']]
-
+    #Output segmentation result into csv
     record_hitpoint_file='./preprocessing/Data/AccuracyResult/record_segmentation.csv'
     with open(record_hitpoint_file,'w',encoding='utf-8') as f:
-	    c=csv.writer(f,lineterminator='\n')
-	    f.write('Frame,X,Y,Time\n')
-	    for i in range(len(df)):
-	        tmp=[]
-	        if df['hitpoint'][i]==1 :
-	        	tmp.append(df['Frame'][i])
-	        	tmp.append(df['X'][i])
-	        	tmp.append(df['Y'][i])
-	        	tmp.append(time['Time'][i])
-	        	c.writerow(tmp)
+        c=csv.writer(f,lineterminator='\n')
+        f.write('Frame,X,Y,Time\n')
+        for i in range(len(df)):
+            tmp=[]
+            if df['hitpoint'][i]==1 :
+                tmp.append(df['Frame'][i])
+                tmp.append(df['X'][i])
+                tmp.append(df['Y'][i])
+                tmp.append(time['Time'][i])
+                c.writerow(tmp)
 
     print('After pruning the consecutive detections, number of detected hit-point = %d' %count)
-    rallyend(df)
+    rallyend()
 
-def rallyend(df):
+def rallyend():
     end = [0 for _ in range(len(df))]
 
     for i in range(len(df)-5):
@@ -192,9 +188,9 @@ def rallyend(df):
             
     # end[len(df)-1]=1    #18116 frame
     df['end']=end
-    on_off_court(df)
+    on_off_court()
 
-def on_off_court(df):
+def on_off_court():
     court_top_left_x=484
     court_top_left_y=319
     court_top_right_x=835
@@ -448,9 +444,9 @@ def on_off_court(df):
 
     # export_json('./preprocessing/Data/Statistics/rally_count.json',result)
 
-    check_accuracy(df)
+    check_accuracy()
 
-def check_accuracy(df):
+def check_accuracy():
     count=0
     rally = pd.read_excel('./preprocessing/Data/TrainTest/clip_info_18IND_TC.xlsx')
     rally = rally[['rally','ball_round','frame_num','server','type','lose_reason']]
@@ -720,6 +716,6 @@ def generateVideo(df,df_complete,numFrame):
 
 def begin():
     readData()
-    # generateVideo(df,df_complete,numFrame)      #if don't need can comment out
+    generateVideo(df,df_complete,numFrame)      #if don't need can comment out
 
     print("SEGMENTATION DONE.")
