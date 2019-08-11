@@ -141,3 +141,12 @@ def landing_convertion(landing):
     else:
         return 'X'
 
+def map_reason(reason):
+    if reason == 0:
+        return '出界'
+    elif reason == 1:
+        return '落地'
+    elif reason == 2:
+        return '未回擊成功'
+    else:
+        return ''
