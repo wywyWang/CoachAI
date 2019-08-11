@@ -47,7 +47,7 @@ def readData():
     df['vecX'] = vecX
     df['vecY'] = vecY
 
-    segmentation(df)
+    segmentation()
 
 def segmentation():
     #Court refer to TAI vs CHEN
@@ -126,20 +126,6 @@ def segmentation():
                     break
                 j+=1              
         i+=1
-    
-    #Output segmentation result into csv
-    record_hitpoint_file='../Data/AccuracyResult/record_segmentation.csv'
-    with open(record_hitpoint_file,'w',encoding='utf-8') as f:
-        c=csv.writer(f,lineterminator='\n')
-        f.write('Frame,X,Y,Time\n')
-        for i in range(len(df)):
-            tmp=[]
-            if df['hitpoint'][i]==1 :
-                tmp.append(df['Frame'][i])
-                tmp.append(df['X'][i])
-                tmp.append(df['Y'][i])
-                tmp.append(time['Time'][i])
-                c.writerow(tmp)
 
     print('After pruning the consecutive detections, number of detected hit-point = %d' %count)
     rallyend()
@@ -200,6 +186,7 @@ def on_off_court():
 
 
     on_off_court=[]
+    lose_reason = [None for _ in range(len(df))]
     ans = np.array([])
 
     #Use algorithm to determine in or out of court
@@ -207,6 +194,7 @@ def on_off_court():
     count=0
 
     for i in range(len(df)) :
+        lose_reason_tmp = None
         if df["end"][i]==1 :
             #Determine whether in net
             if df["Y"][i] > small_court_top_left_y and df["Y"][i] < small_court_down_right_y :
@@ -230,6 +218,7 @@ def on_off_court():
                     count+=1
                 
                 if count == 2 :
+                    lose_reason_tmp = '未回擊成功'
                     on_off_court += [2]
                     continue
             if i < 7 :
@@ -258,178 +247,166 @@ def on_off_court():
                     count+=1
                 
                 if count == 2 :
+                    lose_reason_tmp = '落地'
                     on_off_court += [1]
                     continue
+            lose_reason_tmp = '出界'
             on_off_court += [0]
-            
+        lose_reason[i] = lose_reason_tmp
         count=0
+
+    df['lose_reason'] = lose_reason
 
     on_off_court = {'on_off_court' : on_off_court}
     on_off_court = pd.DataFrame(on_off_court)
 
-    #plot compute result
-    if len(on_off_court.groupby('on_off_court').size()) < 3 :
-        data=on_off_court.groupby('on_off_court')
-        if 0 in data.groups :
-            name = ('In Field',)
-        if 1 in data.groups :
-            name = ('Out Field',)
-        if 2 in data.groups :
-            name = ('On Net',)
-        if 0 in data.groups and 1 in data.groups :
-            name = 'In Field', 'Out Field'
-        if 0 in data.groups and 2 in data.groups :
-            name = 'In Field', 'On Net'
-        if 1 in data.groups and 2 in data.groups :
-            name = 'Out Field', 'On Net'    
-    else :
-        name = 'In Field', 'Out Field', 'On Net'
-    plt.pie(on_off_court.groupby('on_off_court').size(), labels = name, autopct = make_autopct(on_off_court.groupby('on_off_court').size()), radius = 2, shadow = True, startangle=90, textprops={'fontsize': 14})
-    plt.savefig('../Data/Statistics/Loss_reason.jpg', pad_inches = 0.5, transparent=True, bbox_inches = 'tight')
-
     #judge score
+    global who_wins
     scoreA = [0 for _ in range(len(df))]
     scoreB = [0 for _ in range(len(df))]
-    global who_wins
-    who_wins=[]
+    getpoint_player = [None for _ in range(len(df))]
+    rallys = [0 for _ in range(len(df))]
+    sets = [0 for _ in range(len(df))]
+    who_wins = []
     scoreAtmp = 0
     scoreBtmp = 0
 
     index = 0
-    sets = 1
+    lose_reason_index = 0
+    sets_now = 1
+    rallys_now = 1
 
     for i in range(len(df)) :
-        #because rally 29 is accidentally missed in before,so forced the answer in here
-        # if index==28 and df['Frame'][i]==13300:
-        #     scoreBtmp+=1
-        #     who_wins+='B'
-        #     scoreA[i] = scoreAtmp
-        #     scoreB[i] = scoreBtmp
-        #     continue
-        
         if i+thr <len(df):
             thr = 7
         else:
             thr = 0
-        
+
         #short video is imcomplete
-        if index == 25 :
+        if rallys_now == 26 :
             scoreAtmp = 0
             scoreBtmp = 0
-            sets = 2
+            sets_now += 1
+            rallys_now = 1
 
+        # # Determine when will be next set,complete video use
+        # if scoreAtmp >=21 or scoreBtmp >=21:
+        #     if abs(scoreAtmp - scoreBtmp) >= 2:
+        #         scoreAtmp = 0
+        #         scoreBtmp = 0
+        #         sets_now += 1
+        #         rallys_now = 1
+
+        getpoint_player_tmp = None
         if df['end'][i] == 1:
-            if sets == 1:
-                if on_off_court['on_off_court'][index] == 0 and df['Y'][i+thr] < 450 :
-                    scoreAtmp+=1
-                    who_wins+='A'
-                if (on_off_court['on_off_court'][index] == 1 or on_off_court['on_off_court'][index] == 2) and df['Y'][i+thr] < 450 :
-                    scoreBtmp+=1
-                    who_wins+='B'
-                if on_off_court['on_off_court'][index] == 0 and df['Y'][i+thr] > 450 :
-                    scoreBtmp+=1
-                    who_wins+='B'
-                if (on_off_court['on_off_court'][index] == 1 or on_off_court['on_off_court'][index] == 2) and df['Y'][i+thr] > 450 :
-                    scoreAtmp+=1
-                    who_wins+='A'
+            if sets_now%2 == 1:
+                if sets_now == 1:
+                    if on_off_court['on_off_court'][index] == 0 and df['Y'][i+thr] < 450 :
+                        scoreAtmp+=1
+                        getpoint_player_tmp ='A'
+                        who_wins += 'A'
+                    if (on_off_court['on_off_court'][index] == 1 or on_off_court['on_off_court'][index] == 2) and df['Y'][i+thr] < 450 :
+                        scoreBtmp+=1
+                        getpoint_player_tmp ='B'
+                        who_wins += 'B'
+                    if on_off_court['on_off_court'][index] == 0 and df['Y'][i+thr] > 450 :
+                        scoreBtmp+=1
+                        getpoint_player_tmp ='B'
+                        who_wins += 'B'
+                    if (on_off_court['on_off_court'][index] == 1 or on_off_court['on_off_court'][index] == 2) and df['Y'][i+thr] > 450 :
+                        scoreAtmp+=1
+                        getpoint_player_tmp ='A'
+                        who_wins += 'A'
+
+                # Set 3 player will change court when score to 11
+                else:
+                    # Same as set 2
+                    if scoreAtmp >= 11 or scoreBtmp >= 11:
+                        if on_off_court['on_off_court'][index] == 0 and df['Y'][i+thr] < 450 :
+                            scoreBtmp+=1
+                            getpoint_player_tmp ='B'
+                            who_wins += 'B'
+                        if (on_off_court['on_off_court'][index] == 1 or on_off_court['on_off_court'][index] == 2) and df['Y'][i+thr] < 450 :
+                            scoreAtmp+=1
+                            getpoint_player_tmp ='A'
+                            who_wins += 'A'
+                        if on_off_court['on_off_court'][index] == 0 and df['Y'][i+thr] > 450 :
+                            scoreAtmp+=1
+                            getpoint_player_tmp ='A'
+                            who_wins += 'A'
+                        if (on_off_court['on_off_court'][index] == 1 or on_off_court['on_off_court'][index] == 2) and df['Y'][i+thr] > 450 :
+                            scoreBtmp+=1
+                            getpoint_player_tmp ='B'
+                            who_wins += 'B'
+                    # Same as set 1
+                    else:
+                        if on_off_court['on_off_court'][index] == 0 and df['Y'][i+thr] < 450 :
+                            scoreAtmp+=1
+                            getpoint_player_tmp ='A'
+                            who_wins += 'A'
+                        if (on_off_court['on_off_court'][index] == 1 or on_off_court['on_off_court'][index] == 2) and df['Y'][i+thr] < 450 :
+                            scoreBtmp+=1
+                            getpoint_player_tmp ='B'
+                            who_wins += 'B'
+                        if on_off_court['on_off_court'][index] == 0 and df['Y'][i+thr] > 450 :
+                            scoreBtmp+=1
+                            getpoint_player_tmp ='B'
+                            who_wins += 'B'
+                        if (on_off_court['on_off_court'][index] == 1 or on_off_court['on_off_court'][index] == 2) and df['Y'][i+thr] > 450 :
+                            scoreAtmp+=1
+                            getpoint_player_tmp ='A'
+                            who_wins += 'A'
             else:
                 if on_off_court['on_off_court'][index] == 0 and df['Y'][i+thr] < 450 :
                     scoreBtmp+=1
-                    who_wins+='B'
+                    getpoint_player_tmp ='B'
+                    who_wins += 'B'
                 if (on_off_court['on_off_court'][index] == 1 or on_off_court['on_off_court'][index] == 2) and df['Y'][i+thr] < 450 :
                     scoreAtmp+=1
-                    who_wins+='A'
+                    getpoint_player_tmp ='A'
+                    who_wins += 'A'
                 if on_off_court['on_off_court'][index] == 0 and df['Y'][i+thr] > 450 :
                     scoreAtmp+=1
-                    who_wins+='A'
+                    getpoint_player_tmp ='A'
+                    who_wins += 'A'
                 if (on_off_court['on_off_court'][index] == 1 or on_off_court['on_off_court'][index] == 2) and df['Y'][i+thr] > 450 :
                     scoreBtmp+=1
-                    who_wins+='B'
-            index+=1     
-            
+                    getpoint_player_tmp ='B'
+                    who_wins += 'B'
+            index += 1
+        
+        sets[i] = sets_now
+        rallys[i] = rallys_now
+        getpoint_player[i] = getpoint_player_tmp
         scoreA[i] = scoreAtmp
         scoreB[i] = scoreBtmp
 
-    df['scoreA']=scoreA
-    df['scoreB']=scoreB
+        if df['end'][i] == 1:
+            rallys_now += 1
 
+    df['scoreA'] = scoreA
+    df['scoreB'] = scoreB
+    df['getpoint_player'] = getpoint_player
+    df['rally'] = rallys
+    df['set'] = sets
 
-    # #convert to json file,need yen's prediction or cannot produce json file
-    count = 0
-    count_sum=0
-    hit_number = []
-    for i in range(len(df)) :
-        if df['hitpoint'][i] == 1 :
-            count += 1
-        if df['end'][i] == 1 :
-            count_sum += count
-            hit_number += [count]
-            count = 0
-
-    result = pd.DataFrame(columns = ["set","rally","stroke","winner","on_off_court",'balltype'])
-    set = [1 for _ in range(len(hit_number))]
-    rallys = [_+1 for _ in range(len(hit_number))]
-
-    # get prediction ball type
-    rally2 = pd.read_excel('../Data/TrainTest/clip_info_18IND_TC.xlsx')
-    rally2 = rally2[['unique_id','getpoint_player','prediction']]
-    balltype = []
-    flag = 0
-    for i in range(len(rally2)):
-        if rally2['getpoint_player'][i] == 'A' or rally2['getpoint_player'][i] == 'B':
-            if len(balltype) == 28 and not flag:
-                flag = 1
-                continue
-            balltype += [rally2['prediction'][i-1]]
-            
-    conv_balltype = { 
-        'cut': '切球', 
-        'drive': '平球', 
-        'lob': '挑球' , 
-        'long': '長球', 
-        'netplay': '小球',
-        'rush': '撲球',
-        'smash': '殺球'
-    }
-
-    conv_onoffcourt = {
-        '0': '出界',
-        '1': '落地',
-        '2': '未回擊成功'
-    }
-            
-    #get lose area,only this is ground truth
-    # rally2 = pd.read_excel('../Data/TrainTest/clip_info_18IND_TC.xlsx')
-    # rally2 = rally2[['hit_area','lose_reason']].dropna().reset_index(drop=True)
-    # rally2 = rally2[:-1]            #unfound one end,drop last to match the size
-
-    # result['balltype'] = balltype
-    # result['balltype'] = result['balltype'].map(conv_balltype)
-    # result['lose_area'] = rally2['hit_area']
-    # result['set'] = set
-    # result['rally'] = rallys
-    # result['stroke'] = hit_number
-    # result['winner'] = who_wins
-    # result['on_off_court'] = on_off_court
-    # result['on_off_court'] = result['on_off_court'].astype(str).map(conv_onoffcourt)
-    # result = (result.groupby(['set'], as_index=False)
-    #             .apply(lambda x: x[['rally','stroke','winner','on_off_court','balltype','lose_area']].to_dict('r'))
-    #             .reset_index()
-    #             .rename(columns={0:'result'})
-    #             )
-
-    # #plot counting result
-    # plt.figure(figsize = (12,6))
-    # plt.grid()
-    # plt.title('Stroke counting in rallies', fontsize = 16)
-    # plt.xlabel('Rally', fontsize = 16)
-    # plt.ylabel('Count', fontsize = 16)
-    # plt.plot(hit_number, marker = 'o', color = 'magenta', linestyle = 'dashed')
-    # for i in range(len(hit_number)):
-    #     plt.text(i, hit_number[i]+0.3, hit_number[i], ha='center', va='bottom', fontsize=12)
-    # plt.savefig('../Data/Statistics/Rally_count.jpg', pad_inches = 0.5, transparent=True, bbox_inches = 'tight')
-
-    # export_json('../Data/Statistics/rally_count.json',result)
+    #Output segmentation result into csv
+    record_hitpoint_file='../Data/AccuracyResult/record_segmentation.csv'
+    with open(record_hitpoint_file,'w',encoding='utf-8') as f:
+        c=csv.writer(f,lineterminator='\n')
+        f.write('Set,Rally,Frame,X,Y,Time,Getpoint_player,Lose_reason\n')
+        for i in range(len(df)):
+            tmp=[]
+            if df['hitpoint'][i]==1 :
+                tmp.append(df['set'][i])
+                tmp.append(df['rally'][i])
+                tmp.append(df['Frame'][i])
+                tmp.append(df['X'][i])
+                tmp.append(df['Y'][i])
+                tmp.append(time['Time'][i])
+                tmp.append(df['getpoint_player'][i])
+                tmp.append(df['lose_reason'][i])
+                c.writerow(tmp)
 
     check_accuracy()
 
