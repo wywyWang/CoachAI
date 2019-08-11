@@ -14,9 +14,9 @@ python3 segmentation.py
 | 1 | 0 | 0 | 0 |
 ### Output :
 - csv format :
-  | Set | Rally | Frame | X | Y | Time | Getpoint_player | Lose_reason |
-  | --- | -------- | --- | --- | --- | --- | --- | --- |
-  | 1 | 2 | 795 | 486 | 397 | 00:00:26.527 | B | 0 |
+  - | Set | Rally | Frame | X | Y | Time | Getpoint_player | Lose_reason |
+    | --- | -------- | --- | --- | --- | --- | --- | --- |
+    | 1 | 2 | 795 | 486 | 397 | 00:00:26.527 | B | 0 |
 
 - virtual umpire video screenshot :
 ![](https://i.imgur.com/zTH5wMu.jpg)
