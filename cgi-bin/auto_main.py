@@ -35,7 +35,7 @@ result_dir = "./preprocessing/Data/training/result/"
 model_path = "./preprocessing/Data/training/model/model.joblib.dat"
 
 name_train = "video3_train"
-name_result = "0811_predict_result"
+name_result = "0812_predict_result"
 
 filename_train = pre_dir + name_train + ext
 filename_result = result_dir + name_result + ext

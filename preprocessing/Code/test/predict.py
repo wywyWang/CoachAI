@@ -176,4 +176,4 @@ def verify(pre_dir, filename_predict, model_path, result_dir, filename_result):
         if os.path.isfile(filename_result):
             print("Already exist result file: "+str(filename_result))
 
-verify("./", "out_after.csv", "../preprocessing/Data/training/model/model.joblib.dat", "./rrr", "./rrr/resulttttt.csv")
+verify("./", "../../Data/training/data/out_preprocessed.csv", "../../Data/training/model/model.joblib.dat", "./rrr", "./rrr/resulttttt.csv")

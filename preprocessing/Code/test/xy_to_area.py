@@ -1,3 +1,5 @@
+import pandas as pd
+
 x_len = {"A": 208, "B": 76, "C": 76}
 y_len = {"0": 1, "1": 161, "2": 233, "3": 74}
 x_area_map = {0: "D", 1: "B", 2: "A", 3: "C", 4: "E"}
@@ -50,6 +52,7 @@ def judge(x, y):
 #convert coordinate to area
 def to_area(x_list, y_list):
 	area_list = []
+	print(len(x_list))
 	for i in range(len(x_list)):
 		x = x_list[i]
 		y = y_list[i]
@@ -63,4 +66,19 @@ def to_area(x_list, y_list):
 			area_list.append(judge(reset_x(x), reset_y(y)))
 		else:
 			area_list.append('')
+	print(len(y_list))
+	print(len(area_list))
 	return area_list
+
+def main(filename, save):
+	data = pd.read_csv(filename)
+	data = data[['hit_x', 'hit_y']]
+
+	df = pd.DataFrame([])
+	df['hit_x'] = data['hit_x']
+	df['hit_y'] = data['hit_y']
+	
+	df["hit_area"] = pd.Series(to_area(data['hit_x'], data['hit_y']))
+	df.to_csv(save, index=False, encoding = 'utf-8')
+
+main("out.csv", "change.csv")

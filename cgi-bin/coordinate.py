@@ -19,8 +19,8 @@ def convert_hit_area(filename, savename):
 	data = pd.read_csv(filename)
 	frame = data['Frame']
 	time = data['Time']
-	hit_x = data['X']
-	hit_y = data['Y']
+	hit_x = data['Y']
+	hit_y = data['X']
 	getpoint_player = data['Getpoint_player']
 	
 	for reason in data['Lose_reason']:

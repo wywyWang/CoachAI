@@ -171,4 +171,4 @@ def run(filename, savename, unique_id, player_pos_option, frame_option, player_p
     exec(savename, player_pos_option, frame_option, player_pos_file, specific_frame_file)
     print("All done...")
 
-#run("out.csv", "out_after.csv", '', 0, 0, '', '')
+run("../../Data/training/data/out.csv", "../../Data/training/data/out_preprocessed.csv", '', 0, 0, '', '')

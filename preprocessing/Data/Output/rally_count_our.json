@@ -8,7 +8,7 @@
                 "stroke": 17,
                 "winner": "A",
                 "on_off_court": "\u843d\u5730",
-                "balltype": null,
+                "balltype": "netplay",
                 "lose_area": "E1"
             },
             {
@@ -17,7 +17,7 @@
                 "stroke": 5,
                 "winner": "B",
                 "on_off_court": "\u51fa\u754c",
-                "balltype": null,
+                "balltype": "netplay",
                 "lose_area": "E1"
             },
             {
@@ -26,7 +26,7 @@
                 "stroke": 6,
                 "winner": "A",
                 "on_off_court": "\u51fa\u754c",
-                "balltype": null,
+                "balltype": "netplay",
                 "lose_area": "E1"
             },
             {
@@ -35,7 +35,7 @@
                 "stroke": 25,
                 "winner": "B",
                 "on_off_court": "\u843d\u5730",
-                "balltype": null,
+                "balltype": "netplay",
                 "lose_area": "E1"
             },
             {
@@ -44,7 +44,7 @@
                 "stroke": 22,
                 "winner": "B",
                 "on_off_court": "\u672a\u56de\u64ca\u6210\u529f",
-                "balltype": null,
+                "balltype": "netplay",
                 "lose_area": "D1"
             },
             {
@@ -53,7 +53,7 @@
                 "stroke": 9,
                 "winner": "A",
                 "on_off_court": "\u672a\u56de\u64ca\u6210\u529f",
-                "balltype": null,
+                "balltype": "netplay",
                 "lose_area": "D1"
             },
             {
@@ -62,7 +62,7 @@
                 "stroke": 10,
                 "winner": "B",
                 "on_off_court": "\u672a\u56de\u64ca\u6210\u529f",
-                "balltype": null,
+                "balltype": "netplay",
                 "lose_area": "E1"
             },
             {
@@ -71,7 +71,7 @@
                 "stroke": 7,
                 "winner": "B",
                 "on_off_court": "\u843d\u5730",
-                "balltype": null,
+                "balltype": "netplay",
                 "lose_area": "E1"
             },
             {
@@ -80,7 +80,7 @@
                 "stroke": 6,
                 "winner": "B",
                 "on_off_court": "\u51fa\u754c",
-                "balltype": null,
+                "balltype": "netplay",
                 "lose_area": "E1"
             },
             {
@@ -89,7 +89,7 @@
                 "stroke": 11,
                 "winner": "A",
                 "on_off_court": "\u51fa\u754c",
-                "balltype": null,
+                "balltype": "netplay",
                 "lose_area": "E1"
             },
             {
@@ -98,7 +98,7 @@
                 "stroke": 5,
                 "winner": "A",
                 "on_off_court": "\u51fa\u754c",
-                "balltype": null,
+                "balltype": "netplay",
                 "lose_area": "E1"
             },
             {
@@ -107,7 +107,7 @@
                 "stroke": 14,
                 "winner": "A",
                 "on_off_court": "\u843d\u5730",
-                "balltype": null,
+                "balltype": "netplay",
                 "lose_area": "E2"
             },
             {
@@ -116,7 +116,7 @@
                 "stroke": 10,
                 "winner": "B",
                 "on_off_court": "\u51fa\u754c",
-                "balltype": null,
+                "balltype": "netplay",
                 "lose_area": "E2"
             },
             {
@@ -125,7 +125,7 @@
                 "stroke": 9,
                 "winner": "A",
                 "on_off_court": "\u672a\u56de\u64ca\u6210\u529f",
-                "balltype": null,
+                "balltype": "netplay",
                 "lose_area": "D1"
             },
             {
@@ -134,7 +134,7 @@
                 "stroke": 9,
                 "winner": "B",
                 "on_off_court": "\u843d\u5730",
-                "balltype": null,
+                "balltype": "netplay",
                 "lose_area": "E1"
             },
             {
@@ -143,7 +143,7 @@
                 "stroke": 9,
                 "winner": "A",
                 "on_off_court": "\u843d\u5730",
-                "balltype": null,
+                "balltype": "netplay",
                 "lose_area": "D1"
             },
             {
@@ -152,7 +152,7 @@
                 "stroke": 11,
                 "winner": "B",
                 "on_off_court": "\u843d\u5730",
-                "balltype": null,
+                "balltype": "netplay",
                 "lose_area": "E1"
             },
             {
@@ -161,7 +161,7 @@
                 "stroke": 13,
                 "winner": "A",
                 "on_off_court": "\u843d\u5730",
-                "balltype": null,
+                "balltype": "netplay",
                 "lose_area": "E2"
             },
             {
@@ -170,7 +170,7 @@
                 "stroke": 12,
                 "winner": "A",
                 "on_off_court": "\u51fa\u754c",
-                "balltype": null,
+                "balltype": "netplay",
                 "lose_area": "E1"
             },
             {
@@ -179,7 +179,7 @@
                 "stroke": 11,
                 "winner": "A",
                 "on_off_court": "\u672a\u56de\u64ca\u6210\u529f",
-                "balltype": null,
+                "balltype": "netplay",
                 "lose_area": "D1"
             },
             {
@@ -188,7 +188,7 @@
                 "stroke": 18,
                 "winner": "A",
                 "on_off_court": "\u51fa\u754c",
-                "balltype": null,
+                "balltype": "netplay",
                 "lose_area": "E1"
             },
             {
@@ -197,7 +197,7 @@
                 "stroke": 6,
                 "winner": "A",
                 "on_off_court": "\u843d\u5730",
-                "balltype": null,
+                "balltype": "netplay",
                 "lose_area": "E2"
             },
             {
@@ -206,7 +206,7 @@
                 "stroke": 11,
                 "winner": "B",
                 "on_off_court": "\u51fa\u754c",
-                "balltype": null,
+                "balltype": "netplay",
                 "lose_area": "E2"
             },
             {
@@ -215,7 +215,7 @@
                 "stroke": 8,
                 "winner": "B",
                 "on_off_court": "\u51fa\u754c",
-                "balltype": null,
+                "balltype": "netplay",
                 "lose_area": "D1"
             },
             {
@@ -224,7 +224,7 @@
                 "stroke": 5,
                 "winner": "B",
                 "on_off_court": "\u51fa\u754c",
-                "balltype": null,
+                "balltype": "netplay",
                 "lose_area": "E1"
             },
             {
@@ -233,7 +233,7 @@
                 "stroke": 14,
                 "winner": "B",
                 "on_off_court": "\u51fa\u754c",
-                "balltype": null,
+                "balltype": "netplay",
                 "lose_area": "E1"
             },
             {
@@ -242,7 +242,7 @@
                 "stroke": 10,
                 "winner": "A",
                 "on_off_court": "\u843d\u5730",
-                "balltype": null,
+                "balltype": "netplay",
                 "lose_area": "E1"
             },
             {
@@ -251,7 +251,7 @@
                 "stroke": 12,
                 "winner": "B",
                 "on_off_court": "\u51fa\u754c",
-                "balltype": null,
+                "balltype": "netplay",
                 "lose_area": "E1"
             },
             {
@@ -260,7 +260,7 @@
                 "stroke": 19,
                 "winner": "B",
                 "on_off_court": "\u51fa\u754c",
-                "balltype": null,
+                "balltype": "netplay",
                 "lose_area": "E1"
             },
             {
@@ -269,7 +269,7 @@
                 "stroke": 19,
                 "winner": "B",
                 "on_off_court": "\u51fa\u754c",
-                "balltype": null,
+                "balltype": "netplay",
                 "lose_area": "E1"
             },
             {
@@ -278,7 +278,7 @@
                 "stroke": 9,
                 "winner": "B",
                 "on_off_court": "\u843d\u5730",
-                "balltype": null,
+                "balltype": "netplay",
                 "lose_area": "E2"
             },
             {
@@ -287,7 +287,7 @@
                 "stroke": 11,
                 "winner": "B",
                 "on_off_court": "\u672a\u56de\u64ca\u6210\u529f",
-                "balltype": null,
+                "balltype": "netplay",
                 "lose_area": "D1"
             },
             {
@@ -296,7 +296,7 @@
                 "stroke": 10,
                 "winner": "B",
                 "on_off_court": "\u51fa\u754c",
-                "balltype": null,
+                "balltype": "netplay",
                 "lose_area": "E1"
             },
             {
@@ -305,7 +305,7 @@
                 "stroke": 5,
                 "winner": "A",
                 "on_off_court": "\u843d\u5730",
-                "balltype": null,
+                "balltype": "netplay",
                 "lose_area": "E1"
             },
             {
@@ -314,7 +314,7 @@
                 "stroke": 22,
                 "winner": "A",
                 "on_off_court": "\u843d\u5730",
-                "balltype": null,
+                "balltype": "netplay",
                 "lose_area": "D1"
             },
             {
@@ -323,7 +323,7 @@
                 "stroke": 13,
                 "winner": "A",
                 "on_off_court": "\u843d\u5730",
-                "balltype": null,
+                "balltype": "netplay",
                 "lose_area": "E1"
             },
             {
@@ -332,7 +332,7 @@
                 "stroke": 25,
                 "winner": "B",
                 "on_off_court": "\u843d\u5730",
-                "balltype": null,
+                "balltype": "netplay",
                 "lose_area": "E1"
             },
             {
@@ -341,7 +341,7 @@
                 "stroke": 8,
                 "winner": "B",
                 "on_off_court": "\u51fa\u754c",
-                "balltype": null,
+                "balltype": "netplay",
                 "lose_area": "D1"
             }
         ]
