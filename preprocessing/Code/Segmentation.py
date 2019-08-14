@@ -47,8 +47,6 @@ def readData():
     df['vecX'] = vecX
     df['vecY'] = vecY
 
-    segmentation()
-
 def segmentation():
     #Court refer to TAI vs CHEN
     court_top_left_x=470
@@ -128,7 +126,6 @@ def segmentation():
         i+=1
 
     print('After pruning the consecutive detections, number of detected hit-point = %d' %count)
-    rallyend()
 
 def rallyend():
     end = [0 for _ in range(len(df))]
@@ -161,9 +158,7 @@ def rallyend():
                 end[j]=0
             i=i+150               
             
-    # end[len(df)-1]=1    #18116 frame
     df['end']=end
-    on_off_court()
 
 def on_off_court():
     court_top_left_x=484
@@ -400,8 +395,6 @@ def on_off_court():
                 tmp.append(df['getpoint_player'][i])
                 tmp.append(df['lose_reason'][i])
                 c.writerow(tmp)
-
-    check_accuracy()
 
 def check_accuracy():
     count=0
@@ -681,5 +674,9 @@ if __name__ == "__main__":
     import csv
     np.set_printoptions(suppress=True)
     readData()
+    segmentation()
+    rallyend()
+    on_off_court()
+    check_accuracy()
 
     # generateVideo(df,df_complete,numFrame)      #if don't need can comment out

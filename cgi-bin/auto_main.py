@@ -5,7 +5,7 @@ import predict
 import coordinate as coordinate_adjust
 import output
 
-input_video_name = "TestVideo"
+input_video_name = "19IND_TC"
 
 # training data preprocessing input params
 pre_dir = "./preprocessing/Data/training/data/"
@@ -53,7 +53,7 @@ segmentation_output = segmentation_path + segmentation_output + ext
 
 # output json file
 json__ext = ".json"
-rally_count_json_filename = input_video_name+"_rally_count_our_test"
+rally_count_json_filename = "rally_count_our_" + input_video_name
 rally_type_json_filename = ""
 output_json_dir = "./preprocessing/Data/Output/"
 
@@ -65,7 +65,7 @@ if __name__ == "__main__":
     print()                             # blank line, end of headers
     
     # Run segmentation
-    auto_segmentation.begin()
+    auto_segmentation.run()
 
 	# training and prediction
     coordinate_adjust.run(segmentation_output, raw_data)
