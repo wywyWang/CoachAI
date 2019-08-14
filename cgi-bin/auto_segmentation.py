@@ -44,7 +44,7 @@ def readData():
             df['Dup'][i]=0
             i+=1  
 
-    print(np.shape(df))
+    # print(np.shape(df))
 
     # Absolute position
     X = df['X']
@@ -136,7 +136,7 @@ def segmentation():
                 j+=1              
         i+=1
 
-    print('After pruning the consecutive detections, number of detected hit-point = %d' %count)
+    # print('After pruning the consecutive detections, number of detected hit-point = %d' %count)
 
 def rallyend():
     end = [0 for _ in range(len(df))]
@@ -427,12 +427,19 @@ def check_accuracy():
                     break
             
     print("===========HITPOINT ACCURACY=============")
+    print("<br>")
     print("Total Calculate number = ",total)
+    print("<br>")
     print("Total Correct number = ",len(record))
+    print("<br>")
     print("Correct number = ",count)
+    print("<br>")
     print("Precision = ",float(count/len(record)))
+    print("<br>")
     print("Recall = ",float(count/total))
+    print("<br>")
     print("=========================================")
+    print("<br>")
 
     #get ground truth rally start and rally end
     rallystart = []
@@ -466,12 +473,19 @@ def check_accuracy():
         frame+=1 
             
     print("===========RALLY END ACCURACY=============")
+    print("<br>")
     print("Total Calculate number = ",total)
+    print("<br>")
     print("Total Correct number = ",len(rallyend))
+    print("<br>")
     print("Correct number = ",count)
+    print("<br>")
     print("Precision = ",float(count/len(rallyend)))
+    print("<br>")
     print("Recall = ",float(count/(len(df['end'][df['end']==1]))))
+    print("<br>")
     print("==========================================")
+    print("<br>")
 
     #check virtual umpire accuracy
     rally_umpire = pd.read_excel('./preprocessing/Data/TrainTest/clip_info_18IND_TC.xlsx')
@@ -494,10 +508,15 @@ def check_accuracy():
         j+=1
         
     print("=======VIRTUAL UMPIRE ACCURACY=======")
+    print("<br>")
     print("Correct Number = ",correct)
+    print("<br>")
     print("Total Number = ",len(rally_umpire))
+    print("<br>")
     print("Accuracy = ",correct/len(rally_umpire))
+    print("<br>")
     print("=====================================")
+    print("<br>")
 
 def export_json(filepath,data):
     with open(filepath,'w') as outfile:
@@ -682,4 +701,4 @@ def run(segmentation_output):
     check_accuracy()
     # generateVideo(df,df_complete,numFrame)      #if don't need can comment out
 
-    print("SEGMENTATION DONE.")
+    print("SEGMENTATION DONE.<br>")

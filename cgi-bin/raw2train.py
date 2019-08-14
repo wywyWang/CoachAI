@@ -164,11 +164,14 @@ def exec(filename, player_pos_option, frame_option, player_pos_file, specific_fr
 
 def run(filename, savename, unique_id, player_pos_option, frame_option, player_pos_file, specific_frame_file):
     print("Getting velocity...")
+    print("<br>")
     get_velocity(filename, unique_id, savename)
     print("Getting velocity done...")
-    print("")
+    print("<br>")
     print("Starting main...")
+    print("<br>")
     exec(savename, player_pos_option, frame_option, player_pos_file, specific_frame_file)
     print("All done...")
+    print("<br>")
 
 #run("out.csv", "out_after.csv", '', 0, 0, '', '')

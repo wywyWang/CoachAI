@@ -61,8 +61,7 @@ rally_count_json_filename = output_json_dir + rally_count_json_filename + json__
 rally_type_json_filename = output_json_dir + rally_type_json_filename + json__ext
 
 if __name__ == "__main__":
-    print("Content-Type: text/plain")    # plain is following
-    print()                             # blank line, end of headers
+    print("Content-Type: text/html\n\n")    # html type is following
     
     # Run segmentation
     auto_segmentation.run(segmentation_output)
