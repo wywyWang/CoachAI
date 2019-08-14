@@ -5,9 +5,11 @@ import predict
 import coordinate as coordinate_adjust
 import output
 
+input_video_name = "TestVideo"
+
 # training data preprocessing input params
 pre_dir = "./preprocessing/Data/training/data/"
-raw_data = "out"
+raw_data = input_video_name
 ext = ".csv"
 
 # has players' position info? 1/0 : yes/no
@@ -35,10 +37,10 @@ if frame_option != 0:
 result_dir = "./preprocessing/Data/training/result/"
 model_path = "./preprocessing/Data/training/model/model.joblib.dat"
 
-name_train = "video3_train"
-name_result = "0813_predict_result"
+#name_train = "video3_train"
+name_result = input_video_name+"_predict_result"
 
-filename_train = pre_dir + name_train + ext
+#filename_train = pre_dir + name_train + ext
 filename_result = result_dir + name_result + ext
 
 # segmentation filename
@@ -51,7 +53,7 @@ segmentation_output = segmentation_path + segmentation_output + ext
 
 # output json file
 json__ext = ".json"
-rally_count_json_filename = "rally_count_our_test"
+rally_count_json_filename = input_video_name+"_rally_count_our_test"
 rally_type_json_filename = ""
 output_json_dir = "./preprocessing/Data/Output/"
 
