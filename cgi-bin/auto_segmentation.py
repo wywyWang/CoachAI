@@ -171,7 +171,7 @@ def rallyend():
             
     df['end']=end
 
-def on_off_court():
+def on_off_court(segmentation_output):
     court_top_left_x=484
     court_top_left_y=319
     court_top_right_x=835
@@ -390,8 +390,7 @@ def on_off_court():
     df['lose_reason'][idx] = on_off_court['on_off_court'].iloc[-1]
 
     #Output segmentation result into csv
-    record_hitpoint_file='./preprocessing/Data/AccuracyResult/record_segmentation.csv'
-    with open(record_hitpoint_file,'w',encoding='utf-8') as f:
+    with open(segmentation_output,'w',encoding='utf-8') as f:
         c=csv.writer(f,lineterminator='\n')
         f.write('Set,Rally,Frame,X,Y,Time,Getpoint_player,Lose_reason\n')
         for i in range(len(df)):
@@ -675,11 +674,11 @@ def generateVideo(df,df_complete,numFrame):
     output_video.release()
     cv2.destroyAllWindows()
 
-def run():
+def run(segmentation_output):
     readData()
     segmentation()
     rallyend()
-    on_off_court()
+    on_off_court(segmentation_output)
     check_accuracy()
     # generateVideo(df,df_complete,numFrame)      #if don't need can comment out
 

@@ -65,7 +65,7 @@ if __name__ == "__main__":
     print()                             # blank line, end of headers
     
     # Run segmentation
-    auto_segmentation.run()
+    auto_segmentation.run(segmentation_output)
 
 	# training and prediction
     coordinate_adjust.run(segmentation_output, raw_data)
