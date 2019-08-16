@@ -27,8 +27,8 @@ $(function () {
 
         var formData = new FormData();
         var dataFile = document.getElementById('video-uploader').files[0];
-        formData.append('video', dataFile);
-        // var url = $(this).attr("action");
+        formData.append('video_name', document.getElementById('video-name').value);
+        formData.append('video_uploader', dataFile, 'test.mp4');
 
         for (var key of formData.entries()) {
             console.log(key[0] + ', ' + key[1]);
@@ -37,11 +37,12 @@ $(function () {
         $.ajax({
             type: "POST",
             url: '../cgi-bin/auto_main.py',
-            data: $("form[id='submit-video']").serialize(), // serializes the form's elements.
+            data: formData, 
+            contentType: false,
             processData: false,
-            success: function(data)
+            success: function(response)
             {
-                // console.log(data)
+                // console.log(response)
             },
             error: function(error) {
                 console.log('Error: ' + error);

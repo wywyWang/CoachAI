@@ -13,7 +13,7 @@ import output
 print("Content-Type: text/html\n\n")    # html type is following
 form = cgi.FieldStorage()
 
-input_video_name = form.getvalue('video-name')
+input_video_name = form.getvalue('video_name')
 
 # training data preprocessing input params
 pre_dir = "./preprocessing/Data/training/data/"
