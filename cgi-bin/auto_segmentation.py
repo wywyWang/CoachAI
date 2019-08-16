@@ -9,11 +9,11 @@ import cv2
 import csv
 np.set_printoptions(suppress=True)
 
-def readData():
+def readData(segmentation_input):
     global numFrame,df,df_complete,time
     numFrame = 18241
     # Import data
-    df = pd.read_csv('./preprocessing/Data/TrainTest/Badminton_label_TC.csv')
+    df = pd.read_csv(segmentation_input)
     df = df[0:numFrame]
     dupl=[]
     df_complete = df[0:numFrame]
@@ -44,7 +44,7 @@ def readData():
             df['Dup'][i]=0
             i+=1  
 
-    print(np.shape(df))
+    # print(np.shape(df))
 
     # Absolute position
     X = df['X']
@@ -57,8 +57,6 @@ def readData():
     vecY.append(0)
     df['vecX'] = vecX
     df['vecY'] = vecY
-
-    segmentation()
 
 def segmentation():
     #Court refer to TAI vs CHEN
@@ -138,8 +136,7 @@ def segmentation():
                 j+=1              
         i+=1
 
-    print('After pruning the consecutive detections, number of detected hit-point = %d' %count)
-    rallyend()
+    # print('After pruning the consecutive detections, number of detected hit-point = %d' %count)
 
 def rallyend():
     end = [0 for _ in range(len(df))]
@@ -172,11 +169,9 @@ def rallyend():
                 end[j]=0
             i=i+150               
             
-    # end[len(df)-1]=1    #18116 frame
     df['end']=end
-    on_off_court()
 
-def on_off_court():
+def on_off_court(segmentation_output):
     court_top_left_x=484
     court_top_left_y=319
     court_top_right_x=835
@@ -395,8 +390,7 @@ def on_off_court():
     df['lose_reason'][idx] = on_off_court['on_off_court'].iloc[-1]
 
     #Output segmentation result into csv
-    record_hitpoint_file='./preprocessing/Data/AccuracyResult/record_segmentation.csv'
-    with open(record_hitpoint_file,'w',encoding='utf-8') as f:
+    with open(segmentation_output,'w',encoding='utf-8') as f:
         c=csv.writer(f,lineterminator='\n')
         f.write('Set,Rally,Frame,X,Y,Time,Getpoint_player,Lose_reason\n')
         for i in range(len(df)):
@@ -411,8 +405,6 @@ def on_off_court():
                 tmp.append(df['getpoint_player'][i])
                 tmp.append(df['lose_reason'][i])
                 c.writerow(tmp)
-
-    check_accuracy()
 
 def check_accuracy():
     count=0
@@ -435,12 +427,19 @@ def check_accuracy():
                     break
             
     print("===========HITPOINT ACCURACY=============")
+    print("<br>")
     print("Total Calculate number = ",total)
+    print("<br>")
     print("Total Correct number = ",len(record))
+    print("<br>")
     print("Correct number = ",count)
+    print("<br>")
     print("Precision = ",float(count/len(record)))
+    print("<br>")
     print("Recall = ",float(count/total))
+    print("<br>")
     print("=========================================")
+    print("<br>")
 
     #get ground truth rally start and rally end
     rallystart = []
@@ -474,12 +473,19 @@ def check_accuracy():
         frame+=1 
             
     print("===========RALLY END ACCURACY=============")
+    print("<br>")
     print("Total Calculate number = ",total)
+    print("<br>")
     print("Total Correct number = ",len(rallyend))
+    print("<br>")
     print("Correct number = ",count)
+    print("<br>")
     print("Precision = ",float(count/len(rallyend)))
+    print("<br>")
     print("Recall = ",float(count/(len(df['end'][df['end']==1]))))
+    print("<br>")
     print("==========================================")
+    print("<br>")
 
     #check virtual umpire accuracy
     rally_umpire = pd.read_excel('./preprocessing/Data/TrainTest/clip_info_18IND_TC.xlsx')
@@ -502,10 +508,15 @@ def check_accuracy():
         j+=1
         
     print("=======VIRTUAL UMPIRE ACCURACY=======")
+    print("<br>")
     print("Correct Number = ",correct)
+    print("<br>")
     print("Total Number = ",len(rally_umpire))
+    print("<br>")
     print("Accuracy = ",correct/len(rally_umpire))
+    print("<br>")
     print("=====================================")
+    print("<br>")
 
 def export_json(filepath,data):
     with open(filepath,'w') as outfile:
@@ -682,8 +693,12 @@ def generateVideo(df,df_complete,numFrame):
     output_video.release()
     cv2.destroyAllWindows()
 
-def begin():
-    readData()
+def run(segmentation_input, segmentation_output):
+    readData(segmentation_input)
+    segmentation()
+    rallyend()
+    on_off_court(segmentation_output)
+    check_accuracy()
     # generateVideo(df,df_complete,numFrame)      #if don't need can comment out
 
-    print("SEGMENTATION DONE.")
+    print("SEGMENTATION DONE.<br>")

@@ -84,9 +84,11 @@ def rally_type(rawfile, predict_file, savefile):
 
 def run(rawfile, predict_file, rally_count_savefile, rally_type_savefile):
 	print("Output rally_count json file...")
+	print("<br>")
 	rally_count(rawfile, predict_file, rally_count_savefile)
 	#print("Output rally_type json file...")
 	#rally_type(rawfile, predict_file, rally_type_savefile)
 	print("Output file done...")
+	print("<br>")
 
 #run("../../Data/training/data/out.csv", "../../Data/training/result/0811_predict_result.csv", "../../Data/Output/rally_count_our.json", "")
