@@ -3,6 +3,7 @@ import cgitb
 cgitb.enable(display=0, logdir="./log")
 
 import cgi
+import storevideo
 import auto_segmentation
 import raw2train as training_preprocess
 import training
@@ -69,6 +70,9 @@ rally_count_json_filename = output_json_dir + rally_count_json_filename + json__
 rally_type_json_filename = output_json_dir + rally_type_json_filename + json__ext
 
 if __name__ == "__main__":
+    # Store video
+    storevideo.store(form['video_uploader'])
+
     # Run segmentation
     auto_segmentation.run(segmentation_input, segmentation_output)
 
