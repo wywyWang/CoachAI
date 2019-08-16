@@ -9,11 +9,11 @@ import cv2
 import csv
 np.set_printoptions(suppress=True)
 
-def readData():
+def readData(segmentation_input):
     global numFrame,df,df_complete,time
     numFrame = 18241
     # Import data
-    df = pd.read_csv('./preprocessing/Data/TrainTest/Badminton_label_TC.csv')
+    df = pd.read_csv(segmentation_input)
     df = df[0:numFrame]
     dupl=[]
     df_complete = df[0:numFrame]
@@ -693,8 +693,8 @@ def generateVideo(df,df_complete,numFrame):
     output_video.release()
     cv2.destroyAllWindows()
 
-def run(segmentation_output):
-    readData()
+def run(segmentation_input, segmentation_output):
+    readData(segmentation_input)
     segmentation()
     rallyend()
     on_off_court(segmentation_output)

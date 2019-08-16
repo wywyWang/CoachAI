@@ -5,7 +5,7 @@ import predict
 import coordinate as coordinate_adjust
 import output
 
-input_video_name = "19IND_TC"
+input_video_name = "18IND_TC"
 
 # training data preprocessing input params
 pre_dir = "./preprocessing/Data/training/data/"
@@ -44,12 +44,13 @@ name_result = input_video_name+"_predict_result"
 filename_result = result_dir + name_result + ext
 
 # segmentation filename
-segmentation_path = "./preprocessing/Data/AccuracyResult/"
-segmentation_input = ""
-segmentation_output = "record_segmentation"
+segmentation_input_path = "./preprocessing/Data/TrainTest/"
+segmentation_output_path = "./preprocessing/Data/AccuracyResult/"
+segmentation_input = "Badminton_label_"
+segmentation_output = "record_segmentation_"
 
-segmentation_input = segmentation_path + segmentation_input + ext
-segmentation_output = segmentation_path + segmentation_output + ext
+segmentation_input = segmentation_input_path + segmentation_input + input_video_name+ ext
+segmentation_output = segmentation_output_path + segmentation_output + input_video_name+ ext
 
 # output json file
 json__ext = ".json"
@@ -64,7 +65,7 @@ if __name__ == "__main__":
     print("Content-Type: text/html\n\n")    # html type is following
     
     # Run segmentation
-    auto_segmentation.run(segmentation_output)
+    auto_segmentation.run(segmentation_input, segmentation_output)
 
 	# training and prediction
     coordinate_adjust.run(segmentation_output, raw_data)

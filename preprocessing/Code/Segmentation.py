@@ -1,8 +1,8 @@
-def readData():
+def readData(segmentation_input):
     global numFrame,df,df_complete,time
     numFrame = 18241
     # Import data
-    df = pd.read_csv('../Data/TrainTest/Badminton_label_TC.csv')
+    df = pd.read_csv(segmentation_input)
     df = df[0:numFrame]
     dupl=[]
     df_complete = df[0:numFrame]
@@ -160,7 +160,7 @@ def rallyend():
             
     df['end']=end
 
-def on_off_court():
+def on_off_court(segmentation_output):
     court_top_left_x=484
     court_top_left_y=319
     court_top_right_x=835
@@ -379,8 +379,7 @@ def on_off_court():
     df['lose_reason'][idx] = on_off_court['on_off_court'].iloc[-1]
 
     #Output segmentation result into csv
-    record_hitpoint_file='../Data/AccuracyResult/record_segmentation.csv'
-    with open(record_hitpoint_file,'w',encoding='utf-8') as f:
+    with open(segmentation_output,'w',encoding='utf-8') as f:
         c=csv.writer(f,lineterminator='\n')
         f.write('Set,Rally,Frame,X,Y,Time,Getpoint_player,Lose_reason\n')
         for i in range(len(df)):
@@ -673,10 +672,22 @@ if __name__ == "__main__":
     import cv2
     import csv
     np.set_printoptions(suppress=True)
-    readData()
+
+    # segmentation filename
+    input_video_name = "18IND_TC"
+    ext = ".csv"
+    segmentation_input_path = "../Data/TrainTest/"
+    segmentation_output_path = "../Data/AccuracyResult/"
+    segmentation_input = "Badminton_label_"
+    segmentation_output = "record_segmentation_"
+
+    segmentation_input = segmentation_input_path + segmentation_input + input_video_name + ext
+    segmentation_output = segmentation_output_path + segmentation_output + input_video_name + ext
+
+    readData(segmentation_input)
     segmentation()
     rallyend()
-    on_off_court()
+    on_off_court(segmentation_output)
     check_accuracy()
 
     # generateVideo(df,df_complete,numFrame)      #if don't need can comment out
