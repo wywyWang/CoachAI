@@ -19,6 +19,10 @@ $(function () {
             alert("Please upload file.");
             return false;
         }
+        if(document.getElementById('video-name').value.length == 0){
+            alert("Please Enter save name.");
+            return false;
+        }
         e.preventDefault(); // avoid to execute the actual submit of the form.
 
         var formData = new FormData();
@@ -33,7 +37,7 @@ $(function () {
         $.ajax({
             type: "POST",
             url: '../cgi-bin/auto_main.py',
-            data: formData, // serializes the form's elements.
+            data: $("form[id='submit-video']").serialize(), // serializes the form's elements.
             processData: false,
             success: function(data)
             {
@@ -45,7 +49,6 @@ $(function () {
         }).done(function(data) {
             console.log(data)
             $('.container').append(data);
-            // alert('finished python script');
         });
 
     });

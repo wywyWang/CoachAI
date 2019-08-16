@@ -1,3 +1,8 @@
+#Comment when not developing
+import cgitb
+cgitb.enable(display=0, logdir="./log")
+
+import cgi
 import auto_segmentation
 import raw2train as training_preprocess
 import training
@@ -5,7 +10,10 @@ import predict
 import coordinate as coordinate_adjust
 import output
 
-input_video_name = "18IND_TC"
+print("Content-Type: text/html\n\n")    # html type is following
+form = cgi.FieldStorage()
+
+input_video_name = form.getvalue('video-name')
 
 # training data preprocessing input params
 pre_dir = "./preprocessing/Data/training/data/"
@@ -32,7 +40,6 @@ if player_pos_option != 0:
 if frame_option != 0:
 	specific_frame_file += ext
 
-
 # training and predict input params
 result_dir = "./preprocessing/Data/training/result/"
 model_path = "./preprocessing/Data/training/model/model.joblib.dat"
@@ -55,15 +62,13 @@ segmentation_output = segmentation_output_path + segmentation_output + input_vid
 # output json file
 json__ext = ".json"
 rally_count_json_filename = "rally_count_our_" + input_video_name
-rally_type_json_filename = ""
+rally_type_json_filename = "" + input_video_name
 output_json_dir = "./preprocessing/Data/Output/"
 
 rally_count_json_filename = output_json_dir + rally_count_json_filename + json__ext
 rally_type_json_filename = output_json_dir + rally_type_json_filename + json__ext
 
 if __name__ == "__main__":
-    print("Content-Type: text/html\n\n")    # html type is following
-    
     # Run segmentation
     auto_segmentation.run(segmentation_input, segmentation_output)
 
