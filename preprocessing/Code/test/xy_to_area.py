@@ -52,7 +52,6 @@ def judge(x, y):
 #convert coordinate to area
 def to_area(x_list, y_list):
 	area_list = []
-	print(len(x_list))
 	for i in range(len(x_list)):
 		x = x_list[i]
 		y = y_list[i]
@@ -66,8 +65,7 @@ def to_area(x_list, y_list):
 			area_list.append(judge(reset_x(x), reset_y(y)))
 		else:
 			area_list.append('')
-	print(len(y_list))
-	print(len(area_list))
+
 	return area_list
 
 def main(filename, save):
@@ -81,4 +79,4 @@ def main(filename, save):
 	df["hit_area"] = pd.Series(to_area(data['hit_x'], data['hit_y']))
 	df.to_csv(save, index=False, encoding = 'utf-8')
 
-main("out.csv", "change.csv")
+#main("out.csv", "change.csv")

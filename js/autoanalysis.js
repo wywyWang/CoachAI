@@ -37,7 +37,7 @@ $(function () {
         $.ajax({
             type: "POST",
             url: '../cgi-bin/auto_main.py',
-            data: formData, 
+            data: formData.get('video_uploader'), 
             contentType: false,
             processData: false,
             success: function(response)

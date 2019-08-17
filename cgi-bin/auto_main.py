@@ -21,6 +21,8 @@ pre_dir = "./preprocessing/Data/training/data/"
 raw_data = input_video_name
 ext = ".csv"
 
+print("Video name: "+str(raw_data))
+
 # has players' position info? 1/0 : yes/no
 # if yes, player_pos_file (.csv) is needed
 player_pos_option = 0
@@ -63,7 +65,7 @@ segmentation_output = segmentation_output_path + segmentation_output + input_vid
 # output json file
 json__ext = ".json"
 rally_count_json_filename = "rally_count_our_" + input_video_name
-rally_type_json_filename = "" + input_video_name
+rally_type_json_filename = "rally_type_our_" + input_video_name
 output_json_dir = "./preprocessing/Data/Output/"
 
 rally_count_json_filename = output_json_dir + rally_count_json_filename + json__ext
@@ -83,5 +85,4 @@ if __name__ == "__main__":
     predict.verify(pre_dir, preprocessed_filename, model_path, result_dir, filename_result) #predict testing data
 
     # output json file
-    #"../../Data/training/data/out.csv", "../../Data/training/result/0811_predict_result.csv", "../../Data/Output/rally_count_our.json", ""
     output.run(raw_data, filename_result, rally_count_json_filename, rally_type_json_filename)
