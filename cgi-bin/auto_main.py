@@ -21,8 +21,6 @@ pre_dir = "./preprocessing/Data/training/data/"
 raw_data = input_video_name
 ext = ".csv"
 
-print("Video name: "+str(raw_data))
-
 # has players' position info? 1/0 : yes/no
 # if yes, player_pos_file (.csv) is needed
 player_pos_option = 0
@@ -39,9 +37,9 @@ preprocessed_filename = pre_dir + raw_data + "_preprocessed" + ext
 raw_data = pre_dir + raw_data + ext
 
 if player_pos_option != 0:
-	player_pos_file += ext
+    player_pos_file += ext
 if frame_option != 0:
-	specific_frame_file += ext
+    specific_frame_file += ext
 
 # training and predict input params
 result_dir = "./preprocessing/Data/training/result/"
@@ -61,6 +59,7 @@ segmentation_output = "record_segmentation_"
 
 segmentation_input = segmentation_input_path + segmentation_input + input_video_name+ ext
 segmentation_output = segmentation_output_path + segmentation_output + input_video_name+ ext
+
 
 # output json file
 json__ext = ".json"
