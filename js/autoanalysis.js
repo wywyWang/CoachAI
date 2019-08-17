@@ -40,6 +40,7 @@ $(function () {
             data: formData, 
             contentType: false,
             processData: false,
+            cache: false,
             success: function(response)
             {
                 // console.log(response)
