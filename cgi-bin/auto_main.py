@@ -13,6 +13,10 @@ import output
 
 print("Content-Type: text/html\n\n")    # html type is following
 form = cgi.FieldStorage()
+print("video type = ",form['video_uploader'].type)
+print('<br>')
+print("video size = ",len(form['video_uploader'].value))
+print('<br>')
 
 input_video_name = form['video_uploader'].filename.split('.')[0]
 

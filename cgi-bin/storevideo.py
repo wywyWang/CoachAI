@@ -1,12 +1,7 @@
 import os
 import shutil
-import base64
 
 def store(videofile):
-    print("video type = ",videofile.type)
-    print('<br>')
-    print("video size = ",len(videofile.value))
-    print('<br>')
     if videofile.filename:
         base_filename = os.path.basename(videofile.filename)
         video_folder = './uploadvideo/'
