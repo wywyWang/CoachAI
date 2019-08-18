@@ -14,7 +14,7 @@ import output
 print("Content-Type: text/html\n\n")    # html type is following
 form = cgi.FieldStorage()
 
-input_video_name = form.getvalue('video_name')
+input_video_name = form['video_uploader'].filename.split('.')[0]
 
 # training data preprocessing input params
 pre_dir = "./preprocessing/Data/training/data/"
