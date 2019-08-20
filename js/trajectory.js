@@ -14,7 +14,7 @@ function change_set(){
 
 function change_rally(){
     var game = document.getElementById("game").value;
-    var set=document.getElementById("set").value;
+    var set = document.getElementById("set").value;
     if(!set){
         set = 1;
     }
@@ -28,40 +28,22 @@ function change_rally(){
 }
 
 function get_interval_game(){
-    var insertText = '<option value='+ 1 +'>'+ 'Game 1' +'</option>';
-    $('#game').append(insertText); 
-    var insertText = '<option value='+ 2 +'>'+ 'Game 2' +'</option>';
-    $('#game').append(insertText); 
-    var insertText = '<option value='+ 3 +'>'+ 'Game 3' +'</option>';
-    $('#game').append(insertText); 
-    var insertText = '<option value='+ 4 +'>'+ 'Game 4' +'</option>';
-    $('#game').append(insertText); 
-    var insertText = '<option value='+ 5 +'>'+ 'Game 5' +'</option>';
-    $('#game').append(insertText); 
-    var insertText = '<option value='+ 6 +'>'+ 'Game 6' +'</option>';
-    $('#game').append(insertText); 
+    filename = 'statistics/game_name.json';
+    $.getJSON(filename, function(data) {
+        for(var i=1;i<=data.length;i++){
+            var insertText = '<option value=' + data[i-1] + '>' + 'Game ' + i + '</option>';
+            $('#game').append(insertText); 
+        }
+    })
 }
 
-function get_interval_set(game){
+function get_interval_set(game_name){
     //init game
-    if (!game){
-        game = 1;
+    if (!game_name){
+        game_name = "18IND_TC";
     }
-    var game_name;
-    if (game == 1)
-        game_name = '_18IND_TC';
-    if (game == 2)
-        game_name = '_19ASI_CS';
-    if (game == 3)
-        game_name = '_19SIN_CG';
-    if (game == 4)
-        game_name = '_19AUS_CJ';
-    if (game == 5)
-        game_name = '_19SIN_CJ';
-    if (game == 6)
-        game_name = '_19IND_KH';
 
-    filename = 'statistics/rally_detail_real' + game_name + '.json';
+    filename = 'statistics/rally_detail_real_' + game_name + '.json';
 
     $.getJSON(filename, function(data) {
         //find maximum set
@@ -77,7 +59,7 @@ function get_interval_set(game){
     });
 }
 
-function get_interval_rally(set,game){
+function get_interval_rally(set,game_name){
     var insertText = '<button id="interval-submit" type="button" class="btn btn-primary" onclick=change_rally()>查詢</button>';
     $('#dropdown').append(insertText); 
     var insertText = '<button class="btn btn-default" id="next" type="button">下一球</button>';
@@ -86,24 +68,10 @@ function get_interval_rally(set,game){
     $('#dropdown').append(insertText); 
 
     //init game
-    if (!game){
-        game = 1;
+    if (!game_name){
+        game_name = "18IND_TC";
     }
-    var game_name;
-    if (game == 1)
-        game_name = '_18IND_TC';
-    if (game == 2)
-        game_name = '_19ASI_CS';
-    if (game == 3)
-        game_name = '_19SIN_CG';
-    if (game == 4)
-        game_name = '_19AUS_CJ';
-    if (game == 5)
-        game_name = '_19SIN_CJ';
-    if (game == 6)
-        game_name = '_19IND_KH';
-        
-    filename = 'statistics/rally_detail_real' + game_name + '.json';
+    filename = 'statistics/rally_detail_real_' + game_name + '.json';
 
     $.getJSON(filename, function(data) {
         //init set
@@ -129,7 +97,7 @@ function get_interval_rally(set,game){
     })
 }
 
-function init_trajectory(set,game){
+function init_trajectory(set,game_name){
     var cwidth = "1200";
     var cheight = "600";
     $('.ball_trajectory').html('<canvas id="canvas" width=' + cwidth + ' height=' + cheight + '></canvas>');
@@ -146,24 +114,10 @@ function init_trajectory(set,game){
     ctx.clearRect(TopLeftX,TopLeftY,CourtW,CourtH);
     
     //init game
-    if (!game){
-        game = 1;
+    if (!game_name){
+        game_name = "18IND_TC";
     }
-    var game_name;
-    if (game == 1)
-        game_name = '_18IND_TC';
-    if (game == 2)
-        game_name = '_19ASI_CS';
-    if (game == 3)
-        game_name = '_19SIN_CG';
-    if (game == 4)
-        game_name = '_19AUS_CJ';
-    if (game == 5)
-        game_name = '_19SIN_CJ';
-    if (game == 6)
-        game_name = '_19IND_KH';
-        
-    filename = 'statistics/rally_detail_real' + game_name + '.json';
+    filename = 'statistics/rally_detail_real_' + game_name + '.json';
 
     $.getJSON(filename, function(data) {
         if(!set){
