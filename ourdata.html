@@ -35,6 +35,10 @@
     </div>
     <div class="container">
         <div id="dropdown" class="row form-group form-inline">
+            <label for="game">Game:</label>
+            <select id="game" class="form-control" onchange=change_game()>
+                <script type="text/javascript">get_interval_game();</script>
+            </select>
             <label for="set">Set:</label>
             <select id="set" class="form-control" onchange=change_set()>
                 <script type="text/javascript">get_interval_set();</script>
@@ -86,6 +90,8 @@
                     </div>
                     <div class="modal-body">
                         <canvas id="canvas" width="1000" height="800"></canvas>
+                        <div class="modal-text" id="lose_reason"></div>
+                        <div class="modal-text" id="lose_balltype"></div>
                     </div>
                 </div>
             </div>

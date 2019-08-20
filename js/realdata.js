@@ -1,23 +1,10 @@
 
-function init_linechart(minrally,maxrally,set,game){
+function init_linechart(minrally,maxrally,set,game_name){
     //init game
-    if (!game){
-        game = 1;
+    if (!game_name){
+        game_name = "18IND_TC";
     }
-    var game_name;
-    if (game == 1)
-        game_name = '_18IND_TC';
-    if (game == 2)
-        game_name = '_19ASI_CS';
-    if (game == 3)
-        game_name = '_19SIN_CG';
-    if (game == 4)
-        game_name = '_19AUS_CJ';
-    if (game == 5)
-        game_name = '_19SIN_CJ';
-    if (game == 6)
-        game_name = '_19IND_KH';
-    filename = 'statistics/rally_count_real' + game_name + '.json';
+    filename = 'statistics/rally_count_real_' + game_name + '.json';
 
     $.getJSON(filename, function(data) {
         [data,set,minrally,maxrally] = data_filter(data,set,minrally,maxrally,0);
@@ -287,20 +274,11 @@ function init_linechart(minrally,maxrally,set,game){
                 var id = set + '-' + (activepoints[0]['_index']+1)
                 console.log(id)
 
-                var game_name;
-                if (game == 1)
-                    game_name = '_18IND_TC';
-                if (game == 2)
-                    game_name = '_19ASI_CS';
-                if (game == 3)
-                    game_name = '_19SIN_CG';
-                if (game == 4)
-                    game_name = '_19AUS_CJ';
-                if (game == 5)
-                    game_name = '_19SIN_CJ';
-                if (game == 6)
-                    game_name = '_19IND_KH';
-                filename = 'statistics/rally_type_real' + game_name + '.json';
+                //init game
+                if (!game_name){
+                    game_name = "18IND_TC";
+                }
+                filename = 'statistics/rally_type_real_' + game_name + '.json';
 
                 $.getJSON(filename, function(data2) {
                     document.getElementById("rallytitle").innerHTML = id + ' 球種分佈圖';
@@ -415,7 +393,7 @@ function init_linechart(minrally,maxrally,set,game){
     });
 }
 
-function init_on_off_court(minrally,maxrally,set,game){
+function init_on_off_court(minrally,maxrally,set,game_name){
     //create player info radar
     $('#on_off_court .playerA').html('<div class="subtitle">選手A失分比例</div>\
     <canvas id="on_off_court_chartA" width="800" height="600"></canvas>');
@@ -443,23 +421,10 @@ function init_on_off_court(minrally,maxrally,set,game){
     };
 
     //init game
-    if (!game){
-        game = 1;
+    if (!game_name){
+        game_name = "18IND_TC";
     }
-    var game_name;
-    if (game == 1)
-        game_name = '_18IND_TC';
-    if (game == 2)
-        game_name = '_19ASI_CS';
-    if (game == 3)
-        game_name = '_19SIN_CG';
-    if (game == 4)
-        game_name = '_19AUS_CJ';
-    if (game == 5)
-        game_name = '_19SIN_CJ';
-    if (game == 6)
-        game_name = '_19IND_KH';
-    filename = 'statistics/rally_count_real' + game_name + '.json';
+    filename = 'statistics/rally_count_real_' + game_name + '.json';
 
     $.getJSON(filename, function(data) {
         [data,set,minrally,maxrally] = data_filter(data,set,minrally,maxrally,1);
@@ -538,7 +503,7 @@ function init_on_off_court(minrally,maxrally,set,game){
     });
 }
 
-function init_total_balltype(minrally,maxrally,set,game){
+function init_total_balltype(minrally,maxrally,set,game_name){
     $('#total_balltype .playerA').html('<div class="subtitle">選手A獲勝球種</div>\
     <canvas id="total_balltype_chartA" width="800" height="600"></canvas>');
     $('#total_balltype .playerB').html('<div class="subtitle">選手B獲勝球種</div>\
@@ -550,23 +515,10 @@ function init_total_balltype(minrally,maxrally,set,game){
     <canvas id="sum_balltype_chartB" width="800" height="600"></canvas>');
 
     //init game
-    if (!game){
-        game = 1;
+    if (!game_name){
+        game_name = "18IND_TC";
     }
-    var game_name;
-    if (game == 1)
-        game_name = '_18IND_TC';
-    if (game == 2)
-        game_name = '_19ASI_CS';
-    if (game == 3)
-        game_name = '_19SIN_CG';
-    if (game == 4)
-        game_name = '_19AUS_CJ';
-    if (game == 5)
-        game_name = '_19SIN_CJ';
-    if (game == 6)
-        game_name = '_19IND_KH';
-    filename = 'statistics/rally_type_real' + game_name + '.json';
+    filename = 'statistics/rally_type_real_' + game_name + '.json';
 
     $.getJSON(filename, function(data) {
         //init set
@@ -631,20 +583,7 @@ function init_total_balltype(minrally,maxrally,set,game){
             }
         };
 
-        var game_name;
-        if (game == 1)
-            game_name = '_18IND_TC';
-        if (game == 2)
-            game_name = '_19ASI_CS';
-        if (game == 3)
-            game_name = '_19SIN_CG';
-        if (game == 4)
-            game_name = '_19AUS_CJ';
-        if (game == 5)
-            game_name = '_19SIN_CJ';
-        if (game == 6)
-            game_name = '_19IND_KH';
-        filename = 'statistics/rally_count_real' + game_name + '.json';
+        filename = 'statistics/rally_count_real_' + game_name + '.json';
 
         //rendering each player win balltype
         $.getJSON(filename, function(data2) {
@@ -802,7 +741,7 @@ function init_total_balltype(minrally,maxrally,set,game){
     });
 }
 
-function init_stroke_distribution(minrally,maxrally,set,game){
+function init_stroke_distribution(minrally,maxrally,set,game_name){
     //create player info radar
     $('#stroke_distribution .playerA').html('<div class="subtitle">選手A得分拍數</div>\
     <canvas id="stroke_distribution_chartA" width="800" height="600"></canvas>');
@@ -829,23 +768,10 @@ function init_stroke_distribution(minrally,maxrally,set,game){
     };
 
     //init game
-    if (!game){
-        game = 1;
+    if (!game_name){
+        game_name = "18IND_TC";
     }
-    var game_name;
-    if (game == 1)
-        game_name = '_18IND_TC';
-    if (game == 2)
-        game_name = '_19ASI_CS';
-    if (game == 3)
-        game_name = '_19SIN_CG';
-    if (game == 4)
-        game_name = '_19AUS_CJ';
-    if (game == 5)
-        game_name = '_19SIN_CJ';
-    if (game == 6)
-        game_name = '_19IND_KH';
-    filename = 'statistics/rally_count_real' + game_name + '.json';
+    filename = 'statistics/rally_count_real_' + game_name + '.json';
 
     $.getJSON(filename, function(data) {
         [data,set,minrally,maxrally] = data_filter(data,set,minrally,maxrally,1);
@@ -946,7 +872,7 @@ function init_stroke_distribution(minrally,maxrally,set,game){
     });
 }
 
-function init_court_distribution(minrally,maxrally,set,game){
+function init_court_distribution(minrally,maxrally,set,game_name){
     //左邊是後場 右邊是前場 小戴是A 陳是B
     $('#total_court .playerA').html('<div class="subtitle">選手A失分分佈</div>\
     <img id="badminton_courtA" src="../image/badminton_court.jpg" width="100%"/>');
@@ -981,23 +907,10 @@ function init_court_distribution(minrally,maxrally,set,game){
     var ctxB = canvB.getContext("2d");
 
     //init game
-    if (!game){
-        game = 1;
+    if (!game_name){
+        game_name = "18IND_TC";
     }
-    var game_name;
-    if (game == 1)
-        game_name = '_18IND_TC';
-    if (game == 2)
-        game_name = '_19ASI_CS';
-    if (game == 3)
-        game_name = '_19SIN_CG';
-    if (game == 4)
-        game_name = '_19AUS_CJ';
-    if (game == 5)
-        game_name = '_19SIN_CJ';
-    if (game == 6)
-        game_name = '_19IND_KH';
-    filename = 'statistics/rally_count_real' + game_name + '.json';
+    filename = 'statistics/rally_count_real_' + game_name + '.json';
 
     $.getJSON(filename, function(data) {
         [data,set,minrally,maxrally] = data_filter(data,set,minrally,maxrally,1);
@@ -1309,44 +1222,27 @@ function change_set() {
 function change_game() {
     new_game = document.getElementById("game").value;
     $('#set option').remove();
-    get_interval_set(new_game);
+    get_interval_set();
     change_set();
 }
 
 function get_interval_game(){
-    var insertText = '<option value='+ 1 +'>'+ 'Game 1' +'</option>';
-    $('#game').append(insertText); 
-    var insertText = '<option value='+ 2 +'>'+ 'Game 2' +'</option>';
-    $('#game').append(insertText); 
-    var insertText = '<option value='+ 3 +'>'+ 'Game 3' +'</option>';
-    $('#game').append(insertText); 
-    var insertText = '<option value='+ 4 +'>'+ 'Game 4' +'</option>';
-    $('#game').append(insertText); 
-    var insertText = '<option value='+ 5 +'>'+ 'Game 5' +'</option>';
-    $('#game').append(insertText); 
-    var insertText = '<option value='+ 6 +'>'+ 'Game 6' +'</option>';
-    $('#game').append(insertText); 
+    filename = 'statistics/game_name.json';
+    $.getJSON(filename, function(data) {
+        for(var i=1;i<=data.length;i++){
+            var insertText = '<option value=' + data[i-1] + '>' + 'Game ' + i + '</option>';
+            $('#game').append(insertText); 
+        }
+    })
 }
 
-function get_interval_set(game){
+function get_interval_set(){
+    var game_name = document.getElementById("game").value;
     //init game
-    if (!game){
-        game = 1;
+    if (!game_name){
+        game_name = "18IND_TC";
     }
-    var game_name;
-    if (game == 1)
-        game_name = '_18IND_TC';
-    if (game == 2)
-        game_name = '_19ASI_CS';
-    if (game == 3)
-        game_name = '_19SIN_CG';
-    if (game == 4)
-        game_name = '_19AUS_CJ';
-    if (game == 5)
-        game_name = '_19SIN_CJ';
-    if (game == 6)
-        game_name = '_19IND_KH';
-    filename = 'statistics/rally_count_real' + game_name + '.json';
+    filename = 'statistics/rally_count_real_' + game_name + '.json';
 
     $.getJSON(filename, function(data) {
         //find max set
@@ -1365,24 +1261,12 @@ function get_interval_set(game){
 }
 
 function get_interval_updown(set,game){
+    var game_name = document.getElementById("game").value;
     //init game
-    if (!game){
-        game = 1;
+    if (!game_name){
+        game_name = "18IND_TC";
     }
-    var game_name;
-    if (game == 1)
-        game_name = '_18IND_TC';
-    if (game == 2)
-        game_name = '_19ASI_CS';
-    if (game == 3)
-        game_name = '_19SIN_CG';
-    if (game == 4)
-        game_name = '_19AUS_CJ';
-    if (game == 5)
-        game_name = '_19SIN_CJ';
-    if (game == 6)
-        game_name = '_19IND_KH';
-    filename = 'statistics/rally_count_real' + game_name + '.json';
+    filename = 'statistics/rally_count_real_' + game_name + '.json';
 
     $.getJSON(filename, function(data) {
         //init set

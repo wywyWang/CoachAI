@@ -25,10 +25,10 @@ $(function () {
         var dataFile = document.getElementById('video-uploader').files[0];
         formData.append('video_uploader', dataFile);
 
-        for (var key of formData.entries()) {
-            console.log(key[0] + ', ' + key[1]);
-        }
-        console.log("video size in js = ",formData.get('video_uploader')['size'])
+        // for (var key of formData.entries()) {
+        //     console.log(key[0] + ', ' + key[1]);
+        // }
+        $('.file-size').html('File size : ' + parseInt(formData.get('video_uploader')['size']/1024) + 'KB');
 
         $.ajax({
             type: "POST",
@@ -60,20 +60,23 @@ $(function () {
     });
 
     function updateProgress(e){
-        console.log("total size",e.total)
-        console.log("current upload size",e.loaded)
+        // console.log("total size",e.total)
+        // console.log("current upload size",e.loaded)
         if(e.lengthComputable){
             var max = e.total;
             var current = e.loaded;
-            var Percentage = (current * 100)/max;
-            console.log(Percentage);
+            var Percentage = parseInt((current * 100)/max);
+            $('.progress-bar').css('width', Percentage + '%');
+            $('.progress-bar').html(Percentage + '%');
         } 
         else{
             console.log("Unable to compute progress information since the total size is unknown")
         } 
      }
 
-    function updateComplete(evt) {
-        console.log("The transfer is complete.");
+    function updateComplete(e) {
+        $('.progress-bar').removeClass("active");
+        $('.progress-bar').addClass("progress-bar-success");
+        $('.upload-finish').html('Upload finished.Start analysizing, please wait.')
     }
 });
