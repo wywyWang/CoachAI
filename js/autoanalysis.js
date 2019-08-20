@@ -19,28 +19,32 @@ $(function () {
             alert("Please upload file.");
             return false;
         }
-        if(document.getElementById('video-name').value.length == 0){
-            alert("Please Enter save name.");
-            return false;
-        }
         e.preventDefault(); // avoid to execute the actual submit of the form.
 
         var formData = new FormData();
         var dataFile = document.getElementById('video-uploader').files[0];
-        formData.append('video_name', document.getElementById('video-name').value);
-        formData.append('video_uploader', dataFile, 'test.mp4');
+        formData.append('video_uploader', dataFile);
 
         for (var key of formData.entries()) {
             console.log(key[0] + ', ' + key[1]);
         }
+        console.log("video size in js = ",formData.get('video_uploader')['size'])
 
         $.ajax({
             type: "POST",
             url: '../cgi-bin/auto_main.py',
             data: formData, 
             contentType: false,
-            processData: false,
             cache: false,
+            processData: false,
+            xhr: function() {
+                var myXhr = $.ajaxSettings.xhr();
+                if(myXhr.upload){
+                    myXhr.upload.addEventListener('progress',updateProgress, false);
+                    myXhr.upload.addEventListener("load", updateComplete);
+                }
+                return myXhr;
+            },
             success: function(response)
             {
                 // console.log(response)
@@ -54,4 +58,22 @@ $(function () {
         });
 
     });
+
+    function updateProgress(e){
+        console.log("total size",e.total)
+        console.log("current upload size",e.loaded)
+        if(e.lengthComputable){
+            var max = e.total;
+            var current = e.loaded;
+            var Percentage = (current * 100)/max;
+            console.log(Percentage);
+        } 
+        else{
+            console.log("Unable to compute progress information since the total size is unknown")
+        } 
+     }
+
+    function updateComplete(evt) {
+        console.log("The transfer is complete.");
+    }
 });

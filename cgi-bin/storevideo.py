@@ -1,4 +1,5 @@
 import os
+import shutil
 
 def store(videofile):
     if videofile.filename:
@@ -6,6 +7,11 @@ def store(videofile):
         video_folder = './uploadvideo/'
         if not os.path.isdir(video_folder):
             os.mkdir(video_folder)
+
         video_path = video_folder + base_filename
-        open(video_path, 'wb').write(videofile.file.read())
-        message = 'The file "' + base_filename + '" was uploaded successfully'
+        # with open(video_path, 'wb') as fout:
+        #     fout.write(videofile.file.read())
+        with open(video_path,'wb') as fout:
+            shutil.copyfileobj(videofile.file, fout, 100000)
+        print('The file "' + base_filename + '" was uploaded successfully')
+        print('<br>')

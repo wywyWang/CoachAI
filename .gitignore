@@ -3,3 +3,5 @@
 __pycache__/
 log/*
 uploadvideo/*
+preprocessing/Data/TrackNetModel/*
+preprocessing/Code/TrackNet/*
