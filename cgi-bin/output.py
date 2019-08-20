@@ -69,26 +69,60 @@ def rally_count(rawfile, predict_file, savefile):
 
 def rally_type(rawfile, predict_file, savefile):
 	rally_data = pd.read_csv(rawfile)
+	hits = pd.read_csv(predict_file)
 	result = pd.DataFrame(columns = ["set", "rally", "player", "balltype", "count"])
 	ball_id = {'cut': 0, 'drive': 1, 'lob': 2, 'long': 3, 'netplay': 4, 'rush': 5, 'smash': 6}
-	ball_cnt = [0]*len(ball_id)
 	sets = [1]
 	rally_cnt = 1
-
+	score_A = 0
+	score_B = 0
+	type_A_cnt = [0]*len(ball_id)
+	type_B_cnt = [0]*len(ball_id)
+	result = pd.DataFrame(columns = ["set", "rally", "player", "balltype", "count"])
 	result_A = pd.DataFrame(columns = ["set", "rally", "player", "balltype", "count"])
-	result_B = result_A
+	result_B = pd.DataFrame(columns = ["set", "rally", "player", "balltype", "count"])
 
-	# not done
-	#for hit in range(len(rally_data['hit_area'])):
+	for i in range(len(hits['prediction'])):
+		if type(rally_data['getpoint_player'][i]) == str and (rally_data['getpoint_player'][i] == 'A' or rally_data['getpoint_player'][i] == 'B'):
+			
+			result_A['balltype'] = list(ball_id.keys())
+			result_A['count'] = type_A_cnt
+			result_A['set'] = sets*len(type_A_cnt)
+			result_A['rally'] = [rally_cnt]*len(type_A_cnt)
+			result_A['player'] = ['A']*len(type_A_cnt)
 
+			result_B['balltype'] = list(ball_id.keys())
+			result_B['count'] = type_B_cnt
+			result_B['set'] = sets*len(type_B_cnt)
+			result_B['rally'] = [rally_cnt]*len(type_B_cnt)
+			result_B['player'] = ['B']*len(type_B_cnt)
+
+			result = result.append(result_A)
+			result = result.append(result_B)
+			result_A = pd.DataFrame(columns = ["set", "rally", "player", "balltype", "count"])
+			result_B = pd.DataFrame(columns = ["set", "rally", "player", "balltype", "count"])
+			type_A_cnt = [0]*len(ball_id)
+			type_B_cnt = [0]*len(ball_id)
+			rally_cnt += 1
+	
+		if rally_data['hitting'][i] == 'A':
+			type_A_cnt[ball_id[hits['prediction'][i]]] += 1
+		elif rally_data['hitting'][i] == 'B':
+			type_B_cnt[ball_id[hits['prediction'][i]]] += 1
+
+	result = (result.groupby(['set','rally','player'], as_index=False)
+            .apply(lambda x: x[['balltype','count']].to_dict('r'))
+            .reset_index()
+            .rename(columns={0:'result'})
+            )
+	result = (result.groupby(['set'], as_index=True)
+            .apply(lambda x: x[['rally','player','result']].to_dict('r'))
+            .reset_index()
+            .rename(columns={0:'info'})
+            )
+
+	export_json(savefile, result)
 
 def run(rawfile, predict_file, rally_count_savefile, rally_type_savefile):
-	print("Output rally_count json file...")
-	print("<br>")
 	rally_count(rawfile, predict_file, rally_count_savefile)
-	#print("Output rally_type json file...")
-	#rally_type(rawfile, predict_file, rally_type_savefile)
-	print("Output file done...")
-	print("<br>")
-
-#run("../../Data/training/data/out.csv", "../../Data/training/result/0811_predict_result.csv", "../../Data/Output/rally_count_our.json", "")
+	rally_type(rawfile, predict_file, rally_type_savefile)

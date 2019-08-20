@@ -150,3 +150,27 @@ def map_reason(reason):
         return '未回擊成功'
     else:
         return ''
+def revese_map_reason(reason_name):
+    if reason_name == '出界':
+        return 0
+    elif reason_name == '落地':
+        return 1
+    elif reason_name == '未回擊成功':
+        return 2
+    else:
+        return ''
+
+def another_player(player):
+    if player == 'A':
+        return 'B'
+    elif player == 'B':
+        return 'A'
+    else:
+        return ''
+
+def who_first_blood(reason_name, winner):
+    reason = revese_map_reason(reason_name)
+    if reason == 0 or reason == 2:
+        return another_player(winner)
+    elif reason == 1:
+        return winner
