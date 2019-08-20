@@ -1,3 +1,5 @@
+#!C:\Users\User\AppData\Local\Programs\Python\Python36
+# /home/ino/anaconda3/envs/TrackNet/bin/python3
 #Comment when not developing
 import cgitb
 cgitb.enable(display=0, logdir="./log")
@@ -24,7 +26,7 @@ ext = ".csv"
 mp4_ext = '.mp4'
 
 #TrackNet filename
-TrackNet_input_path = './preprocessing/Data/SourceVideo/'
+TrackNet_input_path = './uploadvideo/'
 TrackNet_label = 'Badminton_label_'
 TrackNet_input = TrackNet_input_path + input_video_name + mp4_ext
 TrackNet_output_path = './preprocessing/Data/TrainTest/'
@@ -86,7 +88,7 @@ if __name__ == "__main__":
     # Store video
     storevideo.store(form['video_uploader'])
 
-    # TrackNet prediction
+    # TrackNet prediction(Local test can commit TrackNet to reduce runtime)
     TrackNetPredict.run(TrackNet_input, TrackNet_output)
 
     # Run segmentation

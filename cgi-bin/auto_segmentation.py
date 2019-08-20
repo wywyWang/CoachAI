@@ -1,5 +1,3 @@
-#!C:\Users\User\AppData\Local\Programs\Python\Python36
-
 import pandas as pd
 import matplotlib.pyplot as plt
 import math

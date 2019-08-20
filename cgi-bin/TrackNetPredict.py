@@ -153,7 +153,5 @@ def run(TrackNet_input, TrackNet_output):
         image2 = image3
         success, image3 = cap.read()
         count += 1
-        if count % 500 == 0:
-            print("Status = ",count)
 
     f.close()
