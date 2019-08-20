@@ -89,7 +89,7 @@ if __name__ == "__main__":
     storevideo.store(form['video_uploader'])
 
     # TrackNet prediction(Local test can commit TrackNet to reduce runtime)
-    TrackNetPredict.run(TrackNet_input, TrackNet_output)
+    # TrackNetPredict.run(TrackNet_input, TrackNet_output)
 
     # Run segmentation
     auto_segmentation.run(segmentation_input, segmentation_output)
