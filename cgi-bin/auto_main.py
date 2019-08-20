@@ -76,8 +76,8 @@ filename_result = result_dir + name_result + ext
 
 # output json file
 json__ext = ".json"
-rally_count_json_filename = "rally_count_our_" + input_video_name
-rally_type_json_filename = "rally_type_our_" + input_video_name
+rally_count_json_filename = "rally_count_predict_" + input_video_name
+rally_type_json_filename = "rally_type_predict_" + input_video_name
 output_json_dir = "./preprocessing/Data/Output/"
 
 rally_count_json_filename = output_json_dir + rally_count_json_filename + json__ext
