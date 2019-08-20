@@ -1,4 +1,3 @@
-#!C:\Users\User\AppData\Local\Programs\Python\Python36
 # /home/ino/anaconda3/envs/TrackNet/bin/python3
 #Comment when not developing
 import cgitb
