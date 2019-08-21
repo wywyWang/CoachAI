@@ -123,8 +123,23 @@ def rally_type(rawfile, predict_file, savefile):
 
 	export_json(savefile, result)
 
-def run(rawfile, predict_file, rally_count_savefile, rally_type_savefile):
-	rally_count(rawfile, predict_file, rally_count_savefile)
-	rally_type(rawfile, predict_file, rally_type_savefile)
+def insert_new_game_name(exist_game_file, game_name):
+	write = False
+	data = []
 
-run("out.csv", "../../Data/training/result/0813_predict_result.csv", "rally_count_our.json", "rally_type_our.json")
+	with open(exist_game_file) as game:
+		data = json.load(game)
+		if game_name not in data:
+			data.append(game_name)
+			write = True
+
+	if write:
+		with open(exist_game_file, 'w') as outputfile:
+			json.dump(data, outputfile, indent = 4)
+			
+
+def run(rawfile, predict_file, rally_count_savefile, rally_type_savefile, exist_game_file, game_name):
+	#rally_count(rawfile, predict_file, rally_count_savefile)
+	#rally_type(rawfile, predict_file, rally_type_savefile)
+	insert_new_game_name(exist_game_file, game_name)
+run("out.csv", "../../Data/training/result/0813_predict_result.csv", "rally_count_our.json", "rally_type_our.json", "game_name.json", "NEWWWW")
