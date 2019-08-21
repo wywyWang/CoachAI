@@ -78,10 +78,12 @@ filename_result = result_dir + name_result + ext
 json__ext = ".json"
 rally_count_json_filename = "rally_count_predict_" + input_video_name
 rally_type_json_filename = "rally_type_predict_" + input_video_name
+game_name_json_filename = "game_name"
 output_json_dir = "./preprocessing/Data/Output/"
 
 rally_count_json_filename = output_json_dir + rally_count_json_filename + json__ext
 rally_type_json_filename = output_json_dir + rally_type_json_filename + json__ext
+game_name_json_filename = output_json_dir + game_name_json_filename + json__ext
 
 if __name__ == "__main__":
     # Store video
@@ -100,4 +102,4 @@ if __name__ == "__main__":
     predict.verify(pre_dir, preprocessed_filename, model_path, result_dir, filename_result) #predict testing data
 
     # output json file
-    output.run(raw_data, filename_result, rally_count_json_filename, rally_type_json_filename)
+    output.run(raw_data, filename_result, rally_count_json_filename, rally_type_json_filename, game_name_json_filename, input_video_name)
