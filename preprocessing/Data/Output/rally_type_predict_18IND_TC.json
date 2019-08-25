@@ -8,7 +8,7 @@
                 "result": [
                     {
                         "balltype": "cut",
-                        "count": 0
+                        "count": 1
                     },
                     {
                         "balltype": "drive",
@@ -24,11 +24,11 @@
                     },
                     {
                         "balltype": "netplay",
-                        "count": 7
+                        "count": 9
                     },
                     {
                         "balltype": "rush",
-                        "count": 1
+                        "count": 0
                     },
                     {
                         "balltype": "smash",
@@ -54,15 +54,15 @@
                     },
                     {
                         "balltype": "long",
-                        "count": 0
+                        "count": 1
                     },
                     {
                         "balltype": "netplay",
-                        "count": 8
+                        "count": 7
                     },
                     {
                         "balltype": "rush",
-                        "count": 1
+                        "count": 2
                     },
                     {
                         "balltype": "smash",
@@ -92,7 +92,7 @@
                     },
                     {
                         "balltype": "netplay",
-                        "count": 3
+                        "count": 5
                     },
                     {
                         "balltype": "rush",
@@ -126,7 +126,7 @@
                     },
                     {
                         "balltype": "netplay",
-                        "count": 2
+                        "count": 5
                     },
                     {
                         "balltype": "rush",
@@ -141,40 +141,6 @@
             {
                 "rally": 3,
                 "player": "A",
-                "result": [
-                    {
-                        "balltype": "cut",
-                        "count": 1
-                    },
-                    {
-                        "balltype": "drive",
-                        "count": 0
-                    },
-                    {
-                        "balltype": "lob",
-                        "count": 0
-                    },
-                    {
-                        "balltype": "long",
-                        "count": 0
-                    },
-                    {
-                        "balltype": "netplay",
-                        "count": 2
-                    },
-                    {
-                        "balltype": "rush",
-                        "count": 0
-                    },
-                    {
-                        "balltype": "smash",
-                        "count": 0
-                    }
-                ]
-            },
-            {
-                "rally": 3,
-                "player": "B",
                 "result": [
                     {
                         "balltype": "cut",
@@ -194,11 +160,11 @@
                     },
                     {
                         "balltype": "netplay",
-                        "count": 2
+                        "count": 4
                     },
                     {
                         "balltype": "rush",
-                        "count": 0
+                        "count": 1
                     },
                     {
                         "balltype": "smash",
@@ -207,46 +173,12 @@
                 ]
             },
             {
-                "rally": 4,
-                "player": "A",
-                "result": [
-                    {
-                        "balltype": "cut",
-                        "count": 0
-                    },
-                    {
-                        "balltype": "drive",
-                        "count": 0
-                    },
-                    {
-                        "balltype": "lob",
-                        "count": 0
-                    },
-                    {
-                        "balltype": "long",
-                        "count": 0
-                    },
-                    {
-                        "balltype": "netplay",
-                        "count": 13
-                    },
-                    {
-                        "balltype": "rush",
-                        "count": 0
-                    },
-                    {
-                        "balltype": "smash",
-                        "count": 0
-                    }
-                ]
-            },
-            {
-                "rally": 4,
+                "rally": 3,
                 "player": "B",
                 "result": [
                     {
                         "balltype": "cut",
-                        "count": 0
+                        "count": 1
                     },
                     {
                         "balltype": "drive",
@@ -258,109 +190,7 @@
                     },
                     {
                         "balltype": "long",
-                        "count": 0
-                    },
-                    {
-                        "balltype": "netplay",
-                        "count": 12
-                    },
-                    {
-                        "balltype": "rush",
-                        "count": 0
-                    },
-                    {
-                        "balltype": "smash",
-                        "count": 0
-                    }
-                ]
-            },
-            {
-                "rally": 5,
-                "player": "A",
-                "result": [
-                    {
-                        "balltype": "cut",
-                        "count": 0
-                    },
-                    {
-                        "balltype": "drive",
-                        "count": 0
-                    },
-                    {
-                        "balltype": "lob",
-                        "count": 0
-                    },
-                    {
-                        "balltype": "long",
-                        "count": 0
-                    },
-                    {
-                        "balltype": "netplay",
-                        "count": 11
-                    },
-                    {
-                        "balltype": "rush",
-                        "count": 0
-                    },
-                    {
-                        "balltype": "smash",
-                        "count": 0
-                    }
-                ]
-            },
-            {
-                "rally": 5,
-                "player": "B",
-                "result": [
-                    {
-                        "balltype": "cut",
-                        "count": 0
-                    },
-                    {
-                        "balltype": "drive",
-                        "count": 0
-                    },
-                    {
-                        "balltype": "lob",
-                        "count": 0
-                    },
-                    {
-                        "balltype": "long",
-                        "count": 0
-                    },
-                    {
-                        "balltype": "netplay",
-                        "count": 11
-                    },
-                    {
-                        "balltype": "rush",
-                        "count": 0
-                    },
-                    {
-                        "balltype": "smash",
-                        "count": 0
-                    }
-                ]
-            },
-            {
-                "rally": 6,
-                "player": "A",
-                "result": [
-                    {
-                        "balltype": "cut",
-                        "count": 0
-                    },
-                    {
-                        "balltype": "drive",
-                        "count": 0
-                    },
-                    {
-                        "balltype": "lob",
-                        "count": 0
-                    },
-                    {
-                        "balltype": "long",
-                        "count": 0
+                        "count": 1
                     },
                     {
                         "balltype": "netplay",
@@ -377,7 +207,41 @@
                 ]
             },
             {
-                "rally": 6,
+                "rally": 4,
+                "player": "A",
+                "result": [
+                    {
+                        "balltype": "cut",
+                        "count": 1
+                    },
+                    {
+                        "balltype": "drive",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "lob",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "long",
+                        "count": 1
+                    },
+                    {
+                        "balltype": "netplay",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "rush",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "smash",
+                        "count": 0
+                    }
+                ]
+            },
+            {
+                "rally": 4,
                 "player": "B",
                 "result": [
                     {
@@ -395,6 +259,176 @@
                     {
                         "balltype": "long",
                         "count": 0
+                    },
+                    {
+                        "balltype": "netplay",
+                        "count": 1
+                    },
+                    {
+                        "balltype": "rush",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "smash",
+                        "count": 0
+                    }
+                ]
+            },
+            {
+                "rally": 5,
+                "player": "A",
+                "result": [
+                    {
+                        "balltype": "cut",
+                        "count": 1
+                    },
+                    {
+                        "balltype": "drive",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "lob",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "long",
+                        "count": 2
+                    },
+                    {
+                        "balltype": "netplay",
+                        "count": 2
+                    },
+                    {
+                        "balltype": "rush",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "smash",
+                        "count": 0
+                    }
+                ]
+            },
+            {
+                "rally": 5,
+                "player": "B",
+                "result": [
+                    {
+                        "balltype": "cut",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "drive",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "lob",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "long",
+                        "count": 1
+                    },
+                    {
+                        "balltype": "netplay",
+                        "count": 2
+                    },
+                    {
+                        "balltype": "rush",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "smash",
+                        "count": 0
+                    }
+                ]
+            },
+            {
+                "rally": 6,
+                "player": "A",
+                "result": [
+                    {
+                        "balltype": "cut",
+                        "count": 1
+                    },
+                    {
+                        "balltype": "drive",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "lob",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "long",
+                        "count": 1
+                    },
+                    {
+                        "balltype": "netplay",
+                        "count": 4
+                    },
+                    {
+                        "balltype": "rush",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "smash",
+                        "count": 0
+                    }
+                ]
+            },
+            {
+                "rally": 6,
+                "player": "B",
+                "result": [
+                    {
+                        "balltype": "cut",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "drive",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "lob",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "long",
+                        "count": 2
+                    },
+                    {
+                        "balltype": "netplay",
+                        "count": 5
+                    },
+                    {
+                        "balltype": "rush",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "smash",
+                        "count": 0
+                    }
+                ]
+            },
+            {
+                "rally": 7,
+                "player": "A",
+                "result": [
+                    {
+                        "balltype": "cut",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "drive",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "lob",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "long",
+                        "count": 2
                     },
                     {
                         "balltype": "netplay",
@@ -402,40 +436,6 @@
                     },
                     {
                         "balltype": "rush",
-                        "count": 1
-                    },
-                    {
-                        "balltype": "smash",
-                        "count": 0
-                    }
-                ]
-            },
-            {
-                "rally": 7,
-                "player": "A",
-                "result": [
-                    {
-                        "balltype": "cut",
-                        "count": 0
-                    },
-                    {
-                        "balltype": "drive",
-                        "count": 0
-                    },
-                    {
-                        "balltype": "lob",
-                        "count": 0
-                    },
-                    {
-                        "balltype": "long",
-                        "count": 0
-                    },
-                    {
-                        "balltype": "netplay",
-                        "count": 5
-                    },
-                    {
-                        "balltype": "rush",
                         "count": 0
                     },
                     {
@@ -450,7 +450,7 @@
                 "result": [
                     {
                         "balltype": "cut",
-                        "count": 0
+                        "count": 1
                     },
                     {
                         "balltype": "drive",
@@ -466,11 +466,11 @@
                     },
                     {
                         "balltype": "netplay",
-                        "count": 5
+                        "count": 2
                     },
                     {
                         "balltype": "rush",
-                        "count": 0
+                        "count": 1
                     },
                     {
                         "balltype": "smash",
@@ -500,7 +500,7 @@
                     },
                     {
                         "balltype": "netplay",
-                        "count": 3
+                        "count": 6
                     },
                     {
                         "balltype": "rush",
@@ -534,7 +534,7 @@
                     },
                     {
                         "balltype": "netplay",
-                        "count": 4
+                        "count": 5
                     },
                     {
                         "balltype": "rush",
@@ -552,7 +552,7 @@
                 "result": [
                     {
                         "balltype": "cut",
-                        "count": 0
+                        "count": 1
                     },
                     {
                         "balltype": "drive",
@@ -568,7 +568,7 @@
                     },
                     {
                         "balltype": "netplay",
-                        "count": 1
+                        "count": 5
                     },
                     {
                         "balltype": "rush",
@@ -602,11 +602,11 @@
                     },
                     {
                         "balltype": "netplay",
-                        "count": 4
+                        "count": 3
                     },
                     {
                         "balltype": "rush",
-                        "count": 0
+                        "count": 3
                     },
                     {
                         "balltype": "smash",
@@ -640,7 +640,7 @@
                     },
                     {
                         "balltype": "rush",
-                        "count": 0
+                        "count": 6
                     },
                     {
                         "balltype": "smash",
@@ -670,11 +670,11 @@
                     },
                     {
                         "balltype": "netplay",
-                        "count": 5
+                        "count": 8
                     },
                     {
                         "balltype": "rush",
-                        "count": 0
+                        "count": 3
                     },
                     {
                         "balltype": "smash",
@@ -700,11 +700,11 @@
                     },
                     {
                         "balltype": "long",
-                        "count": 1
+                        "count": 0
                     },
                     {
                         "balltype": "netplay",
-                        "count": 1
+                        "count": 9
                     },
                     {
                         "balltype": "rush",
@@ -722,7 +722,7 @@
                 "result": [
                     {
                         "balltype": "cut",
-                        "count": 1
+                        "count": 0
                     },
                     {
                         "balltype": "drive",
@@ -738,7 +738,7 @@
                     },
                     {
                         "balltype": "netplay",
-                        "count": 2
+                        "count": 8
                     },
                     {
                         "balltype": "rush",
@@ -772,7 +772,7 @@
                     },
                     {
                         "balltype": "netplay",
-                        "count": 7
+                        "count": 5
                     },
                     {
                         "balltype": "rush",
@@ -802,108 +802,6 @@
                     },
                     {
                         "balltype": "long",
-                        "count": 1
-                    },
-                    {
-                        "balltype": "netplay",
-                        "count": 4
-                    },
-                    {
-                        "balltype": "rush",
-                        "count": 1
-                    },
-                    {
-                        "balltype": "smash",
-                        "count": 0
-                    }
-                ]
-            },
-            {
-                "rally": 13,
-                "player": "A",
-                "result": [
-                    {
-                        "balltype": "cut",
-                        "count": 0
-                    },
-                    {
-                        "balltype": "drive",
-                        "count": 0
-                    },
-                    {
-                        "balltype": "lob",
-                        "count": 0
-                    },
-                    {
-                        "balltype": "long",
-                        "count": 1
-                    },
-                    {
-                        "balltype": "netplay",
-                        "count": 4
-                    },
-                    {
-                        "balltype": "rush",
-                        "count": 0
-                    },
-                    {
-                        "balltype": "smash",
-                        "count": 0
-                    }
-                ]
-            },
-            {
-                "rally": 13,
-                "player": "B",
-                "result": [
-                    {
-                        "balltype": "cut",
-                        "count": 1
-                    },
-                    {
-                        "balltype": "drive",
-                        "count": 0
-                    },
-                    {
-                        "balltype": "lob",
-                        "count": 0
-                    },
-                    {
-                        "balltype": "long",
-                        "count": 0
-                    },
-                    {
-                        "balltype": "netplay",
-                        "count": 4
-                    },
-                    {
-                        "balltype": "rush",
-                        "count": 0
-                    },
-                    {
-                        "balltype": "smash",
-                        "count": 0
-                    }
-                ]
-            },
-            {
-                "rally": 14,
-                "player": "A",
-                "result": [
-                    {
-                        "balltype": "cut",
-                        "count": 1
-                    },
-                    {
-                        "balltype": "drive",
-                        "count": 0
-                    },
-                    {
-                        "balltype": "lob",
-                        "count": 0
-                    },
-                    {
-                        "balltype": "long",
                         "count": 0
                     },
                     {
@@ -912,6 +810,40 @@
                     },
                     {
                         "balltype": "rush",
+                        "count": 1
+                    },
+                    {
+                        "balltype": "smash",
+                        "count": 0
+                    }
+                ]
+            },
+            {
+                "rally": 13,
+                "player": "A",
+                "result": [
+                    {
+                        "balltype": "cut",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "drive",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "lob",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "long",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "netplay",
+                        "count": 6
+                    },
+                    {
+                        "balltype": "rush",
                         "count": 0
                     },
                     {
@@ -921,8 +853,42 @@
                 ]
             },
             {
-                "rally": 14,
+                "rally": 13,
                 "player": "B",
+                "result": [
+                    {
+                        "balltype": "cut",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "drive",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "lob",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "long",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "netplay",
+                        "count": 6
+                    },
+                    {
+                        "balltype": "rush",
+                        "count": 1
+                    },
+                    {
+                        "balltype": "smash",
+                        "count": 0
+                    }
+                ]
+            },
+            {
+                "rally": 14,
+                "player": "A",
                 "result": [
                     {
                         "balltype": "cut",
@@ -955,41 +921,7 @@
                 ]
             },
             {
-                "rally": 15,
-                "player": "A",
-                "result": [
-                    {
-                        "balltype": "cut",
-                        "count": 1
-                    },
-                    {
-                        "balltype": "drive",
-                        "count": 0
-                    },
-                    {
-                        "balltype": "lob",
-                        "count": 0
-                    },
-                    {
-                        "balltype": "long",
-                        "count": 0
-                    },
-                    {
-                        "balltype": "netplay",
-                        "count": 3
-                    },
-                    {
-                        "balltype": "rush",
-                        "count": 0
-                    },
-                    {
-                        "balltype": "smash",
-                        "count": 0
-                    }
-                ]
-            },
-            {
-                "rally": 15,
+                "rally": 14,
                 "player": "B",
                 "result": [
                     {
@@ -1006,7 +938,75 @@
                     },
                     {
                         "balltype": "long",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "netplay",
+                        "count": 4
+                    },
+                    {
+                        "balltype": "rush",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "smash",
+                        "count": 0
+                    }
+                ]
+            },
+            {
+                "rally": 15,
+                "player": "A",
+                "result": [
+                    {
+                        "balltype": "cut",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "drive",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "lob",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "long",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "netplay",
+                        "count": 4
+                    },
+                    {
+                        "balltype": "rush",
                         "count": 2
+                    },
+                    {
+                        "balltype": "smash",
+                        "count": 0
+                    }
+                ]
+            },
+            {
+                "rally": 15,
+                "player": "B",
+                "result": [
+                    {
+                        "balltype": "cut",
+                        "count": 1
+                    },
+                    {
+                        "balltype": "drive",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "lob",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "long",
+                        "count": 0
                     },
                     {
                         "balltype": "netplay",
@@ -1040,15 +1040,15 @@
                     },
                     {
                         "balltype": "long",
-                        "count": 1
+                        "count": 0
                     },
                     {
                         "balltype": "netplay",
-                        "count": 4
+                        "count": 5
                     },
                     {
                         "balltype": "rush",
-                        "count": 0
+                        "count": 1
                     },
                     {
                         "balltype": "smash",
@@ -1078,113 +1078,113 @@
                     },
                     {
                         "balltype": "netplay",
-                        "count": 4
-                    },
-                    {
-                        "balltype": "rush",
-                        "count": 0
-                    },
-                    {
-                        "balltype": "smash",
-                        "count": 0
-                    }
-                ]
-            },
-            {
-                "rally": 17,
-                "player": "A",
-                "result": [
-                    {
-                        "balltype": "cut",
-                        "count": 0
-                    },
-                    {
-                        "balltype": "drive",
-                        "count": 0
-                    },
-                    {
-                        "balltype": "lob",
-                        "count": 0
-                    },
-                    {
-                        "balltype": "long",
-                        "count": 0
-                    },
-                    {
-                        "balltype": "netplay",
-                        "count": 4
-                    },
-                    {
-                        "balltype": "rush",
-                        "count": 1
-                    },
-                    {
-                        "balltype": "smash",
-                        "count": 0
-                    }
-                ]
-            },
-            {
-                "rally": 17,
-                "player": "B",
-                "result": [
-                    {
-                        "balltype": "cut",
-                        "count": 1
-                    },
-                    {
-                        "balltype": "drive",
-                        "count": 0
-                    },
-                    {
-                        "balltype": "lob",
-                        "count": 0
-                    },
-                    {
-                        "balltype": "long",
-                        "count": 0
-                    },
-                    {
-                        "balltype": "netplay",
-                        "count": 5
-                    },
-                    {
-                        "balltype": "rush",
-                        "count": 0
-                    },
-                    {
-                        "balltype": "smash",
-                        "count": 0
-                    }
-                ]
-            },
-            {
-                "rally": 18,
-                "player": "A",
-                "result": [
-                    {
-                        "balltype": "cut",
-                        "count": 0
-                    },
-                    {
-                        "balltype": "drive",
-                        "count": 0
-                    },
-                    {
-                        "balltype": "lob",
-                        "count": 0
-                    },
-                    {
-                        "balltype": "long",
-                        "count": 1
-                    },
-                    {
-                        "balltype": "netplay",
                         "count": 6
                     },
                     {
                         "balltype": "rush",
+                        "count": 1
+                    },
+                    {
+                        "balltype": "smash",
                         "count": 0
+                    }
+                ]
+            },
+            {
+                "rally": 17,
+                "player": "A",
+                "result": [
+                    {
+                        "balltype": "cut",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "drive",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "lob",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "long",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "netplay",
+                        "count": 5
+                    },
+                    {
+                        "balltype": "rush",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "smash",
+                        "count": 0
+                    }
+                ]
+            },
+            {
+                "rally": 17,
+                "player": "B",
+                "result": [
+                    {
+                        "balltype": "cut",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "drive",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "lob",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "long",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "netplay",
+                        "count": 2
+                    },
+                    {
+                        "balltype": "rush",
+                        "count": 2
+                    },
+                    {
+                        "balltype": "smash",
+                        "count": 0
+                    }
+                ]
+            },
+            {
+                "rally": 18,
+                "player": "A",
+                "result": [
+                    {
+                        "balltype": "cut",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "drive",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "lob",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "long",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "netplay",
+                        "count": 5
+                    },
+                    {
+                        "balltype": "rush",
+                        "count": 1
                     },
                     {
                         "balltype": "smash",
@@ -1198,7 +1198,7 @@
                 "result": [
                     {
                         "balltype": "cut",
-                        "count": 1
+                        "count": 0
                     },
                     {
                         "balltype": "drive",
@@ -1214,11 +1214,11 @@
                     },
                     {
                         "balltype": "netplay",
-                        "count": 5
+                        "count": 4
                     },
                     {
                         "balltype": "rush",
-                        "count": 0
+                        "count": 1
                     },
                     {
                         "balltype": "smash",
@@ -1232,177 +1232,7 @@
                 "result": [
                     {
                         "balltype": "cut",
-                        "count": 1
-                    },
-                    {
-                        "balltype": "drive",
                         "count": 0
-                    },
-                    {
-                        "balltype": "lob",
-                        "count": 0
-                    },
-                    {
-                        "balltype": "long",
-                        "count": 0
-                    },
-                    {
-                        "balltype": "netplay",
-                        "count": 5
-                    },
-                    {
-                        "balltype": "rush",
-                        "count": 0
-                    },
-                    {
-                        "balltype": "smash",
-                        "count": 0
-                    }
-                ]
-            },
-            {
-                "rally": 19,
-                "player": "B",
-                "result": [
-                    {
-                        "balltype": "cut",
-                        "count": 0
-                    },
-                    {
-                        "balltype": "drive",
-                        "count": 0
-                    },
-                    {
-                        "balltype": "lob",
-                        "count": 0
-                    },
-                    {
-                        "balltype": "long",
-                        "count": 1
-                    },
-                    {
-                        "balltype": "netplay",
-                        "count": 5
-                    },
-                    {
-                        "balltype": "rush",
-                        "count": 0
-                    },
-                    {
-                        "balltype": "smash",
-                        "count": 0
-                    }
-                ]
-            },
-            {
-                "rally": 20,
-                "player": "A",
-                "result": [
-                    {
-                        "balltype": "cut",
-                        "count": 1
-                    },
-                    {
-                        "balltype": "drive",
-                        "count": 0
-                    },
-                    {
-                        "balltype": "lob",
-                        "count": 0
-                    },
-                    {
-                        "balltype": "long",
-                        "count": 1
-                    },
-                    {
-                        "balltype": "netplay",
-                        "count": 3
-                    },
-                    {
-                        "balltype": "rush",
-                        "count": 0
-                    },
-                    {
-                        "balltype": "smash",
-                        "count": 0
-                    }
-                ]
-            },
-            {
-                "rally": 20,
-                "player": "B",
-                "result": [
-                    {
-                        "balltype": "cut",
-                        "count": 1
-                    },
-                    {
-                        "balltype": "drive",
-                        "count": 1
-                    },
-                    {
-                        "balltype": "lob",
-                        "count": 0
-                    },
-                    {
-                        "balltype": "long",
-                        "count": 1
-                    },
-                    {
-                        "balltype": "netplay",
-                        "count": 3
-                    },
-                    {
-                        "balltype": "rush",
-                        "count": 0
-                    },
-                    {
-                        "balltype": "smash",
-                        "count": 0
-                    }
-                ]
-            },
-            {
-                "rally": 21,
-                "player": "A",
-                "result": [
-                    {
-                        "balltype": "cut",
-                        "count": 0
-                    },
-                    {
-                        "balltype": "drive",
-                        "count": 0
-                    },
-                    {
-                        "balltype": "lob",
-                        "count": 0
-                    },
-                    {
-                        "balltype": "long",
-                        "count": 1
-                    },
-                    {
-                        "balltype": "netplay",
-                        "count": 8
-                    },
-                    {
-                        "balltype": "rush",
-                        "count": 1
-                    },
-                    {
-                        "balltype": "smash",
-                        "count": 0
-                    }
-                ]
-            },
-            {
-                "rally": 21,
-                "player": "B",
-                "result": [
-                    {
-                        "balltype": "cut",
-                        "count": 1
                     },
                     {
                         "balltype": "drive",
@@ -1431,6 +1261,176 @@
                 ]
             },
             {
+                "rally": 19,
+                "player": "B",
+                "result": [
+                    {
+                        "balltype": "cut",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "drive",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "lob",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "long",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "netplay",
+                        "count": 5
+                    },
+                    {
+                        "balltype": "rush",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "smash",
+                        "count": 0
+                    }
+                ]
+            },
+            {
+                "rally": 20,
+                "player": "A",
+                "result": [
+                    {
+                        "balltype": "cut",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "drive",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "lob",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "long",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "netplay",
+                        "count": 4
+                    },
+                    {
+                        "balltype": "rush",
+                        "count": 2
+                    },
+                    {
+                        "balltype": "smash",
+                        "count": 0
+                    }
+                ]
+            },
+            {
+                "rally": 20,
+                "player": "B",
+                "result": [
+                    {
+                        "balltype": "cut",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "drive",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "lob",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "long",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "netplay",
+                        "count": 6
+                    },
+                    {
+                        "balltype": "rush",
+                        "count": 1
+                    },
+                    {
+                        "balltype": "smash",
+                        "count": 0
+                    }
+                ]
+            },
+            {
+                "rally": 21,
+                "player": "A",
+                "result": [
+                    {
+                        "balltype": "cut",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "drive",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "lob",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "long",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "netplay",
+                        "count": 8
+                    },
+                    {
+                        "balltype": "rush",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "smash",
+                        "count": 0
+                    }
+                ]
+            },
+            {
+                "rally": 21,
+                "player": "B",
+                "result": [
+                    {
+                        "balltype": "cut",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "drive",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "lob",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "long",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "netplay",
+                        "count": 5
+                    },
+                    {
+                        "balltype": "rush",
+                        "count": 1
+                    },
+                    {
+                        "balltype": "smash",
+                        "count": 0
+                    }
+                ]
+            },
+            {
                 "rally": 22,
                 "player": "A",
                 "result": [
@@ -1452,11 +1452,11 @@
                     },
                     {
                         "balltype": "netplay",
-                        "count": 2
+                        "count": 3
                     },
                     {
                         "balltype": "rush",
-                        "count": 1
+                        "count": 2
                     },
                     {
                         "balltype": "smash",
@@ -1470,7 +1470,7 @@
                 "result": [
                     {
                         "balltype": "cut",
-                        "count": 1
+                        "count": 0
                     },
                     {
                         "balltype": "drive",
@@ -1486,7 +1486,7 @@
                     },
                     {
                         "balltype": "netplay",
-                        "count": 2
+                        "count": 6
                     },
                     {
                         "balltype": "rush",
@@ -1520,7 +1520,7 @@
                     },
                     {
                         "balltype": "netplay",
-                        "count": 5
+                        "count": 3
                     },
                     {
                         "balltype": "rush",
@@ -1554,40 +1554,6 @@
                     },
                     {
                         "balltype": "netplay",
-                        "count": 6
-                    },
-                    {
-                        "balltype": "rush",
-                        "count": 0
-                    },
-                    {
-                        "balltype": "smash",
-                        "count": 0
-                    }
-                ]
-            },
-            {
-                "rally": 24,
-                "player": "A",
-                "result": [
-                    {
-                        "balltype": "cut",
-                        "count": 0
-                    },
-                    {
-                        "balltype": "drive",
-                        "count": 0
-                    },
-                    {
-                        "balltype": "lob",
-                        "count": 0
-                    },
-                    {
-                        "balltype": "long",
-                        "count": 0
-                    },
-                    {
-                        "balltype": "netplay",
                         "count": 4
                     },
                     {
@@ -1602,113 +1568,11 @@
             },
             {
                 "rally": 24,
-                "player": "B",
-                "result": [
-                    {
-                        "balltype": "cut",
-                        "count": 0
-                    },
-                    {
-                        "balltype": "drive",
-                        "count": 0
-                    },
-                    {
-                        "balltype": "lob",
-                        "count": 0
-                    },
-                    {
-                        "balltype": "long",
-                        "count": 0
-                    },
-                    {
-                        "balltype": "netplay",
-                        "count": 4
-                    },
-                    {
-                        "balltype": "rush",
-                        "count": 0
-                    },
-                    {
-                        "balltype": "smash",
-                        "count": 0
-                    }
-                ]
-            },
-            {
-                "rally": 25,
                 "player": "A",
                 "result": [
                     {
                         "balltype": "cut",
                         "count": 0
-                    },
-                    {
-                        "balltype": "drive",
-                        "count": 0
-                    },
-                    {
-                        "balltype": "lob",
-                        "count": 0
-                    },
-                    {
-                        "balltype": "long",
-                        "count": 0
-                    },
-                    {
-                        "balltype": "netplay",
-                        "count": 2
-                    },
-                    {
-                        "balltype": "rush",
-                        "count": 1
-                    },
-                    {
-                        "balltype": "smash",
-                        "count": 0
-                    }
-                ]
-            },
-            {
-                "rally": 25,
-                "player": "B",
-                "result": [
-                    {
-                        "balltype": "cut",
-                        "count": 0
-                    },
-                    {
-                        "balltype": "drive",
-                        "count": 0
-                    },
-                    {
-                        "balltype": "lob",
-                        "count": 0
-                    },
-                    {
-                        "balltype": "long",
-                        "count": 0
-                    },
-                    {
-                        "balltype": "netplay",
-                        "count": 2
-                    },
-                    {
-                        "balltype": "rush",
-                        "count": 0
-                    },
-                    {
-                        "balltype": "smash",
-                        "count": 0
-                    }
-                ]
-            },
-            {
-                "rally": 26,
-                "player": "A",
-                "result": [
-                    {
-                        "balltype": "cut",
-                        "count": 1
                     },
                     {
                         "balltype": "drive",
@@ -1737,6 +1601,142 @@
                 ]
             },
             {
+                "rally": 24,
+                "player": "B",
+                "result": [
+                    {
+                        "balltype": "cut",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "drive",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "lob",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "long",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "netplay",
+                        "count": 6
+                    },
+                    {
+                        "balltype": "rush",
+                        "count": 1
+                    },
+                    {
+                        "balltype": "smash",
+                        "count": 0
+                    }
+                ]
+            },
+            {
+                "rally": 25,
+                "player": "A",
+                "result": [
+                    {
+                        "balltype": "cut",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "drive",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "lob",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "long",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "netplay",
+                        "count": 3
+                    },
+                    {
+                        "balltype": "rush",
+                        "count": 1
+                    },
+                    {
+                        "balltype": "smash",
+                        "count": 0
+                    }
+                ]
+            },
+            {
+                "rally": 25,
+                "player": "B",
+                "result": [
+                    {
+                        "balltype": "cut",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "drive",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "lob",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "long",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "netplay",
+                        "count": 2
+                    },
+                    {
+                        "balltype": "rush",
+                        "count": 2
+                    },
+                    {
+                        "balltype": "smash",
+                        "count": 0
+                    }
+                ]
+            },
+            {
+                "rally": 26,
+                "player": "A",
+                "result": [
+                    {
+                        "balltype": "cut",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "drive",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "lob",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "long",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "netplay",
+                        "count": 3
+                    },
+                    {
+                        "balltype": "rush",
+                        "count": 1
+                    },
+                    {
+                        "balltype": "smash",
+                        "count": 0
+                    }
+                ]
+            },
+            {
                 "rally": 26,
                 "player": "B",
                 "result": [
@@ -1754,15 +1754,15 @@
                     },
                     {
                         "balltype": "long",
-                        "count": 1
+                        "count": 0
                     },
                     {
                         "balltype": "netplay",
-                        "count": 7
+                        "count": 2
                     },
                     {
                         "balltype": "rush",
-                        "count": 0
+                        "count": 1
                     },
                     {
                         "balltype": "smash",
@@ -1796,7 +1796,7 @@
                     },
                     {
                         "balltype": "rush",
-                        "count": 0
+                        "count": 1
                     },
                     {
                         "balltype": "smash",
@@ -1826,45 +1826,11 @@
                     },
                     {
                         "balltype": "netplay",
-                        "count": 5
-                    },
-                    {
-                        "balltype": "rush",
-                        "count": 0
-                    },
-                    {
-                        "balltype": "smash",
-                        "count": 0
-                    }
-                ]
-            },
-            {
-                "rally": 28,
-                "player": "A",
-                "result": [
-                    {
-                        "balltype": "cut",
-                        "count": 0
-                    },
-                    {
-                        "balltype": "drive",
-                        "count": 0
-                    },
-                    {
-                        "balltype": "lob",
-                        "count": 0
-                    },
-                    {
-                        "balltype": "long",
-                        "count": 0
-                    },
-                    {
-                        "balltype": "netplay",
                         "count": 7
                     },
                     {
                         "balltype": "rush",
-                        "count": 0
+                        "count": 1
                     },
                     {
                         "balltype": "smash",
@@ -1874,312 +1840,6 @@
             },
             {
                 "rally": 28,
-                "player": "B",
-                "result": [
-                    {
-                        "balltype": "cut",
-                        "count": 0
-                    },
-                    {
-                        "balltype": "drive",
-                        "count": 0
-                    },
-                    {
-                        "balltype": "lob",
-                        "count": 0
-                    },
-                    {
-                        "balltype": "long",
-                        "count": 0
-                    },
-                    {
-                        "balltype": "netplay",
-                        "count": 5
-                    },
-                    {
-                        "balltype": "rush",
-                        "count": 0
-                    },
-                    {
-                        "balltype": "smash",
-                        "count": 0
-                    }
-                ]
-            },
-            {
-                "rally": 29,
-                "player": "A",
-                "result": [
-                    {
-                        "balltype": "cut",
-                        "count": 0
-                    },
-                    {
-                        "balltype": "drive",
-                        "count": 0
-                    },
-                    {
-                        "balltype": "lob",
-                        "count": 0
-                    },
-                    {
-                        "balltype": "long",
-                        "count": 1
-                    },
-                    {
-                        "balltype": "netplay",
-                        "count": 8
-                    },
-                    {
-                        "balltype": "rush",
-                        "count": 0
-                    },
-                    {
-                        "balltype": "smash",
-                        "count": 0
-                    }
-                ]
-            },
-            {
-                "rally": 29,
-                "player": "B",
-                "result": [
-                    {
-                        "balltype": "cut",
-                        "count": 1
-                    },
-                    {
-                        "balltype": "drive",
-                        "count": 0
-                    },
-                    {
-                        "balltype": "lob",
-                        "count": 0
-                    },
-                    {
-                        "balltype": "long",
-                        "count": 1
-                    },
-                    {
-                        "balltype": "netplay",
-                        "count": 8
-                    },
-                    {
-                        "balltype": "rush",
-                        "count": 0
-                    },
-                    {
-                        "balltype": "smash",
-                        "count": 0
-                    }
-                ]
-            },
-            {
-                "rally": 30,
-                "player": "A",
-                "result": [
-                    {
-                        "balltype": "cut",
-                        "count": 0
-                    },
-                    {
-                        "balltype": "drive",
-                        "count": 0
-                    },
-                    {
-                        "balltype": "lob",
-                        "count": 0
-                    },
-                    {
-                        "balltype": "long",
-                        "count": 0
-                    },
-                    {
-                        "balltype": "netplay",
-                        "count": 8
-                    },
-                    {
-                        "balltype": "rush",
-                        "count": 1
-                    },
-                    {
-                        "balltype": "smash",
-                        "count": 0
-                    }
-                ]
-            },
-            {
-                "rally": 30,
-                "player": "B",
-                "result": [
-                    {
-                        "balltype": "cut",
-                        "count": 0
-                    },
-                    {
-                        "balltype": "drive",
-                        "count": 0
-                    },
-                    {
-                        "balltype": "lob",
-                        "count": 0
-                    },
-                    {
-                        "balltype": "long",
-                        "count": 0
-                    },
-                    {
-                        "balltype": "netplay",
-                        "count": 9
-                    },
-                    {
-                        "balltype": "rush",
-                        "count": 1
-                    },
-                    {
-                        "balltype": "smash",
-                        "count": 0
-                    }
-                ]
-            },
-            {
-                "rally": 31,
-                "player": "A",
-                "result": [
-                    {
-                        "balltype": "cut",
-                        "count": 0
-                    },
-                    {
-                        "balltype": "drive",
-                        "count": 0
-                    },
-                    {
-                        "balltype": "lob",
-                        "count": 0
-                    },
-                    {
-                        "balltype": "long",
-                        "count": 1
-                    },
-                    {
-                        "balltype": "netplay",
-                        "count": 2
-                    },
-                    {
-                        "balltype": "rush",
-                        "count": 1
-                    },
-                    {
-                        "balltype": "smash",
-                        "count": 0
-                    }
-                ]
-            },
-            {
-                "rally": 31,
-                "player": "B",
-                "result": [
-                    {
-                        "balltype": "cut",
-                        "count": 0
-                    },
-                    {
-                        "balltype": "drive",
-                        "count": 0
-                    },
-                    {
-                        "balltype": "lob",
-                        "count": 0
-                    },
-                    {
-                        "balltype": "long",
-                        "count": 0
-                    },
-                    {
-                        "balltype": "netplay",
-                        "count": 5
-                    },
-                    {
-                        "balltype": "rush",
-                        "count": 0
-                    },
-                    {
-                        "balltype": "smash",
-                        "count": 0
-                    }
-                ]
-            },
-            {
-                "rally": 32,
-                "player": "A",
-                "result": [
-                    {
-                        "balltype": "cut",
-                        "count": 1
-                    },
-                    {
-                        "balltype": "drive",
-                        "count": 0
-                    },
-                    {
-                        "balltype": "lob",
-                        "count": 0
-                    },
-                    {
-                        "balltype": "long",
-                        "count": 0
-                    },
-                    {
-                        "balltype": "netplay",
-                        "count": 4
-                    },
-                    {
-                        "balltype": "rush",
-                        "count": 0
-                    },
-                    {
-                        "balltype": "smash",
-                        "count": 0
-                    }
-                ]
-            },
-            {
-                "rally": 32,
-                "player": "B",
-                "result": [
-                    {
-                        "balltype": "cut",
-                        "count": 1
-                    },
-                    {
-                        "balltype": "drive",
-                        "count": 0
-                    },
-                    {
-                        "balltype": "lob",
-                        "count": 0
-                    },
-                    {
-                        "balltype": "long",
-                        "count": 1
-                    },
-                    {
-                        "balltype": "netplay",
-                        "count": 4
-                    },
-                    {
-                        "balltype": "rush",
-                        "count": 0
-                    },
-                    {
-                        "balltype": "smash",
-                        "count": 0
-                    }
-                ]
-            },
-            {
-                "rally": 33,
                 "player": "A",
                 "result": [
                     {
@@ -2204,7 +1864,7 @@
                     },
                     {
                         "balltype": "rush",
-                        "count": 0
+                        "count": 3
                     },
                     {
                         "balltype": "smash",
@@ -2213,7 +1873,7 @@
                 ]
             },
             {
-                "rally": 33,
+                "rally": 28,
                 "player": "B",
                 "result": [
                     {
@@ -2238,7 +1898,347 @@
                     },
                     {
                         "balltype": "rush",
+                        "count": 1
+                    },
+                    {
+                        "balltype": "smash",
                         "count": 0
+                    }
+                ]
+            },
+            {
+                "rally": 29,
+                "player": "A",
+                "result": [
+                    {
+                        "balltype": "cut",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "drive",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "lob",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "long",
+                        "count": 1
+                    },
+                    {
+                        "balltype": "netplay",
+                        "count": 4
+                    },
+                    {
+                        "balltype": "rush",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "smash",
+                        "count": 0
+                    }
+                ]
+            },
+            {
+                "rally": 29,
+                "player": "B",
+                "result": [
+                    {
+                        "balltype": "cut",
+                        "count": 1
+                    },
+                    {
+                        "balltype": "drive",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "lob",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "long",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "netplay",
+                        "count": 4
+                    },
+                    {
+                        "balltype": "rush",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "smash",
+                        "count": 0
+                    }
+                ]
+            },
+            {
+                "rally": 30,
+                "player": "A",
+                "result": [
+                    {
+                        "balltype": "cut",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "drive",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "lob",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "long",
+                        "count": 1
+                    },
+                    {
+                        "balltype": "netplay",
+                        "count": 6
+                    },
+                    {
+                        "balltype": "rush",
+                        "count": 1
+                    },
+                    {
+                        "balltype": "smash",
+                        "count": 0
+                    }
+                ]
+            },
+            {
+                "rally": 30,
+                "player": "B",
+                "result": [
+                    {
+                        "balltype": "cut",
+                        "count": 1
+                    },
+                    {
+                        "balltype": "drive",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "lob",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "long",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "netplay",
+                        "count": 4
+                    },
+                    {
+                        "balltype": "rush",
+                        "count": 2
+                    },
+                    {
+                        "balltype": "smash",
+                        "count": 0
+                    }
+                ]
+            },
+            {
+                "rally": 31,
+                "player": "A",
+                "result": [
+                    {
+                        "balltype": "cut",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "drive",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "lob",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "long",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "netplay",
+                        "count": 6
+                    },
+                    {
+                        "balltype": "rush",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "smash",
+                        "count": 0
+                    }
+                ]
+            },
+            {
+                "rally": 31,
+                "player": "B",
+                "result": [
+                    {
+                        "balltype": "cut",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "drive",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "lob",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "long",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "netplay",
+                        "count": 7
+                    },
+                    {
+                        "balltype": "rush",
+                        "count": 1
+                    },
+                    {
+                        "balltype": "smash",
+                        "count": 0
+                    }
+                ]
+            },
+            {
+                "rally": 32,
+                "player": "A",
+                "result": [
+                    {
+                        "balltype": "cut",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "drive",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "lob",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "long",
+                        "count": 1
+                    },
+                    {
+                        "balltype": "netplay",
+                        "count": 4
+                    },
+                    {
+                        "balltype": "rush",
+                        "count": 1
+                    },
+                    {
+                        "balltype": "smash",
+                        "count": 0
+                    }
+                ]
+            },
+            {
+                "rally": 32,
+                "player": "B",
+                "result": [
+                    {
+                        "balltype": "cut",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "drive",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "lob",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "long",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "netplay",
+                        "count": 2
+                    },
+                    {
+                        "balltype": "rush",
+                        "count": 3
+                    },
+                    {
+                        "balltype": "smash",
+                        "count": 0
+                    }
+                ]
+            },
+            {
+                "rally": 33,
+                "player": "A",
+                "result": [
+                    {
+                        "balltype": "cut",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "drive",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "lob",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "long",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "netplay",
+                        "count": 5
+                    },
+                    {
+                        "balltype": "rush",
+                        "count": 2
+                    },
+                    {
+                        "balltype": "smash",
+                        "count": 0
+                    }
+                ]
+            },
+            {
+                "rally": 33,
+                "player": "B",
+                "result": [
+                    {
+                        "balltype": "cut",
+                        "count": 1
+                    },
+                    {
+                        "balltype": "drive",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "lob",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "long",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "netplay",
+                        "count": 4
+                    },
+                    {
+                        "balltype": "rush",
+                        "count": 4
                     },
                     {
                         "balltype": "smash",
@@ -2253,6 +2253,414 @@
                     {
                         "balltype": "cut",
                         "count": 0
+                    },
+                    {
+                        "balltype": "drive",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "lob",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "long",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "netplay",
+                        "count": 5
+                    },
+                    {
+                        "balltype": "rush",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "smash",
+                        "count": 0
+                    }
+                ]
+            },
+            {
+                "rally": 34,
+                "player": "B",
+                "result": [
+                    {
+                        "balltype": "cut",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "drive",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "lob",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "long",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "netplay",
+                        "count": 5
+                    },
+                    {
+                        "balltype": "rush",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "smash",
+                        "count": 0
+                    }
+                ]
+            },
+            {
+                "rally": 35,
+                "player": "A",
+                "result": [
+                    {
+                        "balltype": "cut",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "drive",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "lob",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "long",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "netplay",
+                        "count": 6
+                    },
+                    {
+                        "balltype": "rush",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "smash",
+                        "count": 0
+                    }
+                ]
+            },
+            {
+                "rally": 35,
+                "player": "B",
+                "result": [
+                    {
+                        "balltype": "cut",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "drive",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "lob",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "long",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "netplay",
+                        "count": 6
+                    },
+                    {
+                        "balltype": "rush",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "smash",
+                        "count": 0
+                    }
+                ]
+            },
+            {
+                "rally": 36,
+                "player": "A",
+                "result": [
+                    {
+                        "balltype": "cut",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "drive",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "lob",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "long",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "netplay",
+                        "count": 5
+                    },
+                    {
+                        "balltype": "rush",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "smash",
+                        "count": 0
+                    }
+                ]
+            },
+            {
+                "rally": 36,
+                "player": "B",
+                "result": [
+                    {
+                        "balltype": "cut",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "drive",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "lob",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "long",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "netplay",
+                        "count": 3
+                    },
+                    {
+                        "balltype": "rush",
+                        "count": 1
+                    },
+                    {
+                        "balltype": "smash",
+                        "count": 0
+                    }
+                ]
+            },
+            {
+                "rally": 37,
+                "player": "A",
+                "result": [
+                    {
+                        "balltype": "cut",
+                        "count": 1
+                    },
+                    {
+                        "balltype": "drive",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "lob",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "long",
+                        "count": 1
+                    },
+                    {
+                        "balltype": "netplay",
+                        "count": 2
+                    },
+                    {
+                        "balltype": "rush",
+                        "count": 2
+                    },
+                    {
+                        "balltype": "smash",
+                        "count": 0
+                    }
+                ]
+            },
+            {
+                "rally": 37,
+                "player": "B",
+                "result": [
+                    {
+                        "balltype": "cut",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "drive",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "lob",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "long",
+                        "count": 1
+                    },
+                    {
+                        "balltype": "netplay",
+                        "count": 3
+                    },
+                    {
+                        "balltype": "rush",
+                        "count": 3
+                    },
+                    {
+                        "balltype": "smash",
+                        "count": 0
+                    }
+                ]
+            },
+            {
+                "rally": 38,
+                "player": "A",
+                "result": [
+                    {
+                        "balltype": "cut",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "drive",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "lob",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "long",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "netplay",
+                        "count": 5
+                    },
+                    {
+                        "balltype": "rush",
+                        "count": 2
+                    },
+                    {
+                        "balltype": "smash",
+                        "count": 0
+                    }
+                ]
+            },
+            {
+                "rally": 38,
+                "player": "B",
+                "result": [
+                    {
+                        "balltype": "cut",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "drive",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "lob",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "long",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "netplay",
+                        "count": 6
+                    },
+                    {
+                        "balltype": "rush",
+                        "count": 3
+                    },
+                    {
+                        "balltype": "smash",
+                        "count": 0
+                    }
+                ]
+            },
+            {
+                "rally": 39,
+                "player": "A",
+                "result": [
+                    {
+                        "balltype": "cut",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "drive",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "lob",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "long",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "netplay",
+                        "count": 7
+                    },
+                    {
+                        "balltype": "rush",
+                        "count": 1
+                    },
+                    {
+                        "balltype": "smash",
+                        "count": 0
+                    }
+                ]
+            },
+            {
+                "rally": 39,
+                "player": "B",
+                "result": [
+                    {
+                        "balltype": "cut",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "drive",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "lob",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "long",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "netplay",
+                        "count": 7
+                    },
+                    {
+                        "balltype": "rush",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "smash",
+                        "count": 0
+                    }
+                ]
+            },
+            {
+                "rally": 40,
+                "player": "A",
+                "result": [
+                    {
+                        "balltype": "cut",
+                        "count": 1
                     },
                     {
                         "balltype": "drive",
@@ -2281,7 +2689,551 @@
                 ]
             },
             {
-                "rally": 34,
+                "rally": 40,
+                "player": "B",
+                "result": [
+                    {
+                        "balltype": "cut",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "drive",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "lob",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "long",
+                        "count": 1
+                    },
+                    {
+                        "balltype": "netplay",
+                        "count": 4
+                    },
+                    {
+                        "balltype": "rush",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "smash",
+                        "count": 0
+                    }
+                ]
+            },
+            {
+                "rally": 41,
+                "player": "A",
+                "result": [
+                    {
+                        "balltype": "cut",
+                        "count": 1
+                    },
+                    {
+                        "balltype": "drive",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "lob",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "long",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "netplay",
+                        "count": 4
+                    },
+                    {
+                        "balltype": "rush",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "smash",
+                        "count": 0
+                    }
+                ]
+            },
+            {
+                "rally": 41,
+                "player": "B",
+                "result": [
+                    {
+                        "balltype": "cut",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "drive",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "lob",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "long",
+                        "count": 1
+                    },
+                    {
+                        "balltype": "netplay",
+                        "count": 4
+                    },
+                    {
+                        "balltype": "rush",
+                        "count": 1
+                    },
+                    {
+                        "balltype": "smash",
+                        "count": 0
+                    }
+                ]
+            },
+            {
+                "rally": 42,
+                "player": "A",
+                "result": [
+                    {
+                        "balltype": "cut",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "drive",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "lob",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "long",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "netplay",
+                        "count": 4
+                    },
+                    {
+                        "balltype": "rush",
+                        "count": 1
+                    },
+                    {
+                        "balltype": "smash",
+                        "count": 0
+                    }
+                ]
+            },
+            {
+                "rally": 42,
+                "player": "B",
+                "result": [
+                    {
+                        "balltype": "cut",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "drive",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "lob",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "long",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "netplay",
+                        "count": 5
+                    },
+                    {
+                        "balltype": "rush",
+                        "count": 2
+                    },
+                    {
+                        "balltype": "smash",
+                        "count": 0
+                    }
+                ]
+            },
+            {
+                "rally": 43,
+                "player": "A",
+                "result": [
+                    {
+                        "balltype": "cut",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "drive",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "lob",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "long",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "netplay",
+                        "count": 6
+                    },
+                    {
+                        "balltype": "rush",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "smash",
+                        "count": 0
+                    }
+                ]
+            },
+            {
+                "rally": 43,
+                "player": "B",
+                "result": [
+                    {
+                        "balltype": "cut",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "drive",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "lob",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "long",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "netplay",
+                        "count": 5
+                    },
+                    {
+                        "balltype": "rush",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "smash",
+                        "count": 0
+                    }
+                ]
+            },
+            {
+                "rally": 44,
+                "player": "A",
+                "result": [
+                    {
+                        "balltype": "cut",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "drive",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "lob",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "long",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "netplay",
+                        "count": 6
+                    },
+                    {
+                        "balltype": "rush",
+                        "count": 2
+                    },
+                    {
+                        "balltype": "smash",
+                        "count": 0
+                    }
+                ]
+            },
+            {
+                "rally": 44,
+                "player": "B",
+                "result": [
+                    {
+                        "balltype": "cut",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "drive",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "lob",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "long",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "netplay",
+                        "count": 4
+                    },
+                    {
+                        "balltype": "rush",
+                        "count": 3
+                    },
+                    {
+                        "balltype": "smash",
+                        "count": 0
+                    }
+                ]
+            },
+            {
+                "rally": 45,
+                "player": "A",
+                "result": [
+                    {
+                        "balltype": "cut",
+                        "count": 1
+                    },
+                    {
+                        "balltype": "drive",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "lob",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "long",
+                        "count": 1
+                    },
+                    {
+                        "balltype": "netplay",
+                        "count": 3
+                    },
+                    {
+                        "balltype": "rush",
+                        "count": 2
+                    },
+                    {
+                        "balltype": "smash",
+                        "count": 0
+                    }
+                ]
+            },
+            {
+                "rally": 45,
+                "player": "B",
+                "result": [
+                    {
+                        "balltype": "cut",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "drive",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "lob",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "long",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "netplay",
+                        "count": 4
+                    },
+                    {
+                        "balltype": "rush",
+                        "count": 2
+                    },
+                    {
+                        "balltype": "smash",
+                        "count": 0
+                    }
+                ]
+            },
+            {
+                "rally": 46,
+                "player": "A",
+                "result": [
+                    {
+                        "balltype": "cut",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "drive",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "lob",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "long",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "netplay",
+                        "count": 9
+                    },
+                    {
+                        "balltype": "rush",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "smash",
+                        "count": 0
+                    }
+                ]
+            },
+            {
+                "rally": 46,
+                "player": "B",
+                "result": [
+                    {
+                        "balltype": "cut",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "drive",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "lob",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "long",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "netplay",
+                        "count": 7
+                    },
+                    {
+                        "balltype": "rush",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "smash",
+                        "count": 0
+                    }
+                ]
+            },
+            {
+                "rally": 47,
+                "player": "A",
+                "result": [
+                    {
+                        "balltype": "cut",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "drive",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "lob",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "long",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "netplay",
+                        "count": 4
+                    },
+                    {
+                        "balltype": "rush",
+                        "count": 2
+                    },
+                    {
+                        "balltype": "smash",
+                        "count": 0
+                    }
+                ]
+            },
+            {
+                "rally": 47,
+                "player": "B",
+                "result": [
+                    {
+                        "balltype": "cut",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "drive",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "lob",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "long",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "netplay",
+                        "count": 5
+                    },
+                    {
+                        "balltype": "rush",
+                        "count": 2
+                    },
+                    {
+                        "balltype": "smash",
+                        "count": 0
+                    }
+                ]
+            },
+            {
+                "rally": 48,
+                "player": "A",
+                "result": [
+                    {
+                        "balltype": "cut",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "drive",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "lob",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "long",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "netplay",
+                        "count": 5
+                    },
+                    {
+                        "balltype": "rush",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "smash",
+                        "count": 0
+                    }
+                ]
+            },
+            {
+                "rally": 48,
                 "player": "B",
                 "result": [
                     {
@@ -2306,7 +3258,7 @@
                     },
                     {
                         "balltype": "rush",
-                        "count": 0
+                        "count": 1
                     },
                     {
                         "balltype": "smash",
@@ -2315,12 +3267,12 @@
                 ]
             },
             {
-                "rally": 35,
+                "rally": 49,
                 "player": "A",
                 "result": [
                     {
                         "balltype": "cut",
-                        "count": 1
+                        "count": 0
                     },
                     {
                         "balltype": "drive",
@@ -2336,11 +3288,11 @@
                     },
                     {
                         "balltype": "netplay",
-                        "count": 9
+                        "count": 8
                     },
                     {
                         "balltype": "rush",
-                        "count": 1
+                        "count": 0
                     },
                     {
                         "balltype": "smash",
@@ -2349,7 +3301,7 @@
                 ]
             },
             {
-                "rally": 35,
+                "rally": 49,
                 "player": "B",
                 "result": [
                     {
@@ -2366,11 +3318,2663 @@
                     },
                     {
                         "balltype": "long",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "netplay",
+                        "count": 8
+                    },
+                    {
+                        "balltype": "rush",
                         "count": 1
+                    },
+                    {
+                        "balltype": "smash",
+                        "count": 0
+                    }
+                ]
+            },
+            {
+                "rally": 50,
+                "player": "A",
+                "result": [
+                    {
+                        "balltype": "cut",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "drive",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "lob",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "long",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "netplay",
+                        "count": 6
+                    },
+                    {
+                        "balltype": "rush",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "smash",
+                        "count": 0
+                    }
+                ]
+            },
+            {
+                "rally": 50,
+                "player": "B",
+                "result": [
+                    {
+                        "balltype": "cut",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "drive",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "lob",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "long",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "netplay",
+                        "count": 4
+                    },
+                    {
+                        "balltype": "rush",
+                        "count": 1
+                    },
+                    {
+                        "balltype": "smash",
+                        "count": 0
+                    }
+                ]
+            },
+            {
+                "rally": 51,
+                "player": "A",
+                "result": [
+                    {
+                        "balltype": "cut",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "drive",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "lob",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "long",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "netplay",
+                        "count": 7
+                    },
+                    {
+                        "balltype": "rush",
+                        "count": 3
+                    },
+                    {
+                        "balltype": "smash",
+                        "count": 0
+                    }
+                ]
+            },
+            {
+                "rally": 51,
+                "player": "B",
+                "result": [
+                    {
+                        "balltype": "cut",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "drive",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "lob",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "long",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "netplay",
+                        "count": 6
+                    },
+                    {
+                        "balltype": "rush",
+                        "count": 3
+                    },
+                    {
+                        "balltype": "smash",
+                        "count": 0
+                    }
+                ]
+            },
+            {
+                "rally": 52,
+                "player": "A",
+                "result": [
+                    {
+                        "balltype": "cut",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "drive",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "lob",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "long",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "netplay",
+                        "count": 6
+                    },
+                    {
+                        "balltype": "rush",
+                        "count": 1
+                    },
+                    {
+                        "balltype": "smash",
+                        "count": 0
+                    }
+                ]
+            },
+            {
+                "rally": 52,
+                "player": "B",
+                "result": [
+                    {
+                        "balltype": "cut",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "drive",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "lob",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "long",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "netplay",
+                        "count": 5
+                    },
+                    {
+                        "balltype": "rush",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "smash",
+                        "count": 0
+                    }
+                ]
+            },
+            {
+                "rally": 53,
+                "player": "A",
+                "result": [
+                    {
+                        "balltype": "cut",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "drive",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "lob",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "long",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "netplay",
+                        "count": 4
+                    },
+                    {
+                        "balltype": "rush",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "smash",
+                        "count": 0
+                    }
+                ]
+            },
+            {
+                "rally": 53,
+                "player": "B",
+                "result": [
+                    {
+                        "balltype": "cut",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "drive",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "lob",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "long",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "netplay",
+                        "count": 4
+                    },
+                    {
+                        "balltype": "rush",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "smash",
+                        "count": 0
+                    }
+                ]
+            },
+            {
+                "rally": 54,
+                "player": "A",
+                "result": [
+                    {
+                        "balltype": "cut",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "drive",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "lob",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "long",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "netplay",
+                        "count": 4
+                    },
+                    {
+                        "balltype": "rush",
+                        "count": 2
+                    },
+                    {
+                        "balltype": "smash",
+                        "count": 0
+                    }
+                ]
+            },
+            {
+                "rally": 54,
+                "player": "B",
+                "result": [
+                    {
+                        "balltype": "cut",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "drive",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "lob",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "long",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "netplay",
+                        "count": 7
+                    },
+                    {
+                        "balltype": "rush",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "smash",
+                        "count": 0
+                    }
+                ]
+            },
+            {
+                "rally": 55,
+                "player": "A",
+                "result": [
+                    {
+                        "balltype": "cut",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "drive",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "lob",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "long",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "netplay",
+                        "count": 7
+                    },
+                    {
+                        "balltype": "rush",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "smash",
+                        "count": 0
+                    }
+                ]
+            },
+            {
+                "rally": 55,
+                "player": "B",
+                "result": [
+                    {
+                        "balltype": "cut",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "drive",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "lob",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "long",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "netplay",
+                        "count": 8
+                    },
+                    {
+                        "balltype": "rush",
+                        "count": 1
+                    },
+                    {
+                        "balltype": "smash",
+                        "count": 0
+                    }
+                ]
+            },
+            {
+                "rally": 56,
+                "player": "A",
+                "result": [
+                    {
+                        "balltype": "cut",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "drive",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "lob",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "long",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "netplay",
+                        "count": 4
+                    },
+                    {
+                        "balltype": "rush",
+                        "count": 1
+                    },
+                    {
+                        "balltype": "smash",
+                        "count": 0
+                    }
+                ]
+            },
+            {
+                "rally": 56,
+                "player": "B",
+                "result": [
+                    {
+                        "balltype": "cut",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "drive",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "lob",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "long",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "netplay",
+                        "count": 5
+                    },
+                    {
+                        "balltype": "rush",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "smash",
+                        "count": 0
+                    }
+                ]
+            },
+            {
+                "rally": 57,
+                "player": "A",
+                "result": [
+                    {
+                        "balltype": "cut",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "drive",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "lob",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "long",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "netplay",
+                        "count": 6
+                    },
+                    {
+                        "balltype": "rush",
+                        "count": 6
+                    },
+                    {
+                        "balltype": "smash",
+                        "count": 0
+                    }
+                ]
+            },
+            {
+                "rally": 57,
+                "player": "B",
+                "result": [
+                    {
+                        "balltype": "cut",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "drive",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "lob",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "long",
+                        "count": 0
                     },
                     {
                         "balltype": "netplay",
                         "count": 10
+                    },
+                    {
+                        "balltype": "rush",
+                        "count": 2
+                    },
+                    {
+                        "balltype": "smash",
+                        "count": 0
+                    }
+                ]
+            },
+            {
+                "rally": 58,
+                "player": "A",
+                "result": [
+                    {
+                        "balltype": "cut",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "drive",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "lob",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "long",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "netplay",
+                        "count": 9
+                    },
+                    {
+                        "balltype": "rush",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "smash",
+                        "count": 0
+                    }
+                ]
+            },
+            {
+                "rally": 58,
+                "player": "B",
+                "result": [
+                    {
+                        "balltype": "cut",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "drive",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "lob",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "long",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "netplay",
+                        "count": 7
+                    },
+                    {
+                        "balltype": "rush",
+                        "count": 2
+                    },
+                    {
+                        "balltype": "smash",
+                        "count": 0
+                    }
+                ]
+            },
+            {
+                "rally": 59,
+                "player": "A",
+                "result": [
+                    {
+                        "balltype": "cut",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "drive",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "lob",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "long",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "netplay",
+                        "count": 6
+                    },
+                    {
+                        "balltype": "rush",
+                        "count": 3
+                    },
+                    {
+                        "balltype": "smash",
+                        "count": 0
+                    }
+                ]
+            },
+            {
+                "rally": 59,
+                "player": "B",
+                "result": [
+                    {
+                        "balltype": "cut",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "drive",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "lob",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "long",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "netplay",
+                        "count": 7
+                    },
+                    {
+                        "balltype": "rush",
+                        "count": 1
+                    },
+                    {
+                        "balltype": "smash",
+                        "count": 0
+                    }
+                ]
+            },
+            {
+                "rally": 60,
+                "player": "A",
+                "result": [
+                    {
+                        "balltype": "cut",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "drive",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "lob",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "long",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "netplay",
+                        "count": 3
+                    },
+                    {
+                        "balltype": "rush",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "smash",
+                        "count": 0
+                    }
+                ]
+            },
+            {
+                "rally": 60,
+                "player": "B",
+                "result": [
+                    {
+                        "balltype": "cut",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "drive",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "lob",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "long",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "netplay",
+                        "count": 5
+                    },
+                    {
+                        "balltype": "rush",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "smash",
+                        "count": 0
+                    }
+                ]
+            },
+            {
+                "rally": 61,
+                "player": "A",
+                "result": [
+                    {
+                        "balltype": "cut",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "drive",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "lob",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "long",
+                        "count": 1
+                    },
+                    {
+                        "balltype": "netplay",
+                        "count": 5
+                    },
+                    {
+                        "balltype": "rush",
+                        "count": 1
+                    },
+                    {
+                        "balltype": "smash",
+                        "count": 0
+                    }
+                ]
+            },
+            {
+                "rally": 61,
+                "player": "B",
+                "result": [
+                    {
+                        "balltype": "cut",
+                        "count": 1
+                    },
+                    {
+                        "balltype": "drive",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "lob",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "long",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "netplay",
+                        "count": 4
+                    },
+                    {
+                        "balltype": "rush",
+                        "count": 1
+                    },
+                    {
+                        "balltype": "smash",
+                        "count": 0
+                    }
+                ]
+            },
+            {
+                "rally": 62,
+                "player": "A",
+                "result": [
+                    {
+                        "balltype": "cut",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "drive",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "lob",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "long",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "netplay",
+                        "count": 4
+                    },
+                    {
+                        "balltype": "rush",
+                        "count": 2
+                    },
+                    {
+                        "balltype": "smash",
+                        "count": 0
+                    }
+                ]
+            },
+            {
+                "rally": 62,
+                "player": "B",
+                "result": [
+                    {
+                        "balltype": "cut",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "drive",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "lob",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "long",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "netplay",
+                        "count": 5
+                    },
+                    {
+                        "balltype": "rush",
+                        "count": 2
+                    },
+                    {
+                        "balltype": "smash",
+                        "count": 0
+                    }
+                ]
+            },
+            {
+                "rally": 63,
+                "player": "A",
+                "result": [
+                    {
+                        "balltype": "cut",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "drive",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "lob",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "long",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "netplay",
+                        "count": 4
+                    },
+                    {
+                        "balltype": "rush",
+                        "count": 2
+                    },
+                    {
+                        "balltype": "smash",
+                        "count": 0
+                    }
+                ]
+            },
+            {
+                "rally": 63,
+                "player": "B",
+                "result": [
+                    {
+                        "balltype": "cut",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "drive",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "lob",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "long",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "netplay",
+                        "count": 4
+                    },
+                    {
+                        "balltype": "rush",
+                        "count": 3
+                    },
+                    {
+                        "balltype": "smash",
+                        "count": 0
+                    }
+                ]
+            },
+            {
+                "rally": 64,
+                "player": "A",
+                "result": [
+                    {
+                        "balltype": "cut",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "drive",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "lob",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "long",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "netplay",
+                        "count": 4
+                    },
+                    {
+                        "balltype": "rush",
+                        "count": 1
+                    },
+                    {
+                        "balltype": "smash",
+                        "count": 0
+                    }
+                ]
+            },
+            {
+                "rally": 64,
+                "player": "B",
+                "result": [
+                    {
+                        "balltype": "cut",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "drive",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "lob",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "long",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "netplay",
+                        "count": 6
+                    },
+                    {
+                        "balltype": "rush",
+                        "count": 1
+                    },
+                    {
+                        "balltype": "smash",
+                        "count": 0
+                    }
+                ]
+            },
+            {
+                "rally": 65,
+                "player": "A",
+                "result": [
+                    {
+                        "balltype": "cut",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "drive",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "lob",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "long",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "netplay",
+                        "count": 7
+                    },
+                    {
+                        "balltype": "rush",
+                        "count": 1
+                    },
+                    {
+                        "balltype": "smash",
+                        "count": 0
+                    }
+                ]
+            },
+            {
+                "rally": 65,
+                "player": "B",
+                "result": [
+                    {
+                        "balltype": "cut",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "drive",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "lob",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "long",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "netplay",
+                        "count": 5
+                    },
+                    {
+                        "balltype": "rush",
+                        "count": 3
+                    },
+                    {
+                        "balltype": "smash",
+                        "count": 0
+                    }
+                ]
+            },
+            {
+                "rally": 66,
+                "player": "A",
+                "result": [
+                    {
+                        "balltype": "cut",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "drive",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "lob",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "long",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "netplay",
+                        "count": 3
+                    },
+                    {
+                        "balltype": "rush",
+                        "count": 2
+                    },
+                    {
+                        "balltype": "smash",
+                        "count": 0
+                    }
+                ]
+            },
+            {
+                "rally": 66,
+                "player": "B",
+                "result": [
+                    {
+                        "balltype": "cut",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "drive",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "lob",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "long",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "netplay",
+                        "count": 4
+                    },
+                    {
+                        "balltype": "rush",
+                        "count": 1
+                    },
+                    {
+                        "balltype": "smash",
+                        "count": 0
+                    }
+                ]
+            },
+            {
+                "rally": 67,
+                "player": "A",
+                "result": [
+                    {
+                        "balltype": "cut",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "drive",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "lob",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "long",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "netplay",
+                        "count": 6
+                    },
+                    {
+                        "balltype": "rush",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "smash",
+                        "count": 0
+                    }
+                ]
+            },
+            {
+                "rally": 67,
+                "player": "B",
+                "result": [
+                    {
+                        "balltype": "cut",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "drive",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "lob",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "long",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "netplay",
+                        "count": 5
+                    },
+                    {
+                        "balltype": "rush",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "smash",
+                        "count": 0
+                    }
+                ]
+            },
+            {
+                "rally": 68,
+                "player": "A",
+                "result": [
+                    {
+                        "balltype": "cut",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "drive",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "lob",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "long",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "netplay",
+                        "count": 4
+                    },
+                    {
+                        "balltype": "rush",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "smash",
+                        "count": 0
+                    }
+                ]
+            },
+            {
+                "rally": 68,
+                "player": "B",
+                "result": [
+                    {
+                        "balltype": "cut",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "drive",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "lob",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "long",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "netplay",
+                        "count": 6
+                    },
+                    {
+                        "balltype": "rush",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "smash",
+                        "count": 0
+                    }
+                ]
+            },
+            {
+                "rally": 69,
+                "player": "A",
+                "result": [
+                    {
+                        "balltype": "cut",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "drive",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "lob",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "long",
+                        "count": 2
+                    },
+                    {
+                        "balltype": "netplay",
+                        "count": 5
+                    },
+                    {
+                        "balltype": "rush",
+                        "count": 1
+                    },
+                    {
+                        "balltype": "smash",
+                        "count": 0
+                    }
+                ]
+            },
+            {
+                "rally": 69,
+                "player": "B",
+                "result": [
+                    {
+                        "balltype": "cut",
+                        "count": 2
+                    },
+                    {
+                        "balltype": "drive",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "lob",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "long",
+                        "count": 1
+                    },
+                    {
+                        "balltype": "netplay",
+                        "count": 3
+                    },
+                    {
+                        "balltype": "rush",
+                        "count": 1
+                    },
+                    {
+                        "balltype": "smash",
+                        "count": 0
+                    }
+                ]
+            },
+            {
+                "rally": 70,
+                "player": "A",
+                "result": [
+                    {
+                        "balltype": "cut",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "drive",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "lob",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "long",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "netplay",
+                        "count": 6
+                    },
+                    {
+                        "balltype": "rush",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "smash",
+                        "count": 0
+                    }
+                ]
+            },
+            {
+                "rally": 70,
+                "player": "B",
+                "result": [
+                    {
+                        "balltype": "cut",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "drive",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "lob",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "long",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "netplay",
+                        "count": 5
+                    },
+                    {
+                        "balltype": "rush",
+                        "count": 2
+                    },
+                    {
+                        "balltype": "smash",
+                        "count": 0
+                    }
+                ]
+            },
+            {
+                "rally": 71,
+                "player": "A",
+                "result": [
+                    {
+                        "balltype": "cut",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "drive",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "lob",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "long",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "netplay",
+                        "count": 3
+                    },
+                    {
+                        "balltype": "rush",
+                        "count": 2
+                    },
+                    {
+                        "balltype": "smash",
+                        "count": 0
+                    }
+                ]
+            },
+            {
+                "rally": 71,
+                "player": "B",
+                "result": [
+                    {
+                        "balltype": "cut",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "drive",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "lob",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "long",
+                        "count": 1
+                    },
+                    {
+                        "balltype": "netplay",
+                        "count": 5
+                    },
+                    {
+                        "balltype": "rush",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "smash",
+                        "count": 0
+                    }
+                ]
+            },
+            {
+                "rally": 72,
+                "player": "A",
+                "result": [
+                    {
+                        "balltype": "cut",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "drive",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "lob",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "long",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "netplay",
+                        "count": 2
+                    },
+                    {
+                        "balltype": "rush",
+                        "count": 1
+                    },
+                    {
+                        "balltype": "smash",
+                        "count": 0
+                    }
+                ]
+            },
+            {
+                "rally": 72,
+                "player": "B",
+                "result": [
+                    {
+                        "balltype": "cut",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "drive",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "lob",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "long",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "netplay",
+                        "count": 4
+                    },
+                    {
+                        "balltype": "rush",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "smash",
+                        "count": 0
+                    }
+                ]
+            },
+            {
+                "rally": 73,
+                "player": "A",
+                "result": [
+                    {
+                        "balltype": "cut",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "drive",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "lob",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "long",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "netplay",
+                        "count": 4
+                    },
+                    {
+                        "balltype": "rush",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "smash",
+                        "count": 0
+                    }
+                ]
+            },
+            {
+                "rally": 73,
+                "player": "B",
+                "result": [
+                    {
+                        "balltype": "cut",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "drive",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "lob",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "long",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "netplay",
+                        "count": 5
+                    },
+                    {
+                        "balltype": "rush",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "smash",
+                        "count": 0
+                    }
+                ]
+            },
+            {
+                "rally": 74,
+                "player": "A",
+                "result": [
+                    {
+                        "balltype": "cut",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "drive",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "lob",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "long",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "netplay",
+                        "count": 4
+                    },
+                    {
+                        "balltype": "rush",
+                        "count": 1
+                    },
+                    {
+                        "balltype": "smash",
+                        "count": 0
+                    }
+                ]
+            },
+            {
+                "rally": 74,
+                "player": "B",
+                "result": [
+                    {
+                        "balltype": "cut",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "drive",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "lob",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "long",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "netplay",
+                        "count": 6
+                    },
+                    {
+                        "balltype": "rush",
+                        "count": 1
+                    },
+                    {
+                        "balltype": "smash",
+                        "count": 0
+                    }
+                ]
+            },
+            {
+                "rally": 75,
+                "player": "A",
+                "result": [
+                    {
+                        "balltype": "cut",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "drive",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "lob",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "long",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "netplay",
+                        "count": 10
+                    },
+                    {
+                        "balltype": "rush",
+                        "count": 1
+                    },
+                    {
+                        "balltype": "smash",
+                        "count": 0
+                    }
+                ]
+            },
+            {
+                "rally": 75,
+                "player": "B",
+                "result": [
+                    {
+                        "balltype": "cut",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "drive",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "lob",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "long",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "netplay",
+                        "count": 9
+                    },
+                    {
+                        "balltype": "rush",
+                        "count": 1
+                    },
+                    {
+                        "balltype": "smash",
+                        "count": 0
+                    }
+                ]
+            },
+            {
+                "rally": 76,
+                "player": "A",
+                "result": [
+                    {
+                        "balltype": "cut",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "drive",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "lob",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "long",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "netplay",
+                        "count": 3
+                    },
+                    {
+                        "balltype": "rush",
+                        "count": 3
+                    },
+                    {
+                        "balltype": "smash",
+                        "count": 0
+                    }
+                ]
+            },
+            {
+                "rally": 76,
+                "player": "B",
+                "result": [
+                    {
+                        "balltype": "cut",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "drive",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "lob",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "long",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "netplay",
+                        "count": 7
+                    },
+                    {
+                        "balltype": "rush",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "smash",
+                        "count": 0
+                    }
+                ]
+            },
+            {
+                "rally": 77,
+                "player": "A",
+                "result": [
+                    {
+                        "balltype": "cut",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "drive",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "lob",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "long",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "netplay",
+                        "count": 6
+                    },
+                    {
+                        "balltype": "rush",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "smash",
+                        "count": 0
+                    }
+                ]
+            },
+            {
+                "rally": 77,
+                "player": "B",
+                "result": [
+                    {
+                        "balltype": "cut",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "drive",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "lob",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "long",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "netplay",
+                        "count": 4
+                    },
+                    {
+                        "balltype": "rush",
+                        "count": 3
+                    },
+                    {
+                        "balltype": "smash",
+                        "count": 0
+                    }
+                ]
+            },
+            {
+                "rally": 78,
+                "player": "A",
+                "result": [
+                    {
+                        "balltype": "cut",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "drive",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "lob",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "long",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "netplay",
+                        "count": 5
+                    },
+                    {
+                        "balltype": "rush",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "smash",
+                        "count": 0
+                    }
+                ]
+            },
+            {
+                "rally": 78,
+                "player": "B",
+                "result": [
+                    {
+                        "balltype": "cut",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "drive",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "lob",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "long",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "netplay",
+                        "count": 5
+                    },
+                    {
+                        "balltype": "rush",
+                        "count": 1
+                    },
+                    {
+                        "balltype": "smash",
+                        "count": 0
+                    }
+                ]
+            },
+            {
+                "rally": 79,
+                "player": "A",
+                "result": [
+                    {
+                        "balltype": "cut",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "drive",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "lob",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "long",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "netplay",
+                        "count": 7
+                    },
+                    {
+                        "balltype": "rush",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "smash",
+                        "count": 0
+                    }
+                ]
+            },
+            {
+                "rally": 79,
+                "player": "B",
+                "result": [
+                    {
+                        "balltype": "cut",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "drive",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "lob",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "long",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "netplay",
+                        "count": 8
+                    },
+                    {
+                        "balltype": "rush",
+                        "count": 1
+                    },
+                    {
+                        "balltype": "smash",
+                        "count": 0
+                    }
+                ]
+            },
+            {
+                "rally": 80,
+                "player": "A",
+                "result": [
+                    {
+                        "balltype": "cut",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "drive",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "lob",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "long",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "netplay",
+                        "count": 5
+                    },
+                    {
+                        "balltype": "rush",
+                        "count": 1
+                    },
+                    {
+                        "balltype": "smash",
+                        "count": 0
+                    }
+                ]
+            },
+            {
+                "rally": 80,
+                "player": "B",
+                "result": [
+                    {
+                        "balltype": "cut",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "drive",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "lob",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "long",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "netplay",
+                        "count": 6
+                    },
+                    {
+                        "balltype": "rush",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "smash",
+                        "count": 0
+                    }
+                ]
+            },
+            {
+                "rally": 81,
+                "player": "A",
+                "result": [
+                    {
+                        "balltype": "cut",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "drive",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "lob",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "long",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "netplay",
+                        "count": 3
+                    },
+                    {
+                        "balltype": "rush",
+                        "count": 4
+                    },
+                    {
+                        "balltype": "smash",
+                        "count": 0
+                    }
+                ]
+            },
+            {
+                "rally": 81,
+                "player": "B",
+                "result": [
+                    {
+                        "balltype": "cut",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "drive",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "lob",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "long",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "netplay",
+                        "count": 2
+                    },
+                    {
+                        "balltype": "rush",
+                        "count": 5
+                    },
+                    {
+                        "balltype": "smash",
+                        "count": 0
+                    }
+                ]
+            },
+            {
+                "rally": 82,
+                "player": "A",
+                "result": [
+                    {
+                        "balltype": "cut",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "drive",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "lob",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "long",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "netplay",
+                        "count": 6
+                    },
+                    {
+                        "balltype": "rush",
+                        "count": 3
+                    },
+                    {
+                        "balltype": "smash",
+                        "count": 0
+                    }
+                ]
+            },
+            {
+                "rally": 82,
+                "player": "B",
+                "result": [
+                    {
+                        "balltype": "cut",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "drive",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "lob",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "long",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "netplay",
+                        "count": 8
+                    },
+                    {
+                        "balltype": "rush",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "smash",
+                        "count": 0
+                    }
+                ]
+            },
+            {
+                "rally": 83,
+                "player": "A",
+                "result": [
+                    {
+                        "balltype": "cut",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "drive",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "lob",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "long",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "netplay",
+                        "count": 10
+                    },
+                    {
+                        "balltype": "rush",
+                        "count": 1
+                    },
+                    {
+                        "balltype": "smash",
+                        "count": 0
+                    }
+                ]
+            },
+            {
+                "rally": 83,
+                "player": "B",
+                "result": [
+                    {
+                        "balltype": "cut",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "drive",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "lob",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "long",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "netplay",
+                        "count": 8
+                    },
+                    {
+                        "balltype": "rush",
+                        "count": 5
+                    },
+                    {
+                        "balltype": "smash",
+                        "count": 0
+                    }
+                ]
+            },
+            {
+                "rally": 84,
+                "player": "A",
+                "result": [
+                    {
+                        "balltype": "cut",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "drive",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "lob",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "long",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "netplay",
+                        "count": 8
+                    },
+                    {
+                        "balltype": "rush",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "smash",
+                        "count": 0
+                    }
+                ]
+            },
+            {
+                "rally": 84,
+                "player": "B",
+                "result": [
+                    {
+                        "balltype": "cut",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "drive",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "lob",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "long",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "netplay",
+                        "count": 4
+                    },
+                    {
+                        "balltype": "rush",
+                        "count": 3
+                    },
+                    {
+                        "balltype": "smash",
+                        "count": 0
+                    }
+                ]
+            },
+            {
+                "rally": 85,
+                "player": "A",
+                "result": [
+                    {
+                        "balltype": "cut",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "drive",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "lob",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "long",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "netplay",
+                        "count": 4
+                    },
+                    {
+                        "balltype": "rush",
+                        "count": 1
+                    },
+                    {
+                        "balltype": "smash",
+                        "count": 0
+                    }
+                ]
+            },
+            {
+                "rally": 85,
+                "player": "B",
+                "result": [
+                    {
+                        "balltype": "cut",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "drive",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "lob",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "long",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "netplay",
+                        "count": 6
+                    },
+                    {
+                        "balltype": "rush",
+                        "count": 1
+                    },
+                    {
+                        "balltype": "smash",
+                        "count": 0
+                    }
+                ]
+            },
+            {
+                "rally": 86,
+                "player": "A",
+                "result": [
+                    {
+                        "balltype": "cut",
+                        "count": 1
+                    },
+                    {
+                        "balltype": "drive",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "lob",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "long",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "netplay",
+                        "count": 4
+                    },
+                    {
+                        "balltype": "rush",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "smash",
+                        "count": 0
+                    }
+                ]
+            },
+            {
+                "rally": 86,
+                "player": "B",
+                "result": [
+                    {
+                        "balltype": "cut",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "drive",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "lob",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "long",
+                        "count": 1
+                    },
+                    {
+                        "balltype": "netplay",
+                        "count": 3
+                    },
+                    {
+                        "balltype": "rush",
+                        "count": 1
+                    },
+                    {
+                        "balltype": "smash",
+                        "count": 0
+                    }
+                ]
+            },
+            {
+                "rally": 87,
+                "player": "A",
+                "result": [
+                    {
+                        "balltype": "cut",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "drive",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "lob",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "long",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "netplay",
+                        "count": 5
+                    },
+                    {
+                        "balltype": "rush",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "smash",
+                        "count": 0
+                    }
+                ]
+            },
+            {
+                "rally": 87,
+                "player": "B",
+                "result": [
+                    {
+                        "balltype": "cut",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "drive",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "lob",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "long",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "netplay",
+                        "count": 4
+                    },
+                    {
+                        "balltype": "rush",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "smash",
+                        "count": 0
+                    }
+                ]
+            },
+            {
+                "rally": 88,
+                "player": "A",
+                "result": [
+                    {
+                        "balltype": "cut",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "drive",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "lob",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "long",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "netplay",
+                        "count": 3
+                    },
+                    {
+                        "balltype": "rush",
+                        "count": 2
+                    },
+                    {
+                        "balltype": "smash",
+                        "count": 0
+                    }
+                ]
+            },
+            {
+                "rally": 88,
+                "player": "B",
+                "result": [
+                    {
+                        "balltype": "cut",
+                        "count": 1
+                    },
+                    {
+                        "balltype": "drive",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "lob",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "long",
+                        "count": 0
+                    },
+                    {
+                        "balltype": "netplay",
+                        "count": 5
                     },
                     {
                         "balltype": "rush",

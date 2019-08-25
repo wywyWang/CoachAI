@@ -277,19 +277,19 @@ def on_off_court(segmentation_output):
             thr = 0
 
         #short video is imcomplete
-        if rallys_now == 26 :
-            scoreAtmp = 0
-            scoreBtmp = 0
-            sets_now += 1
-            rallys_now = 1
+        # if rallys_now == 26 :
+        #     scoreAtmp = 0
+        #     scoreBtmp = 0
+        #     sets_now += 1
+        #     rallys_now = 1
 
         # # Determine when will be next set,complete video use
-        # if scoreAtmp >=21 or scoreBtmp >=21:
-        #     if abs(scoreAtmp - scoreBtmp) >= 2:
-        #         scoreAtmp = 0
-        #         scoreBtmp = 0
-        #         sets_now += 1
-        #         rallys_now = 1
+        if scoreAtmp >=21 or scoreBtmp >=21:
+            if abs(scoreAtmp - scoreBtmp) >= 2:
+                scoreAtmp = 0
+                scoreBtmp = 0
+                sets_now += 1
+                rallys_now = 1
 
         getpoint_player_tmp = None
         if df['end'][i] == 1:
@@ -372,15 +372,24 @@ def on_off_court(segmentation_output):
     total_end_frame = df[df['end'] == 1]['Frame'].reset_index(drop=True)
     end_frame_index = 0
     closetframe = -1e9
-    for hitpoint_frame in df[df['hitpoint']==1]['Frame']:
-        if hitpoint_frame < total_end_frame[end_frame_index] and hitpoint_frame > closetframe:
-            closetframe = hitpoint_frame
-        if hitpoint_frame > total_end_frame[end_frame_index]:
-            idx=df['Frame'][df['Frame']==closetframe].index[0]
-            df['getpoint_player'][idx] = who_wins[end_frame_index]
-            df['lose_reason'][idx] = on_off_court['on_off_court'][end_frame_index]
-            closetframe = -1e9
-            end_frame_index += 1
+    df_index = 0
+    while df_index < len(df) and end_frame_index < len(total_end_frame):
+        if df['hitpoint'][df_index] == 0:
+            pass
+        else:
+            if df['Frame'][df_index] < total_end_frame[end_frame_index] and df['Frame'][df_index] > closetframe:
+                closetframe = df['Frame'][df_index]
+            if df['Frame'][df_index] >= total_end_frame[end_frame_index]:
+                if closetframe <= 0: 
+                    end_frame_index += 1
+                    df_index -= 1
+                else:
+                    idx=df['Frame'][df['Frame']==closetframe].index[0]
+                    df['getpoint_player'][idx] = who_wins[end_frame_index]
+                    df['lose_reason'][idx] = on_off_court['on_off_court'][end_frame_index]
+                    closetframe = -1e9
+                    end_frame_index += 1
+        df_index += 1
 
     # Fill last one end info into last hitpoint
     idx = df['Frame'][df['Frame'] == df[df['hitpoint']==1]['Frame'].iloc[-1]].index[0]

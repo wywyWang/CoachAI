@@ -5,114 +5,258 @@
             {
                 "rally": 1,
                 "score": "1:0",
-                "stroke": 17,
-                "winner": "A",
-                "on_off_court": "\u843d\u5730",
-                "balltype": "netplay",
-                "lose_area": "B2"
-            },
-            {
-                "rally": 2,
-                "score": "1:1",
-                "stroke": 5,
-                "winner": "B",
-                "on_off_court": "\u51fa\u754c",
-                "balltype": "netplay",
-                "lose_area": "D1"
-            },
-            {
-                "rally": 3,
-                "score": "2:1",
-                "stroke": 6,
+                "stroke": 20,
                 "winner": "A",
                 "on_off_court": "\u51fa\u754c",
-                "balltype": "netplay",
-                "lose_area": "D1"
-            },
-            {
-                "rally": 4,
-                "score": "2:2",
-                "stroke": 25,
-                "winner": "B",
-                "on_off_court": "\u843d\u5730",
                 "balltype": "netplay",
                 "lose_area": "A2"
             },
             {
-                "rally": 5,
-                "score": "2:3",
-                "stroke": 22,
-                "winner": "B",
-                "on_off_court": "\u672a\u56de\u64ca\u6210\u529f",
+                "rally": 2,
+                "score": "2:0",
+                "stroke": 10,
+                "winner": "A",
+                "on_off_court": "\u51fa\u754c",
                 "balltype": "netplay",
-                "lose_area": "D1"
+                "lose_area": "A1"
+            },
+            {
+                "rally": 3,
+                "score": "3:0",
+                "stroke": 13,
+                "winner": "A",
+                "on_off_court": "\u51fa\u754c",
+                "balltype": "long",
+                "lose_area": "A3"
+            },
+            {
+                "rally": 4,
+                "score": "4:0",
+                "stroke": 3,
+                "winner": "A",
+                "on_off_court": "\u51fa\u754c",
+                "balltype": "cut",
+                "lose_area": "A1"
+            },
+            {
+                "rally": 5,
+                "score": "5:0",
+                "stroke": 8,
+                "winner": "A",
+                "on_off_court": "\u51fa\u754c",
+                "balltype": "netplay",
+                "lose_area": "A2"
             },
             {
                 "rally": 6,
-                "score": "3:3",
-                "stroke": 9,
+                "score": "6:0",
+                "stroke": 13,
                 "winner": "A",
-                "on_off_court": "\u672a\u56de\u64ca\u6210\u529f",
+                "on_off_court": "\u51fa\u754c",
                 "balltype": "netplay",
-                "lose_area": "D1"
+                "lose_area": "A2"
             },
             {
                 "rally": 7,
-                "score": "3:4",
-                "stroke": 10,
-                "winner": "B",
-                "on_off_court": "\u672a\u56de\u64ca\u6210\u529f",
+                "score": "7:0",
+                "stroke": 9,
+                "winner": "A",
+                "on_off_court": "\u51fa\u754c",
                 "balltype": "netplay",
-                "lose_area": "B2"
+                "lose_area": "A2"
             },
             {
                 "rally": 8,
-                "score": "3:5",
-                "stroke": 7,
-                "winner": "B",
-                "on_off_court": "\u843d\u5730",
+                "score": "8:0",
+                "stroke": 11,
+                "winner": "A",
+                "on_off_court": "\u51fa\u754c",
                 "balltype": "netplay",
                 "lose_area": "A2"
             },
             {
                 "rally": 9,
-                "score": "3:6",
-                "stroke": 6,
-                "winner": "B",
-                "on_off_court": "\u51fa\u754c",
-                "balltype": "netplay",
-                "lose_area": "D2"
-            },
-            {
-                "rally": 10,
-                "score": "4:6",
-                "stroke": 11,
-                "winner": "A",
-                "on_off_court": "\u51fa\u754c",
-                "balltype": "netplay",
-                "lose_area": "D2"
-            },
-            {
-                "rally": 11,
-                "score": "5:6",
-                "stroke": 5,
+                "score": "9:0",
+                "stroke": 13,
                 "winner": "A",
                 "on_off_court": "\u51fa\u754c",
                 "balltype": "rush",
-                "lose_area": "B2"
+                "lose_area": "A2"
             },
             {
-                "rally": 12,
-                "score": "6:6",
-                "stroke": 14,
+                "rally": 10,
+                "score": "10:0",
+                "stroke": 23,
                 "winner": "A",
-                "on_off_court": "\u843d\u5730",
+                "on_off_court": "\u51fa\u754c",
                 "balltype": "netplay",
                 "lose_area": "A2"
             },
             {
+                "rally": 11,
+                "score": "11:0",
+                "stroke": 17,
+                "winner": "A",
+                "on_off_court": "\u51fa\u754c",
+                "balltype": "netplay",
+                "lose_area": "A1"
+            },
+            {
+                "rally": 12,
+                "score": "12:0",
+                "stroke": 10,
+                "winner": "A",
+                "on_off_court": "\u51fa\u754c",
+                "balltype": "netplay",
+                "lose_area": "A1"
+            },
+            {
                 "rally": 13,
-                "score": "6:7",
+                "score": "13:0",
+                "stroke": 13,
+                "winner": "A",
+                "on_off_court": "\u51fa\u754c",
+                "balltype": "netplay",
+                "lose_area": "A1"
+            },
+            {
+                "rally": 14,
+                "score": "14:0",
+                "stroke": 9,
+                "winner": "A",
+                "on_off_court": "\u51fa\u754c",
+                "balltype": "netplay",
+                "lose_area": "A1"
+            },
+            {
+                "rally": 15,
+                "score": "15:0",
+                "stroke": 10,
+                "winner": "A",
+                "on_off_court": "\u51fa\u754c",
+                "balltype": "netplay",
+                "lose_area": "A2"
+            },
+            {
+                "rally": 16,
+                "score": "16:0",
+                "stroke": 13,
+                "winner": "A",
+                "on_off_court": "\u51fa\u754c",
+                "balltype": "netplay",
+                "lose_area": "A1"
+            },
+            {
+                "rally": 17,
+                "score": "17:0",
+                "stroke": 9,
+                "winner": "A",
+                "on_off_court": "\u51fa\u754c",
+                "balltype": "rush",
+                "lose_area": "A1"
+            },
+            {
+                "rally": 18,
+                "score": "18:0",
+                "stroke": 11,
+                "winner": "A",
+                "on_off_court": "\u51fa\u754c",
+                "balltype": "netplay",
+                "lose_area": "A1"
+            },
+            {
+                "rally": 19,
+                "score": "19:0",
+                "stroke": 12,
+                "winner": "A",
+                "on_off_court": "\u51fa\u754c",
+                "balltype": "netplay",
+                "lose_area": "A2"
+            },
+            {
+                "rally": 20,
+                "score": "20:0",
+                "stroke": 13,
+                "winner": "A",
+                "on_off_court": "\u51fa\u754c",
+                "balltype": "netplay",
+                "lose_area": "A1"
+            },
+            {
+                "rally": 21,
+                "score": "20:1",
+                "stroke": 14,
+                "winner": "B",
+                "on_off_court": "\u51fa\u754c",
+                "balltype": "netplay",
+                "lose_area": "A2"
+            },
+            {
+                "rally": 22,
+                "score": "20:2",
+                "stroke": 11,
+                "winner": "B",
+                "on_off_court": "\u51fa\u754c",
+                "balltype": "netplay",
+                "lose_area": "A2"
+            },
+            {
+                "rally": 23,
+                "score": "20:3",
+                "stroke": 7,
+                "winner": "B",
+                "on_off_court": "\u51fa\u754c",
+                "balltype": "netplay",
+                "lose_area": "A1"
+            },
+            {
+                "rally": 24,
+                "score": "20:4",
+                "stroke": 12,
+                "winner": "B",
+                "on_off_court": "\u51fa\u754c",
+                "balltype": "netplay",
+                "lose_area": "A2"
+            },
+            {
+                "rally": 25,
+                "score": "20:5",
+                "stroke": 8,
+                "winner": "B",
+                "on_off_court": "\u51fa\u754c",
+                "balltype": "netplay",
+                "lose_area": "A2"
+            },
+            {
+                "rally": 26,
+                "score": "20:6",
+                "stroke": 7,
+                "winner": "B",
+                "on_off_court": "\u51fa\u754c",
+                "balltype": "netplay",
+                "lose_area": "A2"
+            },
+            {
+                "rally": 27,
+                "score": "20:7",
+                "stroke": 14,
+                "winner": "B",
+                "on_off_court": "\u51fa\u754c",
+                "balltype": "netplay",
+                "lose_area": "A2"
+            },
+            {
+                "rally": 28,
+                "score": "20:8",
+                "stroke": 14,
+                "winner": "B",
+                "on_off_court": "\u51fa\u754c",
+                "balltype": "netplay",
+                "lose_area": "A2"
+            },
+            {
+                "rally": 29,
+                "score": "20:9",
                 "stroke": 10,
                 "winner": "B",
                 "on_off_court": "\u51fa\u754c",
@@ -120,89 +264,26 @@
                 "lose_area": "A2"
             },
             {
-                "rally": 14,
-                "score": "7:7",
-                "stroke": 9,
-                "winner": "A",
-                "on_off_court": "\u672a\u56de\u64ca\u6210\u529f",
-                "balltype": "netplay",
-                "lose_area": "D2"
-            },
-            {
-                "rally": 15,
-                "score": "7:8",
-                "stroke": 9,
+                "rally": 30,
+                "score": "20:10",
+                "stroke": 15,
                 "winner": "B",
-                "on_off_court": "\u843d\u5730",
-                "balltype": "netplay",
-                "lose_area": "B2"
-            },
-            {
-                "rally": 16,
-                "score": "8:8",
-                "stroke": 9,
-                "winner": "A",
-                "on_off_court": "\u843d\u5730",
-                "balltype": "rush",
-                "lose_area": "D3"
-            },
-            {
-                "rally": 17,
-                "score": "8:9",
-                "stroke": 11,
-                "winner": "B",
-                "on_off_court": "\u843d\u5730",
-                "balltype": "netplay",
-                "lose_area": "B1"
-            },
-            {
-                "rally": 18,
-                "score": "9:9",
-                "stroke": 13,
-                "winner": "A",
-                "on_off_court": "\u843d\u5730",
+                "on_off_court": "\u51fa\u754c",
                 "balltype": "netplay",
                 "lose_area": "A2"
             },
             {
-                "rally": 19,
-                "score": "10:9",
-                "stroke": 12,
-                "winner": "A",
+                "rally": 31,
+                "score": "20:11",
+                "stroke": 14,
+                "winner": "B",
                 "on_off_court": "\u51fa\u754c",
-                "balltype": "netplay",
-                "lose_area": "E1"
-            },
-            {
-                "rally": 20,
-                "score": "11:9",
-                "stroke": 11,
-                "winner": "A",
-                "on_off_court": "\u672a\u56de\u64ca\u6210\u529f",
-                "balltype": "netplay",
-                "lose_area": "E1"
-            },
-            {
-                "rally": 21,
-                "score": "12:9",
-                "stroke": 18,
-                "winner": "A",
-                "on_off_court": "\u51fa\u754c",
-                "balltype": "netplay",
-                "lose_area": "B1"
-            },
-            {
-                "rally": 22,
-                "score": "13:9",
-                "stroke": 6,
-                "winner": "A",
-                "on_off_court": "\u843d\u5730",
                 "balltype": "netplay",
                 "lose_area": "A1"
             },
             {
-                "rally": 23,
-                "score": "13:10",
+                "rally": 32,
+                "score": "20:12",
                 "stroke": 11,
                 "winner": "B",
                 "on_off_court": "\u51fa\u754c",
@@ -210,139 +291,607 @@
                 "lose_area": "A2"
             },
             {
-                "rally": 24,
-                "score": "13:11",
-                "stroke": 8,
+                "rally": 33,
+                "score": "20:13",
+                "stroke": 16,
+                "winner": "B",
+                "on_off_court": "\u51fa\u754c",
+                "balltype": "netplay",
+                "lose_area": "A2"
+            },
+            {
+                "rally": 34,
+                "score": "20:14",
+                "stroke": 10,
+                "winner": "B",
+                "on_off_court": "\u51fa\u754c",
+                "balltype": "rush",
+                "lose_area": "A2"
+            },
+            {
+                "rally": 35,
+                "score": "20:15",
+                "stroke": 12,
+                "winner": "B",
+                "on_off_court": "\u51fa\u754c",
+                "balltype": "netplay",
+                "lose_area": "A2"
+            },
+            {
+                "rally": 36,
+                "score": "20:16",
+                "stroke": 9,
                 "winner": "B",
                 "on_off_court": "\u51fa\u754c",
                 "balltype": "long",
-                "lose_area": "D2"
+                "lose_area": "A2"
             },
             {
-                "rally": 25,
-                "score": "13:12",
-                "stroke": 5,
+                "rally": 37,
+                "score": "20:17",
+                "stroke": 13,
                 "winner": "B",
+                "on_off_court": "\u51fa\u754c",
+                "balltype": "cut",
+                "lose_area": "A1"
+            },
+            {
+                "rally": 38,
+                "score": "20:18",
+                "stroke": 16,
+                "winner": "B",
+                "on_off_court": "\u51fa\u754c",
+                "balltype": "netplay",
+                "lose_area": "A1"
+            },
+            {
+                "rally": 39,
+                "score": "20:19",
+                "stroke": 15,
+                "winner": "B",
+                "on_off_court": "\u51fa\u754c",
+                "balltype": "netplay",
+                "lose_area": "A3"
+            },
+            {
+                "rally": 40,
+                "score": "20:20",
+                "stroke": 9,
+                "winner": "B",
+                "on_off_court": "\u51fa\u754c",
+                "balltype": "netplay",
+                "lose_area": "A1"
+            },
+            {
+                "rally": 41,
+                "score": "20:21",
+                "stroke": 11,
+                "winner": "B",
+                "on_off_court": "\u51fa\u754c",
+                "balltype": "long",
+                "lose_area": "A1"
+            },
+            {
+                "rally": 42,
+                "score": "21:21",
+                "stroke": 12,
+                "winner": "A",
+                "on_off_court": "\u51fa\u754c",
+                "balltype": "netplay",
+                "lose_area": "A1"
+            },
+            {
+                "rally": 43,
+                "score": "22:21",
+                "stroke": 11,
+                "winner": "A",
+                "on_off_court": "\u51fa\u754c",
+                "balltype": "netplay",
+                "lose_area": "A1"
+            },
+            {
+                "rally": 44,
+                "score": "23:21",
+                "stroke": 15,
+                "winner": "A",
+                "on_off_court": "\u51fa\u754c",
+                "balltype": "long",
+                "lose_area": "A2"
+            },
+            {
+                "rally": 45,
+                "score": "24:21",
+                "stroke": 13,
+                "winner": "A",
+                "on_off_court": "\u51fa\u754c",
+                "balltype": "cut",
+                "lose_area": "A2"
+            },
+            {
+                "rally": 46,
+                "score": "25:21",
+                "stroke": 16,
+                "winner": "A",
+                "on_off_court": "\u51fa\u754c",
+                "balltype": "netplay",
+                "lose_area": "A2"
+            },
+            {
+                "rally": 47,
+                "score": "26:21",
+                "stroke": 13,
+                "winner": "A",
+                "on_off_court": "\u51fa\u754c",
+                "balltype": "long",
+                "lose_area": "A2"
+            },
+            {
+                "rally": 48,
+                "score": "27:21",
+                "stroke": 8,
+                "winner": "A",
+                "on_off_court": "\u51fa\u754c",
+                "balltype": "long",
+                "lose_area": "A2"
+            },
+            {
+                "rally": 49,
+                "score": "28:21",
+                "stroke": 17,
+                "winner": "A",
+                "on_off_court": "\u51fa\u754c",
+                "balltype": "long",
+                "lose_area": "A1"
+            },
+            {
+                "rally": 50,
+                "score": "29:21",
+                "stroke": 11,
+                "winner": "A",
                 "on_off_court": "\u51fa\u754c",
                 "balltype": "cut",
                 "lose_area": "B1"
             },
             {
-                "rally": 26,
-                "score": "13:13",
-                "stroke": 14,
-                "winner": "B",
+                "rally": 51,
+                "score": "30:21",
+                "stroke": 19,
+                "winner": "A",
                 "on_off_court": "\u51fa\u754c",
                 "balltype": "netplay",
-                "lose_area": "B1"
+                "lose_area": "A1"
             },
             {
-                "rally": 27,
-                "score": "14:13",
-                "stroke": 10,
-                "winner": "A",
-                "on_off_court": "\u843d\u5730",
-                "balltype": "netplay",
-                "lose_area": "B2"
-            },
-            {
-                "rally": 28,
-                "score": "14:14",
+                "rally": 52,
+                "score": "31:21",
                 "stroke": 12,
-                "winner": "B",
-                "on_off_court": "\u51fa\u754c",
-                "balltype": "netplay",
-                "lose_area": "D1"
-            },
-            {
-                "rally": 29,
-                "score": "14:15",
-                "stroke": 19,
-                "winner": "B",
-                "on_off_court": "\u51fa\u754c",
-                "balltype": "netplay",
-                "lose_area": "C1"
-            },
-            {
-                "rally": 30,
-                "score": "14:16",
-                "stroke": 19,
-                "winner": "B",
-                "on_off_court": "\u51fa\u754c",
-                "balltype": "netplay",
-                "lose_area": "D3"
-            },
-            {
-                "rally": 31,
-                "score": "14:17",
-                "stroke": 9,
-                "winner": "B",
-                "on_off_court": "\u843d\u5730",
-                "balltype": "netplay",
-                "lose_area": "A2"
-            },
-            {
-                "rally": 32,
-                "score": "14:18",
-                "stroke": 11,
-                "winner": "B",
-                "on_off_court": "\u672a\u56de\u64ca\u6210\u529f",
-                "balltype": "netplay",
-                "lose_area": "D1"
-            },
-            {
-                "rally": 33,
-                "score": "14:19",
-                "stroke": 10,
-                "winner": "B",
-                "on_off_court": "\u51fa\u754c",
-                "balltype": "netplay",
-                "lose_area": "D1"
-            },
-            {
-                "rally": 34,
-                "score": "15:19",
-                "stroke": 5,
                 "winner": "A",
-                "on_off_court": "\u843d\u5730",
+                "on_off_court": "\u51fa\u754c",
                 "balltype": "netplay",
-                "lose_area": "B1"
+                "lose_area": "A1"
             },
             {
-                "rally": 35,
-                "score": "16:19",
-                "stroke": 22,
-                "winner": "A",
-                "on_off_court": "\u843d\u5730",
-                "balltype": "netplay",
-                "lose_area": "D2"
-            },
-            {
-                "rally": 36,
-                "score": "17:19",
-                "stroke": 13,
-                "winner": "A",
-                "on_off_court": "\u843d\u5730",
-                "balltype": "netplay",
-                "lose_area": "B1"
-            },
-            {
-                "rally": 37,
-                "score": "17:20",
-                "stroke": 25,
-                "winner": "B",
-                "on_off_court": "\u843d\u5730",
-                "balltype": "netplay",
-                "lose_area": "A2"
-            },
-            {
-                "rally": 38,
-                "score": "17:21",
+                "rally": 53,
+                "score": "31:22",
                 "stroke": 8,
                 "winner": "B",
                 "on_off_court": "\u51fa\u754c",
                 "balltype": "netplay",
-                "lose_area": "D1"
+                "lose_area": "A2"
+            },
+            {
+                "rally": 54,
+                "score": "31:23",
+                "stroke": 13,
+                "winner": "B",
+                "on_off_court": "\u51fa\u754c",
+                "balltype": "netplay",
+                "lose_area": "A2"
+            },
+            {
+                "rally": 55,
+                "score": "31:24",
+                "stroke": 16,
+                "winner": "B",
+                "on_off_court": "\u51fa\u754c",
+                "balltype": "netplay",
+                "lose_area": "A2"
+            },
+            {
+                "rally": 56,
+                "score": "31:25",
+                "stroke": 10,
+                "winner": "B",
+                "on_off_court": "\u51fa\u754c",
+                "balltype": "netplay",
+                "lose_area": "A1"
+            },
+            {
+                "rally": 57,
+                "score": "31:26",
+                "stroke": 24,
+                "winner": "B",
+                "on_off_court": "\u51fa\u754c",
+                "balltype": "netplay",
+                "lose_area": "A2"
+            },
+            {
+                "rally": 58,
+                "score": "31:27",
+                "stroke": 18,
+                "winner": "B",
+                "on_off_court": "\u51fa\u754c",
+                "balltype": "netplay",
+                "lose_area": "A1"
+            },
+            {
+                "rally": 59,
+                "score": "31:28",
+                "stroke": 17,
+                "winner": "B",
+                "on_off_court": "\u51fa\u754c",
+                "balltype": "netplay",
+                "lose_area": "A1"
+            },
+            {
+                "rally": 60,
+                "score": "31:29",
+                "stroke": 8,
+                "winner": "B",
+                "on_off_court": "\u51fa\u754c",
+                "balltype": "long",
+                "lose_area": "A1"
+            },
+            {
+                "rally": 61,
+                "score": "31:30",
+                "stroke": 13,
+                "winner": "B",
+                "on_off_court": "\u51fa\u754c",
+                "balltype": "long",
+                "lose_area": "A1"
+            },
+            {
+                "rally": 62,
+                "score": "31:31",
+                "stroke": 13,
+                "winner": "B",
+                "on_off_court": "\u51fa\u754c",
+                "balltype": "cut",
+                "lose_area": "A1"
+            },
+            {
+                "rally": 63,
+                "score": "31:32",
+                "stroke": 13,
+                "winner": "B",
+                "on_off_court": "\u51fa\u754c",
+                "balltype": "netplay",
+                "lose_area": "A1"
+            },
+            {
+                "rally": 64,
+                "score": "31:33",
+                "stroke": 12,
+                "winner": "B",
+                "on_off_court": "\u51fa\u754c",
+                "balltype": "netplay",
+                "lose_area": "A2"
+            },
+            {
+                "rally": 65,
+                "score": "31:34",
+                "stroke": 16,
+                "winner": "B",
+                "on_off_court": "\u51fa\u754c",
+                "balltype": "netplay",
+                "lose_area": "A2"
+            },
+            {
+                "rally": 66,
+                "score": "31:35",
+                "stroke": 10,
+                "winner": "B",
+                "on_off_court": "\u51fa\u754c",
+                "balltype": "netplay",
+                "lose_area": "A1"
+            },
+            {
+                "rally": 67,
+                "score": "31:36",
+                "stroke": 11,
+                "winner": "B",
+                "on_off_court": "\u51fa\u754c",
+                "balltype": "long",
+                "lose_area": "A2"
+            },
+            {
+                "rally": 68,
+                "score": "31:37",
+                "stroke": 10,
+                "winner": "B",
+                "on_off_court": "\u51fa\u754c",
+                "balltype": "long",
+                "lose_area": "A2"
+            },
+            {
+                "rally": 69,
+                "score": "31:38",
+                "stroke": 15,
+                "winner": "B",
+                "on_off_court": "\u51fa\u754c",
+                "balltype": "long",
+                "lose_area": "A2"
+            },
+            {
+                "rally": 70,
+                "score": "31:39",
+                "stroke": 13,
+                "winner": "B",
+                "on_off_court": "\u51fa\u754c",
+                "balltype": "cut",
+                "lose_area": "A2"
+            },
+            {
+                "rally": 71,
+                "score": "31:40",
+                "stroke": 11,
+                "winner": "B",
+                "on_off_court": "\u51fa\u754c",
+                "balltype": "netplay",
+                "lose_area": "A2"
+            },
+            {
+                "rally": 72,
+                "score": "31:41",
+                "stroke": 7,
+                "winner": "B",
+                "on_off_court": "\u51fa\u754c",
+                "balltype": "rush",
+                "lose_area": "A2"
+            },
+            {
+                "rally": 73,
+                "score": "31:42",
+                "stroke": 9,
+                "winner": "B",
+                "on_off_court": "\u51fa\u754c",
+                "balltype": "netplay",
+                "lose_area": "A2"
+            },
+            {
+                "rally": 74,
+                "score": "31:43",
+                "stroke": 12,
+                "winner": "B",
+                "on_off_court": "\u51fa\u754c",
+                "balltype": "netplay",
+                "lose_area": "A2"
+            },
+            {
+                "rally": 75,
+                "score": "31:44",
+                "stroke": 21,
+                "winner": "B",
+                "on_off_court": "\u51fa\u754c",
+                "balltype": "netplay",
+                "lose_area": "A2"
+            },
+            {
+                "rally": 76,
+                "score": "31:45",
+                "stroke": 13,
+                "winner": "B",
+                "on_off_court": "\u51fa\u754c",
+                "balltype": "netplay",
+                "lose_area": "A1"
+            },
+            {
+                "rally": 77,
+                "score": "31:46",
+                "stroke": 13,
+                "winner": "B",
+                "on_off_court": "\u51fa\u754c",
+                "balltype": "netplay",
+                "lose_area": "A3"
+            },
+            {
+                "rally": 78,
+                "score": "31:47",
+                "stroke": 11,
+                "winner": "B",
+                "on_off_court": "\u51fa\u754c",
+                "balltype": "netplay",
+                "lose_area": "A2"
+            },
+            {
+                "rally": 79,
+                "score": "31:48",
+                "stroke": 16,
+                "winner": "B",
+                "on_off_court": "\u51fa\u754c",
+                "balltype": "netplay",
+                "lose_area": "A1"
+            },
+            {
+                "rally": 80,
+                "score": "31:49",
+                "stroke": 12,
+                "winner": "B",
+                "on_off_court": "\u51fa\u754c",
+                "balltype": "netplay",
+                "lose_area": "A1"
+            },
+            {
+                "rally": 81,
+                "score": "31:50",
+                "stroke": 14,
+                "winner": "B",
+                "on_off_court": "\u51fa\u754c",
+                "balltype": "netplay",
+                "lose_area": "A1"
+            },
+            {
+                "rally": 82,
+                "score": "31:51",
+                "stroke": 17,
+                "winner": "B",
+                "on_off_court": "\u51fa\u754c",
+                "balltype": "netplay",
+                "lose_area": "A1"
+            },
+            {
+                "rally": 83,
+                "score": "31:52",
+                "stroke": 24,
+                "winner": "B",
+                "on_off_court": "\u51fa\u754c",
+                "balltype": "netplay",
+                "lose_area": "A2"
+            },
+            {
+                "rally": 84,
+                "score": "31:53",
+                "stroke": 15,
+                "winner": "B",
+                "on_off_court": "\u51fa\u754c",
+                "balltype": "netplay",
+                "lose_area": "A1"
+            },
+            {
+                "rally": 85,
+                "score": "31:54",
+                "stroke": 12,
+                "winner": "B",
+                "on_off_court": "\u51fa\u754c",
+                "balltype": "netplay",
+                "lose_area": "A1"
+            },
+            {
+                "rally": 86,
+                "score": "31:55",
+                "stroke": 10,
+                "winner": "B",
+                "on_off_court": "\u51fa\u754c",
+                "balltype": "netplay",
+                "lose_area": "A2"
+            },
+            {
+                "rally": 87,
+                "score": "31:56",
+                "stroke": 9,
+                "winner": "B",
+                "on_off_court": "\u51fa\u754c",
+                "balltype": "netplay",
+                "lose_area": "A2"
+            },
+            {
+                "rally": 88,
+                "score": "31:57",
+                "stroke": 11,
+                "winner": "B",
+                "on_off_court": "\u51fa\u754c",
+                "balltype": "netplay",
+                "lose_area": "A1"
+            },
+            {
+                "rally": 89,
+                "score": "31:58",
+                "stroke": 8,
+                "winner": "B",
+                "on_off_court": "\u51fa\u754c",
+                "balltype": "netplay",
+                "lose_area": "A2"
+            },
+            {
+                "rally": 90,
+                "score": "31:59",
+                "stroke": 6,
+                "winner": "B",
+                "on_off_court": "\u51fa\u754c",
+                "balltype": "rush",
+                "lose_area": "A2"
+            },
+            {
+                "rally": 91,
+                "score": "31:60",
+                "stroke": 8,
+                "winner": "B",
+                "on_off_court": "\u51fa\u754c",
+                "balltype": "cut",
+                "lose_area": "A2"
+            },
+            {
+                "rally": 92,
+                "score": "31:61",
+                "stroke": 8,
+                "winner": "B",
+                "on_off_court": "\u51fa\u754c",
+                "balltype": "netplay",
+                "lose_area": "A2"
+            },
+            {
+                "rally": 93,
+                "score": "31:62",
+                "stroke": 6,
+                "winner": "B",
+                "on_off_court": "\u51fa\u754c",
+                "balltype": "netplay",
+                "lose_area": "A2"
+            },
+            {
+                "rally": 94,
+                "score": "31:63",
+                "stroke": 12,
+                "winner": "B",
+                "on_off_court": "\u51fa\u754c",
+                "balltype": "netplay",
+                "lose_area": "A2"
+            },
+            {
+                "rally": 95,
+                "score": "32:63",
+                "stroke": 8,
+                "winner": "A",
+                "on_off_court": "\u51fa\u754c",
+                "balltype": "netplay",
+                "lose_area": "A2"
+            },
+            {
+                "rally": 96,
+                "score": "33:63",
+                "stroke": 9,
+                "winner": "A",
+                "on_off_court": "\u51fa\u754c",
+                "balltype": "netplay",
+                "lose_area": "A2"
+            },
+            {
+                "rally": 97,
+                "score": "34:63",
+                "stroke": 6,
+                "winner": "A",
+                "on_off_court": "\u51fa\u754c",
+                "balltype": "netplay",
+                "lose_area": "A2"
+            },
+            {
+                "rally": 98,
+                "score": "35:63",
+                "stroke": 11,
+                "winner": "A",
+                "on_off_court": "\u51fa\u754c",
+                "balltype": "rush",
+                "lose_area": "A2"
+            },
+            {
+                "rally": 99,
+                "score": "36:63",
+                "stroke": 18,
+                "winner": "A",
+                "on_off_court": "\u51fa\u754c",
+                "balltype": "rush",
+                "lose_area": "A2"
             }
         ]
     }
