@@ -19,6 +19,8 @@ def convert_hit_area(filename, savename):
 	output = pd.DataFrame([]) 
 
 	data = pd.read_csv(filename)
+	sets = data['Set']
+	rally = data['Rally']
 	frame = data['Frame']
 	time = data['Time']
 	hit_x = data['Y']
@@ -30,6 +32,8 @@ def convert_hit_area(filename, savename):
 
 	hit_area = convert.to_area(hit_x, hit_y)
 
+	output['set'] = sets
+	output['rally'] = rally
 	output['frame_num'] = frame
 	output['time'] = time
 	output['hit_area'] = hit_area
