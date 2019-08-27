@@ -1,3 +1,4 @@
+import os
 import json
 import pandas as pd
 
@@ -72,7 +73,8 @@ def rally_type(rawfile, predict_file, savefile):
 	hits = pd.read_csv(predict_file)
 	result = pd.DataFrame(columns = ["set", "rally", "player", "balltype", "count"])
 	ball_id = {'cut': 0, 'drive': 1, 'lob': 2, 'long': 3, 'netplay': 4, 'rush': 5, 'smash': 6}
-	sets = [1]
+	sets = 1
+	hit_cnt = 0
 	rally_cnt = 1
 	score_A = 0
 	score_B = 0
@@ -87,13 +89,13 @@ def rally_type(rawfile, predict_file, savefile):
 			
 			result_A['balltype'] = list(ball_id.keys())
 			result_A['count'] = type_A_cnt
-			result_A['set'] = sets*len(type_A_cnt)
+			result_A['set'] = [rally_data['set'][hit_cnt-1]]*len(type_A_cnt)
 			result_A['rally'] = [rally_cnt]*len(type_A_cnt)
 			result_A['player'] = ['A']*len(type_A_cnt)
 
 			result_B['balltype'] = list(ball_id.keys())
 			result_B['count'] = type_B_cnt
-			result_B['set'] = sets*len(type_B_cnt)
+			result_B['set'] = [rally_data['set'][hit_cnt-1]]*len(type_B_cnt)
 			result_B['rally'] = [rally_cnt]*len(type_B_cnt)
 			result_B['player'] = ['B']*len(type_B_cnt)
 
@@ -107,8 +109,10 @@ def rally_type(rawfile, predict_file, savefile):
 	
 		if rally_data['hitting'][i] == 'A':
 			type_A_cnt[ball_id[hits['prediction'][i]]] += 1
+			hit_cnt += 1
 		elif rally_data['hitting'][i] == 'B':
 			type_B_cnt[ball_id[hits['prediction'][i]]] += 1
+			hit_cnt += 1
 
 	result = (result.groupby(['set','rally','player'], as_index=False)
             .apply(lambda x: x[['balltype','count']].to_dict('r'))
@@ -123,24 +127,26 @@ def rally_type(rawfile, predict_file, savefile):
 
 	export_json(savefile, result)
 
-
 def insert_new_game_name(exist_game_file, game_name):
 	write = False
 	data = []
 
-	with open(exist_game_file) as game:
-		data = json.load(game)
-		if game_name not in data:
-			data.append(game_name)
-			write = True
-
-	if write:
+	if os.path.isfile(exist_game_file):
+		with open(exist_game_file) as game:
+			data = json.load(game)
+			if game_name not in data:
+				data.append(game_name)
+				write = True
+		if write:
+			with open(exist_game_file, 'w') as outputfile:
+				json.dump(data, outputfile, indent = 4)
+	else:
+		data.append(game_name)
 		with open(exist_game_file, 'w') as outputfile:
 			json.dump(data, outputfile, indent = 4)
-			
 
 def run(rawfile, predict_file, rally_count_savefile, rally_type_savefile, exist_game_file, game_name):
 	rally_count(rawfile, predict_file, rally_count_savefile)
 	rally_type(rawfile, predict_file, rally_type_savefile)
 	insert_new_game_name(exist_game_file, game_name)
-#run("out.csv", "../../Data/training/result/0813_predict_result.csv", "rally_count_our.json", "rally_type_our.json", "game_name.json", "NEWWWW")
+#run("out.csv", "../../Data/training/result/18IND_TC_predict_result.csv", "rally_count_our.json", "rally_type_our.json", "game_name.json", "NewGameLa")
