@@ -9,11 +9,10 @@ def export_json(savefile, data):
 def rally_count(rawfile, predict_file, savefile):
 	data = pd.read_csv(rawfile)
 	predict_result = pd.read_csv(predict_file)
-	needed_data = data[['set', 'hit_area', 'getpoint_player', 'lose_reason', 'type']]
+	needed_data = data[['set', 'rally', 'hit_area', 'getpoint_player', 'lose_reason', 'type']]
 
 	a_score = 0
 	b_score = 0
-	rally_cnt = 1
 	hit_count = 0
 	sets = []
 	rally = []
@@ -29,12 +28,11 @@ def rally_count(rawfile, predict_file, savefile):
 				b_score += 1
 
 			sets.append(needed_data['set'][i])
-			rally.append(rally_cnt)
+			rally.append(needed_data['rally'][i])
 			score.append(str(a_score)+":"+str(b_score))
 			stroke.append(hit_count)
 			winner.append(needed_data['getpoint_player'][i])
 
-			rally_cnt += 1
 			hit_count = 0
 
 		hit_count += 1
@@ -75,7 +73,6 @@ def rally_type(rawfile, predict_file, savefile):
 	ball_id = {'cut': 0, 'drive': 1, 'lob': 2, 'long': 3, 'netplay': 4, 'rush': 5, 'smash': 6}
 	sets = 1
 	hit_cnt = 0
-	rally_cnt = 1
 	score_A = 0
 	score_B = 0
 	type_A_cnt = [0]*len(ball_id)
@@ -90,13 +87,13 @@ def rally_type(rawfile, predict_file, savefile):
 			result_A['balltype'] = list(ball_id.keys())
 			result_A['count'] = type_A_cnt
 			result_A['set'] = [rally_data['set'][hit_cnt-1]]*len(type_A_cnt)
-			result_A['rally'] = [rally_cnt]*len(type_A_cnt)
+			result_A['rally'] = [rally_data['rally'][hit_cnt-1]]*len(type_A_cnt)
 			result_A['player'] = ['A']*len(type_A_cnt)
 
 			result_B['balltype'] = list(ball_id.keys())
 			result_B['count'] = type_B_cnt
 			result_B['set'] = [rally_data['set'][hit_cnt-1]]*len(type_B_cnt)
-			result_B['rally'] = [rally_cnt]*len(type_B_cnt)
+			result_B['rally'] = [rally_data['rally'][hit_cnt-1]]*len(type_B_cnt)
 			result_B['player'] = ['B']*len(type_B_cnt)
 
 			result = result.append(result_A)
@@ -105,7 +102,6 @@ def rally_type(rawfile, predict_file, savefile):
 			result_B = pd.DataFrame(columns = ["set", "rally", "player", "balltype", "count"])
 			type_A_cnt = [0]*len(ball_id)
 			type_B_cnt = [0]*len(ball_id)
-			rally_cnt += 1
 	
 		if rally_data['hitting'][i] == 'A':
 			type_A_cnt[ball_id[hits['prediction'][i]]] += 1
