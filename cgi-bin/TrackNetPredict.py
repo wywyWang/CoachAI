@@ -19,7 +19,7 @@ BATCH_SIZE=1
 HEIGHT=360
 WIDTH=640
 def custom_loss(y_true, y_pred):
-    weight=y_true*0.999+0.001
+    weight=y_true*0.95+0.05
     return K.sum(K.square(y_true-y_pred)*weight)
 
 def genHeatMap(osizex, osizey, x, y, sigma, facx, facy, radius, mag):
@@ -141,8 +141,8 @@ def run(TrackNet_input, TrackNet_output):
         unit = unit.reshape((1, 9, HEIGHT, WIDTH))
         unit = unit.astype('float32')
         unit /= 255
-        y_pred = model.predict(unit, batch_size=BATCH_SIZE)
-        #y_pred = adjustPredHeatMaps(y_raw, sigma, mag)
+        y_raw = model.predict(unit, batch_size=BATCH_SIZE)
+        y_pred = adjustPredHeatMaps(y_raw, sigma, mag)
         time = custom_time(cap.get(cv2.CAP_PROP_POS_MSEC))
         if np.amax(y_pred[0]) <= 0:
             f.write(str(count)+',0,0,0,'+time+'\n')
