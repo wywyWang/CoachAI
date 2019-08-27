@@ -9,7 +9,7 @@ def export_json(savefile, data):
 def rally_count(rawfile, predict_file, savefile):
 	data = pd.read_csv(rawfile)
 	predict_result = pd.read_csv(predict_file)
-	needed_data = data[['hit_area', 'getpoint_player', 'lose_reason', 'type']]
+	needed_data = data[['set', 'hit_area', 'getpoint_player', 'lose_reason', 'type']]
 
 	a_score = 0
 	b_score = 0
@@ -28,11 +28,11 @@ def rally_count(rawfile, predict_file, savefile):
 			elif needed_data['getpoint_player'][i] == "B":
 				b_score += 1
 
+			sets.append(needed_data['set'][i])
 			rally.append(rally_cnt)
 			score.append(str(a_score)+":"+str(b_score))
 			stroke.append(hit_count)
 			winner.append(needed_data['getpoint_player'][i])
-			sets.append(1)
 
 			rally_cnt += 1
 			hit_count = 0
@@ -49,7 +49,7 @@ def rally_count(rawfile, predict_file, savefile):
 	        cnt += 1
 
 	result_data = pd.DataFrame(columns = ["set", "rally", "score", "stroke", "winner", "on_off_court", "balltype", "lose_area"])
-	
+
 	result_data["set"] = sets
 	result_data["rally"] = rally
 	result_data["score"] = score
