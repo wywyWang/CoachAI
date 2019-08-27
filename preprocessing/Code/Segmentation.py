@@ -464,7 +464,6 @@ def check_accuracy():
                     break
             frame+=1
     
-    idx=tmp[tmp==rallyend[len(rallyend)-1]].index[0]
     while(frame!=18241):
         if frame in list(df['Frame']):
             idx=tmp[tmp==frame].index[0]
@@ -684,7 +683,7 @@ def generateVideo(df,df_complete,numFrame):
 
 if __name__ == "__main__":
     # segmentation filename
-    input_video_name = "18IND_TC_groundtruth"
+    input_video_name = "18IND_TC"
     ext = ".csv"
     segmentation_input_path = "../Data/TrainTest/"
     segmentation_output_path = "../Data/AccuracyResult/"

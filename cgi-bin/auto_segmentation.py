@@ -470,7 +470,6 @@ def check_accuracy():
                     break
             frame+=1
     
-    idx=tmp[tmp==rallyend[len(rallyend)-1]].index[0]
     while(frame!=18241):
         if frame in list(df['Frame']):
             idx=tmp[tmp==frame].index[0]
