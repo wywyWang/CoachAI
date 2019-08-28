@@ -14,6 +14,7 @@ def rally_count(rawfile, predict_file, savefile):
 	a_score = 0
 	b_score = 0
 	hit_count = 0
+	pre_set = 1
 	sets = []
 	rally = []
 	score = []
@@ -29,9 +30,19 @@ def rally_count(rawfile, predict_file, savefile):
 
 			sets.append(needed_data['set'][i])
 			rally.append(needed_data['rally'][i])
+			if needed_data['set'][i] != pre_set:
+				pre_set = needed_data['set'][i]
+				if a_score > b_score:
+					a_score = 1
+					b_score = 0
+				else:
+					a_score = 0
+					b_score = 1	
+
 			score.append(str(a_score)+":"+str(b_score))
 			stroke.append(hit_count)
 			winner.append(needed_data['getpoint_player'][i])
+
 
 			hit_count = 0
 
@@ -64,7 +75,6 @@ def rally_count(rawfile, predict_file, savefile):
 	            )
 
 	export_json(savefile, result_data)
-
 
 def rally_type(rawfile, predict_file, savefile):
 	rally_data = pd.read_csv(rawfile)
