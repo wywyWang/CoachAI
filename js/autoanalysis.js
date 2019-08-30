@@ -75,7 +75,6 @@ $(function () {
      }
 
     function updateComplete(e) {
-        $('.progress-bar').removeClass("active");
         $('.progress-bar').addClass("progress-bar-success");
         $('.upload-finish').html('Upload finished.Start analysizing, please wait.')
     }

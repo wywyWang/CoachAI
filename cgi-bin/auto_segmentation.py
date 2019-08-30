@@ -5,6 +5,8 @@ import numpy as np
 import json
 import cv2
 import csv
+import warnings
+warnings.filterwarnings("ignore")
 np.set_printoptions(suppress=True)
 
 def readData(segmentation_input):
@@ -515,11 +517,15 @@ def check_accuracy():
         
     print("=======VIRTUAL UMPIRE ACCURACY=======")
     print("<br>")
+    print("Total Calculate Number = ",len(who_wins))
+    print("<br>")
+    print("Total Correct Number = ",len(rally_umpire))
+    print("<br>")
     print("Correct Number = ",correct)
     print("<br>")
-    print("Total Number = ",len(rally_umpire))
+    print("Precision = ",correct/len(rally_umpire))
     print("<br>")
-    print("Accuracy = ",correct/len(rally_umpire))
+    print("Recall = ",correct/len(who_wins))
     print("<br>")
     print("=====================================")
     print("<br>")
