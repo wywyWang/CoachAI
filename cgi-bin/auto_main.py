@@ -29,7 +29,7 @@ TrackNet_input_path = './uploadvideo/'
 TrackNet_label = 'Badminton_label_'
 TrackNet_input = TrackNet_input_path + input_video_name + mp4_ext
 TrackNet_output_path = './preprocessing/Data/TrainTest/'
-TrackNet_output = TrackNet_output_path + TrackNet_label + input_video_name + '_predict' + ext
+TrackNet_output = TrackNet_output_path + TrackNet_label + input_video_name + ext
 
 # segmentation filename(not used TrackNet output yet)
 segmentation_input_path = TrackNet_output_path

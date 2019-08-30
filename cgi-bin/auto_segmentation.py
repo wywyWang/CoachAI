@@ -5,13 +5,15 @@ import numpy as np
 import json
 import cv2
 import csv
+import warnings
+warnings.filterwarnings("ignore")
 np.set_printoptions(suppress=True)
 
 def readData(segmentation_input):
     global numFrame,df,df_complete,time
-    numFrame = 18241
     # Import data
     df = pd.read_csv(segmentation_input)
+    numFrame = df.iloc[-1]['Frame']
     df = df[0:numFrame]
     dupl=[]
     df_complete = df[0:numFrame]
@@ -277,19 +279,19 @@ def on_off_court(segmentation_output):
             thr = 0
 
         #short video is imcomplete
-        if rallys_now == 26 :
-            scoreAtmp = 0
-            scoreBtmp = 0
-            sets_now += 1
-            rallys_now = 1
+        # if rallys_now == 26 :
+        #     scoreAtmp = 0
+        #     scoreBtmp = 0
+        #     sets_now += 1
+        #     rallys_now = 1
 
         # # Determine when will be next set,complete video use
-        # if scoreAtmp >=21 or scoreBtmp >=21:
-        #     if abs(scoreAtmp - scoreBtmp) >= 2:
-        #         scoreAtmp = 0
-        #         scoreBtmp = 0
-        #         sets_now += 1
-        #         rallys_now = 1
+        if scoreAtmp >=21 or scoreBtmp >=21:
+            if abs(scoreAtmp - scoreBtmp) >= 2:
+                scoreAtmp = 0
+                scoreBtmp = 0
+                sets_now += 1
+                rallys_now = 1
 
         getpoint_player_tmp = None
         if df['end'][i] == 1:
@@ -372,15 +374,24 @@ def on_off_court(segmentation_output):
     total_end_frame = df[df['end'] == 1]['Frame'].reset_index(drop=True)
     end_frame_index = 0
     closetframe = -1e9
-    for hitpoint_frame in df[df['hitpoint']==1]['Frame']:
-        if hitpoint_frame < total_end_frame[end_frame_index] and hitpoint_frame > closetframe:
-            closetframe = hitpoint_frame
-        if hitpoint_frame > total_end_frame[end_frame_index]:
-            idx=df['Frame'][df['Frame']==closetframe].index[0]
-            df['getpoint_player'][idx] = who_wins[end_frame_index]
-            df['lose_reason'][idx] = on_off_court['on_off_court'][end_frame_index]
-            closetframe = -1e9
-            end_frame_index += 1
+    df_index = 0
+    while df_index < len(df) and end_frame_index < len(total_end_frame):
+        if df['hitpoint'][df_index] == 0:
+            pass
+        else:
+            if df['Frame'][df_index] < total_end_frame[end_frame_index] and df['Frame'][df_index] > closetframe:
+                closetframe = df['Frame'][df_index]
+            if df['Frame'][df_index] >= total_end_frame[end_frame_index]:
+                if closetframe <= 0: 
+                    end_frame_index += 1
+                    df_index -= 1
+                else:
+                    idx=df['Frame'][df['Frame']==closetframe].index[0]
+                    df['getpoint_player'][idx] = who_wins[end_frame_index]
+                    df['lose_reason'][idx] = on_off_court['on_off_court'][end_frame_index]
+                    closetframe = -1e9
+                    end_frame_index += 1
+        df_index += 1
 
     # Fill last one end info into last hitpoint
     idx = df['Frame'][df['Frame'] == df[df['hitpoint']==1]['Frame'].iloc[-1]].index[0]
@@ -406,7 +417,7 @@ def on_off_court(segmentation_output):
 
 def check_accuracy():
     count=0
-    rally = pd.read_excel('./preprocessing/Data/TrainTest/clip_info_18IND_TC.xlsx')
+    rally = pd.read_excel('./preprocessing/Data/TrainTest/clip_info_19ASI_CS_10min.xlsx')
     rally = rally[['rally','ball_round','frame_num','server','type','lose_reason']]
     record = rally[rally['type'] != '未擊球'].reset_index(drop=True)
     record = record[rally['type'] != '未過網'].reset_index(drop=True)
@@ -460,16 +471,8 @@ def check_accuracy():
                     count+=1
                     break
             frame+=1
-    
-    idx=tmp[tmp==rallyend[len(rallyend)-1]].index[0]
-    while(frame!=18241):
-        if frame in list(df['Frame']):
-            idx=tmp[tmp==frame].index[0]
-            if df['end'][idx]:
-                count+=1
-                break
-        frame+=1 
             
+    print("<br>")
     print("===========RALLY END ACCURACY=============")
     print("<br>")
     print("Total Calculate number = ",total)
@@ -486,7 +489,7 @@ def check_accuracy():
     print("<br>")
 
     #check virtual umpire accuracy
-    rally_umpire = pd.read_excel('./preprocessing/Data/TrainTest/clip_info_18IND_TC.xlsx')
+    rally_umpire = pd.read_excel('./preprocessing/Data/TrainTest/clip_info_19ASI_CS_10min.xlsx')
     rally_umpire = rally_umpire[['unique_id','getpoint_player']]
     rally_umpire = rally_umpire.dropna().reset_index(drop=True)
 
@@ -507,11 +510,15 @@ def check_accuracy():
         
     print("=======VIRTUAL UMPIRE ACCURACY=======")
     print("<br>")
+    print("Total Calculate Number = ",len(who_wins))
+    print("<br>")
+    print("Total Correct Number = ",len(rally_umpire))
+    print("<br>")
     print("Correct Number = ",correct)
     print("<br>")
-    print("Total Number = ",len(rally_umpire))
+    print("Precision = ",correct/len(rally_umpire))
     print("<br>")
-    print("Accuracy = ",correct/len(rally_umpire))
+    print("Recall = ",correct/len(who_wins))
     print("<br>")
     print("=====================================")
     print("<br>")
