@@ -11,9 +11,9 @@ np.set_printoptions(suppress=True)
 
 def readData(segmentation_input):
     global numFrame,df,df_complete,time
-    numFrame = 18241
     # Import data
     df = pd.read_csv(segmentation_input)
+    numFrame = df.iloc[-1]['Frame']
     df = df[0:numFrame]
     dupl=[]
     df_complete = df[0:numFrame]
@@ -417,7 +417,7 @@ def on_off_court(segmentation_output):
 
 def check_accuracy():
     count=0
-    rally = pd.read_excel('./preprocessing/Data/TrainTest/clip_info_18IND_TC.xlsx')
+    rally = pd.read_excel('./preprocessing/Data/TrainTest/clip_info_19ASI_CS_10min.xlsx')
     rally = rally[['rally','ball_round','frame_num','server','type','lose_reason']]
     record = rally[rally['type'] != '未擊球'].reset_index(drop=True)
     record = record[rally['type'] != '未過網'].reset_index(drop=True)
@@ -471,15 +471,8 @@ def check_accuracy():
                     count+=1
                     break
             frame+=1
-    
-    while(frame!=18241):
-        if frame in list(df['Frame']):
-            idx=tmp[tmp==frame].index[0]
-            if df['end'][idx]:
-                count+=1
-                break
-        frame+=1 
             
+    print("<br>")
     print("===========RALLY END ACCURACY=============")
     print("<br>")
     print("Total Calculate number = ",total)
@@ -496,7 +489,7 @@ def check_accuracy():
     print("<br>")
 
     #check virtual umpire accuracy
-    rally_umpire = pd.read_excel('./preprocessing/Data/TrainTest/clip_info_18IND_TC.xlsx')
+    rally_umpire = pd.read_excel('./preprocessing/Data/TrainTest/clip_info_19ASI_CS_10min.xlsx')
     rally_umpire = rally_umpire[['unique_id','getpoint_player']]
     rally_umpire = rally_umpire.dropna().reset_index(drop=True)
 

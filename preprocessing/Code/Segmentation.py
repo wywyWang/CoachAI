@@ -11,9 +11,10 @@ np.set_printoptions(suppress=True)
 
 def readData(segmentation_input):
     global numFrame,df,df_complete,time
-    numFrame = 18241
+    
     # Import data
     df = pd.read_csv(segmentation_input)
+    numFrame = df.iloc[-1]['Frame']
     df = df[0:numFrame]
     dupl=[]
     df_complete = df[0:numFrame]
@@ -45,6 +46,7 @@ def readData(segmentation_input):
             i+=1  
 
     print(np.shape(df))
+    print("# of frame = ",numFrame)
 
     # Absolute position
     X = df['X']
@@ -369,6 +371,7 @@ def on_off_court(segmentation_output):
     df['set'] = sets
     df['getpoint_player'] = [None for _ in range(len(df))]
     df['lose_reason'] = [None for _ in range(len(df))]
+    print(df[df['end']==1][43:53])
     
     # Fill who win and lose reason into each rally last hitpoint
     total_end_frame = df[df['end'] == 1]['Frame'].reset_index(drop=True)
@@ -418,7 +421,7 @@ def on_off_court(segmentation_output):
 
 def check_accuracy():
     count=0
-    rally = pd.read_excel('../Data/TrainTest/clip_info_18IND_TC.xlsx')
+    rally = pd.read_excel('../Data/TrainTest/clip_info_19ASI_CS_10min.xlsx')
     rally = rally[['rally','ball_round','frame_num','server','type','lose_reason']]
     record = rally[rally['type'] != '未擊球'].reset_index(drop=True)
     record = record[rally['type'] != '未過網'].reset_index(drop=True)
@@ -465,14 +468,6 @@ def check_accuracy():
                     count+=1
                     break
             frame+=1
-    
-    while(frame!=18241):
-        if frame in list(df['Frame']):
-            idx=tmp[tmp==frame].index[0]
-            if df['end'][idx]:
-                count+=1
-                break
-        frame+=1 
             
     print("===========RALLY END ACCURACY=============")
     print("Total Calculate number = ",total)
@@ -483,7 +478,7 @@ def check_accuracy():
     print("==========================================")
 
     #check virtual umpire accuracy
-    rally_umpire = pd.read_excel('../Data/TrainTest/clip_info_18IND_TC.xlsx')
+    rally_umpire = pd.read_excel('../Data/TrainTest/clip_info_19ASI_CS_10min.xlsx')
     rally_umpire = rally_umpire[['unique_id','getpoint_player']]
     rally_umpire = rally_umpire.dropna().reset_index(drop=True)
 
@@ -687,7 +682,7 @@ def generateVideo(df,df_complete,numFrame):
 
 if __name__ == "__main__":
     # segmentation filename
-    input_video_name = "18IND_TC"
+    input_video_name = "19ASI_CS_10min"
     ext = ".csv"
     segmentation_input_path = "../Data/TrainTest/"
     segmentation_output_path = "../Data/AccuracyResult/"
