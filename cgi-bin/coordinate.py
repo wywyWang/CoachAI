@@ -1,6 +1,8 @@
 import xy_to_area as convert
-from functions import map_reason
+from functions import *
 import pandas as pd
+
+hitting = []
 
 def convert_hit_area(filename, savename):
 	hit_x = []
@@ -17,6 +19,8 @@ def convert_hit_area(filename, savename):
 	output = pd.DataFrame([]) 
 
 	data = pd.read_csv(filename)
+	sets = data['Set']
+	rally = data['Rally']
 	frame = data['Frame']
 	time = data['Time']
 	hit_x = data['Y']
@@ -27,7 +31,8 @@ def convert_hit_area(filename, savename):
 		lose_reason.append(map_reason(reason))
 
 	hit_area = convert.to_area(hit_x, hit_y)
-
+	output['set'] = sets
+	output['rally'] = rally
 	output['frame_num'] = frame
 	output['time'] = time
 	output['hit_area'] = hit_area
@@ -40,10 +45,54 @@ def convert_hit_area(filename, savename):
 	output['getpoint_player'] = pd.Series(getpoint_player)
 	output['type'] = pd.Series(ball_type)
 
-
 	output.to_csv(savename, index = False, encoding = 'utf-8')
 
+def first_hit(filename):
+	data = pd.read_csv(filename)
+	data = data[['lose_reason', 'getpoint_player']]
+
+	# find who lose first and the reason
+	first_blood = ''
+	r_cnt = 0
+	for i in range(len(data['lose_reason'])):
+		if type(data['lose_reason'][i]) == str and type(data['getpoint_player'][i]) == str:
+			first_blood = who_first_blood(data['lose_reason'][i], data['getpoint_player'][i])
+		if first_blood != '':
+			r_cnt = i
+			break
+
+	return first_blood, r_cnt
+
+def get_hits(first_blood, cnt, filename):
+	start = ''
+	if cnt%2:
+		start = another_player(first_blood)
+	else:
+		start = first_blood
+
+	data = pd.read_csv(filename)
+	result = pd.DataFrame([])
+	
+
+	for i in range(len(data['frame_num'])):
+		hitting.append(start)
+		start = another_player(start)
+		if type(data['lose_reason'][i]) == str and type(data['getpoint_player'][i]) == str:
+			start = data['getpoint_player'][i]
+
+	result['hitting'] = hitting
+	data['hitting'] = result['hitting']
+
+	data.to_csv(filename, index=False)
+
 def run(filename, savename):
+	first_blood = ''
+	cnt = 0
 	convert_hit_area(filename, savename)
 
-#run("record_segmentation.csv", "out.csv")
+	# repeat to find the player who serve the ball
+	
+	first_blood, cnt = first_hit(savename)
+	get_hits(first_blood, cnt, savename)
+
+#run("../../Data/training/data/record_segmentation.csv", "out.csv")

@@ -1,6 +1,12 @@
 
-function init_linechart(minrally,maxrally,set){
-    $.getJSON("statistics/rally_count.json", function(data) {
+function init_linechart(minrally,maxrally,set,game_name){
+    //init game
+    if (!game_name){
+        game_name = "18IND_TC";
+    }
+    filename = 'preprocessing/Data/Output/rally_count_predict_' + game_name + '.json';
+
+    $.getJSON(filename, function(data) {
         [data,set,minrally,maxrally] = data_filter(data,set,minrally,maxrally,0);
 
         //init svg legend
@@ -93,7 +99,6 @@ function init_linechart(minrally,maxrally,set){
         var datainterval = [];
         var dataup = [];
         for (var i = 0;i<data.length;i++){
-            // console.log(data[i])
             if (data[i].rally < minrally){
                 datadown.push(data[i].stroke);
                 datainterval.push(null);
@@ -120,7 +125,6 @@ function init_linechart(minrally,maxrally,set){
                     datainterval.push(data[i].stroke);
                     dataup.push(null);
                 }
-                
             }
                 
             if (data[i].rally < minrally || data[i].rally > maxrally)
@@ -131,45 +135,134 @@ function init_linechart(minrally,maxrally,set){
                 pointcolor.push("rgb(255,99,132)");
         }
 
+        var segment_data=[];
+        var consec_point=[];
+        for (var i = 0;i<data.length-1;) {
+            var point_data=[];
+            if (data[i].rally < minrally || data[i].rally >= maxrally) {
+                i+=1;
+                continue;
+            }
+            if(i==data.length-2){
+                point_data.push(i);
+                point_data.push(i+1);
+                segment_data.push(point_data);
+                break;
+            }
+            
+            if(data[i].winner==data[i+1].winner){
+                consec_point.push(i);
+                while(data[i].winner==data[i+1].winner){
+                    if(i>=data.length-2){
+                        point_data.push(i);
+                        i+=1;
+                        break;
+                    }
+                    point_data.push(i);
+                    i+=1;
+                }
+                point_data.push(i);
+            }
+            else if(data[i].winner!=data[i+1].winner){
+                while(data[i].winner!=data[i+1].winner){
+                    if(i>=data.length-2){
+                        point_data.push(i);
+                        i+=1;
+                        break;
+                    }
+                    point_data.push(i);
+                    i+=1;
+                }
+                point_data.push(i);
+            }
+            segment_data.push(point_data);
+            if(i==data.length-1){
+                break;
+            }
+        }
+        var final_data=new Array();
+        for (var i = 0;i<data.length;i++) {
+            final_data[i]=new Array();
+        }
+        for (var i = 0;i<segment_data.length;i++) {
+            for(var j = 0;j<data.length;j++){
+                var match=0;
+                for(var k=0;k<segment_data[i].length;k++){
+                    if(j==segment_data[i][k]){
+                        match=1;
+                        break;
+                    }
+                }
+                if(match==1){
+                    final_data[i].push(data[j].stroke);
+                }
+                else{
+                    final_data[i].push(null);
+                }                   
+            }
+        }
+        var present_data=[];
+        for (var i = 0;i<segment_data.length;i++) {
+            var linecolor;
+            for(var j=0;j<consec_point.length;j++){
+                if(segment_data[i][0]==consec_point[j]){
+                	if(data[segment_data[i][0]].winner=='A'){
+                		linecolor="rgba(66,129,164,"+segment_data[i].length*0.2+")";
+                	}               			
+                	if(data[segment_data[i][0]].winner=='B')    {
+                		linecolor="rgba(255,99,132,"+segment_data[i].length*0.2+")";
+                	}               		
+                    //"rgb("+(255-segment_data[i].length*10)+","+(236-segment_data[i].length*10)+","+(203-segment_data[i].length*10)+")";
+                    break;
+                }
+                else{
+                    linecolor="rgb(255, 236, 203)";
+                }
+            }
+            
+            present_data.push({fill: false,
+                        cubicInterpolationMode:"monotone",
+                        backgroundColor: "rgba(66,129,164,0.2)",
+                        borderColor: linecolor,
+                        pointBorderColor: "#fff",
+                        pointBackgroundColor:pointcolor,
+                        pointRadius: 4,
+                        pointHoverRadius: 6,
+                        data: final_data[i]});
+        }
+        var datatotal=[
+                        {
+                            fill: false,
+                            cubicInterpolationMode:"monotone",
+                            backgroundColor: "rgba(66,129,164,0.2)",
+                            borderColor: "rgba(216, 212, 212, 0.5)",
+                            pointBorderColor: "#fff",
+                            pointBackgroundColor:pointcolor,
+                            pointRadius: 4,
+                            pointHoverRadius: 6,
+                            data: datadown
+                        }
+                      ];
+        for(var i=0;i<segment_data.length;i++){
+            datatotal.push(present_data[i]);
+        }
+        datatotal.push({
+                            fill: false,
+                            cubicInterpolationMode:"monotone",
+                            backgroundColor: "rgba(66,129,164,0.2)",
+                            borderColor: "rgba(216, 212, 212, 0.5)",
+                            pointBorderColor: "#fff",
+                            pointBackgroundColor:pointcolor,
+                            pointRadius: 4,
+                            pointHoverRadius: 6,
+                            data: dataup
+                        });
+
         var chart = new Chart(chartRadarDOM, {
             type: 'line',
             data:{
                 labels: labels,
-                datasets: [
-                    {
-                        fill: false,
-                        cubicInterpolationMode:"monotone",
-                        backgroundColor: "rgba(66,129,164,0.2)",
-                        borderColor: "rgb(216, 212, 212)",
-                        pointBorderColor: "#fff",
-                        pointBackgroundColor:pointcolor,
-                        pointRadius: 4,
-                        pointHoverRadius: 6,
-                        data: datadown
-                    },
-                    {
-                        fill: false,
-                        cubicInterpolationMode:"monotone",
-                        backgroundColor: "rgba(66,129,164,0.2)",
-                        borderColor: "rgb(255, 210, 136)",
-                        pointBorderColor: "#fff",
-                        pointBackgroundColor:pointcolor,
-                        pointRadius: 4,
-                        pointHoverRadius: 6,
-                        data: datainterval
-                    },
-                    {
-                        fill: false,
-                        cubicInterpolationMode:"monotone",
-                        backgroundColor: "rgba(66,129,164,0.2)",
-                        borderColor: "rgb(216, 212, 212)",
-                        pointBorderColor: "#fff",
-                        pointBackgroundColor:pointcolor,
-                        pointRadius: 4,
-                        pointHoverRadius: 6,
-                        data: dataup
-                    }
-                ]
+                datasets:datatotal
             },
             options: chartRadarOptions
         });
@@ -180,7 +273,14 @@ function init_linechart(minrally,maxrally,set){
             if (activepoints[0]){
                 var id = set + '-' + (activepoints[0]['_index']+1)
                 console.log(id)
-                $.getJSON("../statistics/rally_type.json", function(data2) {
+
+                //init game
+                if (!game_name){
+                    game_name = "18IND_TC";
+                }
+                filename = 'preprocessing/Data/Output/rally_type_predict_' + game_name + '.json';
+
+                $.getJSON(filename, function(data2) {
                     document.getElementById("rallytitle").innerHTML = id + ' 球種分佈圖';
                     //filter data to specific set
                     data2 = data2.filter(function(item) {
@@ -213,6 +313,17 @@ function init_linechart(minrally,maxrally,set){
                     console.log(dataB)
 
                     $("#radarChart").show(function(event){
+                        //filter data to specific rally
+                        data_choose = data.filter(function(item) {
+                            return item.rally == id.split('-')[1];
+                        });
+                        data_choose = data_choose[0];
+                        // console.log(data_choose);
+                        
+                        // show win_reason and lose balltype on each rally
+                        document.getElementById("lose_reason").innerHTML = '失分原因：' + data_choose.on_off_court;
+                        document.getElementById("lose_balltype").innerHTML = '失分球種：' + data_choose.balltype;
+
                         var modal = $(this);
                         var canvas = modal.find('.modal-body canvas');
                         var ctx = canvas[0].getContext("2d"); 
@@ -269,7 +380,9 @@ function init_linechart(minrally,maxrally,set){
                                 var canvas = modal.find('.modal-body canvas');
                                 var ctx = canvas[0].getContext("2d"); 
                                 $(".modal-body canvas").remove();
-                                $(".modal-body").html('<canvas id="canvas" width="1000" height="800"></canvas>');
+                                $(".modal-body").html('<canvas id="canvas" width="1000" height="800"></canvas>\
+                                                    <div class="modal-text" id="lose_reason"></div>\
+                                                    <div class="modal-text" id="lose_balltype"></div>');
                             });
                         });
                     });
@@ -280,7 +393,7 @@ function init_linechart(minrally,maxrally,set){
     });
 }
 
-function init_on_off_court(minrally,maxrally,set){
+function init_on_off_court(minrally,maxrally,set,game_name){
     //create player info radar
     $('#on_off_court .playerA').html('<div class="subtitle">選手A失分比例</div>\
     <canvas id="on_off_court_chartA" width="800" height="600"></canvas>');
@@ -307,7 +420,13 @@ function init_on_off_court(minrally,maxrally,set){
         // responsive:false
     };
 
-    $.getJSON("statistics/rally_count.json", function(data) {
+    //init game
+    if (!game_name){
+        game_name = "18IND_TC";
+    }
+    filename = 'preprocessing/Data/Output/rally_count_predict_' + game_name + '.json';
+
+    $.getJSON(filename, function(data) {
         [data,set,minrally,maxrally] = data_filter(data,set,minrally,maxrally,1);
 
         //filter winners
@@ -317,35 +436,29 @@ function init_on_off_court(minrally,maxrally,set){
         dataA = data.filter(function(item){
             return item.winner == 'B'
         });
-
-        // console.log(set);
-        // console.log(minrally);
-        // console.log(maxrally);
+        console.log("dataA = ",dataA.length);
+        console.log("dataB = ",dataB.length);
         
         //count each reason
         var group_data = Object.keys(_.groupBy(data,"on_off_court"));
         var sum_dataA = new Array(group_data.length).fill(0);
         var sum_dataB = new Array(group_data.length).fill(0);
         for(var i = 0;i<dataA.length;i++){
-            if (dataA[i].on_off_court == group_data[0])
-                sum_dataA[0] +=1;
-            else if (dataA[i].on_off_court == group_data[1])
-                sum_dataA[1] +=1;
-            else
-                sum_dataA[2] +=1;
+            for(var j = 0;j<group_data.length;j++){
+                if (dataA[i].on_off_court == group_data[j]){
+                    sum_dataA[j] +=1;
+                }
+            }
         }
         for(var i = 0;i<dataB.length;i++){
-            if (dataB[i].on_off_court == group_data[0])
-                sum_dataB[0] +=1;
-            else if (dataB[i].on_off_court == group_data[1])
-                sum_dataB[1] +=1;
-            else
-                sum_dataB[2] +=1;
+            for(var j = 0;j<group_data.length;j++){
+                if (dataB[i].on_off_court == group_data[j])
+                    sum_dataB[j] +=1;
+            }
         }
 
         console.log(sum_dataA);
         console.log(sum_dataB);
-        
         
         var labels = group_data;
 
@@ -390,7 +503,7 @@ function init_on_off_court(minrally,maxrally,set){
     });
 }
 
-function init_total_balltype(minrally,maxrally,set){
+function init_total_balltype(minrally,maxrally,set,game_name){
     $('#total_balltype .playerA').html('<div class="subtitle">選手A獲勝球種</div>\
     <canvas id="total_balltype_chartA" width="800" height="600"></canvas>');
     $('#total_balltype .playerB').html('<div class="subtitle">選手B獲勝球種</div>\
@@ -401,7 +514,13 @@ function init_total_balltype(minrally,maxrally,set){
     $('#sum_balltype .playerB').html('<div class="subtitle">選手B球種統計</div>\
     <canvas id="sum_balltype_chartB" width="800" height="600"></canvas>');
 
-    $.getJSON("../statistics/rally_type.json", function(data) {
+    //init game
+    if (!game_name){
+        game_name = "18IND_TC";
+    }
+    filename = 'preprocessing/Data/Output/rally_type_predict_' + game_name + '.json';
+
+    $.getJSON(filename, function(data) {
         //init set
         if (!set){
             set = 1;
@@ -464,8 +583,10 @@ function init_total_balltype(minrally,maxrally,set){
             }
         };
 
+        filename = 'preprocessing/Data/Output/rally_count_predict_' + game_name + '.json';
+
         //rendering each player win balltype
-        $.getJSON("statistics/rally_count.json", function(data2) {
+        $.getJSON(filename, function(data2) {
             [data2,set,minrally,maxrally] = data_filter(data2,set,minrally,maxrally,1);
 
             //filter winners
@@ -493,9 +614,9 @@ function init_total_balltype(minrally,maxrally,set){
                 }
             };
 
-            console.log(labels[0]);
-            console.log(dataA);
-            console.log(dataB);
+            // console.log(labels[0]);
+            // console.log(dataA);
+            // console.log(dataB);
 
             var chartRadarOptionsPlayer = 
             {
@@ -568,11 +689,11 @@ function init_total_balltype(minrally,maxrally,set){
                 rally = parseInt(data[i].rally);
                 for(var j = 0;j<data[i].result.length;j++){
                     dataA[j] += data[i].result[j].count;
-                    dataB[j] += data[i+1].result[j].count
+                    dataB[j] += data[i+1].result[j].count;
                 }
             };
-            // console.log(dataA)
-            // console.log(dataB)
+            console.log(dataA)
+            console.log(dataB)
             //rendering total balltype
             var chartRadarDOM = document.getElementById("sum_balltype_chartA");
             var chart = new Chart(chartRadarDOM, {
@@ -620,7 +741,7 @@ function init_total_balltype(minrally,maxrally,set){
     });
 }
 
-function init_stroke_distribution(minrally,maxrally,set){
+function init_stroke_distribution(minrally,maxrally,set,game_name){
     //create player info radar
     $('#stroke_distribution .playerA').html('<div class="subtitle">選手A得分拍數</div>\
     <canvas id="stroke_distribution_chartA" width="800" height="600"></canvas>');
@@ -646,7 +767,13 @@ function init_stroke_distribution(minrally,maxrally,set){
         }
     };
 
-    $.getJSON("statistics/rally_count.json", function(data) {
+    //init game
+    if (!game_name){
+        game_name = "18IND_TC";
+    }
+    filename = 'preprocessing/Data/Output/rally_count_predict_' + game_name + '.json';
+
+    $.getJSON(filename, function(data) {
         [data,set,minrally,maxrally] = data_filter(data,set,minrally,maxrally,1);
 
         //filter winners
@@ -745,7 +872,7 @@ function init_stroke_distribution(minrally,maxrally,set){
     });
 }
 
-function init_court_distribution(minrally,maxrally,set){
+function init_court_distribution(minrally,maxrally,set,game_name){
     //左邊是後場 右邊是前場 小戴是A 陳是B
     $('#total_court .playerA').html('<div class="subtitle">選手A失分分佈</div>\
     <img id="badminton_courtA" src="../image/badminton_court.jpg" width="100%"/>');
@@ -779,7 +906,13 @@ function init_court_distribution(minrally,maxrally,set){
     var ctxA = canvA.getContext("2d");
     var ctxB = canvB.getContext("2d");
 
-    $.getJSON("statistics/rally_count.json", function(data) {
+    //init game
+    if (!game_name){
+        game_name = "18IND_TC";
+    }
+    filename = 'preprocessing/Data/Output/rally_count_predict_' + game_name + '.json';
+
+    $.getJSON(filename, function(data) {
         [data,set,minrally,maxrally] = data_filter(data,set,minrally,maxrally,1);
 
         //filter winners
@@ -835,23 +968,22 @@ function init_court_distribution(minrally,maxrally,set){
         var coord_oriy = 424;
         var brutew = 61/oriw*canvA.width;
         var bruteh = 41/orih*canvA.height;
-        court.xarea = ['1','2','3','4','5'];
-        court.yarea = ['A','B','C','D','E','F'];
-        court.xcoord_back = [[328,468],[190,328],[53,190],[0,53],[-50,0]];
+        court.xarea = ['1','2','3','4'];
+        court.yarea = ['A','B','C','D','E'];
+        court.xcoord_back = [[307,468],[74,307],[0,74],[-60,0]];
         court.xcoord_back = court.xcoord_back.map(function(item){
             return [parseInt(item[0]/coord_orix*(canvA.width-2*brutew)+brutew),parseInt(item[1]/coord_orix*(canvA.width-2*brutew)+brutew)];
         });
-        court.ycoord_back = [[32,212],[212,392],[0,32],[392,424],[-50,0],[424,500]];
+        court.ycoord_back = [[108,316],[316,392],[32,108],[392,500],[-50,32]];
         court.ycoord_back = court.ycoord_back.map(function(item){
             return [parseInt(item[0]/coord_oriy*(canvA.height-2*bruteh)+bruteh),parseInt(item[1]/coord_oriy*(canvA.height-2*bruteh)+bruteh)];
         });
 
-        court.xcoord_front = [[468,608],[608,745],[745,882],[882,935],[935,955]];
+        court.xcoord_front = [[468,629],[629,861],[861,935],[935,995]];
         court.xcoord_front = court.xcoord_front.map(function(item){
             return [parseInt(item[0]/coord_orix*(canvB.width-2*brutew)+brutew),parseInt(item[1]/coord_orix*(canvB.width-2*brutew)+brutew)];
         });
-        court.yarea = ['A','B','C','D','E','F'];
-        court.ycoord_front = [[212,392],[32,212],[392,424],[0,32],[424,500],[-50,0]];
+        court.ycoord_front = [[108,316],[32,108],[316,392],[-50,32],[392,500]];
         court.ycoord_front = court.ycoord_front.map(function(item){
             return [parseInt(item[0]/coord_oriy*(canvB.height-2*bruteh)+bruteh),parseInt(item[1]/coord_oriy*(canvB.height-2*bruteh)+bruteh)];
         });
@@ -859,8 +991,14 @@ function init_court_distribution(minrally,maxrally,set){
         // console.log(canvA.width);
         // console.log(canvA.height);
         // console.log(court);
-        // console.log(sum_dataA);
-        // console.log(sum_dataB);
+        console.log(sum_dataA);
+        console.log(sum_dataB);
+
+        //render middle line on courtA and courtB
+        ctxA.fillStyle = "rgb(0,0,0)";
+        ctxA.fillRect(court.xcoord_back[0][1]-2,court.ycoord_back[4][0],4,court.ycoord_back[3][1] - court.ycoord_back[4][0]);
+        ctxB.fillStyle = "rgb(0,0,0)";
+        ctxB.fillRect(court.xcoord_back[0][1]-2,court.ycoord_back[4][0],4,court.ycoord_back[3][1] - court.ycoord_back[4][0]);
 
         //render rectangle ratio area over image
         for(var i = 0;i<sum_dataA.value.length;i++){
@@ -868,10 +1006,11 @@ function init_court_distribution(minrally,maxrally,set){
                 var ratio = (sum_dataA.value[i]/sumA).toFixed(2);
                 var idx = court.xarea.indexOf(sum_dataA.area[i].split('')[1]);
                 var idy = court.yarea.indexOf(sum_dataA.area[i].split('')[0]);
-                ctxA.fillStyle = "rgba(66,129,164," + ratio + ")";
                 var topX,topY,w,h;
+
+                //out-field ball will on opposite field
                 if (set%2 == 1){
-                    if (sum_dataA.area[i].split('')[0] == 'E' || sum_dataA.area[i].split('')[0] == 'F' || sum_dataA.area[i].split('')[1] == '5'){
+                    if (sum_dataA.area[i].split('')[0] == 'D' || sum_dataA.area[i].split('')[0] == 'E' || sum_dataA.area[i].split('')[1] == '4'){
                         topX = court.xcoord_front[idx][0];
                         topY = court.ycoord_front[idy][0];
                         w = court.xcoord_front[idx][1]-court.xcoord_front[idx][0];
@@ -885,7 +1024,7 @@ function init_court_distribution(minrally,maxrally,set){
                     }
                 }
                 else{
-                    if (sum_dataA.area[i].split('')[0] == 'E' || sum_dataA.area[i].split('')[0] == 'F' || sum_dataA.area[i].split('')[1] == '5'){
+                    if (sum_dataA.area[i].split('')[0] == 'D' || sum_dataA.area[i].split('')[0] == 'E' || sum_dataA.area[i].split('')[1] == '4'){
                         topX = court.xcoord_back[idx][0];
                         topY = court.ycoord_back[idy][0];
                         w = court.xcoord_back[idx][1]-court.xcoord_back[idx][0];
@@ -898,8 +1037,9 @@ function init_court_distribution(minrally,maxrally,set){
                         h = court.ycoord_front[idy][1]-court.ycoord_front[idy][0];
                     }
                 }
+                ctxA.fillStyle = "rgba(66,129,164," + ratio + ")";
                 ctxA.fillRect(topX,topY,w,h);
-                ctxA.fillStyle = "rgb(255,255,255)";
+                ctxA.fillStyle = "rgb(0,0,0)";
                 ctxA.textAlign = "center"; 
                 ctxA.textBaseline = "middle";
                 ctxA.strokeText(ratio,topX+w/2,topY+h/2);
@@ -908,7 +1048,6 @@ function init_court_distribution(minrally,maxrally,set){
                 var ratio = (sum_dataA.selfout[i]/sumA).toFixed(2);
                 var idx = court.xarea.indexOf(sum_dataA.area[i].split('')[1]);
                 var idy = court.yarea.indexOf(sum_dataA.area[i].split('')[0]);
-                ctxA.fillStyle = "rgba(66,129,164," + ratio + ")";
                 var topX,topY,w,h;
                 if (set%2 == 1){
                     topX = court.xcoord_back[idx][0];
@@ -922,8 +1061,9 @@ function init_court_distribution(minrally,maxrally,set){
                     w = court.xcoord_front[idx][1]-court.xcoord_front[idx][0];
                     h = court.ycoord_front[idy][1]-court.ycoord_front[idy][0];
                 }
+                ctxA.fillStyle = "rgba(66,129,164," + ratio + ")";
                 ctxA.fillRect(topX,topY,w,h);
-                ctxA.fillStyle = "rgb(255,255,255)";
+                ctxA.fillStyle = "rgb(0,0,0)";
                 ctxA.textAlign = "center"; 
                 ctxA.textBaseline = "middle";
                 ctxA.strokeText(ratio,topX+w/2,topY+h/2);
@@ -935,10 +1075,9 @@ function init_court_distribution(minrally,maxrally,set){
                 var ratio = (sum_dataB.value[i]/sumB).toFixed(2);
                 var idx = court.xarea.indexOf(sum_dataB.area[i].split('')[1]);
                 var idy = court.yarea.indexOf(sum_dataB.area[i].split('')[0]);
-                ctxB.fillStyle = "rgba(255,99,132," + ratio + ")";
                 var topX,topY,w,h;
                 if(set%2 == 1){
-                    if (sum_dataB.area[i].split('')[0] == 'E' || sum_dataB.area[i].split('')[0] == 'F' || sum_dataB.area[i].split('')[1] == '5'){
+                    if (sum_dataB.area[i].split('')[0] == 'D' || sum_dataB.area[i].split('')[0] == 'E' || sum_dataB.area[i].split('')[1] == '4'){
                         topX = court.xcoord_back[idx][0];
                         topY = court.ycoord_back[idy][0];
                         w = court.xcoord_back[idx][1]-court.xcoord_back[idx][0];
@@ -952,7 +1091,7 @@ function init_court_distribution(minrally,maxrally,set){
                     }
                 }
                 else{
-                    if (sum_dataB.area[i].split('')[0] == 'E' || sum_dataB.area[i].split('')[0] == 'F' || sum_dataB.area[i].split('')[1] == '5'){
+                    if (sum_dataB.area[i].split('')[0] == 'D' || sum_dataB.area[i].split('')[0] == 'E' || sum_dataB.area[i].split('')[1] == '4'){
                         topX = court.xcoord_front[idx][0];
                         topY = court.ycoord_front[idy][0];
                         w = court.xcoord_front[idx][1]-court.xcoord_front[idx][0];
@@ -965,8 +1104,9 @@ function init_court_distribution(minrally,maxrally,set){
                         h = court.ycoord_back[idy][1]-court.ycoord_back[idy][0];
                     }
                 }
+                ctxB.fillStyle = "rgba(255,99,132," + ratio + ")";
                 ctxB.fillRect(topX,topY,w,h);
-                ctxB.fillStyle = "rgb(255,255,255)";
+                ctxB.fillStyle = "rgb(0,0,0)";
                 ctxB.textAlign = "center"; 
                 ctxB.textBaseline = "middle";
                 ctxB.strokeText(ratio,topX+w/2,topY+h/2);
@@ -975,7 +1115,6 @@ function init_court_distribution(minrally,maxrally,set){
                 var ratio = (sum_dataB.selfout[i]/sumB).toFixed(2);
                 var idx = court.xarea.indexOf(sum_dataB.area[i].split('')[1]);
                 var idy = court.yarea.indexOf(sum_dataB.area[i].split('')[0]);
-                ctxA.fillStyle = "rgba(66,129,164," + ratio + ")";
                 var topX,topY,w,h;
                 if (set%2 == 1){
                     topX = court.xcoord_front[idx][0];
@@ -989,8 +1128,9 @@ function init_court_distribution(minrally,maxrally,set){
                     w = court.xcoord_back[idx][1]-court.xcoord_back[idx][0];
                     h = court.ycoord_back[idy][1]-court.ycoord_back[idy][0];
                 }
+                ctxA.fillStyle = "rgba(66,129,164," + ratio + ")";
                 ctxA.fillRect(topX,topY,w,h);
-                ctxA.fillStyle = "rgb(255,255,255)";
+                ctxA.fillStyle = "rgb(0,0,0)";
                 ctxA.textAlign = "center"; 
                 ctxA.textBaseline = "middle";
                 ctxA.strokeText(ratio,topX+w/2,topY+h/2);
@@ -1004,16 +1144,17 @@ function change_interval(){
     var minrally = document.getElementById("down").value;
     var maxrally = document.getElementById("up").value;
     var set = document.getElementById("set").value;
+    var game = document.getElementById("game").value;
 
     //delete old linechart
     $('#line_chart').remove();
-    init_linechart(minrally,maxrally,set);
+    init_linechart(minrally,maxrally,set,game);
 
     //delete old doughnut
     $('#on_off_court .subtitle').remove();
     $('#on_off_court_chartA').remove();
     $('#on_off_court_chartB').remove();
-    init_on_off_court(minrally,maxrally,set);
+    init_on_off_court(minrally,maxrally,set,game);
 
     //delete old radar
     $('#total_balltype .subtitle').remove();
@@ -1021,13 +1162,13 @@ function change_interval(){
     $('#total_balltype_chartB').remove();
     $('#sum_balltype_chartA').remove();
     $('#sum_balltype_chartB').remove();
-    init_total_balltype(minrally,maxrally,set);
+    init_total_balltype(minrally,maxrally,set,game);
 
     //delete old stoke distribution
     $('#stroke_distribution .subtitle').remove();
     $('#stroke_distribution_chartA').remove();
     $('#stroke_distribution_chartB').remove();
-    init_stroke_distribution(minrally,maxrally,set);
+    init_stroke_distribution(minrally,maxrally,set,game);
 
     //delete old court distribution
     $('#total_court .subtitle').remove();
@@ -1035,24 +1176,25 @@ function change_interval(){
     $('#total_court_chartB').remove();
     $('#badminton_courtA').remove();
     $('#badminton_courtB').remove();
-    init_court_distribution(minrally,maxrally,set);
+    init_court_distribution(minrally,maxrally,set,game);
 }
 
 function change_set() {
+    game = document.getElementById("game").value;
     new_set = document.getElementById("set").value;
     $('#down option').remove();
     $('#up option').remove();
-    get_interval_updown(new_set);
+    get_interval_updown(new_set,game);
 
     //delete old and refresh new linechart
     $('#line_chart').remove();
-    init_linechart(null,null,new_set);
+    init_linechart(null,null,new_set,game);
 
     //delete old doughnut
     $('#on_off_court .subtitle').remove();
     $('#on_off_court_chartA').remove();
     $('#on_off_court_chartB').remove();
-    init_on_off_court(null,null,new_set);
+    init_on_off_court(null,null,new_set,game);
 
     //delete old radar
     $('#total_balltype .subtitle').remove();
@@ -1060,13 +1202,13 @@ function change_set() {
     $('#total_balltype_chartB').remove();
     $('#sum_balltype_chartA').remove();
     $('#sum_balltype_chartB').remove();
-    init_total_balltype(null,null,new_set);
+    init_total_balltype(null,null,new_set,game);
 
     //delete old stoke distribution
     $('#stroke_distribution .subtitle').remove();
     $('#stroke_distribution_chartA').remove();
     $('#stroke_distribution_chartB').remove();
-    init_stroke_distribution(null,null,new_set);
+    init_stroke_distribution(null,null,new_set,game);
 
     //delete old court distribution
     $('#total_court .subtitle').remove();
@@ -1074,11 +1216,35 @@ function change_set() {
     $('#total_court_chartB').remove();
     $('#badminton_courtA').remove();
     $('#badminton_courtB').remove();
-    init_court_distribution(null,null,new_set);
+    init_court_distribution(null,null,new_set,game);
+}
+
+function change_game() {
+    new_game = document.getElementById("game").value;
+    $('#set option').remove();
+    get_interval_set();
+    change_set();
+}
+
+function get_interval_game(){
+    filename = 'preprocessing/Data/Output/game_name.json';
+    $.getJSON(filename, function(data) {
+        for(var i=1;i<=data.length;i++){
+            var insertText = '<option value=' + data[i-1] + '>' + 'Game ' + i + '</option>';
+            $('#game').append(insertText); 
+        }
+    })
 }
 
 function get_interval_set(){
-    $.getJSON("statistics/rally_count.json", function(data) {
+    var game_name = document.getElementById("game").value;
+    //init game
+    if (!game_name){
+        game_name = "18IND_TC";
+    }
+    filename = 'preprocessing/Data/Output/rally_count_predict_' + game_name + '.json';
+
+    $.getJSON(filename, function(data) {
         //find max set
         var maximum = 0;
         for (var i=0 ; i<data.length ; i++) {
@@ -1089,14 +1255,20 @@ function get_interval_set(){
         for(var i=1;i<=maximum;i+=1)
         {
             var insertText = '<option value='+i+'>'+i+'</option>';
-            //document.getElementById("up").appendChild=insertText;
             $('#set').append(insertText); 
         }
     });
 }
 
-function get_interval_updown(set){
-    $.getJSON("statistics/rally_count.json", function(data) {
+function get_interval_updown(set,game){
+    var game_name = document.getElementById("game").value;
+    //init game
+    if (!game_name){
+        game_name = "18IND_TC";
+    }
+    filename = 'preprocessing/Data/Output/rally_count_predict_' + game_name + '.json';
+
+    $.getJSON(filename, function(data) {
         //init set
         if (!set){
             set = 1;
@@ -1110,9 +1282,10 @@ function get_interval_updown(set){
         maximum = Math.max.apply(Math, data.map(function(d) { 
             return d.rally;
         }));  
-        for(var i=1;i<=maximum;i+=1)
+        for(var i=0;i<maximum;i+=1)
         {
-            var insertText = '<option value='+i+'>'+i+'</option>';
+            var score = data[i].score;
+            var insertText = '<option value=' + (i+1) + '>' + score + ' (' + (i+1) + ')' + '</option>';
             $('#down').append(insertText); 
             $('#up').append(insertText); 
         }

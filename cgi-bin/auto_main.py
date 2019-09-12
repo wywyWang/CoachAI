@@ -1,3 +1,11 @@
+# /home/ino/anaconda3/envs/TrackNet/bin/python3
+#Comment when not developing
+import cgitb
+cgitb.enable(display=0, logdir="./log")
+
+import cgi
+import storevideo
+import TrackNetPredict
 import auto_segmentation
 import raw2train as training_preprocess
 import training
@@ -5,12 +13,36 @@ import predict
 import coordinate as coordinate_adjust
 import output
 
-input_video_name = "TestVideo"
+print("Content-Type: text/html\n\n")    # html type is following
+form = cgi.FieldStorage()
+print("video type = ",form['video_uploader'].type)
+print('<br>')
+print("video size = ",len(form['video_uploader'].value))
+print('<br>')
+
+input_video_name = form['video_uploader'].filename.split('.')[0]
+ext = ".csv"
+mp4_ext = '.mp4'
+
+#TrackNet filename
+TrackNet_input_path = './uploadvideo/'
+TrackNet_label = 'Badminton_label_'
+TrackNet_input = TrackNet_input_path + input_video_name + mp4_ext
+TrackNet_output_path = './preprocessing/Data/TrainTest/'
+TrackNet_output = TrackNet_output_path + TrackNet_label + input_video_name + ext
+
+# segmentation filename(not used TrackNet output yet)
+segmentation_input_path = TrackNet_output_path
+segmentation_output_path = "./preprocessing/Data/AccuracyResult/"
+segmentation_input = TrackNet_label
+segmentation_output = "record_segmentation_"
+
+segmentation_input = segmentation_input_path + segmentation_input + input_video_name + ext
+segmentation_output = segmentation_output_path + segmentation_output + input_video_name + ext
 
 # training data preprocessing input params
 pre_dir = "./preprocessing/Data/training/data/"
 raw_data = input_video_name
-ext = ".csv"
 
 # has players' position info? 1/0 : yes/no
 # if yes, player_pos_file (.csv) is needed
@@ -28,10 +60,9 @@ preprocessed_filename = pre_dir + raw_data + "_preprocessed" + ext
 raw_data = pre_dir + raw_data + ext
 
 if player_pos_option != 0:
-	player_pos_file += ext
+    player_pos_file += ext
 if frame_option != 0:
-	specific_frame_file += ext
-
+    specific_frame_file += ext
 
 # training and predict input params
 result_dir = "./preprocessing/Data/training/result/"
@@ -43,29 +74,26 @@ name_result = input_video_name+"_predict_result"
 #filename_train = pre_dir + name_train + ext
 filename_result = result_dir + name_result + ext
 
-# segmentation filename
-segmentation_path = "./preprocessing/Data/AccuracyResult/"
-segmentation_input = ""
-segmentation_output = "record_segmentation"
-
-segmentation_input = segmentation_path + segmentation_input + ext
-segmentation_output = segmentation_path + segmentation_output + ext
-
 # output json file
 json__ext = ".json"
-rally_count_json_filename = input_video_name+"_rally_count_our_test"
-rally_type_json_filename = ""
+rally_count_json_filename = "rally_count_predict_" + input_video_name
+rally_type_json_filename = "rally_type_predict_" + input_video_name
+game_name_json_filename = "game_name"
 output_json_dir = "./preprocessing/Data/Output/"
 
 rally_count_json_filename = output_json_dir + rally_count_json_filename + json__ext
 rally_type_json_filename = output_json_dir + rally_type_json_filename + json__ext
+game_name_json_filename = output_json_dir + game_name_json_filename + json__ext
 
 if __name__ == "__main__":
-    print("Content-Type: text/plain")    # plain is following
-    print()                             # blank line, end of headers
-    
+    # Store video
+    storevideo.store(form['video_uploader'])
+
+    # TrackNet prediction(Local test can commit TrackNet to reduce runtime)
+    # TrackNetPredict.run(TrackNet_input, TrackNet_output)
+
     # Run segmentation
-    auto_segmentation.begin()
+    auto_segmentation.run(segmentation_input, segmentation_output)
 
 	# training and prediction
     coordinate_adjust.run(segmentation_output, raw_data)
@@ -74,5 +102,4 @@ if __name__ == "__main__":
     predict.verify(pre_dir, preprocessed_filename, model_path, result_dir, filename_result) #predict testing data
 
     # output json file
-    #"../../Data/training/data/out.csv", "../../Data/training/result/0811_predict_result.csv", "../../Data/Output/rally_count_our.json", ""
-    output.run(raw_data, filename_result, rally_count_json_filename, rally_type_json_filename)
+    output.run(raw_data, filename_result, rally_count_json_filename, rally_type_json_filename, game_name_json_filename, input_video_name)
