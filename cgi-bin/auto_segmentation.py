@@ -472,7 +472,6 @@ def check_accuracy():
                     break
             frame+=1
             
-    print("<br>")
     print("===========RALLY END ACCURACY=============")
     print("<br>")
     print("Total Calculate number = ",total)
