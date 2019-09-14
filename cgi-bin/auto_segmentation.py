@@ -417,7 +417,7 @@ def on_off_court(segmentation_output):
 
 def check_accuracy():
     count=0
-    rally = pd.read_excel('./preprocessing/Data/TrainTest/clip_info_19ASI_CS_10min.xlsx')
+    rally = pd.read_excel('./preprocessing/Data/TrainTest/clip_info_18IND_TC.xlsx')
     rally = rally[['rally','ball_round','frame_num','server','type','lose_reason']]
     record = rally[rally['type'] != '未擊球'].reset_index(drop=True)
     record = record[rally['type'] != '未過網'].reset_index(drop=True)
@@ -489,17 +489,19 @@ def check_accuracy():
     print("<br>")
 
     #check virtual umpire accuracy
-    rally_umpire = pd.read_excel('./preprocessing/Data/TrainTest/clip_info_19ASI_CS_10min.xlsx')
+    rally_umpire = pd.read_excel('./preprocessing/Data/TrainTest/clip_info_18IND_TC.xlsx')
     rally_umpire = rally_umpire[['unique_id','getpoint_player']]
     rally_umpire = rally_umpire.dropna().reset_index(drop=True)
 
     correct = 0
     j=0
     for i in range(len(rally_umpire)):
-        #rally 29 is missed on finding rally end,assume it will be correct
-        if i == 28:
-            correct +=1
-            continue
+        # #rally 29 is missed on finding rally end,assume it will be correct
+        # if i == 28:
+        #     correct +=1
+        #     continue
+        if j == len(who_wins):
+            break
         if rally_umpire['unique_id'][i].split('-')[-1] == '2':
             if rally_umpire['getpoint_player'][i] == who_wins[j]:
                 correct +=1
