@@ -8,8 +8,16 @@ from xgboost import XGBClassifier
 import itertools
 import matplotlib.pyplot as plt
 
-needed = ['ball_round', 'pos_x', 'pos_y', 'next_x', 'next_y', 'hit_height']
-test_needed = ['ball_round', 'pos_x', 'pos_y', 'next_x', 'next_y']
+needed = ['now_right_x', 'now_right_y', 'now_left_x', 'now_left_y', 
+		'next_right_x', 'next_right_y', 'next_left_x', 'next_left_y', 
+		'right_delta_x', 'right_delta_y', 'left_delta_x', 'left_delta_y',
+		'right_x_speed', 'right_y_speed',
+		'left_x_speed', 'left_y_speed', 'hit_height']
+test_needed = ['now_right_x', 'now_right_y', 'now_left_x', 'now_left_y', 
+		'next_right_x', 'next_right_y', 'next_left_x', 'next_left_y', 
+		'right_delta_x', 'right_delta_y', 'left_delta_x', 'left_delta_y',
+		'right_x_speed', 'right_y_speed',
+		'left_x_speed', 'left_y_speed']
 
 def convert_area(area):
 	val = {'E': 0, 'C': 4, 'A': 8, 'B': 12, 'D': 16}
@@ -53,7 +61,7 @@ def plot_chart(set_now, model_type, model, groundtruth, grid_predictions, labels
     plt.clf()
     plt.close()
 
-def SVM(filename, x_predict, model_name, xgb_outputname, set_now):
+def SVM(filename, x_predict, model_name, svm_outputname, set_now):
 	data = pd.read_csv(filename)
 	data = data[needed]
 	data.dropna(inplace=True)
@@ -99,18 +107,13 @@ def Run(set_now, filename, svm_option, svm_model_name, svm_outputname, xgboost_o
 	x_predict = LoadData(filename)
 	if svm_option and svm_model_name != '':
 		print("SVM predicting set"+str(set_now)+"...")
-		print("")
 		SVM(filename, x_predict, svm_model_name, svm_outputname, set_now)
-		print("")
 		print("SVM predict set"+str(set_now)+" done!")
 
 	if xgboost_option and xgboost_model_name != '':
 		print("XGBoost predicting set"+str(set_now)+"...")
-		print("")
 		XGBoost(filename, x_predict, xgboost_model_name, xgboost_outputname, set_now)
-		print("")
 		print("XGBoost predict set"+str(set_now)+" done!")
-
 
 def exec(predict_set):
 	for i in predict_set:

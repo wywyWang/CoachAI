@@ -6,10 +6,16 @@ from sklearn.metrics import *
 from sklearn.model_selection import *
 from xgboost import XGBClassifier
 
-
-
-needed = ['ball_round','pos_x', 'pos_y', 'next_x', 'next_y', 'hit_height']
-train_needed = ['ball_round', 'pos_x', 'pos_y', 'next_x', 'next_y']
+needed = ['now_right_x', 'now_right_y', 'now_left_x', 'now_left_y', 
+		'next_right_x', 'next_right_y', 'next_left_x', 'next_left_y', 
+		'right_delta_x', 'right_delta_y', 'left_delta_x', 'left_delta_y',
+		'right_x_speed', 'right_y_speed',
+		'left_x_speed', 'left_y_speed', 'hit_height']
+train_needed = ['now_right_x', 'now_right_y', 'now_left_x', 'now_left_y', 
+		'next_right_x', 'next_right_y', 'next_left_x', 'next_left_y', 
+		'right_delta_x', 'right_delta_y', 'left_delta_x', 'left_delta_y',
+		'right_x_speed', 'right_y_speed',
+		'left_x_speed', 'left_y_speed']
 test_needed = ['hit_height']
 
 def convert_area(area):
@@ -74,4 +80,4 @@ def Run(filename, svm_option, svm_model_name, xgboost_option, xgboost_model_name
 		XGBoost(x_train, y_train, xgboost_model_name)
 		print("XGBoost training done!")
 
-Run('../data/set1_with_skeleton.csv', False, 'SVM.joblib.dat', True, 'XGB.joblib.dat')
+Run('../data/set1_with_skeleton.csv', True, 'SVM_skeleton.joblib.dat', True, 'XGB_skeleton.joblib.dat')
