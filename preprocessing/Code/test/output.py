@@ -92,19 +92,18 @@ def rally_type(rawfile, predict_file, savefile):
 	result_A = pd.DataFrame(columns = ["set", "rally", "player", "balltype", "count"])
 	result_B = pd.DataFrame(columns = ["set", "rally", "player", "balltype", "count"])
 
-	for i in range(len(hits['prediction'])):
+	for i in range(len(rally_data['hitting'])):
 		if type(rally_data['getpoint_player'][i]) == str and (rally_data['getpoint_player'][i] == 'A' or rally_data['getpoint_player'][i] == 'B'):
-			
 			result_A['balltype'] = list(ball_id.keys())
 			result_A['count'] = type_A_cnt
-			result_A['set'] = [rally_data['set'][hit_cnt-1]]*len(type_A_cnt)
-			result_A['rally'] = [rally_data['rally'][hit_cnt-1]]*len(type_A_cnt)
+			result_A['set'] = [rally_data['set'][i]]*len(type_A_cnt)
+			result_A['rally'] = [rally_data['rally'][i]]*len(type_A_cnt)
 			result_A['player'] = ['A']*len(type_A_cnt)
 
 			result_B['balltype'] = list(ball_id.keys())
 			result_B['count'] = type_B_cnt
-			result_B['set'] = [rally_data['set'][hit_cnt-1]]*len(type_B_cnt)
-			result_B['rally'] = [rally_data['rally'][hit_cnt-1]]*len(type_B_cnt)
+			result_B['set'] = [rally_data['set'][i]]*len(type_B_cnt)
+			result_B['rally'] = [rally_data['rally'][i]]*len(type_B_cnt)
 			result_B['player'] = ['B']*len(type_B_cnt)
 
 			result = result.append(result_A)
@@ -113,12 +112,13 @@ def rally_type(rawfile, predict_file, savefile):
 			result_B = pd.DataFrame(columns = ["set", "rally", "player", "balltype", "count"])
 			type_A_cnt = [0]*len(ball_id)
 			type_B_cnt = [0]*len(ball_id)
-	
+			continue
+
 		if rally_data['hitting'][i] == 'A':
-			type_A_cnt[ball_id[hits['prediction'][i]]] += 1
+			type_A_cnt[ball_id[hits['prediction'][hit_cnt]]] += 1
 			hit_cnt += 1
 		elif rally_data['hitting'][i] == 'B':
-			type_B_cnt[ball_id[hits['prediction'][i]]] += 1
+			type_B_cnt[ball_id[hits['prediction'][hit_cnt]]] += 1
 			hit_cnt += 1
 
 	result = (result.groupby(['set','rally','player'], as_index=False)
@@ -157,4 +157,4 @@ def run(rawfile, predict_file, rally_count_savefile, rally_type_savefile, exist_
 	rally_type(rawfile, predict_file, rally_type_savefile)
 	insert_new_game_name(exist_game_file, game_name)
 
-run("out.csv", "../../Data/training/result/18IND_TC_predict_result.csv", "rally_count_our.json", "rally_type_our.json", "game_name.json", "NewGameLa")
+run("../../Data/training/data/18IND_TC.csv", "../../Data/training/result/18IND_TC_predict_result.csv", "rally_count_our.json", "rally_type_our.json", "game_name.json", "NewGameLa")
