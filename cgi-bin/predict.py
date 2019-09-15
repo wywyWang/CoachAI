@@ -67,28 +67,13 @@ def verify(pre_dir, filename_predict, model_path, result_dir, filename_result):
     # result_dir: the directory that store the result
     # filename_result: where the result will be saved
 
-    if os.path.isdir(pre_dir) and os.path.isfile(filename_predict) and os.path.isfile(model_path) and not os.path.isfile(filename_result):
-        if not os.path.isdir(result_dir):
-            os.mkdir(result_dir)
+    if not os.path.isdir(result_dir):
+        os.mkdir(result_dir)
 
-        print("Start predict...")
-        print("<br>")
-        exec(filename_predict, model_path, filename_result)
-        print("Prediction done...")
-        print("<br>")
-        
-    else:
-        if not os.path.isfile(model_path):
-            print("No such model named: "+str(model_path))
-            print("<br>")
-        if not os.path.isdir(pre_dir):
-            print("No such directory named: "+str(pre_dir))
-            print("<br>")
-        if not os.path.isfile(filename_predict):
-            print("No such file: "+str(filename_predict))
-            print("<br>")
-        if os.path.isfile(filename_result):
-            print("Already exist result file: "+str(filename_result))
-            print("<br>")
+    print("Start predict...")
+    print("<br>")
+    exec(filename_predict, model_path, filename_result)
+    print("Prediction done...")
+    print("<br>")
 
 #verify("./", "set1_after.csv", "../preprocessing/Data/training/model/model.joblib.dat", "./rrr", "./rrr/resulttttt.csv")
