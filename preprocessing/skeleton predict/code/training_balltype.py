@@ -6,13 +6,17 @@ from sklearn.metrics import *
 from sklearn.model_selection import *
 from xgboost import XGBClassifier
 
-needed = ['ball_round','pos_x', 'pos_y', 'next_x', 'next_y', 'hit_height']
-train_needed = ['ball_round', 'pos_x', 'pos_y', 'next_x', 'next_y']
-test_needed = ['hit_height']
-
-def convert_area(area):
-	val = {'E': 0, 'C': 4, 'A': 8, 'B': 12, 'D': 16}
-	return float(val[area[0]]+float(area[1]))
+needed = ['now_right_x', 'now_right_y', 'now_left_x', 'now_left_y', 
+		'next_right_x', 'next_right_y', 'next_left_x', 'next_left_y', 
+		'right_delta_x', 'right_delta_y', 'left_delta_x', 'left_delta_y',
+		'right_x_speed', 'right_y_speed',
+		'left_x_speed', 'left_y_speed', 'hit_height', 'ball_type']
+train_needed = ['now_right_x', 'now_right_y', 'now_left_x', 'now_left_y', 
+		'next_right_x', 'next_right_y', 'next_left_x', 'next_left_y', 
+		'right_delta_x', 'right_delta_y', 'left_delta_x', 'left_delta_y',
+		'right_x_speed', 'right_y_speed',
+		'left_x_speed', 'left_y_speed', 'hit_height']
+test_needed = ['ball_type']
 
 def LoadData(filename):
 	data = pd.read_csv(filename)
@@ -46,7 +50,7 @@ def XGBoost(x_train, y_train, model_name):
 	xgbc.fit(x_train, y_train)
 	joblib.dump(xgbc, model_name)
 
-def Run(filename, svm_option, svm_model_name, xgboost_option, xgboost_model_name):
+def Run(filename, svm_option, svm_model_name, svm_ball_height_predict_result, xgboost_option, xgboost_model_name, xgboost_ball_height_predict_result):
 	x_train, y_train = LoadData(filename)
 	if svm_option and svm_model_name != '':
 		print("SVM training...")
@@ -57,4 +61,4 @@ def Run(filename, svm_option, svm_model_name, xgboost_option, xgboost_model_name
 		XGBoost(x_train, y_train, xgboost_model_name)
 		print("XGBoost training done!")
 
-Run('../data/set1_with_skeleton.csv', 'XGB_set1_skeleton_out.csv' False, 'SVM.joblib.dat', True, 'XGB.joblib.dat')
+Run('../data/set1_with_skeleton.csv', False, 'SVM_balltype.joblib.dat', True, 'XGB_balltype.joblib.dat')

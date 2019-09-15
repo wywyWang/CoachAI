@@ -50,7 +50,7 @@ def plot_Confusion_Matrix(set_now, model_type, cm, groundtruth, grid_predictions
             color="white" if cm[j, i] > cm.max()/2. else "black", 
             horizontalalignment="center")
 
-    plt.savefig(str(model_type)+'_set'+str(set_now)+'_confusion_matrix.png')
+    plt.savefig('../data/img/'+str(model_type)+'_set'+str(set_now)+'_confusion_matrix.png')
     plt.close(0)
 
 def plot_chart(set_now, model_type, model, groundtruth, grid_predictions, labels):
@@ -117,5 +117,5 @@ def Run(set_now, filename, svm_option, svm_model_name, svm_outputname, xgboost_o
 
 def exec(predict_set):
 	for i in predict_set:
-		Run(i, '../data/set'+str(i)+'_with_skeleton.csv', False, 'SVM_skeleton.joblib.dat', 'SVM_set'+str(i)+'_skeleton_out.csv', True, 'XGB_skeleton.joblib.dat', 'XGB_set'+str(i)+'_skeleton_out.csv')
+		Run(i, '../data/set'+str(i)+'_with_skeleton.csv', False, '../model/SVM_skeleton.joblib.dat', '../data/result/SVM_set'+str(i)+'_skeleton_out.csv', True, '../model/XGB_skeleton.joblib.dat', '../data/result/XGB_set'+str(i)+'_skeleton_out.csv')
 exec([2, 3])

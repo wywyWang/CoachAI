@@ -80,4 +80,4 @@ def Run(filename, svm_option, svm_model_name, xgboost_option, xgboost_model_name
 		XGBoost(x_train, y_train, xgboost_model_name)
 		print("XGBoost training done!")
 
-Run('../data/set1_with_skeleton.csv', True, 'SVM_skeleton.joblib.dat', True, 'XGB_skeleton.joblib.dat')
+Run('../data/set1_with_skeleton.csv', True, '../model/SVM_skeleton.joblib.dat', True, '../model/XGB_skeleton.joblib.dat')
