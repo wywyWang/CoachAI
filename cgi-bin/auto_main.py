@@ -12,6 +12,7 @@ import training
 import predict
 import coordinate as coordinate_adjust
 import output
+import time
 
 print("Content-Type: text/html\n\n")    # html type is following
 form = cgi.FieldStorage()
@@ -87,19 +88,36 @@ game_name_json_filename = output_json_dir + game_name_json_filename + json__ext
 
 if __name__ == "__main__":
     # Store video
+    previous_time = time.time()
     storevideo.store(form['video_uploader'])
+    end_time = time.time()
+    print("<br>")
+    print("Uploaded time : ",end_time - previous_time)
+    print("<br>")
 
     # TrackNet prediction(Local test can commit TrackNet to reduce runtime)
+    previous_time = time.time()
     # TrackNetPredict.run(TrackNet_input, TrackNet_output)
+    end_time = time.time()
+    print("TrackNet time : ",end_time - previous_time)
+    print("<br>")
 
     # Run segmentation
+    previous_time = time.time()
     auto_segmentation.run(segmentation_input, segmentation_output)
+    end_time = time.time()
+    print("Segmentation time : ",end_time - previous_time)
+    print("<br>")
 
 	# training and prediction
+    previous_time = time.time()
     coordinate_adjust.run(segmentation_output, raw_data)
     training_preprocess.run(raw_data, preprocessed_filename, unique_id, player_pos_option, frame_option, player_pos_file, specific_frame_file)  #preprocess data
     #training.verify(pre_dir, filename_train, model_path)  #train model
     predict.verify(pre_dir, preprocessed_filename, model_path, result_dir, filename_result) #predict testing data
+    end_time = time.time()
+    print("Predict time : ",end_time - previous_time)
+    print("<br>")
 
     # output json file
     output.run(raw_data, filename_result, rally_count_json_filename, rally_type_json_filename, game_name_json_filename, input_video_name)

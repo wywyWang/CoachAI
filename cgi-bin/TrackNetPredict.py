@@ -125,9 +125,23 @@ def run(TrackNet_input, TrackNet_output):
 
     while success:
         unit = []
-        x1 = np.moveaxis(cv2.resize(image1, (WIDTH, HEIGHT)), -1, 0)
-        x2 = np.moveaxis(cv2.resize(image2, (WIDTH, HEIGHT)), -1, 0)
-        x3 = np.moveaxis(cv2.resize(image3, (WIDTH, HEIGHT)), -1, 0)
+        #adjust BGR format (cv2) to RGB format (PIL)
+        x1 = image1[...,::-1]
+        x2 = image2[...,::-1]
+        x3 = image3[...,::-1]
+        #convert np arrays to PIL images
+        x1 = array_to_img(x1)
+        x2 = array_to_img(x2)
+        x3 = array_to_img(x3)
+        #resize the images
+        x1 = x1.resize(size = (WIDTH, HEIGHT))
+        x2 = x2.resize(size = (WIDTH, HEIGHT))
+        x3 = x3.resize(size = (WIDTH, HEIGHT))
+        #convert images to np arrays and adjust to channels first
+        x1 = np.moveaxis(img_to_array(x1), -1, 0)		
+        x2 = np.moveaxis(img_to_array(x2), -1, 0)		
+        x3 = np.moveaxis(img_to_array(x3), -1, 0)
+        #create data
         unit.append(x1[0])
         unit.append(x1[1])
         unit.append(x1[2])
