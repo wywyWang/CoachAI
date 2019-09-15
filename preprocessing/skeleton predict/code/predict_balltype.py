@@ -10,15 +10,29 @@ from sklearn.metrics import *
 from xgboost import plot_importance
 import matplotlib.pyplot as plt
 
-def LoadData(filename):
+needed = ['now_right_x', 'now_right_y', 'now_left_x', 'now_left_y', 
+		'next_right_x', 'next_right_y', 'next_left_x', 'next_left_y', 
+		'right_delta_x', 'right_delta_y', 'left_delta_x', 'left_delta_y',
+		'right_x_speed', 'right_y_speed','right_speed',
+		'left_x_speed', 'left_y_speed', 'left_speed', 'hit_height', 'type']
+
+test_needed = ['now_right_x', 'now_right_y', 'now_left_x', 'now_left_y', 
+		'next_right_x', 'next_right_y', 'next_left_x', 'next_left_y', 
+		'right_delta_x', 'right_delta_y', 'left_delta_x', 'left_delta_y',
+		'right_x_speed', 'right_y_speed','right_speed',
+		'left_x_speed', 'left_y_speed', 'left_speed']
+
+def LoadData(filename, ball_height_predict):
 	data = pd.read_csv(filename)
+	ball_height = pd.read_csv(ball_height_predict)
 	data = data[needed]
 	data.dropna(inplace=True)
-	x_predict = data[test_needed]
+	data.reset_index(drop=True, inplace=True)
+	data['Predict'] = ball_height['Predict']
 
+	x_predict = data[test_needed+['Predict']]
+	
 	return x_predict
-
-def prediction_to_ClipInfo_csv()
 
 def plot_Confusion_Matrix(model_type, cm, groundtruth, grid_predictions, classes):
     plt.imshow(cm, cmap=plt.cm.Blues)
@@ -43,14 +57,14 @@ def plot_Confusion_Matrix(model_type, cm, groundtruth, grid_predictions, classes
     plt.close(0)
 
 def plot_chart(model_type, model, groundtruth, grid_predictions, labels):
-    # feature importance
-    feature_importance(model)
     # confusion matrix
     plot_Confusion_Matrix(model_type, confusion_matrix(groundtruth, grid_predictions), groundtruth, grid_predictions, labels)
     plt.clf()
     plt.close()
 
-def run(filename_predict, model_path, filename_result):
+def XGBoost(filename, x_predict, xgboost_model_name, xgboost_outputname, set_now):
+    '''
+    label = ['cut', 'drive', 'lob', 'long', 'netplay', 'rush', 'smash']
     label_name_dict = {
         0:"cut",
         1:"drive",
@@ -61,56 +75,34 @@ def run(filename_predict, model_path, filename_result):
         6:"smash",
         7:""
     }
-    new_dict = {v : k for k, v in label_name_dict.items()}
-
-    type_labels = pd.DataFrame(label_name_dict, index=[0])
-    type_labels = type_labels.values[0]
-
-    xgboost_model = joblib.load(model_path)
     
-    # load dataset
-    data_predict = np.array([])
-
-    with open(filename_predict, newline='', encoding='utf-8') as f:
-        reader = csv.reader(f)
-        next(reader, None)
-        c = 0
-        for row in reader:
-            if c == 0:
-                data_predict = np.hstack((data_predict, np.array(row)))
-                c = 1
-            else:
-                data_predict = np.vstack((data_predict, np.array(row)))
-
-    x_predict = data_predict[:,:-1]
-
     # prediction
     grid_predictions = xgboost_model.predict(x_predict)
 
     # output
-    pd.DataFrame(grid_predictions,columns=['prediction']).to_csv(filename_result,index=None)
-
-    # plot graph
-    #result_chart(xgboost_model, data_predict[:, -1], grid_predictions, type_labels, new_dict)
+    pd.DataFrame(grid_predictions,columns=['prediction']).to_csv(xgboost_outputname,index=None)
 
     # print precision and recall
-    print("Precision: "+str(precision_score(data_predict[:, -1], grid_predictions, labels = ['cut', 'drive', 'lob', 'long', 'netplay', 'rush', 'smash'], average=None)))
-    print("Recall: "+str(recall_score(data_predict[:, -1], grid_predictions, labels = ['cut', 'drive', 'lob', 'long', 'netplay', 'rush', 'smash'], average=None)))
-
-def Run(filename, prediction_result_file, svm_option, svm_model_name, svm_outputname, xgboost_option, xgboost_model_name, xgboost_outputname):
-	x_predict, y_predict = LoadData(filename, prediction_result_file)
+    print("Precision: "+str(precision_score(data_predict[:, -1], grid_predictions, labels = label, average=None)))
+    print("Recall: "+str(recall_score(data_predict[:, -1], grid_predictions, labels = label, average=None)))
+    '''
+    print(x_predict)
+def Run(set_now, filename, svm_option, svm_model_name, svm_prediction_result_file, svm_outputname, xgboost_option, xgboost_model_name, xgboost_prediction_result_file, xgboost_outputname):
+	
 	if svm_option and svm_model_name != '':
-		print("SVM predicting...")
-		print("")
-		SVM(filename, x_predict, svm_model_name, svm_outputname)
-		print("")
-		print("SVM predict done!")
+		print("SVM predicting set"+str(set_now)+"...")
+		x_predict = LoadData(filename, svm_prediction_result_file)
+		SVM(filename, x_predict, svm_model_name, svm_outputname, set_now)
+		print("SVM predict set"+str(set_now)+" done!")
 
 	if xgboost_option and xgboost_model_name != '':
-		print("XGBoost predicting...")
-		print("")
-		XGBoost(filename, x_predict, xgboost_model_name, xgboost_outputname)
-		print("")
-		print("XGBoost predict done!")
+		print("XGBoost predicting set"+str(set_now)+"...")
+		x_predict = LoadData(filename, xgboost_prediction_result_file)
+		XGBoost(filename, x_predict, xgboost_model_name, xgboost_outputname, set_now)
+		print("XGBoost predict set"+str(set_now)+" done!")
 
-Run('../data/set3_with_skeleton.csv', 'XGB_skeleton_out.csv', False, 'SVM_balltype.joblib.dat', 'SVM_balltype_out.csv', True, 'XGB_balltype.joblib.dat', 'XGB_balltype_out.csv')
+def exec(predict_set):
+	for i in predict_set:
+		Run(i ,'../data/set'+str(i)+'_with_skeleton.csv', False, '../model/SVM_balltype.joblib.dat', '../data/result/SVM_set'+str(i)+'_skeleton_out.csv', '../data/result/SVM_set'+str(i)+'_balltype_out.csv', True, '../model/XGB_balltype.joblib.dat', '../data/result/XGB_set'+str(i)+'_skeleton_out.csv', '../data/result/XGB_set'+str(i)+'_balltype_out.csv')
+
+exec([1, 2, 3])	

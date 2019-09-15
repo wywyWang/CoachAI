@@ -128,11 +128,11 @@ def Merge(set_num, total_set, setinfo, skeleton_file, top_is_Taiwan, savename):
 
 	set_info['right_x_speed'] = pd.Series(right_x_speed)
 	set_info['right_y_speed'] = pd.Series(right_y_speed)
-	#set_info['right_speed'] = pd.Series(right_speed)
+	set_info['right_speed'] = pd.Series(right_speed)
 
 	set_info['left_x_speed'] = pd.Series(left_x_speed)
 	set_info['left_y_speed'] = pd.Series(left_y_speed)
-	#set_info['left_speed'] = pd.Series(left_speed)
+	set_info['left_speed'] = pd.Series(left_speed)
 	set_info.to_csv(savename, index=False, encoding = 'utf-8')
 
 def run(set_num, total_set, top_is_Taiwan):
