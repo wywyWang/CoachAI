@@ -32,7 +32,7 @@ def LoadData(filename, ball_height_predict):
 
 	for t in data['type']:
 		ball_type.append(eng_type_to_num[ball_type_convertion(t)])
-
+	
 	data['type'] = ball_type
 	data['Predict'] = ball_height['Predict']
 

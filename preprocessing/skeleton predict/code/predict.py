@@ -51,7 +51,7 @@ def plot_Confusion_Matrix(set_now, model_type, cm, groundtruth, grid_predictions
             color="white" if cm[j, i] > cm.max()/2. else "black", 
             horizontalalignment="center")
 
-    plt.savefig('../data/img/'+str(model_type)+'_set'+str(set_now)+'_confusion_matrix.png')
+    plt.savefig('../data/img/'+str(model_type)+'_set'+str(set_now)+'_skeleton_confusion_matrix.png')
     plt.close(0)
 
 def plot_chart(set_now, model_type, model, groundtruth, grid_predictions, labels):
