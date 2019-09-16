@@ -11,13 +11,13 @@ import matplotlib.pyplot as plt
 needed = ['now_right_x', 'now_right_y', 'now_left_x', 'now_left_y', 
 		'next_right_x', 'next_right_y', 'next_left_x', 'next_left_y', 
 		'right_delta_x', 'right_delta_y', 'left_delta_x', 'left_delta_y',
-		'right_x_speed', 'right_y_speed',
-		'left_x_speed', 'left_y_speed', 'hit_height']
+		'right_x_speed', 'right_y_speed', 'right_speed',
+		'left_x_speed', 'left_y_speed', 'left_speed','hit_height']
 test_needed = ['now_right_x', 'now_right_y', 'now_left_x', 'now_left_y', 
 		'next_right_x', 'next_right_y', 'next_left_x', 'next_left_y', 
 		'right_delta_x', 'right_delta_y', 'left_delta_x', 'left_delta_y',
-		'right_x_speed', 'right_y_speed',
-		'left_x_speed', 'left_y_speed']
+		'right_x_speed', 'right_y_speed', 'right_speed',
+		'left_x_speed', 'left_y_speed', 'left_speed']
 
 def convert_area(area):
 	val = {'E': 0, 'C': 4, 'A': 8, 'B': 12, 'D': 16}
@@ -27,6 +27,7 @@ def LoadData(filename):
 	data = pd.read_csv(filename)
 	data = data[needed]
 	data.dropna(inplace=True)
+	data.reset_index(drop=True, inplace=True)
 	x_predict = data[test_needed]
 
 	return x_predict
@@ -50,7 +51,7 @@ def plot_Confusion_Matrix(set_now, model_type, cm, groundtruth, grid_predictions
             color="white" if cm[j, i] > cm.max()/2. else "black", 
             horizontalalignment="center")
 
-    plt.savefig('../data/img/'+str(model_type)+'_set'+str(set_now)+'_confusion_matrix.png')
+    plt.savefig('../data/img/'+str(model_type)+'_set'+str(set_now)+'_skeleton_confusion_matrix.png')
     plt.close(0)
 
 def plot_chart(set_now, model_type, model, groundtruth, grid_predictions, labels):
@@ -117,5 +118,5 @@ def Run(set_now, filename, svm_option, svm_model_name, svm_outputname, xgboost_o
 
 def exec(predict_set):
 	for i in predict_set:
-		Run(i, '../data/set'+str(i)+'_with_skeleton.csv', False, '../model/SVM_skeleton.joblib.dat', '../data/result/SVM_set'+str(i)+'_skeleton_out.csv', True, '../model/XGB_skeleton.joblib.dat', '../data/result/XGB_set'+str(i)+'_skeleton_out.csv')
-exec([2, 3])
+		Run(i, '../data/set'+str(i)+'_with_skeleton.csv', True, '../model/SVM_skeleton.joblib.dat', '../data/result/SVM_set'+str(i)+'_skeleton_out.csv', True, '../model/XGB_skeleton.joblib.dat', '../data/result/XGB_set'+str(i)+'_skeleton_out.csv')
+exec([1, 2, 3])
