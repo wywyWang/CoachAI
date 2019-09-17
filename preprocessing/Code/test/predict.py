@@ -151,8 +151,8 @@ def run(filename_predict, model_path, filename_result):
 
     # print precision and recall
     print("Accuracy: "+str(accuracy_score(data_predict[:, -1], prediction)))
-    print("Precision: "+str(precision_score(data_predict[:, -1], prediction, labels = ['cut', 'drive', 'lob', 'long', 'netplay', 'rush', 'smash'], average=None)))
-    print("Recall: "+str(recall_score(data_predict[:, -1], prediction, labels = ['cut', 'drive', 'lob', 'long', 'netplay', 'rush', 'smash'], average=None)))
+    print("Precision: "+str(precision_score(data_predict[:, -1], prediction, labels = ['cut', 'drive', 'lob', 'long', 'netplay', 'rush', 'smash'], average='macro')))
+    print("Recall: "+str(recall_score(data_predict[:, -1], prediction, labels = ['cut', 'drive', 'lob', 'long', 'netplay', 'rush', 'smash'], average='macro')))
 
 def verify(pre_dir, filename_predict, model_path, result_dir, filename_result):
     
