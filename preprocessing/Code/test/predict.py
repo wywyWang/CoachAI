@@ -103,7 +103,7 @@ def result_chart(xgbc, groundtruth, grid_predictions, type_labels, new_dict):
     radar_chart(new_dict, type_labels, groundtruth, grid_predictions)
 
 
-def exec(filename_predict, model_path, filename_result):
+def run(filename_predict, model_path, filename_result):
     label_name_dict = {
         0:"cut",
         1:"drive",
@@ -138,17 +138,21 @@ def exec(filename_predict, model_path, filename_result):
     x_predict = data_predict[:,:-1]
 
     # prediction
-    grid_predictions = xgboost_model.predict(x_predict)
+    prediction = xgboost_model.predict(x_predict)
 
     # output
-    pd.DataFrame(grid_predictions,columns=['prediction']).to_csv(filename_result,index=None)
+    result = pd.DataFrame([])
+    result['prediction'] = prediction
+    result['answer'] = data_predict[:,-1]
+    result.to_csv(filename_result,index=None)
 
     # plot graph
-    #result_chart(xgboost_model, data_predict[:, -1], grid_predictions, type_labels, new_dict)
+    #result_chart(xgboost_model, data_predict[:, -1], prediction, type_labels, new_dict)
 
     # print precision and recall
-    print("Precision: "+str(precision_score(data_predict[:, -1], grid_predictions, labels = ['cut', 'drive', 'lob', 'long', 'netplay', 'rush', 'smash'], average=None)))
-    print("Recall: "+str(recall_score(data_predict[:, -1], grid_predictions, labels = ['cut', 'drive', 'lob', 'long', 'netplay', 'rush', 'smash'], average=None)))
+    print("Accuracy: "+str(accuracy_score(data_predict[:, -1], prediction)))
+    print("Precision: "+str(precision_score(data_predict[:, -1], prediction, labels = ['cut', 'drive', 'lob', 'long', 'netplay', 'rush', 'smash'], average=None)))
+    print("Recall: "+str(recall_score(data_predict[:, -1], prediction, labels = ['cut', 'drive', 'lob', 'long', 'netplay', 'rush', 'smash'], average=None)))
 
 def verify(pre_dir, filename_predict, model_path, result_dir, filename_result):
     
@@ -158,22 +162,15 @@ def verify(pre_dir, filename_predict, model_path, result_dir, filename_result):
     # result_dir: the directory that store the result
     # filename_result: where the result will be saved
 
-    if os.path.isdir(pre_dir) and os.path.isfile(filename_predict) and os.path.isfile(model_path) and not os.path.isfile(filename_result):
-        if not os.path.isdir(result_dir):
-            os.mkdir(result_dir)
+    if not os.path.isdir(result_dir):
+        os.mkdir(result_dir)
 
-        print("Start predict...")
-        exec(filename_predict, model_path, filename_result)
-        print("Prediction done...")
-        
-    else:
-        if not os.path.isfile(model_path):
-            print("No such model named: "+str(model_path))
-        if not os.path.isdir(pre_dir):
-            print("No such directory named: "+str(pre_dir))
-        if not os.path.isfile(filename_predict):
-            print("No such file: "+str(filename_predict))
-        if os.path.isfile(filename_result):
-            print("Already exist result file: "+str(filename_result))
+    print("Start predict...")
+    run(filename_predict, model_path, filename_result)
+    print("Prediction done...")
 
-verify("./", "../../Data/training/data/out_preprocessed.csv", "../../Data/training/model/model.joblib.dat", "./rrr", "./rrr/resulttttt.csv")
+def exec(game_names):
+    for g in game_names:
+        verify("./", "../../Data/training/data/"+str(g)+"_preprocessed.csv", "../../Data/training/model/model.joblib.dat", "../../Data/training/result", "../../Data/training/result/"+str(g)+"_result.csv")
+
+exec(["18IND_TC"])
