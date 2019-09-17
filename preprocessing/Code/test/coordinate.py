@@ -100,4 +100,4 @@ def exec(game_names):
 	for g in game_names:
 		run("../../Data/AccuracyResult/record_segmentation_"+str(g)+".csv", "../../Data/training/data/record_segmentation_"+str(g)+"_out.csv")
 
-exec(["18IND_TC"])
+exec(["19ASI_CS_10min"])

@@ -173,4 +173,4 @@ def exec(game_names):
     for g in game_names:
         verify("./", "../../Data/training/data/"+str(g)+"_preprocessed.csv", "../../Data/training/model/model.joblib.dat", "../../Data/training/result", "../../Data/training/result/"+str(g)+"_result.csv")
 
-exec(["18IND_TC"])
+exec(["19ASI_CS_10min"])

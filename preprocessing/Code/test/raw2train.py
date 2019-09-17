@@ -50,6 +50,7 @@ def get_velocity(filename, unique_id, savename):
     data.to_csv(savename,index=False, encoding='utf-8')
         
 def process(filename, clipinfo, player_pos_option, frame_option, player_pos_file, specific_frame_file):
+    shift = 565
 
     ball_type_new = []
     hit_direct = []
@@ -70,8 +71,8 @@ def process(filename, clipinfo, player_pos_option, frame_option, player_pos_file
         delta = [-2, -1, 0, 1, 2]
         find = False
         for d in delta:
-            if int(f)+int(d) > 0 and has_frame(clip, int(f)+int(d))[0]:
-                ball_type_new.append(functions.ball_type_convertion(clip["type"][has_frame(clip, int(f)+int(d))[1]]))
+            if int(f)+int(d)+shift > 0 and has_frame(clip, int(f)+int(d)+shift)[0]:
+                ball_type_new.append(functions.ball_type_convertion(clip["type"][has_frame(clip, int(f)+int(d)+shift)[1]]))
                 find = True
                 break
         if not find:
@@ -187,4 +188,4 @@ def exec(game_names):
     for g in game_names:
         run("../../Data/training/data/record_segmentation_"+str(g)+"_out.csv", "../../Data/training/data/"+str(g)+"_preprocessed.csv", "../../Data/TrainTest/clip_info_"+str(g)+".xlsx",'', 0, 0, '', '')
 
-exec(["18IND_TC"])
+exec(["19ASI_CS_10min"])
