@@ -9,8 +9,8 @@ from collections import Counter
 import itertools
 import matplotlib.pyplot as plt
 
-needed = ['ball_round', 'pos_x', 'pos_y', 'next_x', 'next_y', 'hit_height']
-test_needed = ['ball_round', 'pos_x', 'pos_y', 'next_x', 'next_y']
+needed = ['ball_round', 'hit_area_number', 'landing_area_number', 'pos_x', 'pos_y', 'next_x', 'next_y', 'hit_height']
+test_needed = ['ball_round', 'hit_area_number', 'landing_area_number', 'pos_x', 'pos_y', 'next_x', 'next_y']
 
 def convert_area(area):
 	val = {'E': 0, 'C': 4, 'A': 8, 'B': 12, 'D': 16}
