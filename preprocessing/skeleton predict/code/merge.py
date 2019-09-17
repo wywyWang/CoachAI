@@ -77,21 +77,6 @@ def Merge(set_num, total_set, setinfo, skeleton_file, top_is_Taiwan, savename):
 			y_speed.append((y/100)/sec_per_frame)
 			speed.append((math.sqrt(x*x+y*y)/100)/sec_per_frame)
 
-	hit_area_number = []
-	landing_area_number = []
-	
-	for i in range (0,len(set_info)) :
-		if not (isinstance(set_info['hit_area'][i], float) and set_info['hit_area'][i] != set_info['hit_area'][i]) and set_info['hit_area'][i] != 'yy':
-			hit_area_number.append(int(set_info['hit_area'][i][1]))
-		else :
-			hit_area_number.append('')
-		if not (isinstance(set_info['landing_area'][i], float) and set_info['landing_area'][i] != set_info['landing_area'][i]) and set_info['landing_area'][i] != 'yy':
-			landing_area_number.append(int(set_info['landing_area'][i][1]))
-		else :
-			landing_area_number.append('')
-
-	set_info['hit_area_number'] = hit_area_number
-	set_info['landing_area_number'] = landing_area_number
 	set_info['pos_x'] = list(hitting_pos[:, 0])
 	set_info['pos_y'] = list(hitting_pos[:, 1])
 	set_info['next_x'] = pd.Series(list(hitting_pos[1:, 0]))
