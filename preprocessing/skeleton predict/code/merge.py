@@ -86,6 +86,7 @@ def Merge(set_num, total_set, setinfo, skeleton_file, top_is_Taiwan, savename):
 				second = set_info[:][i:]
 				break;
 		# fix index
+		first = first.reset_index(drop = True)
 		second = second.reset_index(drop = True)
 		first_part, first_time = get_hitting_pos(first, skeleton_info, top_is_Taiwan)
 		top_is_Taiwan = not top_is_Taiwan
@@ -135,7 +136,47 @@ def Merge(set_num, total_set, setinfo, skeleton_file, top_is_Taiwan, savename):
 			avg_ball_speed.append(abs(math.sqrt((x_right-x_left)*(x_right-x_left)+(y_right-y_left)*(y_right-y_left))/(int(times[i+1])-int(times[i]))))
 		else:
 			avg_ball_speed.append(0)
-
+      
+  hitting_area_number = []
+	landing_area_number = []
+	for i in range (0,len(hitting_pos[0:, 1])):
+		if hitting_pos[:, 1][i]=='':
+			hitting_area_number.append('')
+		elif int(hitting_pos[:, 1][i])<0 :
+			hitting_area_number.append('4')
+		elif int(hitting_pos[:, 1][i])>=0 and int(hitting_pos[:, 1][i])<74:
+			hitting_area_number.append('3')
+		elif int(hitting_pos[:, 1][i])>=74 and int(hitting_pos[:, 1][i])<307:
+			hitting_area_number.append('2')
+		elif int(hitting_pos[:, 1][i])>=307 and int(hitting_pos[:, 1][i])<629:
+			hitting_area_number.append('1')
+		elif int(hitting_pos[:, 1][i])>=629 and int(hitting_pos[:, 1][i])<861:
+			hitting_area_number.append('2')
+		elif int(hitting_pos[:, 1][i])>=861 and int(hitting_pos[:, 1][i])<935:
+			hitting_area_number.append('3')
+		elif int(hitting_pos[:, 1][i])>=935 :
+			hitting_area_number.append('4')
+	
+	for i in range (0,len(hitting_pos[1:, 1])):
+		if hitting_pos[1:, 1][i]=='':
+			landing_area_number.append('')
+		elif int(hitting_pos[1:, 1][i])<0 :
+			landing_area_number.append('4')
+		elif int(hitting_pos[1:, 1][i])>=0 and int(hitting_pos[1:, 1][i])<74:
+			landing_area_number.append('3')
+		elif int(hitting_pos[1:, 1][i])>=74 and int(hitting_pos[1:, 1][i])<307:
+			landing_area_number.append('2')
+		elif int(hitting_pos[1:, 1][i])>=307 and int(hitting_pos[1:, 1][i])<629:
+			landing_area_number.append('1')
+		elif int(hitting_pos[1:, 1][i])>=629 and int(hitting_pos[1:, 1][i])<861:
+			landing_area_number.append('2')
+		elif int(hitting_pos[1:, 1][i])>=861 and int(hitting_pos[1:, 1][i])<935:
+			landing_area_number.append('3')
+		elif int(hitting_pos[1:, 1][i])>=935 :
+			landing_area_number.append('4')
+  landing_area_number.append('')
+  set_info['hitting_area_number'] = hitting_area_number	
+	set_info['landing_area_number'] = landing_area_number
 
 	set_info['now_right_x'] = list(hitting_pos[:, 0])
 	set_info['now_right_y'] = list(hitting_pos[:, 1])
@@ -164,7 +205,7 @@ def Merge(set_num, total_set, setinfo, skeleton_file, top_is_Taiwan, savename):
 	set_info['left_speed'] = pd.Series(left_speed)
 
 	set_info['avg_ball_speed'] = pd.Series(avg_ball_speed)
-	
+
 	set_info.to_csv(savename, index=False, encoding = 'utf-8')
 
 def run(set_num, total_set, top_is_Taiwan):
