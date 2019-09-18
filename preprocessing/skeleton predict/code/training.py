@@ -10,7 +10,7 @@ needed = ['now_right_x', 'now_right_y', 'now_left_x', 'now_left_y',
 		'next_right_x', 'next_right_y', 'next_left_x', 'next_left_y', 
 		'right_delta_x', 'right_delta_y', 'left_delta_x', 'left_delta_y',
 		'right_x_speed', 'right_y_speed', 'right_speed',
-		'left_x_speed', 'left_y_speed', 'left_speed','hit_height', 'avg_ball_speed']
+		'left_x_speed', 'left_y_speed', 'left_speed','hit_height', 'avg_ball_speed', 'type']
 train_needed = ['now_right_x', 'now_right_y', 'now_left_x', 'now_left_y', 
 		'next_right_x', 'next_right_y', 'next_left_x', 'next_left_y', 
 		'right_delta_x', 'right_delta_y', 'left_delta_x', 'left_delta_y',
@@ -27,6 +27,8 @@ def LoadData(filename):
 	data = data[needed]
 	data.dropna(inplace=True)
 	data.reset_index(drop=True, inplace=True)
+	data = data[data.type != '未擊球']
+
 	x_train = data[train_needed]
 	y_train = data[test_needed].values
 

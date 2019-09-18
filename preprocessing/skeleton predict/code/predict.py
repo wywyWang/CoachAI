@@ -12,7 +12,7 @@ needed = ['now_right_x', 'now_right_y', 'now_left_x', 'now_left_y',
 		'next_right_x', 'next_right_y', 'next_left_x', 'next_left_y', 
 		'right_delta_x', 'right_delta_y', 'left_delta_x', 'left_delta_y',
 		'right_x_speed', 'right_y_speed', 'right_speed',
-		'left_x_speed', 'left_y_speed', 'left_speed','hit_height', 'avg_ball_speed']
+		'left_x_speed', 'left_y_speed', 'left_speed','hit_height', 'avg_ball_speed', 'type']
 test_needed = ['now_right_x', 'now_right_y', 'now_left_x', 'now_left_y', 
 		'next_right_x', 'next_right_y', 'next_left_x', 'next_left_y', 
 		'right_delta_x', 'right_delta_y', 'left_delta_x', 'left_delta_y',
@@ -28,6 +28,7 @@ def LoadData(filename):
 	data = data[needed]
 	data.dropna(inplace=True)
 	data.reset_index(drop=True, inplace=True)
+	data = data[data.type != '未擊球']
 	x_predict = data[test_needed]
 
 	return x_predict
@@ -66,6 +67,7 @@ def SVM(filename, x_predict, model_name, svm_outputname, set_now):
 	data = pd.read_csv(filename)
 	data = data[needed]
 	data.dropna(inplace=True)
+	data = data[data.type != '未擊球']
 	label = [1, 2]
 
 	model = joblib.load(model_name)
@@ -85,6 +87,7 @@ def XGBoost(filename, x_predict, model_name, xgb_outputname, set_now):
 	data = pd.read_csv(filename)
 	data = data[needed]
 	data.dropna(inplace=True)
+	data = data[data.type != '未擊球']
 	label = [1, 2]
 
 	model = joblib.load(model_name)

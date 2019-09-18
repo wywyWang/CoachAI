@@ -25,7 +25,10 @@ def LoadData(filename, ball_height_predict):
 	data = data[needed]
 	data.dropna(inplace=True)
 	data.reset_index(drop=True, inplace=True)
-	print(data['avg_ball_speed'])
+	data = data[data.type != '未擊球']
+	for d in data['type']:
+		if d == '未擊球':
+			print(d)
 	eng_type_to_num = {'cut': 1, 'drive': 2, 'lob': 3, 'long': 4, 'netplay': 5, 'rush': 6, 'smash': 7, 'error': 8}
 
 	ball_type = []

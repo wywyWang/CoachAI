@@ -31,7 +31,7 @@ def LoadData(filename, ball_height_predict):
 	data.dropna(inplace=True)
 	data.reset_index(drop=True, inplace=True)
 	data['Predict'] = ball_height['Predict']
-
+	data = data[data.type != '未擊球']
 	x_predict = data[test_needed+['Predict']]
 	
 	return x_predict
@@ -69,6 +69,7 @@ def XGBoost(filename, x_predict, xgboost_model_name, xgboost_outputname, set_now
     data = data[needed]
     data.dropna(inplace=True)
     data.reset_index(drop=True, inplace=True)
+    data = data[data.type != '未擊球']
 
     label = [1, 2, 3, 4, 5, 6, 7, 8]
     type_to_num = {'cut': 1, 'drive': 2, 'lob': 3, 'long': 4, 'netplay': 5, 'rush': 6, 'smash': 7, 'error': 8}
@@ -91,7 +92,7 @@ def XGBoost(filename, x_predict, xgboost_model_name, xgboost_outputname, set_now
     result = pd.DataFrame([])
     result['Real'] = real_num
     result['Predict'] = prediction
-
+    
     result.to_csv(xgboost_outputname, index=None)
 
     # print precision and recall

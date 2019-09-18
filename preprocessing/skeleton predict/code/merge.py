@@ -164,7 +164,7 @@ def Merge(set_num, total_set, setinfo, skeleton_file, top_is_Taiwan, savename):
 	set_info['left_speed'] = pd.Series(left_speed)
 
 	set_info['avg_ball_speed'] = pd.Series(avg_ball_speed)
-	
+
 	set_info.to_csv(savename, index=False, encoding = 'utf-8')
 
 def run(set_num, total_set, top_is_Taiwan):
