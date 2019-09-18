@@ -12,12 +12,16 @@ needed = ['now_right_x', 'now_right_y', 'now_left_x', 'now_left_y',
 		'next_right_x', 'next_right_y', 'next_left_x', 'next_left_y', 
 		'right_delta_x', 'right_delta_y', 'left_delta_x', 'left_delta_y',
 		'right_x_speed', 'right_y_speed', 'right_speed',
+<<<<<<< HEAD
 		'left_x_speed', 'left_y_speed', 'left_speed','hit_height', 'avg_ball_speed', 'type']
+=======
+		'left_x_speed', 'left_y_speed', 'left_speed','hit_height', 'avg_ball_speed', 'hitting_area_number', 'landing_area_number']
+>>>>>>> 04f20bcbb7beff08c43ce3cd2c46d509212261ed
 test_needed = ['now_right_x', 'now_right_y', 'now_left_x', 'now_left_y', 
 		'next_right_x', 'next_right_y', 'next_left_x', 'next_left_y', 
 		'right_delta_x', 'right_delta_y', 'left_delta_x', 'left_delta_y',
 		'right_x_speed', 'right_y_speed', 'right_speed',
-		'left_x_speed', 'left_y_speed', 'left_speed', 'avg_ball_speed']
+		'left_x_speed', 'left_y_speed', 'left_speed', 'avg_ball_speed', 'hitting_area_number', 'landing_area_number']
 
 def convert_area(area):
 	val = {'E': 0, 'C': 4, 'A': 8, 'B': 12, 'D': 16}
