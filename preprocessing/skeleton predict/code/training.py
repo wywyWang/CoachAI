@@ -8,8 +8,8 @@ from xgboost import XGBClassifier
 
 
 
-needed = ['ball_round', 'pos_x', 'pos_y', 'next_x', 'next_y', 'hit_height']
-train_needed = ['ball_round', 'pos_x', 'pos_y', 'next_x', 'next_y']
+needed = ['ball_round', 'hitting_area_number', 'landing_area_number', 'pos_x', 'pos_y', 'next_x', 'next_y', 'hit_height']
+train_needed = ['ball_round', 'hitting_area_number', 'landing_area_number', 'pos_x', 'pos_y', 'next_x', 'next_y']
 test_needed = ['hit_height']
 
 def convert_area(area):

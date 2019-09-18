@@ -14,6 +14,7 @@ def get_hitting_pos(set_info, skeleton_info, top_is_Taiwan):
 		pos = []
 		
 		if skeleton_idx == None:
+				print(set_info['frame_num'][idx])
 				pos.append('')
 				pos.append('')
 		else:
@@ -57,6 +58,7 @@ def Merge(set_num, total_set, setinfo, skeleton_file, top_is_Taiwan, savename):
 				second = set_info[:][i:]
 				break;
 		# fix index
+		first = first.reset_index(drop = True)
 		second = second.reset_index(drop = True)
 		first_part = get_hitting_pos(first, skeleton_info, top_is_Taiwan)
 		top_is_Taiwan = not top_is_Taiwan
@@ -77,6 +79,49 @@ def Merge(set_num, total_set, setinfo, skeleton_file, top_is_Taiwan, savename):
 			y_speed.append((y/100)/sec_per_frame)
 			speed.append((math.sqrt(x*x+y*y)/100)/sec_per_frame)
 
+	hitting_area_number = []
+	landing_area_number = []
+	for i in range (0,len(hitting_pos[0:, 1])):
+		if hitting_pos[:, 1][i]=='':
+			hitting_area_number.append('')
+		elif int(hitting_pos[:, 1][i])<0 :
+			hitting_area_number.append('4')
+		elif int(hitting_pos[:, 1][i])>=0 and int(hitting_pos[:, 1][i])<74:
+			hitting_area_number.append('3')
+		elif int(hitting_pos[:, 1][i])>=74 and int(hitting_pos[:, 1][i])<307:
+			hitting_area_number.append('2')
+		elif int(hitting_pos[:, 1][i])>=307 and int(hitting_pos[:, 1][i])<629:
+			hitting_area_number.append('1')
+		elif int(hitting_pos[:, 1][i])>=629 and int(hitting_pos[:, 1][i])<861:
+			hitting_area_number.append('2')
+		elif int(hitting_pos[:, 1][i])>=861 and int(hitting_pos[:, 1][i])<935:
+			hitting_area_number.append('3')
+		elif int(hitting_pos[:, 1][i])>=935 :
+			hitting_area_number.append('4')
+	
+	for i in range (0,len(hitting_pos[1:, 1])):
+		if hitting_pos[1:, 1][i]=='':
+			landing_area_number.append('')
+		elif int(hitting_pos[1:, 1][i])<0 :
+			landing_area_number.append('4')
+		elif int(hitting_pos[1:, 1][i])>=0 and int(hitting_pos[1:, 1][i])<74:
+			landing_area_number.append('3')
+		elif int(hitting_pos[1:, 1][i])>=74 and int(hitting_pos[1:, 1][i])<307:
+			landing_area_number.append('2')
+		elif int(hitting_pos[1:, 1][i])>=307 and int(hitting_pos[1:, 1][i])<629:
+			landing_area_number.append('1')
+		elif int(hitting_pos[1:, 1][i])>=629 and int(hitting_pos[1:, 1][i])<861:
+			landing_area_number.append('2')
+		elif int(hitting_pos[1:, 1][i])>=861 and int(hitting_pos[1:, 1][i])<935:
+			landing_area_number.append('3')
+		elif int(hitting_pos[1:, 1][i])>=935 :
+			landing_area_number.append('4')
+	print(hitting_pos[:, 1])
+	print(hitting_area_number)
+	print(landing_area_number)
+	landing_area_number.append('')
+	set_info['hitting_area_number'] = hitting_area_number	
+	set_info['landing_area_number'] = landing_area_number
 	set_info['pos_x'] = list(hitting_pos[:, 0])
 	set_info['pos_y'] = list(hitting_pos[:, 1])
 	set_info['next_x'] = pd.Series(list(hitting_pos[1:, 0]))
