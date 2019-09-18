@@ -46,7 +46,7 @@ def convert_hit_area(filename, savename):
 	output['getpoint_player'] = pd.Series(getpoint_player)
 	output['type'] = pd.Series(ball_type)
 
-	output.to_csv(savename, index = False, encoding = 'utf-8')
+	output.to_csv(savename, index = False)
 
 def first_hit(filename):
 	data = pd.read_csv(filename)
@@ -84,7 +84,7 @@ def get_hits(first_blood, cnt, filename):
 	result['hitting'] = hitting
 	data['hitting'] = result['hitting']
 
-	data.to_csv(filename, index = False, encoding = 'utf-8')
+	data.to_csv(filename, index = False)
 
 def run(filename, savename):
 	first_blood = ''
@@ -96,4 +96,8 @@ def run(filename, savename):
 	first_blood, cnt = first_hit(savename)
 	get_hits(first_blood, cnt, savename)
 
-run("../../Data/training/data/record_segmentation.csv", "out.csv")
+def exec(game_names):
+	for g in game_names:
+		run("../../Data/AccuracyResult/record_segmentation_"+str(g)+".csv", "../../Data/training/data/record_segmentation_"+str(g)+"_out.csv")
+
+exec(["19ASI_CS_10min"])

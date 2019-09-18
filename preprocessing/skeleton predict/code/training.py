@@ -6,10 +6,17 @@ from sklearn.metrics import *
 from sklearn.model_selection import *
 from xgboost import XGBClassifier
 
+needed = ['now_right_x', 'now_right_y', 'now_left_x', 'now_left_y', 
+		'next_right_x', 'next_right_y', 'next_left_x', 'next_left_y', 
+		'right_delta_x', 'right_delta_y', 'left_delta_x', 'left_delta_y',
+		'right_x_speed', 'right_y_speed', 'right_speed',
+		'left_x_speed', 'left_y_speed', 'left_speed','hit_height', 'avg_ball_speed', 'hitting_area_number', 'landing_area_number']
+train_needed = ['now_right_x', 'now_right_y', 'now_left_x', 'now_left_y', 
+		'next_right_x', 'next_right_y', 'next_left_x', 'next_left_y', 
+		'right_delta_x', 'right_delta_y', 'left_delta_x', 'left_delta_y',
+		'right_x_speed', 'right_y_speed','right_speed',
+		'left_x_speed', 'left_y_speed', 'left_speed', 'avg_ball_speed', 'hitting_area_number', 'landing_area_number']
 
-
-needed = ['ball_round', 'hitting_area_number', 'landing_area_number', 'pos_x', 'pos_y', 'next_x', 'next_y', 'hit_height']
-train_needed = ['ball_round', 'hitting_area_number', 'landing_area_number', 'pos_x', 'pos_y', 'next_x', 'next_y']
 test_needed = ['hit_height']
 
 def convert_area(area):
@@ -20,6 +27,7 @@ def LoadData(filename):
 	data = pd.read_csv(filename)
 	data = data[needed]
 	data.dropna(inplace=True)
+	data.reset_index(drop=True, inplace=True)
 	x_train = data[train_needed]
 	y_train = data[test_needed].values
 
@@ -74,4 +82,4 @@ def Run(filename, svm_option, svm_model_name, xgboost_option, xgboost_model_name
 		XGBoost(x_train, y_train, xgboost_model_name)
 		print("XGBoost training done!")
 
-Run('../data/set1_with_skeleton.csv', False, 'SVM.joblib.dat', True, 'XGB.joblib.dat')
+Run('../data/set1_with_skeleton.csv', True, '../model/SVM_skeleton.joblib.dat', True, '../model/XGB_skeleton.joblib.dat')

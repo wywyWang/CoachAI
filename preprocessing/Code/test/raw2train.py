@@ -3,6 +3,12 @@ import pandas as pd
 import math
 import functions
 
+def has_frame(data, target):
+    for i in range(len(data)):
+        if data["frame_num"][i] == target:
+            return True, i
+    return False, -1
+
 def get_velocity(filename, unique_id, savename):
     data = pd.read_csv(filename, encoding = 'utf-8')
 
@@ -43,7 +49,8 @@ def get_velocity(filename, unique_id, savename):
     data.insert(loc=0, column='unique_id', value=unique_id)
     data.to_csv(savename,index=False, encoding='utf-8')
         
-def exec(filename, player_pos_option, frame_option, player_pos_file, specific_frame_file):
+def process(filename, clipinfo, player_pos_option, frame_option, player_pos_file, specific_frame_file):
+    shift = 565
 
     ball_type_new = []
     hit_direct = []
@@ -58,11 +65,24 @@ def exec(filename, player_pos_option, frame_option, player_pos_file, specific_fr
     y_distance = []
 
     data = pd.read_csv(filename, encoding = 'utf-8')
+    clip = pd.read_excel(clipinfo, encoding = 'utf-8')
+
+    for f in data["frame_num"]:
+        delta = [-2, -1, 0, 1, 2]
+        find = False
+        for d in delta:
+            if int(f)+int(d)+shift > 0 and has_frame(clip, int(f)+int(d)+shift)[0]:
+                ball_type_new.append(functions.ball_type_convertion(clip["type"][has_frame(clip, int(f)+int(d)+shift)[1]]))
+                find = True
+                break
+        if not find:
+            ball_type_new.append("error")
 
     data_num = data.shape[0]
 
     frame = data["frame_num"]
     #ball_type = data["type"]
+
     hit_area = data["hit_area"]
     #hit_height = data["hit_height"]
     lose_reason = data["lose_reason"]
@@ -137,13 +157,6 @@ def exec(filename, player_pos_option, frame_option, player_pos_file, specific_fr
         hit_height_new.append('0')
         landing_height_new.append('0')
 
-        # ball type
-        #bt = functions.ball_type_convertion(ball_type[i])
-        #ball_type_new.append(bt)
-        #if bt == 'error':
-        #    print('error ball_type: ',i,ball_type[i])
-        ball_type_new.append('unknown')
-
     output_data = pd.DataFrame([]) 
     output_data["hit_direct"] = hit_direct
     output_data["hit_distance"] = hit_distance
@@ -158,17 +171,21 @@ def exec(filename, player_pos_option, frame_option, player_pos_file, specific_fr
     output_data["y_distance"] = y_distance
 
     output_data["velocity"] = velocity
-    output_data["ball_type"] = ball_type_new
+    output_data["ball_type"] = pd.Series(ball_type_new)
 
-    output_data.to_csv(filename,index=False, encoding = 'utf-8')
+    output_data.to_csv(filename, index=False, encoding = 'utf-8')
 
-def run(filename, savename, unique_id, player_pos_option, frame_option, player_pos_file, specific_frame_file):
+def run(filename, savename, clipinfo, unique_id, player_pos_option, frame_option, player_pos_file, specific_frame_file):
     print("Getting velocity...")
     get_velocity(filename, unique_id, savename)
     print("Getting velocity done...")
     print("")
     print("Starting main...")
-    exec(savename, player_pos_option, frame_option, player_pos_file, specific_frame_file)
+    process(savename, clipinfo, player_pos_option, frame_option, player_pos_file, specific_frame_file)
     print("All done...")
 
-run("../../Data/training/data/out.csv", "../../Data/training/data/out_preprocessed.csv", '', 0, 0, '', '')
+def exec(game_names):
+    for g in game_names:
+        run("../../Data/training/data/record_segmentation_"+str(g)+"_out.csv", "../../Data/training/data/"+str(g)+"_preprocessed.csv", "../../Data/TrainTest/clip_info_"+str(g)+".xlsx",'', 0, 0, '', '')
+
+exec(["19ASI_CS_10min"])

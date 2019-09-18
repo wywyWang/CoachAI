@@ -5,13 +5,18 @@ import json
 import numpy as np
 import cv2
 
-def save_to_csv(sets, frame, top_x, top_y, bot_x, bot_y):
+def save_to_csv(sets, frame, top_left_x, top_left_y, top_right_x, top_right_y, bot_left_x, bot_left_y, bot_right_x, bot_right_y):
     result = pd.DataFrame([])
     result['frame'] = frame
-    result['top_x'] = top_x
-    result['top_y'] = top_y
-    result['bot_x'] = bot_x
-    result['bot_y'] = bot_y
+    result['top_right_x'] = top_right_x
+    result['top_right_y'] = top_right_y
+    result['top_left_x'] = top_left_x
+    result['top_left_y'] = top_left_y
+    
+    result['bot_right_x'] = top_right_x
+    result['bot_right_y'] = top_right_y
+    result['bot_left_x'] = bot_left_x
+    result['bot_left_y'] = bot_left_y
 
     result.to_csv("../data/set"+str(sets+1)+"_skeleton.csv", index=False, encoding = 'utf-8')
 
@@ -25,23 +30,31 @@ dst=np.array([[610,1340],[0,1340],[610,0],[0,0]], np.float32)
 src=np.array([[1011,671],[276,671],[880,383],[404,383]], np.float32)
 
 H = cv2.getPerspectiveTransform(src,dst)
-
 frame = []
-top_x = []
-top_y = []
-bot_x = []
-bot_y = []
+top_left_x = []
+top_left_y = []
+top_right_x = []
+top_right_y = []
+bot_left_x = []
+bot_left_y = []
+bot_right_x = []
+bot_right_y = []
 sets = 0
 
 for i in range(len(player_bot)):
     #img = draw_court()
     if sets != int(player_bot['set'][i]):
-        save_to_csv(sets, frame, top_x, top_y, bot_x, bot_y)
+        save_to_csv(sets, frame, top_left_x, top_left_y, top_right_x, top_right_y, bot_left_x, bot_left_y, bot_right_x, bot_right_y)
         frame = []
-        top_x = []
-        top_y = []
-        bot_x = []
-        bot_y = []
+        top_left_x = []
+        top_left_y = []
+        top_right_x = []
+        top_right_y = []
+        bot_left_x = []
+        bot_left_y = []
+        bot_right_x = []
+        bot_right_y = []
+        
         sets = int(player_bot['set'][i])
 
     frame.append(player_bot['frame_id'][i])
@@ -75,8 +88,6 @@ for i in range(len(player_bot)):
     bot_H_left_ankle /= bot_H_left_ankle[2]
     bot_H_left_ankle = bot_H_left_ankle.astype(int)
     bot_H_left_ankle = tuple([bot_H_left_ankle[0],bot_H_left_ankle[1]])
-    bot_x.append(bot_H_left_ankle[0])
-    bot_y.append(bot_H_left_ankle[1])
     
     # right ankle and left ankle of top player
     top_right_ankle = np.array([player_top['x11'][i],player_top['y11'][i],1])
@@ -89,7 +100,15 @@ for i in range(len(player_bot)):
     top_H_left_ankle /= top_H_left_ankle[2]
     top_H_left_ankle = top_H_left_ankle.astype(int)
     top_H_left_ankle = tuple([top_H_left_ankle[0],top_H_left_ankle[1]])
-    top_x.append(top_H_left_ankle[0])
-    top_y.append(top_H_left_ankle[1])
 
-save_to_csv(sets, frame, top_x, top_y, bot_x, bot_y)
+    bot_right_x.append(bot_H_right_ankle[0])
+    bot_right_y.append(bot_H_right_ankle[1])
+    bot_left_x.append(bot_H_left_ankle[0])
+    bot_left_y.append(bot_H_left_ankle[1])
+
+    top_right_x.append(top_H_right_ankle[0])
+    top_right_y.append(top_H_right_ankle[1])
+    top_left_x.append(top_H_left_ankle[0])
+    top_left_y.append(top_H_left_ankle[1])
+
+save_to_csv(sets, frame, top_left_x, top_left_y, top_right_x, top_right_y, bot_left_x, bot_left_y, bot_right_x, bot_right_y)
