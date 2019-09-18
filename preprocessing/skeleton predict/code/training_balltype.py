@@ -11,12 +11,12 @@ needed = ['now_right_x', 'now_right_y', 'now_left_x', 'now_left_y',
 		'next_right_x', 'next_right_y', 'next_left_x', 'next_left_y', 
 		'right_delta_x', 'right_delta_y', 'left_delta_x', 'left_delta_y',
 		'right_x_speed', 'right_y_speed','right_speed',
-		'left_x_speed', 'left_y_speed', 'left_speed', 'hit_height', 'type']
+		'left_x_speed', 'left_y_speed', 'left_speed', 'hit_height', 'type', 'avg_ball_speed']
 train_needed = ['now_right_x', 'now_right_y', 'now_left_x', 'now_left_y', 
 		'next_right_x', 'next_right_y', 'next_left_x', 'next_left_y', 
 		'right_delta_x', 'right_delta_y', 'left_delta_x', 'left_delta_y',
 		'right_x_speed', 'right_y_speed','right_speed',
-		'left_x_speed', 'left_y_speed', 'left_speed']
+		'left_x_speed', 'left_y_speed', 'left_speed', 'avg_ball_speed']
 test_needed = ['type']
 
 def LoadData(filename, ball_height_predict):
@@ -25,7 +25,7 @@ def LoadData(filename, ball_height_predict):
 	data = data[needed]
 	data.dropna(inplace=True)
 	data.reset_index(drop=True, inplace=True)
-
+	print(data['avg_ball_speed'])
 	eng_type_to_num = {'cut': 1, 'drive': 2, 'lob': 3, 'long': 4, 'netplay': 5, 'rush': 6, 'smash': 7, 'error': 8}
 
 	ball_type = []

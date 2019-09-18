@@ -16,13 +16,13 @@ needed = ['now_right_x', 'now_right_y', 'now_left_x', 'now_left_y',
 		'next_right_x', 'next_right_y', 'next_left_x', 'next_left_y', 
 		'right_delta_x', 'right_delta_y', 'left_delta_x', 'left_delta_y',
 		'right_x_speed', 'right_y_speed','right_speed',
-		'left_x_speed', 'left_y_speed', 'left_speed', 'hit_height', 'type']
+		'left_x_speed', 'left_y_speed', 'left_speed', 'hit_height', 'type', 'avg_ball_speed']
 
 test_needed = ['now_right_x', 'now_right_y', 'now_left_x', 'now_left_y', 
 		'next_right_x', 'next_right_y', 'next_left_x', 'next_left_y', 
 		'right_delta_x', 'right_delta_y', 'left_delta_x', 'left_delta_y',
 		'right_x_speed', 'right_y_speed','right_speed',
-		'left_x_speed', 'left_y_speed', 'left_speed']
+		'left_x_speed', 'left_y_speed', 'left_speed', 'avg_ball_speed']
 
 def LoadData(filename, ball_height_predict):
 	data = pd.read_csv(filename)
