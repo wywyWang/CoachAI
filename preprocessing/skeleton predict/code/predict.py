@@ -29,7 +29,7 @@ def LoadData(filename):
 	data = data[needed]
 	data.dropna(inplace=True)
 	data.reset_index(drop=True, inplace=True)
-	data = data[data.type != '未擊球']
+	data = data[data.type != '未擊球' and data.type != '掛網球' and data.tpye != '未過網' and data.type != '發球犯規']
 	x_predict = data[test_needed]
 
 	return x_predict
@@ -68,7 +68,7 @@ def SVM(filename, x_predict, model_name, svm_outputname, set_now):
 	data = pd.read_csv(filename)
 	data = data[needed]
 	data.dropna(inplace=True)
-	data = data[data.type != '未擊球']
+	data = data[data.type != '未擊球' and data.type != '掛網球' and data.tpye != '未過網' and data.type != '發球犯規']
 	label = [1, 2]
 
 	model = joblib.load(model_name)

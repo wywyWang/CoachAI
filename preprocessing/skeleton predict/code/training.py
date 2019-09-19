@@ -29,7 +29,7 @@ def LoadData(filename):
 	data = data[needed]
 	data.dropna(inplace=True)
 	data.reset_index(drop=True, inplace=True)
-	data = data[data.type != '未擊球']
+	data = data[data.type != '未擊球' and data.type != '掛網球' and data.tpye != '未過網' and data.type != '發球犯規']
 
 	x_train = data[train_needed]
 	y_train = data[test_needed].values
