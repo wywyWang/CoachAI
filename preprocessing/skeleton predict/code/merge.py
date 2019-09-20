@@ -15,8 +15,6 @@ def get_hitting_pos(set_info, skeleton_info, top_is_Taiwan):
 		pos = []
 		
 		if skeleton_idx == None:
-			print(str(top_is_Taiwan)+" "+str(set_info['frame_num'][idx])+" cant find.")
-
 			pos.append('')
 			pos.append('')
 			pos.append('')
@@ -137,7 +135,7 @@ def Merge(set_num, total_set, setinfo, skeleton_file, top_is_Taiwan, savename):
 		else:
 			avg_ball_speed.append(0)
       
-  hitting_area_number = []
+	hitting_area_number = []
 	landing_area_number = []
 	for i in range (0,len(hitting_pos[0:, 1])):
 		if hitting_pos[:, 1][i]=='':
@@ -174,8 +172,9 @@ def Merge(set_num, total_set, setinfo, skeleton_file, top_is_Taiwan, savename):
 			landing_area_number.append('3')
 		elif int(hitting_pos[1:, 1][i])>=935 :
 			landing_area_number.append('4')
-  landing_area_number.append('')
-  set_info['hitting_area_number'] = hitting_area_number	
+
+	landing_area_number.append('')
+	set_info['hitting_area_number'] = hitting_area_number	
 	set_info['landing_area_number'] = landing_area_number
 
 	set_info['now_right_x'] = list(hitting_pos[:, 0])
