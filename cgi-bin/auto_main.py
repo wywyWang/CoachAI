@@ -1,27 +1,39 @@
 # /home/ino/anaconda3/envs/TrackNet/bin/python3
-#Comment when not developing
 import cgitb
-cgitb.enable(display=0, logdir="./log")
-
+import os
 import cgi
-import storevideo
-import TrackNetPredict
-import auto_segmentation
+import uploadvideo
+import tracknetpredict
+import segmentation
 import raw2train as training_preprocess
 import training
 import predict
 import coordinate as coordinate_adjust
 import output
+import videolist
 import time
+
+if not os.path.isdir('./log'):
+    os.mkdir('./log')
+cgitb.enable(display=0, logdir='./log')
 
 print("Content-Type: text/html\n\n")    # html type is following
 form = cgi.FieldStorage()
-print("video type = ",form['video_uploader'].type)
-print('<br>')
-print("video size = ",len(form['video_uploader'].value))
-print('<br>')
+print("<br>")
+# print(form.keys())
+uploadvideomode = form['uploadvideomode'].value
+tracknetpredictmode = form['tracknetpredictmode'].value
+segmentationmode = form['segmentationmode'].value
+predictballtpyemode = form['predictballtpyemode'].value
 
-input_video_name = form['video_uploader'].filename.split('.')[0]
+###################### FILENAME ######################
+input_video_name = ''
+if uploadvideomode == 'on':
+    input_video_name = form['videoname'].filename.split('.')[0]
+else:
+    print("Selected name : {}".format(form['videoname'].value))
+    print("<br>")
+    input_video_name = form['videoname'].value.split('.')[0]
 ext = ".csv"
 mp4_ext = '.mp4'
 
@@ -86,38 +98,55 @@ rally_count_json_filename = output_json_dir + rally_count_json_filename + json__
 rally_type_json_filename = output_json_dir + rally_type_json_filename + json__ext
 game_name_json_filename = output_json_dir + game_name_json_filename + json__ext
 
+###################### FILENAME ######################
+
 if __name__ == "__main__":
-    # Store video
-    previous_time = time.time()
-    storevideo.store(form['video_uploader'])
-    end_time = time.time()
-    print("<br>")
-    print("Uploaded time : ",end_time - previous_time)
-    print("<br>")
+    if uploadvideomode == 'on':
+        # Store video
+        print("video type = ",form['videoname'].type)
+        print('<br>')
+        print("video size = ",len(form['videoname'].value))
+        print('<br>')
 
-    # TrackNet prediction(Local test can commit TrackNet to reduce runtime)
-    previous_time = time.time()
-    # TrackNetPredict.run(TrackNet_input, TrackNet_output)
-    end_time = time.time()
-    print("TrackNet time : ",end_time - previous_time)
-    print("<br>")
+        previous_time = time.time()
+        uploadvideo.store(form['videoname'])
+        end_time = time.time()
 
-    # Run segmentation
-    previous_time = time.time()
-    auto_segmentation.run(segmentation_input, segmentation_output)
-    end_time = time.time()
-    print("Segmentation time : ",end_time - previous_time)
-    print("<br>")
+        print("<br>")
+        print("Uploaded time : ",end_time - previous_time)
+        print("<br>")
 
-	# training and prediction
-    previous_time = time.time()
-    coordinate_adjust.run(segmentation_output, raw_data)
-    training_preprocess.run(raw_data, preprocessed_filename, unique_id, player_pos_option, frame_option, player_pos_file, specific_frame_file)  #preprocess data
-    #training.verify(pre_dir, filename_train, model_path)  #train model
-    predict.verify(pre_dir, preprocessed_filename, model_path, result_dir, filename_result) #predict testing data
-    end_time = time.time()
-    print("Predict time : ",end_time - previous_time)
-    print("<br>")
+    if tracknetpredictmode == 'on':
+        # TrackNet prediction(Local test can commit TrackNet to reduce runtime)
+        previous_time = time.time()
+        # TrackNetPredict.run(TrackNet_input, TrackNet_output)
+        end_time = time.time()
 
-    # output json file
-    output.run(raw_data, filename_result, rally_count_json_filename, rally_type_json_filename, game_name_json_filename, input_video_name)
+        print("TrackNet time : ",end_time - previous_time)
+        print("<br>")
+
+    if segmentationmode == 'on':
+        # Run segmentation
+        previous_time = time.time()
+        segmentation.run(segmentation_input, segmentation_output)
+        end_time = time.time()
+
+        print("Segmentation time : ",end_time - previous_time)
+        print("<br>")
+
+    if predictballtpyemode == 'on':
+        # training and prediction
+        previous_time = time.time()
+        coordinate_adjust.run(segmentation_output, raw_data)
+        training_preprocess.run(raw_data, preprocessed_filename, unique_id, player_pos_option, frame_option, player_pos_file, specific_frame_file)  #preprocess data
+        #training.verify(pre_dir, filename_train, model_path)  #train model
+        predict.verify(pre_dir, preprocessed_filename, model_path, result_dir, filename_result) #predict testing data
+        end_time = time.time()
+
+        print("Predict time : ",end_time - previous_time)
+        print("<br>")
+
+        # output json file
+        output.run(raw_data, filename_result, rally_count_json_filename, rally_type_json_filename, game_name_json_filename, input_video_name)
+
+    videolist.savelist2json()       

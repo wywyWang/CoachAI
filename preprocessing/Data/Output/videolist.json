@@ -1,0 +1,17 @@
+{
+    "previous_tracknet":[
+        "18IND_TC",
+        "18IND_TC_testing",
+        "19ASI_CS_10min"
+    ],
+    "previous_segmentation":[
+        "18IND_TC",
+        "18IND_TC_groundtruth",
+        "19ASI_CS_10min"
+    ],
+    "previous_predict_balltype":[
+        "18IND_TC",
+        "18IND_TC_groundtruth",
+        "19ASI_CS_10min"
+    ]
+}
