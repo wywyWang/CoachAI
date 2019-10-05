@@ -435,7 +435,7 @@ def check_accuracy():
                     haveFrame += [df['Frame'][idx]]
                     break
             
-    print("===========HITPOINT ACCURACY=============")
+    print("============HITPOINT ACCURACY=============")
     print("<br>")
     print("Total Calculate number = ",total)
     print("<br>")
@@ -447,7 +447,7 @@ def check_accuracy():
     print("<br>")
     print("Recall = ",float(count/total))
     print("<br>")
-    print("=========================================")
+    print("==========================================")
     print("<br>")
 
     #get ground truth rally start and rally end
@@ -472,7 +472,7 @@ def check_accuracy():
                     break
             frame+=1
             
-    print("===========RALLY END ACCURACY=============")
+    print("===========RALLY END ACCURACY============")
     print("<br>")
     print("Total Calculate number = ",total)
     print("<br>")
@@ -509,7 +509,7 @@ def check_accuracy():
                 correct +=1
         j+=1
         
-    print("=======VIRTUAL UMPIRE ACCURACY=======")
+    print("=======VIRTUAL UMPIRE ACCURACY===========")
     print("<br>")
     print("Total Calculate Number = ",len(who_wins))
     print("<br>")
@@ -521,7 +521,7 @@ def check_accuracy():
     print("<br>")
     print("Recall = ",correct/len(who_wins))
     print("<br>")
-    print("=====================================")
+    print("==========================================")
     print("<br>")
 
 def export_json(filepath,data):

@@ -15,6 +15,7 @@ function checkfile(sender) {
 function show_file_select() {
     $('.modal').on('show.bs.modal', function (e) {
         var $trigger = $(e.relatedTarget)[0].id;
+        $('.analysis-result').html('');         // Clear previous result
         $('.modal-body').append('<form id="autoanalysis_form" enctype="multipart/form-data" method="post"></form>')
         $('#autoanalysis_form').append('<select id="video_name" name="Video Name" class="form-control"></select>');
         filename = '/preprocessing/Data/Output/videolist.json';
@@ -32,19 +33,17 @@ function show_file_select() {
             if($trigger == "one_click_to_complete_btn") {
                 data = data.previous_tracknet;
             }
-            console.log(data)
-
-           for(var index = 0;index < data.length;index++) {
-              var insertText = '<option value=' + data[index] + '>' + data[index] + '</option>';
-              $('#video_name').append(insertText); 
-          }
+            for(var index = 0;index < data.length;index++) {
+                var insertText = '<option value=' + data[index] + '>' + data[index] + '</option>';
+                $('#video_name').append(insertText); 
+            }
         });
         
-        $('#autoanalysis_form').append('<button type="submit" id="model_name" class="btn btn-primary" name=' + $trigger + '>Confirm</button>');
+        $('#autoanalysis_form').append('<button type="submit" id="model_name" class="btn btn-primary" name=' + $trigger + '>Start analysis</button>');
      
         $('#autoanalysis_form').submit(function(e) {
+            e.preventDefault();
             var formData = new FormData();
-            //new===============================================================
             if(document.getElementById('model_name').name == 'tracknet_btn'){
                 formData.append('uploadvideomode', 'off');
                 formData.append('tracknetpredictmode', 'on');
@@ -52,7 +51,6 @@ function show_file_select() {
                 formData.append('predictballtpyemode', 'off');
             }
             if(document.getElementById('model_name').name == 'segmentation_btn'){
-                console.log(document.getElementById('model_name').name)
                 formData.append('uploadvideomode', 'off');
                 formData.append('tracknetpredictmode', 'off');
                 formData.append('segmentationmode', 'on');
@@ -70,7 +68,6 @@ function show_file_select() {
                 formData.append('segmentationmode', 'on');
                 formData.append('predictballtpyemode', 'on');
             }
-            //==================================================================
 
             var dataFile = document.getElementById('video_name').value;
             formData.append('videoname', dataFile);
@@ -78,11 +75,11 @@ function show_file_select() {
             for (var key of formData.entries()) {
                 console.log(key[0] + ', ' + key[1]);
             }
-            // $('.file-size').html('File size : ' + parseInt(formData.get('video_uploader')['size']/1024) + 'KB');
             
             $.ajax({
                 type: "POST",
-                url: '/cgi-bin/auto_main.py',        // "POST /autoanalysis.html HTTP/1.1" 501
+                url: '/cgi-bin/auto_main.py',        
+                data: formData,
                 contentType: false,
                 cache: false,
                 processData: false,
@@ -92,23 +89,18 @@ function show_file_select() {
                     // console.log(response)
                 },
                 error: function(jqXHR, exception) {
-                    alert("ERROR : ");
-                    alert(window.location.href);
-                    // var err = eval("(" + xhr.responseText + ")");
-                    // alert(err.Message);
+
                 }
             }).done(function(data) {
-                alert("DONE : ");
-                alert(window.location.href);
-                $('#file_select').hide(function(event){     //not enter
-                    alert("CLOSE : ");
-                    alert(window.location.href);
+                $('#file_select').hide(function(event){     
                     $(".modal-body form").remove();
                 });
+                $('body').removeClass('modal-open');
+                $('.modal-backdrop').remove();
+
                 console.log(data)
-                // $('.module-btn').append(data);
+                $('.analysis-result').append(data);
             });
-        
         });
     });                        　                 
 }
@@ -130,7 +122,6 @@ $(function () {
         var dataFile = document.getElementById('video-uploader').files[0];
         formData_upload.append('videoname', dataFile);
 
-
         for (var key of formData_upload.entries()) {
             console.log(key[0] + ', ' + key[1]);
         }
@@ -145,7 +136,6 @@ $(function () {
             cache: false,
             processData: false,
             xhr: function() {
-                console.log(window.location.href);
                 var myXhr = $.ajaxSettings.xhr();
                 if(myXhr.upload){
                     myXhr.upload.addEventListener('progress',updateProgress, false);
@@ -169,8 +159,6 @@ $(function () {
     $('.close').click(function() {
         $('#file_select').hide(function(event){
             $(".modal-body form").remove();
-            // $(".modal-body select").remove();
-            // $(".modal-body button").remove();
         });
     });
 

@@ -1,8 +1,6 @@
 # /home/ino/anaconda3/envs/TrackNet/bin/python3
-#Comment when not developing
 import cgitb
-cgitb.enable(display=0, logdir="./log")
-
+import os
 import cgi
 import uploadvideo
 import tracknetpredict
@@ -15,16 +13,14 @@ import output
 import videolist
 import time
 
+if not os.path.isdir('./log'):
+    os.mkdir('./log')
+cgitb.enable(display=0, logdir='./log')
+
 print("Content-Type: text/html\n\n")    # html type is following
 form = cgi.FieldStorage()
-# form = cgi.FieldStorage(environ={'REQUEST_METHOD':'POST'})    # upload video will error, but use this module won't fault in line 23
-# print(cgi.print_environ())
 print("<br>")
-print(form.keys())
-# print("<br>")
-# print(form['videoname'].filename)
-# print("<br>")
-# print(form['uploadvideomode'].value)
+# print(form.keys())
 uploadvideomode = form['uploadvideomode'].value
 tracknetpredictmode = form['tracknetpredictmode'].value
 segmentationmode = form['segmentationmode'].value
@@ -35,7 +31,9 @@ input_video_name = ''
 if uploadvideomode == 'on':
     input_video_name = form['videoname'].filename.split('.')[0]
 else:
-    input_video_name = form['videoname'].split('.')[0]
+    print("Selected name : {}".format(form['videoname'].value))
+    print("<br>")
+    input_video_name = form['videoname'].value.split('.')[0]
 ext = ".csv"
 mp4_ext = '.mp4'
 
