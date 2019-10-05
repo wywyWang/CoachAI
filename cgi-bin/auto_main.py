@@ -1,9 +1,12 @@
 # /home/ino/anaconda3/envs/TrackNet/bin/python3
 import cgitb
 import os
+if not os.path.isdir('./log'):
+    os.mkdir('./log')
+cgitb.enable(display=0, logdir='./log')
 import cgi
 import uploadvideo
-import tracknetpredict
+import TrackNetPredict
 import segmentation
 import raw2train as training_preprocess
 import training
@@ -12,10 +15,6 @@ import coordinate as coordinate_adjust
 import output
 import videolist
 import time
-
-if not os.path.isdir('./log'):
-    os.mkdir('./log')
-cgitb.enable(display=0, logdir='./log')
 
 print("Content-Type: text/html\n\n")    # html type is following
 form = cgi.FieldStorage()
