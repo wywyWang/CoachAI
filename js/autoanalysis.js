@@ -63,7 +63,7 @@ function show_file_select() {
                 formData.append('predictballtpyemode', 'on');
             }
             if(document.getElementById('model_name').name == 'one_click_to_complete_btn'){
-                formData.append('uploadvideomode', 'on');
+                formData.append('uploadvideomode', 'off');
                 formData.append('tracknetpredictmode', 'on');
                 formData.append('segmentationmode', 'on');
                 formData.append('predictballtpyemode', 'on');
@@ -156,12 +156,10 @@ $(function () {
         });
     });
 
-    $('.close').click(function() {
-        $('#file_select').hide(function(event){
-            $(".modal-body form").remove();
-        });
+    $('.modal').on('hidden.bs.modal', function () {
+        $(".modal-body form").remove();
     });
-
+    
     function updateProgress(e){
         // console.log("total size",e.total)
         // console.log("current upload size",e.loaded)
