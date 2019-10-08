@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
     <link rel="stylesheet" href="css/autoanalysis.css">
     <script src="js/autoanalysis.js"></script>
 </head>
@@ -55,7 +56,7 @@
     </div>
     
     <div class="container">
-        <div class="row module-btn">
+        <div class="row btn-group module-btn">
             <button class="btn btn-default" id="tracknet_btn" type="button" data-toggle="modal" data-target="#file_select">Tracknet</button>
             <button class="btn btn-default" id="segmentation_btn" type="button" data-toggle="modal" data-target="#file_select">Segmentation</button>
             <button class="btn btn-default" id="predict_ball_type_btn" type="button" data-toggle="modal" data-target="#file_select">Predict Ball Type</button>
@@ -70,7 +71,7 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <button id="close_file_select" type="button" class="close" data-dismiss="modal">
-                            <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+                            <i class="fa fa-close"></i>
                         </button>
                         <h4 class="modal-title" id="file_select_title">Select video list</h4>
                     </div>

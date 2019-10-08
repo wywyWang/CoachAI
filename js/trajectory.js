@@ -60,7 +60,7 @@ function get_interval_set(game_name){
 }
 
 function get_interval_rally(set,game_name){
-    var insertText = '<button id="interval-submit" type="button" class="btn btn-primary" onclick=change_rally()>查詢</button>';
+    var insertText = '<button id="interval-submit" type="button" class="btn btn-primary" onclick=change_rally()>查詢 <i class="fab fa-sistrix"></i></button>';
     $('#dropdown').append(insertText); 
     var insertText = '<button class="btn btn-default" id="next" type="button">下一球</button>';
     $('#dropdown').append(insertText); 
