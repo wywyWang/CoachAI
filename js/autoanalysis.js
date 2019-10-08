@@ -14,7 +14,14 @@ function checkfile(sender) {
 
 function show_file_select() {
     $('.modal').on('show.bs.modal', function (e) {
+        // Remove previous result
+        $(".file-size").html('');
+        $(".upload-finish").html('');
+        $('.progress-bar').css('width', '0%');
+        $('.progress-bar').removeClass("progress-bar-success");
+        $('.progress-bar').html('0%');
         $(".modal-footer").hide();
+
         var $trigger = $(e.relatedTarget)[0].id;
         $('.analysis-result').html('');         // Clear previous result
         $('.modal-body').append('<form id="autoanalysis_form" enctype="multipart/form-data" method="post"></form>')
@@ -98,8 +105,6 @@ function show_file_select() {
                     $(".modal-body form").remove();
                 });
                 $('#file_select').modal('toggle');
-                // $('body').removeClass('modal-open');
-                // $('.modal-backdrop').remove();
                 console.log(data)
                 $('.analysis-result').append(data);
             });
@@ -179,6 +184,6 @@ $(function () {
 
     function updateComplete(e) {
         $('.progress-bar').addClass("progress-bar-success");
-        $('.upload-finish').html('Upload finished.Start analysizing, please wait.')
+        $('.upload-finish').html('Upload finished.')
     }
 });
