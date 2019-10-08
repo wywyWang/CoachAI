@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="css/autoanalysis.css">
     <script src="js/autoanalysis.js"></script>
 </head>
 <body>
@@ -71,13 +72,14 @@
                         <button id="close_file_select" type="button" class="close" data-dismiss="modal">
                             <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
                         </button>
-                        <h4 class="modal-title" id="file_select_title">Select File</h4>
+                        <h4 class="modal-title" id="file_select_title">Select video list</h4>
                     </div>
                     <div class="modal-body">
                         
                     </div>
-                    <div class="modal-footer">
-                    	<img src="http://d21p91le50s4xn.cloudfront.net/wp-content/uploads/2015/08/giphy.gif" width="50%">
+                    <div class="modal-footer waiting">
+                        <h3 class="modal-title">Please wait ...</h3>
+                    	<img src="./image/waiting.gif">
                     </div>
                     <script type="text/javascript">show_file_select();</script>
                 </div>
