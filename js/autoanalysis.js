@@ -14,6 +14,7 @@ function checkfile(sender) {
 
 function show_file_select() {
     $('.modal').on('show.bs.modal', function (e) {
+        $(".modal-footer").hide();
         var $trigger = $(e.relatedTarget)[0].id;
         $('.analysis-result').html('');         // Clear previous result
         $('.modal-body').append('<form id="autoanalysis_form" enctype="multipart/form-data" method="post"></form>')
@@ -42,6 +43,7 @@ function show_file_select() {
         $('#autoanalysis_form').append('<button type="submit" id="model_name" class="btn btn-primary" name=' + $trigger + '>Start analysis</button>');
      
         $('#autoanalysis_form').submit(function(e) {
+            $(".modal-footer").show();
             e.preventDefault();
             var formData = new FormData();
             if(document.getElementById('model_name').name == 'tracknet_btn'){
