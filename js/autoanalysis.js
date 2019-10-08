@@ -95,9 +95,9 @@ function show_file_select() {
                 $('#file_select').hide(function(event){     
                     $(".modal-body form").remove();
                 });
-                $('body').removeClass('modal-open');
-                $('.modal-backdrop').remove();
-
+                $('#file_select').modal('toggle');
+                // $('body').removeClass('modal-open');
+                // $('.modal-backdrop').remove();
                 console.log(data)
                 $('.analysis-result').append(data);
             });
@@ -159,7 +159,7 @@ $(function () {
     $('.modal').on('hidden.bs.modal', function () {
         $(".modal-body form").remove();
     });
-    
+
     function updateProgress(e){
         // console.log("total size",e.total)
         // console.log("current upload size",e.loaded)
