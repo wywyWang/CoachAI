@@ -12,29 +12,32 @@ import matplotlib.pyplot as plt
 
 from functions import *
 
-needed = ['now_right_x', 'now_right_y', 'now_left_x', 'now_left_y', 
+needed = ['flying_time', 'now_right_x', 'now_right_y', 'now_left_x', 'now_left_y', 
 		'next_right_x', 'next_right_y', 'next_left_x', 'next_left_y', 
 		'right_delta_x', 'right_delta_y', 'left_delta_x', 'left_delta_y',
 		'right_x_speed', 'right_y_speed','right_speed',
-		'left_x_speed', 'left_y_speed', 'left_speed', 'hit_height', 'type', 'avg_ball_speed']
+		'left_x_speed', 'left_y_speed', 'left_speed', 'hit_height', 'type', 'avg_ball_speed', 'hitting_area_number', 'landing_area_number']
 
-test_needed = ['now_right_x', 'now_right_y', 'now_left_x', 'now_left_y', 
+test_needed = ['flying_time', 'now_right_x', 'now_right_y', 'now_left_x', 'now_left_y', 
 		'next_right_x', 'next_right_y', 'next_left_x', 'next_left_y', 
 		'right_delta_x', 'right_delta_y', 'left_delta_x', 'left_delta_y',
 		'right_x_speed', 'right_y_speed','right_speed',
-		'left_x_speed', 'left_y_speed', 'left_speed', 'avg_ball_speed']
+		'left_x_speed', 'left_y_speed', 'left_speed', 'avg_ball_speed', 'hitting_area_number', 'landing_area_number']
 
 def LoadData(filename, ball_height_predict):
-	data = pd.read_csv(filename)
-	ball_height = pd.read_csv(ball_height_predict)
-	data = data[needed]
-	data.dropna(inplace=True)
-	data.reset_index(drop=True, inplace=True)
-	data['Predict'] = ball_height['Predict']
-	data = data[data.type != '未擊球' and data.type != '掛網球' and data.tpye != '未過網' and data.type != '發球犯規']
-	x_predict = data[test_needed+['Predict']]
-	
-	return x_predict
+    data = pd.read_csv(filename)
+    ball_height = pd.read_csv(ball_height_predict)
+    data = data[needed]
+    data.dropna(inplace=True)
+    data.reset_index(drop=True, inplace=True)
+    data['Predict'] = ball_height['Predict']
+    data = data[data.type != '未擊球']
+    data = data[data.type != '掛網球']
+    data = data[data.type != '未過網']
+    data = data[data.type != '發球犯規']
+    #x_predict = data[test_needed]
+    x_predict = data[test_needed+['Predict']]
+    return x_predict
 
 def plot_Confusion_Matrix(set_now, model_type, cm, groundtruth, grid_predictions, classes):
     plt.imshow(cm, cmap=plt.cm.Blues)
@@ -42,12 +45,12 @@ def plot_Confusion_Matrix(set_now, model_type, cm, groundtruth, grid_predictions
     plt.colorbar()
     plt.xlabel('Actual Class')
     plt.ylabel('Predicted Class')
-    plt.xticks(np.arange(len(classes)-1), classes)
-    plt.yticks(np.arange(len(classes)-1), classes)
+    plt.xticks(np.arange(len(classes)), classes)
+    plt.yticks(np.arange(len(classes)), classes)
 
     for j, i in itertools.product(range(cm.shape[0]), range(cm.shape[1])):
         if i == j:
-            plt.text(i+0.03, j+0.2, str(format(cm[j, i], 'd'))+'\n'+str( round(precision_score(groundtruth, grid_predictions, average=None)[i]*100,1))+'%', 
+            plt.text(i+0.03, j+0.2, str(format(cm[j, i], 'd'))+'\n'+str( round(precision_score(groundtruth, grid_predictions, labels=classes, average=None)[i]*100,1))+'%', 
             color="white" if cm[j, i] > cm.max()/2. else "black", 
             horizontalalignment="center")
         else:
@@ -60,7 +63,7 @@ def plot_Confusion_Matrix(set_now, model_type, cm, groundtruth, grid_predictions
 
 def plot_chart(set_now, model_type, model, groundtruth, grid_predictions, labels):
     # confusion matrix
-    plot_Confusion_Matrix(set_now, model_type, confusion_matrix(groundtruth, grid_predictions), groundtruth, grid_predictions, labels)
+    plot_Confusion_Matrix(set_now, model_type, confusion_matrix(groundtruth, grid_predictions, labels=labels), groundtruth, grid_predictions, labels)
     plt.clf()
     plt.close()
 
@@ -69,11 +72,14 @@ def XGBoost(filename, x_predict, xgboost_model_name, xgboost_outputname, set_now
     data = data[needed]
     data.dropna(inplace=True)
     data.reset_index(drop=True, inplace=True)
-    data = data[data.type != '未擊球' and data.type != '掛網球' and data.tpye != '未過網' and data.type != '發球犯規']
+    data = data[data.type != '未擊球']
+    data = data[data.type != '掛網球']
+    data = data[data.type != '未過網']
+    data = data[data.type != '發球犯規']
 
-    label = [1, 2, 3, 4, 5, 6, 7, 8]
-    type_to_num = {'cut': 1, 'drive': 2, 'lob': 3, 'long': 4, 'netplay': 5, 'rush': 6, 'smash': 7, 'error': 8}
-    num_to_type = {1: 'cut', 2: 'drive', 3: 'lob', 4: 'long', 5: 'netplay', 6: 'rush', 7: 'smash', 8: 'error'}
+    label = [0, 1, 2, 3, 4, 5, 6]
+    type_to_num = {'cut': 0, 'drive': 1, 'lob': 2, 'long': 3, 'netplay': 4, 'rush': 5, 'smash': 6}
+    num_to_type = {0: 'cut', 1: 'drive', 2: 'lob', 3: 'long', 4: 'netplay', 5: 'rush', 6: 'smash'}
     real_num = []
     real_eng = []
     predict_result_eng = []
@@ -92,13 +98,16 @@ def XGBoost(filename, x_predict, xgboost_model_name, xgboost_outputname, set_now
     result = pd.DataFrame([])
     result['Real'] = real_num
     result['Predict'] = prediction
-    
+
     result.to_csv(xgboost_outputname, index=None)
 
     # print precision and recall
     print("Accuracy: "+str(accuracy_score(real_num, prediction)))
-    print("Precision: "+str(precision_score(real_num, prediction, labels = label, average=None)))
-    print("Recall: "+str(recall_score(real_num, prediction, labels = label, average=None)))
+    print("Average precision: "+str(precision_score(real_num, prediction, labels = label, average='micro')))
+    print("Average recall: "+str(recall_score(real_num, prediction, labels = label, average='micro')))
+
+    print("Overall precision: "+str(precision_score(real_num, prediction, labels = label, average=None)))
+    print("Overall Recall: "+str(recall_score(real_num, prediction, labels = label, average=None)))
     
     # plot result chart
     plot_chart(set_now, "XGB", xgboost_model, real_eng, predict_result_eng, list(type_to_num.keys()))
@@ -118,7 +127,7 @@ def Run(set_now, filename, svm_option, svm_model_name, svm_prediction_result_fil
 		print("XGBoost predict set"+str(set_now)+" done!")
 
 def exec(predict_set):
-	for i in predict_set:
-		Run(i ,'../data/set'+str(i)+'_with_skeleton.csv', False, '../model/SVM_balltype.joblib.dat', '../data/result/SVM_set'+str(i)+'_skeleton_out.csv', '../data/result/SVM_set'+str(i)+'_balltype_out.csv', True, '../model/XGB_balltype.joblib.dat', '../data/result/XGB_set'+str(i)+'_skeleton_out.csv', '../data/result/XGB_set'+str(i)+'_balltype_out.csv')
-
+    for i in predict_set:
+        Run(i ,'../data/set'+str(i)+'_with_skeleton.csv', False, '../model/SVM_balltype.joblib.dat', '../data/result/SVM_set'+str(i)+'_skeleton_out.csv', '../data/result/SVM_set'+str(i)+'_balltype_out.csv', True, '../model/XGB_balltype.joblib.dat', '../data/result/XGB_set'+str(i)+'_skeleton_out.csv', '../data/result/XGB_set'+str(i)+'_balltype_out.csv')
+    Run(3 ,'../data/set3-1_with_skeleton.csv', False, '../model/SVM_balltype.joblib.dat', '../data/result/SVM_set3-1_skeleton_out.csv', '../data/result/SVM_set3-1_balltype_out.csv', True, '../model/XGB_balltype.joblib.dat', '../data/result/XGB_set3-1_skeleton_out.csv', '../data/result/XGB_set3-1_balltype_out.csv')
 exec([1, 2, 3])	

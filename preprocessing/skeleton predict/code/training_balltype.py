@@ -4,19 +4,20 @@ from sklearn.externals import joblib
 from sklearn import svm
 from sklearn.metrics import *
 from sklearn.model_selection import *
-from xgboost import XGBClassifier
+from xgboost import XGBClassifier, plot_importance
 from functions import *
+from matplotlib import pyplot as plt
 
-needed = ['now_right_x', 'now_right_y', 'now_left_x', 'now_left_y', 
+needed = ['flying_time', 'now_right_x', 'now_right_y', 'now_left_x', 'now_left_y', 
 		'next_right_x', 'next_right_y', 'next_left_x', 'next_left_y', 
 		'right_delta_x', 'right_delta_y', 'left_delta_x', 'left_delta_y',
 		'right_x_speed', 'right_y_speed','right_speed',
-		'left_x_speed', 'left_y_speed', 'left_speed', 'hit_height', 'type', 'avg_ball_speed']
-train_needed = ['now_right_x', 'now_right_y', 'now_left_x', 'now_left_y', 
+		'left_x_speed', 'left_y_speed', 'left_speed', 'hit_height', 'type', 'avg_ball_speed', 'hitting_area_number', 'landing_area_number']
+train_needed = ['flying_time', 'now_right_x', 'now_right_y', 'now_left_x', 'now_left_y', 
 		'next_right_x', 'next_right_y', 'next_left_x', 'next_left_y', 
 		'right_delta_x', 'right_delta_y', 'left_delta_x', 'left_delta_y',
 		'right_x_speed', 'right_y_speed','right_speed',
-		'left_x_speed', 'left_y_speed', 'left_speed', 'avg_ball_speed']
+		'left_x_speed', 'left_y_speed', 'left_speed', 'avg_ball_speed', 'hitting_area_number', 'landing_area_number']
 test_needed = ['type']
 
 def LoadData(filename, ball_height_predict):
@@ -25,18 +26,23 @@ def LoadData(filename, ball_height_predict):
 	data = data[needed]
 	data.dropna(inplace=True)
 	data.reset_index(drop=True, inplace=True)
-	data = data[data.type != '未擊球' and data.type != '掛網球' and data.tpye != '未過網' and data.type != '發球犯規']
+	data = data[data.type != '未擊球']
+	data = data[data.type != '掛網球']
+	data = data[data.type != '未過網']
+	data = data[data.type != '發球犯規']
 	
-	eng_type_to_num = {'cut': 1, 'drive': 2, 'lob': 3, 'long': 4, 'netplay': 5, 'rush': 6, 'smash': 7, 'error': 8}
+	eng_type_to_num = {'cut': 0, 'drive': 1, 'lob': 2, 'long': 3, 'netplay': 4, 'rush': 5, 'smash': 6}
 
 	ball_type = []
 
 	for t in data['type']:
+		if ball_type_convertion(t) == 'error':
+			print(t)
 		ball_type.append(eng_type_to_num[ball_type_convertion(t)])
 	
 	data['type'] = ball_type
 	data['Predict'] = ball_height['Predict']
-
+	#x_train = data[train_needed]
 	x_train = data[train_needed+['Predict']]
 	y_train = ball_type
 	
@@ -51,18 +57,38 @@ def SVM(x_train, y_train, model_name):
 def XGBoost(x_train, y_train, model_name):
 	params = {
         'learning_rate': 0.01,
-        'n_estimators': 1000,
-        'max_depth': 4,
+        'n_estimators': 1100,
+        'max_depth': 8,
         'min_child_weight': 1,
         'gamma': 0,
         'subsample': 0.8,
         'colsample_bytree': 0.8,
-        'reg_alpha': 0.005,
-        'objective':'binary:logistic',
-        'scale_pos_weight': 1
+        'reg_alpha': 0.01,
+        'objective':'multi:softmax',
+        'scale_pos_weight': 1,
+        'num_class': 7
     }
-	xgbc = XGBClassifier()
+	xgbc = XGBClassifier(**params)
+	'''
+	grid_params = {
+        #'learning_rate': [i/100.0 for i in range(1,7)],
+        #'n_estimators': [700, 800, 900, 1000, 1100, 1200, 1300, 1400],
+        'max_depth': range(1,7),
+        #'min_child_weight': range(0,4,1),
+        #'subsample': [i/10.0 for i in range(6,10)],
+        #'colsample_bytree': [i/10.0 for i in range(6,10)],
+        #'gamma': [i/10.0 for i in range(0,10)],
+        #'reg_alpha':[0, 1e-5, 1e-3, 1e-2, 0.005, 0.025, 0.01, 0.25, 0.05, 0.10]
+    }
+	grid = GridSearchCV(xgbc, grid_params, cv = 5)
+	
+	xgboost_model = grid.fit(x_train, y_train)
+	print(xgboost_model.best_params_)
+	#{'learning_rate': 0.01, 'max_depth': 8, 'n_estimators': 1100, 'reg_alpha': 0.01}
+	'''
 	xgbc.fit(x_train, y_train)
+	plot_importance(xgbc)
+	plt.show()
 	joblib.dump(xgbc, model_name)
 
 def Run(filename, svm_option, svm_model_name, svm_ball_height_predict_result, xgboost_option, xgboost_model_name, xgboost_ball_height_predict_result):

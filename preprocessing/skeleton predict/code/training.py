@@ -4,15 +4,16 @@ from sklearn.externals import joblib
 from sklearn import svm
 from sklearn.metrics import *
 from sklearn.model_selection import *
-from xgboost import XGBClassifier
+from xgboost import XGBClassifier, plot_importance
+from matplotlib import pyplot as plt
 
-needed = ['now_right_x', 'now_right_y', 'now_left_x', 'now_left_y', 
+needed = ['flying_time', 'now_right_x', 'now_right_y', 'now_left_x', 'now_left_y', 
 		'next_right_x', 'next_right_y', 'next_left_x', 'next_left_y', 
 		'right_delta_x', 'right_delta_y', 'left_delta_x', 'left_delta_y',
 		'right_x_speed', 'right_y_speed', 'right_speed',
 		'left_x_speed', 'left_y_speed', 'left_speed','hit_height', 'avg_ball_speed', 'type', 'hitting_area_number', 'landing_area_number']
 
-train_needed = ['now_right_x', 'now_right_y', 'now_left_x', 'now_left_y', 
+train_needed = ['flying_time', 'now_right_x', 'now_right_y', 'now_left_x', 'now_left_y', 
 		'next_right_x', 'next_right_y', 'next_left_x', 'next_left_y', 
 		'right_delta_x', 'right_delta_y', 'left_delta_x', 'left_delta_y',
 		'right_x_speed', 'right_y_speed','right_speed',
@@ -29,8 +30,10 @@ def LoadData(filename):
 	data = data[needed]
 	data.dropna(inplace=True)
 	data.reset_index(drop=True, inplace=True)
-	data = data[data.type != '未擊球' and data.type != '掛網球' and data.tpye != '未過網' and data.type != '發球犯規']
-
+	data = data[data.type != '未擊球']
+	data = data[data.type != '掛網球']
+	data = data[data.type != '未過網']
+	data = data[data.type != '發球犯規']
 	x_train = data[train_needed]
 	y_train = data[test_needed].values
 
@@ -45,33 +48,39 @@ def SVM(x_train, y_train, model_name):
 def XGBoost(x_train, y_train, model_name):
 	params = {
         'learning_rate': 0.01,
-        'n_estimators': 1000,
-        'max_depth': 4,
-        'min_child_weight': 1,
+        'n_estimators': 800,
+        'max_depth': 2,
+        'min_child_weight': 2,
         'gamma': 0,
-        'subsample': 0.8,
-        'colsample_bytree': 0.8,
-        'reg_alpha': 0.005,
-        'objective':'binary:logistic',
-        'scale_pos_weight': 1
+        'subsample': 0.83,
+        'colsample_bytree': 0.83,
+        'reg_alpha': 0.001,
+        'objective':'multi:softmax',
+        'scale_pos_weight': 1,
+        'num_class': 2
     }
-	xgbc = XGBClassifier()
-	'''
 	xgbc = XGBClassifier(**params)
+	
+	'''
 	grid_params = {
         'learning_rate': [i/100.0 for i in range(1,6)],
-        'max_depth': range(3,6),
+        'n_estimators': [500, 600, 700, 800, 900, 1000, 1100, 1200],
+        #'max_depth': range(2,9),
         #'min_child_weight': range(0,10,1),
         #'subsample': [i/10.0 for i in range(6,9)],
         #'colsample_bytree': [i/10.0 for i in range(6,9)],
-        'gamma': [i/10.0 for i in range(0,6)],
-        'reg_alpha':[1e-5, 1e-2, 0.1, 1, 100]
+        #'gamma': [i/10.0 for i in range(0,6)],
+        #'reg_alpha':[0, 1e-5, 1e-3, 1e-2, 0.005, 0.025, 0.05, 0.10, 0.15]
     }
 	grid = GridSearchCV(xgbc, grid_params, cv = 5)
-
+	
 	xgboost_model = grid.fit(x_train, y_train)
+	print(xgboost_model.best_params_)
+	#{'learning_rate': 0.01, 'max_depth': 2, 'n_estimators': 700, 'reg_alpha': 0.001}
 	'''
 	xgbc.fit(x_train, y_train)
+	plot_importance(xgbc)
+	plt.show()
 	joblib.dump(xgbc, model_name)
 
 def Run(filename, svm_option, svm_model_name, xgboost_option, xgboost_model_name):
@@ -85,4 +94,4 @@ def Run(filename, svm_option, svm_model_name, xgboost_option, xgboost_model_name
 		XGBoost(x_train, y_train, xgboost_model_name)
 		print("XGBoost training done!")
 
-Run('../data/set1_with_skeleton.csv', True, '../model/SVM_skeleton.joblib.dat', True, '../model/XGB_skeleton.joblib.dat')
+Run('../data/set1_with_skeleton.csv', False, '../model/SVM_skeleton.joblib.dat', True, '../model/XGB_skeleton.joblib.dat')
