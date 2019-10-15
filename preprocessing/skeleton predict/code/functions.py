@@ -73,7 +73,7 @@ def ball_type_convertion(ball_type):
         return 'long'
     elif ball_type == '發小球' or ball_type == '放小球' or ball_type == '擋小球':
         return 'netplay'
-    elif ball_type == '撲球':
+    elif ball_type == '撲球' or ball_type == '刷球' :
         return 'rush'
     elif ball_type == '殺球':
         return 'smash'

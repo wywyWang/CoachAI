@@ -8,13 +8,13 @@ from xgboost import XGBClassifier
 import itertools
 import matplotlib.pyplot as plt
 
-needed = ['now_right_x', 'now_right_y', 'now_left_x', 'now_left_y', 
+needed = ['flying_time', 'now_right_x', 'now_right_y', 'now_left_x', 'now_left_y', 
 		'next_right_x', 'next_right_y', 'next_left_x', 'next_left_y', 
 		'right_delta_x', 'right_delta_y', 'left_delta_x', 'left_delta_y',
 		'right_x_speed', 'right_y_speed', 'right_speed',
 		'left_x_speed', 'left_y_speed', 'left_speed','hit_height', 'avg_ball_speed', 'type', 'hitting_area_number', 'landing_area_number']
 
-test_needed = ['now_right_x', 'now_right_y', 'now_left_x', 'now_left_y', 
+test_needed = ['flying_time', 'now_right_x', 'now_right_y', 'now_left_x', 'now_left_y', 
 		'next_right_x', 'next_right_y', 'next_left_x', 'next_left_y', 
 		'right_delta_x', 'right_delta_y', 'left_delta_x', 'left_delta_y',
 		'right_x_speed', 'right_y_speed', 'right_speed',
@@ -29,12 +29,15 @@ def LoadData(filename):
 	data = data[needed]
 	data.dropna(inplace=True)
 	data.reset_index(drop=True, inplace=True)
-	data = data[data.type != '未擊球' and data.type != '掛網球' and data.tpye != '未過網' and data.type != '發球犯規']
+	data = data[data.type != '未擊球']
+	data = data[data.type != '掛網球']
+	data = data[data.type != '未過網']
+	data = data[data.type != '發球犯規']
 	x_predict = data[test_needed]
 
 	return x_predict
 
-def plot_Confusion_Matrix(set_now, model_type, cm, groundtruth, grid_predictions, classes):
+def plot_Confusion_Matrix(set_now, model_type, cm, groundtruth, grid_predictions, classes, change_side):
     plt.imshow(cm, cmap=plt.cm.Blues)
     plt.title('Confusion matrix')
     plt.colorbar()
@@ -45,7 +48,7 @@ def plot_Confusion_Matrix(set_now, model_type, cm, groundtruth, grid_predictions
    
     for j, i in itertools.product(range(cm.shape[0]), range(cm.shape[1])):
         if i == j:
-            plt.text(i+0.03, j+0.2, str(format(cm[j, i], 'd'))+'\n'+str( round(precision_score(groundtruth, grid_predictions, average=None)[i]*100,1))+'%', 
+            plt.text(i+0.03, j+0.2, str(format(cm[j, i], 'd'))+'\n'+str( round(precision_score(groundtruth, grid_predictions, labels=classes, average=None)[i]*100,1))+'%', 
             color="white" if cm[j, i] > cm.max()/2. else "black", 
             horizontalalignment="center")
         else:
@@ -53,22 +56,27 @@ def plot_Confusion_Matrix(set_now, model_type, cm, groundtruth, grid_predictions
             color="white" if cm[j, i] > cm.max()/2. else "black", 
             horizontalalignment="center")
 
-    plt.savefig('../data/img/'+str(model_type)+'_set'+str(set_now)+'_skeleton_confusion_matrix.png')
+    if change_side:
+    	plt.savefig('../data/img/'+str(model_type)+'-1_set'+str(set_now)+'_skeleton_confusion_matrix.png')
+    else:
+    	plt.savefig('../data/img/'+str(model_type)+'_set'+str(set_now)+'_skeleton_confusion_matrix.png')
     plt.close(0)
 
-def plot_chart(set_now, model_type, model, groundtruth, grid_predictions, labels):
-    # feature importance
-    #feature_importance(model)
+def plot_chart(set_now, model_type, model, groundtruth, grid_predictions, labels, change_side):
     # confusion matrix
-    plot_Confusion_Matrix(set_now, model_type, confusion_matrix(groundtruth, grid_predictions), groundtruth, grid_predictions, labels)
+    plot_Confusion_Matrix(set_now, model_type, confusion_matrix(groundtruth, grid_predictions, labels=labels), groundtruth, grid_predictions, labels, change_side)
     plt.clf()
     plt.close()
 
-def SVM(filename, x_predict, model_name, svm_outputname, set_now):
+def SVM(filename, x_predict, model_name, svm_outputname, set_now, change_side):
 	data = pd.read_csv(filename)
 	data = data[needed]
 	data.dropna(inplace=True)
-	data = data[data.type != '未擊球' and data.type != '掛網球' and data.tpye != '未過網' and data.type != '發球犯規']
+
+	data = data[data.type != '未擊球']
+	data = data[data.type != '掛網球']
+	data = data[data.type != '未過網']
+	data = data[data.type != '發球犯規']
 	label = [1, 2]
 
 	model = joblib.load(model_name)
@@ -81,14 +89,21 @@ def SVM(filename, x_predict, model_name, svm_outputname, set_now):
 	result.to_csv(svm_outputname,index=None)
 
 	print("Accuracy: "+str(accuracy_score(data['hit_height'], prediction)))
-	print("Precision: "+str(precision_score(data['hit_height'], prediction, labels = label, average=None)))
-	print("Recall: "+str(recall_score(data['hit_height'], prediction, labels = label, average=None)))
+	print("Overall precision: "+str(precision_score(data['hit_height'], prediction, labels = label, average='micro')))
+	print("Overall recall: "+str(recall_score(data['hit_height'], prediction, labels = label, average='micro')))
 
-def XGBoost(filename, x_predict, model_name, xgb_outputname, set_now):
+	print("Average precision: "+str(precision_score(data['hit_height'], prediction, labels = label, average=None)))
+	print("Average recall: "+str(recall_score(data['hit_height'], prediction, labels = label, average=None)))
+
+def XGBoost(filename, x_predict, model_name, xgb_outputname, set_now, change_side):
 	data = pd.read_csv(filename)
 	data = data[needed]
 	data.dropna(inplace=True)
-	data = data[data.type != '未擊球' and data.type != '掛網球' and data.tpye != '未過網' and data.type != '發球犯規']
+	print(len(data))
+	data = data[data.type != '未擊球']
+	data = data[data.type != '掛網球']
+	data = data[data.type != '未過網']
+	data = data[data.type != '發球犯規']
 	label = [1, 2]
 
 	model = joblib.load(model_name)
@@ -101,26 +116,32 @@ def XGBoost(filename, x_predict, model_name, xgb_outputname, set_now):
 	result.to_csv(xgb_outputname, index=None)
 
 	print("Accuracy: "+str(accuracy_score(data['hit_height'], prediction)))
-	print("Precision: "+str(precision_score(data['hit_height'], prediction, labels = label, average=None)))
-	print("Recall: "+str(recall_score(data['hit_height'], prediction, labels = label, average=None)))
+	print("Overall precision: "+str(precision_score(data['hit_height'], prediction, labels = label, average='micro')))
+	print("Overall recall: "+str(recall_score(data['hit_height'], prediction, labels = label, average='micro')))
+
+	print("Average precision: "+str(precision_score(data['hit_height'], prediction, labels = label, average=None)))
+	print("Average recall: "+str(recall_score(data['hit_height'], prediction, labels = label, average=None)))
 
 	# plot result chart
-	plot_chart(set_now, "XGB", model, list(data['hit_height']), prediction, label)
+	plot_chart(set_now, "XGB", model, list(data['hit_height']), prediction, label, change_side)
 
 
-def Run(set_now, filename, svm_option, svm_model_name, svm_outputname, xgboost_option, xgboost_model_name, xgboost_outputname):
+def Run(set_now, filename, svm_option, svm_model_name, svm_outputname, xgboost_option, xgboost_model_name, xgboost_outputname, change_side):
 	x_predict = LoadData(filename)
 	if svm_option and svm_model_name != '':
 		print("SVM predicting set"+str(set_now)+"...")
-		SVM(filename, x_predict, svm_model_name, svm_outputname, set_now)
+		SVM(filename, x_predict, svm_model_name, svm_outputname, set_now, change_side)
 		print("SVM predict set"+str(set_now)+" done!")
 
 	if xgboost_option and xgboost_model_name != '':
 		print("XGBoost predicting set"+str(set_now)+"...")
-		XGBoost(filename, x_predict, xgboost_model_name, xgboost_outputname, set_now)
+		XGBoost(filename, x_predict, xgboost_model_name, xgboost_outputname, set_now, change_side)
 		print("XGBoost predict set"+str(set_now)+" done!")
 
 def exec(predict_set):
+	change_side = False
 	for i in predict_set:
-		Run(i, '../data/set'+str(i)+'_with_skeleton.csv', True, '../model/SVM_skeleton.joblib.dat', '../data/result/SVM_set'+str(i)+'_skeleton_out.csv', True, '../model/XGB_skeleton.joblib.dat', '../data/result/XGB_set'+str(i)+'_skeleton_out.csv')
+		Run(i, '../data/set'+str(i)+'_with_skeleton.csv', False, '../model/SVM_skeleton.joblib.dat', '../data/result/SVM_set'+str(i)+'_skeleton_out.csv', True, '../model/XGB_skeleton.joblib.dat', '../data/result/XGB_set'+str(i)+'_skeleton_out.csv', change_side)
+	change_side = True
+	Run(3, '../data/set3-1_with_skeleton.csv', False, '../model/SVM_skeleton.joblib.dat', '../data/result/SVM_set3-1_skeleton_out.csv', True, '../model/XGB_skeleton.joblib.dat', '../data/result/XGB_set3-1_skeleton_out.csv', change_side)
 exec([1, 2, 3])
