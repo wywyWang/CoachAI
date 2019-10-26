@@ -2,10 +2,15 @@ import numpy as np
 import pandas as pd
 from sklearn.externals import joblib
 from sklearn import svm
+from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import *
 from sklearn.model_selection import *
 from xgboost import XGBClassifier, plot_importance
 from matplotlib import pyplot as plt
+import time
+
+import warnings 
+warnings.filterwarnings('ignore')
 
 needed = ['flying_time', 'now_right_x', 'now_right_y', 'now_left_x', 'now_left_y', 
 		'next_right_x', 'next_right_y', 'next_left_x', 'next_left_y', 
@@ -39,6 +44,16 @@ def LoadData(filename):
 
 	y_train = np.array(y_train).ravel()
 	return x_train, y_train
+
+def RandomForest(x_train, y_train, model_name):
+	params = {
+		'n_estimators': 800,
+		'criterion': 'entropy',
+		'max_features': 2
+	}
+	model = RandomForestClassifier(**params)
+	model.fit(x_train, y_train)
+	joblib.dump(model, model_name)
 
 def SVM(x_train, y_train, model_name):
 	model = svm.SVC(kernel='rbf')
@@ -78,20 +93,34 @@ def XGBoost(x_train, y_train, model_name):
 	print(xgboost_model.best_params_)
 	#{'learning_rate': 0.01, 'max_depth': 2, 'n_estimators': 700, 'reg_alpha': 0.001}
 	'''
+	
 	xgbc.fit(x_train, y_train)
-	plot_importance(xgbc)
-	plt.show()
+	#plot_importance(xgbc)
+	#plt.show()
 	joblib.dump(xgbc, model_name)
 
-def Run(filename, svm_option, svm_model_name, xgboost_option, xgboost_model_name):
+def Run(filename, svm_option, svm_model_name, xgboost_option, xgboost_model_name, RF_option, RF_model_name):
 	x_train, y_train = LoadData(filename)
 	if svm_option and svm_model_name != '':
 		print("SVM training...")
+		ts = time.time()
 		SVM(x_train, y_train, svm_model_name)
+		te = time.time()
 		print("SVM training done!")
+		print("SVM training time: "+str(te-ts))
 	if xgboost_option and xgboost_model_name != '':
 		print("XGBoost training...")
+		ts = time.time()
 		XGBoost(x_train, y_train, xgboost_model_name)
+		te = time.time()
 		print("XGBoost training done!")
+		print("XGBoost training time: "+str(te-ts))
+	if RF_option and RF_model_name != '':
+		print("Random Forest training...")
+		ts = time.time()
+		RandomForest(x_train, y_train, RF_model_name)
+		te = time.time()
+		print("Random Forest training done!")
+		print("Random Forest training time: "+str(te-ts))
 
-Run('../data/set1_with_skeleton.csv', False, '../model/SVM_skeleton.joblib.dat', True, '../model/XGB_skeleton.joblib.dat')
+Run('../data/set1_with_skeleton.csv', True, '../model/SVM_skeleton.joblib.dat', True, '../model/XGB_skeleton.joblib.dat', True, '../model/RF_skeleton.joblib.dat')

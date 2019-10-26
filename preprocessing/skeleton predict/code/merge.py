@@ -61,8 +61,8 @@ def pos_test(hitting_pos, now):
 
 	if now > 0:
 		start_idx = now
-	if now+1 < len(hitting_pos):
-		end_idx = now+1
+	if now+2 < len(hitting_pos):
+		end_idx = now+2
 
 	if hitting_pos[start_idx, 0] == '' or hitting_pos[start_idx, 1] == '' or hitting_pos[start_idx, 2] == '' or hitting_pos[start_idx, 3] == '':
 		return (False, 0, 0, 0, 0)
@@ -75,7 +75,7 @@ def pos_test(hitting_pos, now):
 	return (True, int(start_pos[0])-int(end_pos[0]), int(start_pos[1])-int(end_pos[1]), int(start_pos[2])-int(end_pos[2]), int(start_pos[3])-int(end_pos[3]))
 
 
-def Merge(set_num, total_set, setinfo, skeleton_file, top_is_Taiwan, savename, change_side):
+def Merge(set_num, total_set, setinfo, skeleton_file, top_is_Taiwan, savename):
 	set_info = pd.read_csv(setinfo)
 	skeleton_info = pd.read_csv(skeleton_file)
 	sec_per_frame = 0.04
@@ -110,21 +110,15 @@ def Merge(set_num, total_set, setinfo, skeleton_file, top_is_Taiwan, savename, c
 				first = set_info[:][:i]
 				second = set_info[:][i:]
 				print(i)
-				break;
+				break
 		first = first.reset_index(drop = True)
 		second = second.reset_index(drop = True)
-		print(len(first))
-		print(len(second))
+
 		first_part, first_time = get_hitting_pos(first, skeleton_info, top_is_Taiwan)
 		second_part, second_time = get_hitting_pos(second, skeleton_info, top_is_Taiwan)
 
-		if change_side:
-			hitting_pos = np.array(second_part)
-			times = np.array(second_time)
-		else:
-			hitting_pos = np.array(first_part)
-			times = np.array(first_time)
-
+		hitting_pos = np.array(first_part+second_part)
+		times = np.array(first_time+second_time)
 
 	for i in range(len(hitting_pos)-1):
 		r_delta_x = int()
@@ -139,20 +133,20 @@ def Merge(set_num, total_set, setinfo, skeleton_file, top_is_Taiwan, savename, c
 			now_delta_y = now_delta_y*now_delta_y
 			left_right_distance.append(math.sqrt(now_delta_x+now_delta_y))
 
-		if hitting_pos[i, 0] != '' and hitting_pos[i+1, 0] != '':
-			r_delta_x = float(hitting_pos[i+1, 0])-float(hitting_pos[i, 0])
+		if hitting_pos[i, 0] != '' and hitting_pos[i+2, 0] != '':
+			r_delta_x = float(hitting_pos[i+2, 0])-float(hitting_pos[i, 0])
 			right_delta_x.append((r_delta_x%10)*10)
 
-		if hitting_pos[i, 1] != '' and hitting_pos[i+1, 1] != '':
-			r_delta_y = float(hitting_pos[i+1, 1])-float(hitting_pos[i, 1])
+		if hitting_pos[i, 1] != '' and hitting_pos[i+2, 1] != '':
+			r_delta_y = float(hitting_pos[i+2, 1])-float(hitting_pos[i, 1])
 			right_delta_y.append((r_delta_y%10)*10)
 
-		if hitting_pos[i, 2] != '' and hitting_pos[i+1, 2] != '':
-			l_delta_x = float(hitting_pos[i+1, 2])-float(hitting_pos[i, 2])
+		if hitting_pos[i, 2] != '' and hitting_pos[i+2, 2] != '':
+			l_delta_x = float(hitting_pos[i+2, 2])-float(hitting_pos[i, 2])
 			left_delta_x.append((l_delta_x%10)*10)
 
-		if hitting_pos[i, 3] != '' and hitting_pos[i+1, 3] != '':
-			l_delta_y = float(hitting_pos[i+1, 3])-float(hitting_pos[i, 3])
+		if hitting_pos[i, 3] != '' and hitting_pos[i+2, 3] != '':
+			l_delta_y = float(hitting_pos[i+2, 3])-float(hitting_pos[i, 3])
 			left_delta_y.append((l_delta_y%10)*10)
 
 		x_right = -1
@@ -162,7 +156,7 @@ def Merge(set_num, total_set, setinfo, skeleton_file, top_is_Taiwan, savename, c
 		right_ok = False
 		left_ok = False
 
-		if hitting_pos[i, 0] != '' and hitting_pos[i+1, 0] != '' and hitting_pos[i, 1] != '' and hitting_pos[i+1, 1] != '':
+		if hitting_pos[i, 0] != '' and hitting_pos[i+2, 0] != '' and hitting_pos[i, 1] != '' and hitting_pos[i+2, 1] != '':
 			right_ok = True
 			delta_x = abs(r_delta_x)
 			delta_y = abs(r_delta_y)
@@ -172,7 +166,7 @@ def Merge(set_num, total_set, setinfo, skeleton_file, top_is_Taiwan, savename, c
 			right_y_speed.append((delta_y/100)/sec_per_frame)
 			right_speed.append((math.sqrt(delta_x*delta_x+delta_y*delta_y)/100)/sec_per_frame)
 
-		if hitting_pos[i, 2] != '' and hitting_pos[i+1, 2] != '' and hitting_pos[i, 3] != '' and hitting_pos[i+1, 3] != '':
+		if hitting_pos[i, 2] != '' and hitting_pos[i+2, 2] != '' and hitting_pos[i, 3] != '' and hitting_pos[i+2, 3] != '':
 			left_ok = True
 			delta_x = abs(l_delta_x)
 			delta_y = abs(l_delta_y)
@@ -182,7 +176,7 @@ def Merge(set_num, total_set, setinfo, skeleton_file, top_is_Taiwan, savename, c
 			left_y_speed.append((delta_y/100)/sec_per_frame)
 			left_speed.append((math.sqrt(delta_x*delta_x+delta_y*delta_y)/100)/sec_per_frame)
 		
-		if pos_test(hitting_pos, i)[0] and times[i+1] != '' and times[i] != '':
+		if pos_test(hitting_pos, i)[0] and times[i+2] != '' and times[i] != '':
 			right_x_delta = pos_test(hitting_pos, i)[1]
 			right_y_delta = pos_test(hitting_pos, i)[2]
 			left_x_delta = pos_test(hitting_pos, i)[3]
@@ -190,7 +184,7 @@ def Merge(set_num, total_set, setinfo, skeleton_file, top_is_Taiwan, savename, c
 
 			dx = ((right_x_delta+left_x_delta)/2)**2
 			dy = ((right_y_delta+left_y_delta)/2)**2
-			dt = float(times[i+1])-float(times[i])
+			dt = float(times[i+2])-float(times[i])
 
 			avg_ball_speed.append(abs(math.sqrt(dx+dy)/dt))
 		else:
@@ -282,18 +276,12 @@ def Merge(set_num, total_set, setinfo, skeleton_file, top_is_Taiwan, savename, c
 
 	set_info.to_csv(savename, index=False, encoding = 'utf-8')
 
-def run(set_num, total_set, top_is_Taiwan, change_side):
-	if change_side:
-		Merge(set_num, total_set, '../data/set'+str(set_num)+'.csv', '../data/set'+str(set_num)+'_skeleton.csv', top_is_Taiwan, '../data/set'+str(set_num)+'-1_with_skeleton.csv', change_side)
-	else:
-		Merge(set_num, total_set, '../data/set'+str(set_num)+'.csv', '../data/set'+str(set_num)+'_skeleton.csv', top_is_Taiwan, '../data/set'+str(set_num)+'_with_skeleton.csv', change_side)
+def run(set_num, total_set, top_is_Taiwan):
+	Merge(set_num, total_set, '../data/set'+str(set_num)+'.csv', '../data/set'+str(set_num)+'_skeleton.csv', top_is_Taiwan, '../data/set'+str(set_num)+'_with_skeleton.csv')
 
 def exec(number_of_sets):
 	top_Taiwan = False
-	change_side = False
 	for i in range(number_of_sets):
-		run(i+1, number_of_sets, top_Taiwan, change_side)
+		run(i+1, number_of_sets, top_Taiwan)
 		top_Taiwan = not top_Taiwan
-	change_side = True
-	run(number_of_sets, number_of_sets, top_Taiwan, change_side)
 exec(3)
