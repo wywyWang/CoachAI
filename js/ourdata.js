@@ -503,6 +503,116 @@ function init_on_off_court(minrally,maxrally,set,game_name){
     });
 }
 
+function init_lose_error(minrally,maxrally,set,game_name){
+    //create player info radar
+    $('#lose_error .playerA').html('<div class="subtitle">選手A失誤比例</div>\
+    <canvas id="lose_error_chartA" width="800" height="600"></canvas>');
+    $('#lose_error .playerB').html('<div class="subtitle">選手B失誤比例</div>\
+    <canvas id="lose_error_chartB" width="800" height="600"></canvas>');  
+
+    var chartRadarDOMA;
+    var chartRadarDOMB;
+    var chartRadarOptions;
+
+    // Chart.defaults.global.responsive = false;
+    chartRadarDOMA = document.getElementById("lose_error_chartA");
+    chartRadarDOMB = document.getElementById("lose_error_chartB");
+    //custormized options
+    chartRadarOptions = 
+    {
+        legend:{
+            labels:{
+                fontColor: 'rgba(248, 184, 82, 1)',
+                fontSize: 16,
+                fontStyle: "bold"
+            }
+        }
+        // responsive:false
+    };
+
+    //init game
+    if (!game_name){
+        game_name = "18IND_TC";
+    }
+    filename = 'preprocessing/Data/Output/rally_count_predict_' + game_name + '.json';
+
+    $.getJSON(filename, function(data) {
+        [data,set,minrally,maxrally] = data_filter(data,set,minrally,maxrally,1);
+
+        //filter winners
+        dataB = data.filter(function(item){
+            return item.winner == 'A'
+        });
+        dataA = data.filter(function(item){
+            return item.winner == 'B'
+        });
+        console.log("dataA = ",dataA.length);
+        console.log("dataB = ",dataB.length);
+        
+        //count each reason
+        var group_data = Object.keys(_.groupBy(data,"error"));
+        var sum_dataA = new Array(group_data.length).fill(0);
+        var sum_dataB = new Array(group_data.length).fill(0);
+        for(var i = 0;i<dataA.length;i++){
+            for(var j = 0;j<group_data.length;j++){
+                if (dataA[i].error == group_data[j]){
+                    sum_dataA[j] +=1;
+                }
+            }
+        }
+        for(var i = 0;i<dataB.length;i++){
+            for(var j = 0;j<group_data.length;j++){
+                if (dataB[i].error == group_data[j])
+                    sum_dataB[j] +=1;
+            }
+        }
+
+        console.log(sum_dataA);
+        console.log(sum_dataB);
+        
+        var labels = ["受迫性失誤","非受迫性失誤"];
+
+        //random color generator
+        color = new Array();
+        for(var i = 0;i<data.length;i++){
+            r = Math.floor(Math.random() * 256);
+            g = Math.floor(Math.random() * 256);
+            b = Math.floor(Math.random() * 256);
+            color.push('rgb(' + r + ', ' + g + ', ' + b + ')');
+        }
+        
+        var chart = new Chart(chartRadarDOMA, {
+            type: 'doughnut',
+            data: {
+                labels: labels,
+                datasets: [{
+                    backgroundColor: color,
+                    pointBorderColor: "rgba(0,0,0,0)",
+                    borderColor: 'rgb(17, 16, 17)',
+                    borderWidth: 1,
+                    data: sum_dataA
+                }]
+            },
+            options: chartRadarOptions
+        });
+
+        var chart = new Chart(chartRadarDOMB, {
+            type: 'doughnut',
+            data: {
+                labels: labels,
+                datasets: [{
+                    backgroundColor: color,
+                    pointBorderColor: "rgba(0,0,0,0)",
+                    borderColor: 'rgb(17, 16, 17)',
+                    borderWidth: 1,
+                    data: sum_dataB
+                }]
+            },
+            options: chartRadarOptions
+        });
+    });
+}
+
 function init_total_balltype(minrally,maxrally,set,game_name){
     $('#total_balltype .playerA').html('<div class="subtitle">選手A獲勝球種</div>\
     <canvas id="total_balltype_chartA" width="800" height="600"></canvas>');
@@ -1156,6 +1266,12 @@ function change_interval(){
     $('#on_off_court_chartB').remove();
     init_on_off_court(minrally,maxrally,set,game);
 
+    //delete old error doughnut
+    $('#lose_error .subtitle').remove();
+    $('#lose_error_chartA').remove();
+    $('#lose_error_chartB').remove();
+    init_lose_error(minrally,maxrally,set,game);
+
     //delete old radar
     $('#total_balltype .subtitle').remove();
     $('#total_balltype_chartA').remove();
@@ -1195,6 +1311,12 @@ function change_set() {
     $('#on_off_court_chartA').remove();
     $('#on_off_court_chartB').remove();
     init_on_off_court(null,null,new_set,game);
+
+    //delete old error doughnut
+    $('#lose_error .subtitle').remove();
+    $('#lose_error_chartA').remove();
+    $('#lose_error_chartB').remove();
+    init_lose_error(null,null,new_set,game);
 
     //delete old radar
     $('#total_balltype .subtitle').remove();
