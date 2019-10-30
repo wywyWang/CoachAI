@@ -43,7 +43,7 @@ def rally_count(rawfile, predict_file, savefile):
 			score.append(str(a_score)+":"+str(b_score))
 			stroke.append(hit_count)
 			winner.append(needed_data['getpoint_player'][i])
-			error.append(needed_data['hit_height'][i-1])
+			error.append(int(needed_data['hit_height'][i-1])-1)
 
 			hit_count = 0
 
