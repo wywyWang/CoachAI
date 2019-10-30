@@ -9,7 +9,7 @@ def export_json(savefile, data):
 def rally_count(rawfile, predict_file, savefile):
 	data = pd.read_csv(rawfile)
 	predict_result = pd.read_csv(predict_file)
-	needed_data = data[['set', 'rally', 'hit_area', 'getpoint_player', 'lose_reason', 'type']]
+	needed_data = data[['set', 'rally', 'hit_area', 'getpoint_player', 'lose_reason', 'type', 'hit_height']]
 
 	a_score = 0
 	b_score = 0
@@ -42,7 +42,7 @@ def rally_count(rawfile, predict_file, savefile):
 			score.append(str(a_score)+":"+str(b_score))
 			stroke.append(hit_count)
 			winner.append(needed_data['getpoint_player'][i])
-
+			error.append(needed_data['hit_height'][i-1])
 
 			hit_count = 0
 
@@ -57,7 +57,7 @@ def rally_count(rawfile, predict_file, savefile):
 	        balltype.append(predict_result['prediction'][cnt])
 	        cnt += 1
 
-	result_data = pd.DataFrame(columns = ["set", "rally", "score", "stroke", "winner", "on_off_court", "balltype", "lose_area"])
+	result_data = pd.DataFrame(columns = ["set", "rally", "score", "stroke", "winner", "on_off_court", "balltype", "lose_area", "error"])
 
 	result_data["set"] = sets
 	result_data["rally"] = rally
@@ -67,9 +67,11 @@ def rally_count(rawfile, predict_file, savefile):
 	result_data["on_off_court"] = list(lose_detail['lose_reason'].values)
 	result_data["balltype"] = balltype
 	result_data["lose_area"] = list(lose_detail['hit_area'].values)
+	result_data["error"] = error
+
 
 	result_data = (result_data.groupby(['set'], as_index = True)
-	            .apply(lambda x: x[['rally','score','stroke','winner','on_off_court','balltype','lose_area']].to_dict('records'))
+	            .apply(lambda x: x[['rally','score','stroke','winner','on_off_court','balltype','lose_area','error']].to_dict('records'))
 	            .reset_index()
 	            .rename(columns={0:'result'})
 	            )
