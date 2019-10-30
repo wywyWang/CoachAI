@@ -20,6 +20,7 @@ def rally_count(rawfile, predict_file, savefile):
 	score = []
 	stroke = []
 	winner = []
+	error = []
 
 	for i in range(len(needed_data['hit_area'])):
 		if type(needed_data['getpoint_player'][i]) != float:
