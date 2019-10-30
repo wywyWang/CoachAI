@@ -103,7 +103,7 @@ def custom_time(time):
 	return cts
 
 def run(TrackNet_input, TrackNet_output):
-    load_weights = './preprocessing/Data/TrackNetModel/TrackNet_weight_0825.h5'
+    load_weights = './preprocessing/Data/TrackNetModel/TrackNet_weight_0906.h5'
     print(TrackNet_input)
     sigma = 5
     mag = 1

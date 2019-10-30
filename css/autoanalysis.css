@@ -1,0 +1,9 @@
+.waiting img {
+    display: inline-block;
+    width: 100%;
+}
+
+.modal-title {
+    font-weight: bold;
+    text-align: center;
+}
