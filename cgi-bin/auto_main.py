@@ -146,7 +146,6 @@ if __name__ == "__main__":
         print("<br>")
 
         # output json file
-        clip_info_file = "./preprocessing/Data/TrainTest/clip_info_18IND_TC.xlsx"
-        output.run(raw_data, filename_result, rally_count_json_filename, rally_type_json_filename, game_name_json_filename, input_video_name, clip_info_file)
+        output.run(raw_data, filename_result, rally_count_json_filename, rally_type_json_filename, game_name_json_filename, input_video_name)
 
     videolist.savelist2json()       
