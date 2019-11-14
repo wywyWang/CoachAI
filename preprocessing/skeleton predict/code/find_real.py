@@ -125,6 +125,7 @@ def check_empty(data):
     empty_cnt = []
     is_empty = False
     cnt = 0
+    total_empty = 0
     for i in range(len(data)):
         # data[i] != data[i] => check nan
         if data[i] != data[i] and not is_empty:
@@ -137,10 +138,11 @@ def check_empty(data):
 
         if is_empty:
             cnt += 1
+            total_empty+=1
 
     if cnt:
         empty_cnt.append(cnt)
-
+    print("total: "+str(len(data))+" empty: "+str(total_empty))
     return empty_idx, empty_cnt
 
 def fill(data, empty_idx, empty_cnt):
@@ -188,10 +190,17 @@ def fill(data, empty_idx, empty_cnt):
 def fill_empty():
     data_top = pd.read_csv(top_filename)
     data_bot = pd.read_csv(bot_filename)
-    player_top = fill(data_top, check_empty(data_top['x11'])[0], check_empty(data_top['x11'])[1])
-    player_bot = fill(data_bot, check_empty(data_bot['x11'])[0], check_empty(data_bot['x11'])[1])
+    #total: 18242 empty: 4871
+    empty_top_idx, empty_top_cnt = check_empty(data_top['x11'])
+    #total: 18242 empty: 527
+    empty_bot_idx, empty_bot_cnt = check_empty(data_bot['x11'])
+    player_top = fill(data_top, empty_top_idx, empty_top_cnt)
+    player_bot = fill(data_bot, empty_bot_idx, empty_bot_cnt)
     player_top.to_csv(fill_top, index=False, encoding = 'utf-8')
     player_bot.to_csv(fill_bot, index=False, encoding = 'utf-8')
+
+    
+    
 
 def exec():
     fill_empty()
