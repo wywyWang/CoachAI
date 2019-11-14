@@ -104,6 +104,13 @@ def RandomForest(filename, x_predict, model_name, RF_outputname, set_now):
 
     result.to_csv(RF_outputname,index=None)
 
+    cnt = 0
+    for i in range(len(result['Real'])):
+        if result['Real'][i] == result['Predict'][i]:
+            cnt+=1
+    
+    print("RF Total correct: "+str(cnt))
+    print("RF Total number: "+str(len(prediction)))
     print("RF Accuracy: "+str(accuracy_score(real_num, prediction)))
     print("RF Overall precision: "+str(precision_score(real_num, prediction, labels = label, average='micro')))
     print("RF Overall recall: "+str(recall_score(real_num, prediction, labels = label, average='micro')))
@@ -133,8 +140,11 @@ def SVM(filename, x_predict, model_name, svm_outputname, set_now):
     prediction = model.predict(x_predict)
     
     for ball in data['type']:
-        real_eng.append(num_to_type[type_to_num[ball_type_convertion(ball)]])
-        real_num.append(type_to_num[ball_type_convertion(ball)])
+        try:
+            real_eng.append(num_to_type[type_to_num[ball_type_convertion(ball)]])
+            real_num.append(type_to_num[ball_type_convertion(ball)])
+        except:
+            print(ball)
 
     for ball in prediction:
         predict_result_eng.append(num_to_type[ball])
@@ -144,7 +154,14 @@ def SVM(filename, x_predict, model_name, svm_outputname, set_now):
     result['Predict'] = prediction
 
     result.to_csv(svm_outputname,index=None)
-
+    
+    cnt = 0
+    for i in range(len(result['Real'])):
+        if result['Real'][i] == result['Predict'][i]:
+            cnt+=1
+    
+    print("SVM Total correct: "+str(cnt))
+    print("SVM Total number: "+str(len(prediction)))
     print("SVM Accuracy: "+str(accuracy_score(real_num, prediction)))
     print("SVM Overall precision: "+str(precision_score(real_num, prediction, labels = label, average='micro')))
     print("SVM Overall recall: "+str(recall_score(real_num, prediction, labels = label, average='micro')))
@@ -188,6 +205,13 @@ def XGBoost(filename, x_predict, xgboost_model_name, xgboost_outputname, set_now
     result.to_csv(xgboost_outputname, index=None)
 
     # print precision and recall
+    cnt = 0
+    for i in range(len(result['Real'])):
+        if result['Real'][i] == result['Predict'][i]:
+            cnt+=1
+    
+    print("XGBoost Total correct: "+str(cnt))
+    print("XGBoost Total number: "+str(len(prediction)))
     print("XGBoost Accuracy: "+str(accuracy_score(real_num, prediction)))
     print("XGBoost Average precision: "+str(precision_score(real_num, prediction, labels = label, average='micro')))
     print("XGBoost Average recall: "+str(recall_score(real_num, prediction, labels = label, average='micro')))
@@ -198,30 +222,52 @@ def XGBoost(filename, x_predict, xgboost_model_name, xgboost_outputname, set_now
     # plot result chart
     #plot_chart(set_now, "XGB", xgboost_model, real_eng, predict_result_eng, list(type_to_num.keys()))
 
-def Run(set_now, filename, svm_option, svm_model_name, svm_prediction_result_file, svm_outputname, xgboost_option, xgboost_model_name, xgboost_prediction_result_file, xgboost_outputname, RF_option, RF_model_name, RF_prediction_result_file, RF_outputname):
+def Run(change_side, set_now, filename, svm_option, svm_model_name, svm_prediction_result_file, svm_outputname, xgboost_option, xgboost_model_name, xgboost_prediction_result_file, xgboost_outputname, RF_option, RF_model_name, RF_prediction_result_file, RF_outputname):
 	
     if svm_option and svm_model_name != '':
-        print("SVM predicting set"+str(set_now)+"...")
+        if change_side:
+            print("SVM predicting set"+str(set_now)+"-1...")
+        else:
+            print("SVM predicting set"+str(set_now)+"...")
         x_predict = LoadData(filename, svm_prediction_result_file)
         SVM(filename, x_predict, svm_model_name, svm_outputname, set_now)
         #print("SVM predict set"+str(set_now)+" done!")
         print("---------------------------------------------------")
     if xgboost_option and xgboost_model_name != '':
-        print("XGBoost predicting set"+str(set_now)+"...")
+        if change_side:
+            print("XGBoost predicting set"+str(set_now)+"-1...")
+        else:
+            print("XGBoost predicting set"+str(set_now)+"...")
         x_predict = LoadData(filename, xgboost_prediction_result_file)
         XGBoost(filename, x_predict, xgboost_model_name, xgboost_outputname, set_now)
         #print("XGBoost predict set"+str(set_now)+" done!")
         print("---------------------------------------------------")
     if RF_option and RF_model_name != '':
-        print("Random Forest predicting set"+str(set_now)+"...")
+        if change_side:
+            print("Random Forest predicting set"+str(set_now)+"-1...")
+        else:
+            print("Random Forest predicting set"+str(set_now)+"...")
         RandomForest(filename, x_predict, RF_model_name, RF_outputname, set_now)
         #print("Random Forest predict set"+str(set_now)+" done!")
         print("---------------------------------------------------")
 
 def exec(predict_set):
+    change_side = False
     for i in predict_set:
-        Run(i ,'../data/set'+str(i)+'_with_skeleton.csv', True, '../model/SVM_balltype.joblib.dat', '../data/result/SVM_set'+str(i)+'_skeleton_out.csv', '../data/result/SVM_set'+str(i)+'_balltype_out.csv', \
+        '''
+        Run(change_side, i ,'../data/set'+str(i)+'_with_skeleton.csv', True, '../model/SVM_balltype.joblib.dat', '../data/result/SVM_set'+str(i)+'_skeleton_out.csv', '../data/result/SVM_set'+str(i)+'_balltype_out.csv', \
             True, '../model/XGB_balltype.joblib.dat', '../data/result/XGB_set'+str(i)+'_skeleton_out.csv', '../data/result/XGB_set'+str(i)+'_balltype_out.csv', \
             True, '../model/RF_balltype.joblib.dat', '../data/result/RF_set'+str(i)+'_skeleton_out.csv', '../data/result/RF_set'+str(i)+'_balltype_out.csv')
-    #Run(3 ,'../data/set3-1_with_skeleton.csv', False, '../model/SVM_balltype.joblib.dat', '../data/result/SVM_set3-1_skeleton_out.csv', '../data/result/SVM_set3-1_balltype_out.csv', True, '../model/XGB_balltype.joblib.dat', '../data/result/XGB_set3-1_skeleton_out.csv', '../data/result/XGB_set3-1_balltype_out.csv')
-exec([1, 2, 3])	
+        '''
+        Run(change_side, i ,'../data/18IND_TC_set'+str(i)+'_with_skeleton.csv', True, '../model/SVM_balltype.joblib.dat', '../data/result/SVM_set'+str(i)+'_skeleton_out.csv', '../data/result/SVM_set'+str(i)+'_balltype_out.csv', \
+            True, '../model/XGB_balltype.joblib.dat', '../data/result/XGB_set'+str(i)+'_skeleton_out.csv', '../data/result/XGB_set'+str(i)+'_balltype_out.csv', \
+            True, '../model/RF_balltype.joblib.dat', '../data/result/RF_set'+str(i)+'_skeleton_out.csv', '../data/result/RF_set'+str(i)+'_balltype_out.csv')
+
+    '''
+    change_side = True
+    
+    Run(change_side, 3 ,'../data/set'+str(i)+'-1_with_skeleton.csv', True, '../model/SVM_balltype.joblib.dat', '../data/result/SVM_set'+str(i)+'-1_skeleton_out.csv', '../data/result/SVM_set'+str(i)+'-1_balltype_out.csv', \
+            True, '../model/XGB_balltype.joblib.dat', '../data/result/XGB_set'+str(i)+'-1_skeleton_out.csv', '../data/result/XGB_set'+str(i)+'-1_balltype_out.csv', \
+            True, '../model/RF_balltype.joblib.dat', '../data/result/RF_set'+str(i)+'-1_skeleton_out.csv', '../data/result/RF_set'+str(i)+'-1_balltype_out.csv')
+    '''
+exec([1, 2])	

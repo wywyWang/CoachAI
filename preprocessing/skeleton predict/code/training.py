@@ -123,4 +123,4 @@ def Run(filename, svm_option, svm_model_name, xgboost_option, xgboost_model_name
 		print("Random Forest training done!")
 		print("Random Forest training time: "+str(te-ts))
 
-Run('../data/set1_with_skeleton.csv', True, '../model/SVM_skeleton.joblib.dat', True, '../model/XGB_skeleton.joblib.dat', True, '../model/RF_skeleton.joblib.dat')
+Run('../data/18IND_TC_set1_with_skeleton.csv', True, '../model/SVM_skeleton.joblib.dat', True, '../model/XGB_skeleton.joblib.dat', True, '../model/RF_skeleton.joblib.dat')

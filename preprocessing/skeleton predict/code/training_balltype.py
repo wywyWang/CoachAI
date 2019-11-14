@@ -142,6 +142,6 @@ def Run(filename, svm_option, svm_model_name, svm_ball_height_predict_result, xg
 		print("Random Forest training done!")
 		print("Random Forest training time: "+str(te-ts))
 
-Run('../data/set1_with_skeleton.csv', True, '../model/SVM_balltype.joblib.dat', '../data/result/SVM_set1_skeleton_out.csv', \
+Run('../data/18IND_TC_set1_with_skeleton.csv', True, '../model/SVM_balltype.joblib.dat', '../data/result/SVM_set1_skeleton_out.csv', \
 									  True, '../model/XGB_balltype.joblib.dat', '../data/result/XGB_set1_skeleton_out.csv', \
 									  True, '../model/RF_balltype.joblib.dat', '../data/result/RF_set1_skeleton_out.csv')
