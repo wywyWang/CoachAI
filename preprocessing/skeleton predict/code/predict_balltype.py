@@ -18,13 +18,17 @@ needed = ['flying_time', 'now_right_x', 'now_right_y', 'now_left_x', 'now_left_y
 		'next_right_x', 'next_right_y', 'next_left_x', 'next_left_y', 
 		'right_delta_x', 'right_delta_y', 'left_delta_x', 'left_delta_y',
 		'right_x_speed', 'right_y_speed','right_speed',
-		'left_x_speed', 'left_y_speed', 'left_speed', 'hit_height', 'type', 'avg_ball_speed', 'hitting_area_number', 'landing_area_number']
+		'left_x_speed', 'left_y_speed', 'left_speed', 'hit_height', 'type', 'avg_ball_speed',  
+        'hitting_area_number_1', 'hitting_area_number_2', 'hitting_area_number_3', 'hitting_area_number_4', 
+        'landing_area_number_1', 'landing_area_number_2', 'landing_area_number_3', 'landing_area_number_4']
 
 test_needed = ['flying_time', 'now_right_x', 'now_right_y', 'now_left_x', 'now_left_y', 
 		'next_right_x', 'next_right_y', 'next_left_x', 'next_left_y', 
 		'right_delta_x', 'right_delta_y', 'left_delta_x', 'left_delta_y',
 		'right_x_speed', 'right_y_speed','right_speed',
-		'left_x_speed', 'left_y_speed', 'left_speed', 'avg_ball_speed', 'hitting_area_number', 'landing_area_number']
+		'left_x_speed', 'left_y_speed', 'left_speed', 'avg_ball_speed',   
+        'hitting_area_number_1', 'hitting_area_number_2', 'hitting_area_number_3', 'hitting_area_number_4', 
+        'landing_area_number_1', 'landing_area_number_2', 'landing_area_number_3', 'landing_area_number_4']
 
 def LoadData(filename, ball_height_predict):
     data = pd.read_csv(filename)
@@ -37,13 +41,25 @@ def LoadData(filename, ball_height_predict):
     data = data[data.type != '發球犯規']
     data.reset_index(drop=True, inplace=True)
 
-    data['Predict'] = ball_height['Predict']
+    active = []
+    passive = []
+
+    for i in ball_height['Predict']:
+        if i == 1:
+            active.append(1)
+            passive.append(0)
+        else:
+            active.append(0)
+            passive.append(1)
+
+    data['active'] = active
+    data['passive'] = passive
     
-    x_predict = data[test_needed+['Predict']]
+    x_predict = data[test_needed+['active', 'passive']]
 
     return x_predict
 
-def plot_Confusion_Matrix(set_now, model_type, cm, groundtruth, grid_predictions, classes):
+def plot_Confusion_Matrix(game_name, set_now, model_type, cm, groundtruth, grid_predictions, classes, change_side):
     plt.imshow(cm, cmap=plt.cm.Blues)
     plt.title('Confusion matrix')
     plt.colorbar()
@@ -62,16 +78,20 @@ def plot_Confusion_Matrix(set_now, model_type, cm, groundtruth, grid_predictions
             color="white" if cm[j, i] > cm.max()/2. else "black", 
             horizontalalignment="center")
 
-    plt.savefig('../data/img/'+str(model_type)+'_set'+str(set_now)+'_balltype_confusion_matrix.png')
+    if change_side:
+        plt.savefig('../data/'+str(game_name)+'/img/'+str(model_type)+'-1_set'+str(set_now)+'_balltype_confusion_matrix.png')
+    else:
+        plt.savefig('../data/'+str(game_name)+'/img/'+str(model_type)+'_set'+str(set_now)+'_balltype_confusion_matrix.png')
+
     plt.close(0)
 
-def plot_chart(set_now, model_type, model, groundtruth, grid_predictions, labels):
+def plot_chart(game_name, set_now, model_type, model, groundtruth, grid_predictions, labels, change_side):
     # confusion matrix
-    plot_Confusion_Matrix(set_now, model_type, confusion_matrix(groundtruth, grid_predictions, labels=labels), groundtruth, grid_predictions, labels)
+    plot_Confusion_Matrix(set_now, model_type, confusion_matrix(groundtruth, grid_predictions, labels=labels), groundtruth, grid_predictions, labels, change_side)
     plt.clf()
     plt.close()
 
-def RandomForest(filename, x_predict, model_name, RF_outputname, set_now):
+def RandomForest(filename, x_predict, model_name, RF_outputname, set_now, game_name, change_side):
     data = pd.read_csv(filename)
     data = data[needed]
     data.dropna(inplace=True)
@@ -119,7 +139,7 @@ def RandomForest(filename, x_predict, model_name, RF_outputname, set_now):
     #print("RF Average recall: "+str(recall_score(real_num, prediction, labels = label, average=None)))
 
 
-def SVM(filename, x_predict, model_name, svm_outputname, set_now):
+def SVM(filename, x_predict, model_name, svm_outputname, set_now, game_name, change_side):
     data = pd.read_csv(filename)
     data = data[needed]
     data.dropna(inplace=True)
@@ -170,7 +190,7 @@ def SVM(filename, x_predict, model_name, svm_outputname, set_now):
     #print("SVM Average recall: "+str(recall_score(real_num, prediction, labels = label, average=None)))
 
 
-def XGBoost(filename, x_predict, xgboost_model_name, xgboost_outputname, set_now):
+def XGBoost(filename, x_predict, xgboost_model_name, xgboost_outputname, set_now, game_name, change_side):
     data = pd.read_csv(filename)
     data = data[needed]
     data.dropna(inplace=True)
@@ -220,9 +240,9 @@ def XGBoost(filename, x_predict, xgboost_model_name, xgboost_outputname, set_now
     #print("XGBoost Overall Recall: "+str(recall_score(real_num, prediction, labels = label, average=None)))
     
     # plot result chart
-    #plot_chart(set_now, "XGB", xgboost_model, real_eng, predict_result_eng, list(type_to_num.keys()))
+    #plot_chart(game_name, set_now, "XGB", xgboost_model, real_eng, predict_result_eng, list(type_to_num.keys()), change_side)
 
-def Run(change_side, set_now, filename, svm_option, svm_model_name, svm_prediction_result_file, svm_outputname, xgboost_option, xgboost_model_name, xgboost_prediction_result_file, xgboost_outputname, RF_option, RF_model_name, RF_prediction_result_file, RF_outputname):
+def Run(game_name, change_side, set_now, filename, svm_option, svm_model_name, svm_prediction_result_file, svm_outputname, xgboost_option, xgboost_model_name, xgboost_prediction_result_file, xgboost_outputname, RF_option, RF_model_name, RF_prediction_result_file, RF_outputname):
 	
     if svm_option and svm_model_name != '':
         if change_side:
@@ -230,7 +250,7 @@ def Run(change_side, set_now, filename, svm_option, svm_model_name, svm_predicti
         else:
             print("SVM predicting set"+str(set_now)+"...")
         x_predict = LoadData(filename, svm_prediction_result_file)
-        SVM(filename, x_predict, svm_model_name, svm_outputname, set_now)
+        SVM(filename, x_predict, svm_model_name, svm_outputname, set_now, game_name, change_side)
         #print("SVM predict set"+str(set_now)+" done!")
         print("---------------------------------------------------")
     if xgboost_option and xgboost_model_name != '':
@@ -239,7 +259,7 @@ def Run(change_side, set_now, filename, svm_option, svm_model_name, svm_predicti
         else:
             print("XGBoost predicting set"+str(set_now)+"...")
         x_predict = LoadData(filename, xgboost_prediction_result_file)
-        XGBoost(filename, x_predict, xgboost_model_name, xgboost_outputname, set_now)
+        XGBoost(filename, x_predict, xgboost_model_name, xgboost_outputname, set_now, game_name, change_side)
         #print("XGBoost predict set"+str(set_now)+" done!")
         print("---------------------------------------------------")
     if RF_option and RF_model_name != '':
@@ -247,21 +267,19 @@ def Run(change_side, set_now, filename, svm_option, svm_model_name, svm_predicti
             print("Random Forest predicting set"+str(set_now)+"-1...")
         else:
             print("Random Forest predicting set"+str(set_now)+"...")
-        RandomForest(filename, x_predict, RF_model_name, RF_outputname, set_now)
+        RandomForest(filename, x_predict, RF_model_name, RF_outputname, set_now, game_name, change_side)
         #print("Random Forest predict set"+str(set_now)+" done!")
         print("---------------------------------------------------")
 
 def exec(predict_set):
     change_side = False
+    game_name = "18ENG_TC"
+
     for i in predict_set:
-        '''
-        Run(change_side, i ,'../data/set'+str(i)+'_with_skeleton.csv', True, '../model/SVM_balltype.joblib.dat', '../data/result/SVM_set'+str(i)+'_skeleton_out.csv', '../data/result/SVM_set'+str(i)+'_balltype_out.csv', \
-            True, '../model/XGB_balltype.joblib.dat', '../data/result/XGB_set'+str(i)+'_skeleton_out.csv', '../data/result/XGB_set'+str(i)+'_balltype_out.csv', \
-            True, '../model/RF_balltype.joblib.dat', '../data/result/RF_set'+str(i)+'_skeleton_out.csv', '../data/result/RF_set'+str(i)+'_balltype_out.csv')
-        '''
-        Run(change_side, i ,'../data/18IND_TC_set'+str(i)+'_with_skeleton.csv', True, '../model/SVM_balltype.joblib.dat', '../data/result/SVM_set'+str(i)+'_skeleton_out.csv', '../data/result/SVM_set'+str(i)+'_balltype_out.csv', \
-            True, '../model/XGB_balltype.joblib.dat', '../data/result/XGB_set'+str(i)+'_skeleton_out.csv', '../data/result/XGB_set'+str(i)+'_balltype_out.csv', \
-            True, '../model/RF_balltype.joblib.dat', '../data/result/RF_set'+str(i)+'_skeleton_out.csv', '../data/result/RF_set'+str(i)+'_balltype_out.csv')
+        Run(game_name, change_side, i ,'../data/'+str(game_name)+'/'+str(game_name)+'_set'+str(i)+'_with_skeleton.csv', \
+            False, '../model/'+str(game_name)+'_SVM_balltype.joblib.dat', '../data/'+str(game_name)+'/result/SVM_set'+str(i)+'_skeleton_out.csv', '../data/'+str(game_name)+'/result/SVM_set'+str(i)+'_balltype_out.csv', \
+            True, '../model/'+str(game_name)+'_XGB_balltype.joblib.dat', '../data/'+str(game_name)+'/result/XGB_set'+str(i)+'_skeleton_out.csv', '../data/'+str(game_name)+'/result/XGB_set'+str(i)+'_balltype_out.csv', \
+            True, '../model/'+str(game_name)+'_RF_balltype.joblib.dat', '../data/'+str(game_name)+'/result/RF_set'+str(i)+'_skeleton_out.csv', '../data/'+str(game_name)+'/result/RF_set'+str(i)+'_balltype_out.csv')
 
     '''
     change_side = True
@@ -270,4 +288,4 @@ def exec(predict_set):
             True, '../model/XGB_balltype.joblib.dat', '../data/result/XGB_set'+str(i)+'-1_skeleton_out.csv', '../data/result/XGB_set'+str(i)+'-1_balltype_out.csv', \
             True, '../model/RF_balltype.joblib.dat', '../data/result/RF_set'+str(i)+'-1_skeleton_out.csv', '../data/result/RF_set'+str(i)+'-1_balltype_out.csv')
     '''
-exec([1, 2])	
+exec([1, 2, 3])	

@@ -5,10 +5,17 @@ import json
 import numpy as np
 import cv2
 
-bot_filename = '../data/player_skeleton/18IND_TC/bot_player_box_poses.csv'
-top_filename = '../data/player_skeleton/18IND_TC/top_player_box_poses.csv'
-fill_bot = '../data/player_skeleton/18IND_TC/bot_player_box_poses_fill.csv'
-fill_top = '../data/player_skeleton/18IND_TC/top_player_box_poses_fill.csv'
+game_name = '18ENG_TC'
+ext = '.csv'
+
+bot_filename = '../data/'+str(game_name)+'/player_skeleton/bottom_player_skeleton'
+top_filename = '../data/'+str(game_name)+'/player_skeleton/top_player_skeleton'
+
+raw_bot_filename = bot_filename+str(ext)
+raw_top_filename = top_filename+str(ext)
+
+fill_bot = bot_filename+'_fill'+str(ext)
+fill_top = top_filename+'_fill'+str(ext)
 
 def save_to_csv(sets, frame, top_left_x, top_left_y, top_right_x, top_right_y, bot_left_x, bot_left_y, bot_right_x, bot_right_y):
     result = pd.DataFrame([])
@@ -23,7 +30,7 @@ def save_to_csv(sets, frame, top_left_x, top_left_y, top_right_x, top_right_y, b
     result['bot_left_x'] = bot_left_x
     result['bot_left_y'] = bot_left_y
 
-    result.to_csv("../data/18IND_TC_skeleton.csv", index=False, encoding = 'utf-8')
+    result.to_csv("../data/"+str(game_name)+"/player_skeleton/"+str(game_name)+"_set"+str(sets+1)+"_skeleton"+str(ext), index=False, encoding = 'utf-8')
 
 def find_real():
     player_bot = pd.read_csv(fill_bot)
@@ -49,7 +56,7 @@ def find_real():
 
     for i in range(len(player_bot)):
         #img = draw_court()
-        '''
+        
         if sets != int(player_bot['set'][i]):
             save_to_csv(sets, frame, top_left_x, top_left_y, top_right_x, top_right_y, bot_left_x, bot_left_y, bot_right_x, bot_right_y)
             frame = []
@@ -63,8 +70,8 @@ def find_real():
             bot_right_y = []
             
             sets = int(player_bot['set'][i])
-        '''
-        frame.append(player_bot['index'][i])
+        
+        frame.append(player_bot['frame_id'][i])
 
         # middle point of bottom player
         bot_mid_x = (player_bot['x11'][i] + player_bot['x14'][i])/2
@@ -188,8 +195,8 @@ def fill(data, empty_idx, empty_cnt):
     return data
 
 def fill_empty():
-    data_top = pd.read_csv(top_filename)
-    data_bot = pd.read_csv(bot_filename)
+    data_top = pd.read_csv(raw_top_filename)
+    data_bot = pd.read_csv(raw_bot_filename)
     #total: 18242 empty: 4871
     empty_top_idx, empty_top_cnt = check_empty(data_top['x11'])
     #total: 18242 empty: 527
@@ -198,9 +205,6 @@ def fill_empty():
     player_bot = fill(data_bot, empty_bot_idx, empty_bot_cnt)
     player_top.to_csv(fill_top, index=False, encoding = 'utf-8')
     player_bot.to_csv(fill_bot, index=False, encoding = 'utf-8')
-
-    
-    
 
 def exec():
     fill_empty()

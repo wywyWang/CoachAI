@@ -17,13 +17,17 @@ needed = ['flying_time', 'now_right_x', 'now_right_y', 'now_left_x', 'now_left_y
 		'next_right_x', 'next_right_y', 'next_left_x', 'next_left_y', 
 		'right_delta_x', 'right_delta_y', 'left_delta_x', 'left_delta_y',
 		'right_x_speed', 'right_y_speed','right_speed',
-		'left_x_speed', 'left_y_speed', 'left_speed', 'hit_height', 'type', 'avg_ball_speed', 'hitting_area_number', 'landing_area_number']
+		'left_x_speed', 'left_y_speed', 'left_speed', 'hit_height', 'type', 'avg_ball_speed', 
+		'hitting_area_number_1', 'hitting_area_number_2', 'hitting_area_number_3', 'hitting_area_number_4', 
+		'landing_area_number_1', 'landing_area_number_2', 'landing_area_number_3', 'landing_area_number_4']
 
 train_needed = ['flying_time', 'now_right_x', 'now_right_y', 'now_left_x', 'now_left_y', 
 		'next_right_x', 'next_right_y', 'next_left_x', 'next_left_y', 
 		'right_delta_x', 'right_delta_y', 'left_delta_x', 'left_delta_y',
 		'right_x_speed', 'right_y_speed','right_speed',
-		'left_x_speed', 'left_y_speed', 'left_speed', 'avg_ball_speed', 'hitting_area_number', 'landing_area_number']
+		'left_x_speed', 'left_y_speed', 'left_speed', 'avg_ball_speed',  
+		'hitting_area_number_1', 'hitting_area_number_2', 'hitting_area_number_3', 'hitting_area_number_4', 
+		'landing_area_number_1', 'landing_area_number_2', 'landing_area_number_3', 'landing_area_number_4']
 test_needed = ['type']
 
 def LoadData(filename, ball_height_predict):
@@ -48,10 +52,21 @@ def LoadData(filename, ball_height_predict):
 		ball_type.append(eng_type_to_num[ball_type_convertion(t)])
 
 	data['type'] = ball_type
-	data['Predict'] = ball_height['Predict']
-	#x_train = data[train_needed]
+	active = []
+	passive = []
 
-	x_train = data[train_needed+['Predict']]
+	for i in ball_height['Predict']:
+		if i == 1:
+			active.append(1)
+			passive.append(0)
+		else:
+			active.append(0)
+			passive.append(1)
+
+	data['active'] = active
+	data['passive'] = passive
+
+	x_train = data[train_needed+['active', 'passive']]
 	y_train = data['type']
 
 	y_train = np.array(y_train).ravel()
@@ -78,7 +93,7 @@ def XGBoost(x_train, y_train, model_name):
         'learning_rate': 0.01,
         'n_estimators': 800,
         #'max_depth': 8,
-        'min_child_weight': 1,
+        #'min_child_weight': 1,
         'gamma': 0,
         'subsample': 0.8,
         'colsample_bytree': 0.8,
@@ -142,6 +157,9 @@ def Run(filename, svm_option, svm_model_name, svm_ball_height_predict_result, xg
 		print("Random Forest training done!")
 		print("Random Forest training time: "+str(te-ts))
 
-Run('../data/18IND_TC_set1_with_skeleton.csv', True, '../model/SVM_balltype.joblib.dat', '../data/result/SVM_set1_skeleton_out.csv', \
-									  True, '../model/XGB_balltype.joblib.dat', '../data/result/XGB_set1_skeleton_out.csv', \
-									  True, '../model/RF_balltype.joblib.dat', '../data/result/RF_set1_skeleton_out.csv')
+game_name = "18ENG_TC"
+
+Run('../data/'+str(game_name)+'/'+str(game_name)+'_set1_with_skeleton.csv', \
+	False, '../model/'+str(game_name)+'_SVM_balltype.joblib.dat', '../data/'+str(game_name)+'/result/SVM_set1_skeleton_out.csv', \
+	True, '../model/'+str(game_name)+'_XGB_balltype.joblib.dat', '../data/'+str(game_name)+'/result/XGB_set1_skeleton_out.csv', \
+	True, '../model/'+str(game_name)+'_RF_balltype.joblib.dat', '../data/'+str(game_name)+'/result/RF_set1_skeleton_out.csv')

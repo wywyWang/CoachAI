@@ -16,13 +16,17 @@ needed = ['flying_time', 'now_right_x', 'now_right_y', 'now_left_x', 'now_left_y
 		'next_right_x', 'next_right_y', 'next_left_x', 'next_left_y', 
 		'right_delta_x', 'right_delta_y', 'left_delta_x', 'left_delta_y',
 		'right_x_speed', 'right_y_speed', 'right_speed',
-		'left_x_speed', 'left_y_speed', 'left_speed','hit_height', 'avg_ball_speed', 'type', 'hitting_area_number', 'landing_area_number']
+		'left_x_speed', 'left_y_speed', 'left_speed','hit_height', 'avg_ball_speed', 'type', 
+		'hitting_area_number_1', 'hitting_area_number_2', 'hitting_area_number_3', 'hitting_area_number_4', 
+		'landing_area_number_1', 'landing_area_number_2', 'landing_area_number_3', 'landing_area_number_4']
 
 train_needed = ['flying_time', 'now_right_x', 'now_right_y', 'now_left_x', 'now_left_y', 
 		'next_right_x', 'next_right_y', 'next_left_x', 'next_left_y', 
 		'right_delta_x', 'right_delta_y', 'left_delta_x', 'left_delta_y',
 		'right_x_speed', 'right_y_speed','right_speed',
-		'left_x_speed', 'left_y_speed', 'left_speed', 'avg_ball_speed', 'hitting_area_number', 'landing_area_number']
+		'left_x_speed', 'left_y_speed', 'left_speed', 'avg_ball_speed',
+		'hitting_area_number_1', 'hitting_area_number_2', 'hitting_area_number_3', 'hitting_area_number_4', 
+		'landing_area_number_1', 'landing_area_number_2', 'landing_area_number_3', 'landing_area_number_4']
 
 test_needed = ['hit_height']
 
@@ -64,8 +68,8 @@ def XGBoost(x_train, y_train, model_name):
 	params = {
         'learning_rate': 0.01,
         'n_estimators': 800,
-        'max_depth': 2,
-        'min_child_weight': 2,
+        #'max_depth': 2000,
+        #'min_child_weight': 2,
         'gamma': 0,
         'subsample': 0.83,
         'colsample_bytree': 0.83,
@@ -123,4 +127,8 @@ def Run(filename, svm_option, svm_model_name, xgboost_option, xgboost_model_name
 		print("Random Forest training done!")
 		print("Random Forest training time: "+str(te-ts))
 
-Run('../data/18IND_TC_set1_with_skeleton.csv', True, '../model/SVM_skeleton.joblib.dat', True, '../model/XGB_skeleton.joblib.dat', True, '../model/RF_skeleton.joblib.dat')
+game_name = "18ENG_TC"
+Run('../data/'+str(game_name)+'/'+str(game_name)+'_set1_with_skeleton.csv', \
+	False, '../model/'+str(game_name)+'_SVM_skeleton.joblib.dat', \
+	True, '../model/'+str(game_name)+'_XGB_skeleton.joblib.dat', \
+	True, '../model/'+str(game_name)+'_RF_skeleton.joblib.dat')
