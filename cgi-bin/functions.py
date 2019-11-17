@@ -65,7 +65,7 @@ def direction(diagonal_angle,hit_x,hit_y,hit_area,landing_x,landing_y,landing_ar
 def ball_type_convertion(ball_type):
     if ball_type == '切球' or ball_type == '過渡切球':
         return 'cut'
-    elif ball_type == '平球' or ball_type == '小平球' or ball_type == '後場抽平球':
+    elif ball_type == '平球' or ball_type == '小平球' or ball_type == '後場抽平球' or ball_type == '後場平球':
         return 'drive'
     elif ball_type == '挑球' or ball_type == '防守回挑':
         return 'lob'
@@ -73,7 +73,7 @@ def ball_type_convertion(ball_type):
         return 'long'
     elif ball_type == '發小球' or ball_type == '放小球' or ball_type == '擋小球':
         return 'netplay'
-    elif ball_type == '撲球':
+    elif ball_type == '撲球' or ball_type == '刷球' :
         return 'rush'
     elif ball_type == '殺球':
         return 'smash'

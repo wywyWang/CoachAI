@@ -76,7 +76,6 @@ def rally_count(rawfile, predict_file, savefile):
 
 	export_json(savefile, result_data)
 
-
 def rally_type(rawfile, predict_file, savefile):
 	rally_data = pd.read_csv(rawfile)
 	hits = pd.read_csv(predict_file)

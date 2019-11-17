@@ -12,10 +12,11 @@ def get_hitting_pos(set_info, skeleton_info, top_is_Taiwan):
 	hitting_pos = []
 	times = []
 	pre_id = 0
-	for idx in range(len(set_info['frame_num'])):
+	for idx in set_info.index:
 		skeleton_idx = find_index(skeleton_info['frame'], set_info['frame_num'][idx])
 		pos = []
-		
+		#print(idx)
+		#print(set_info['time'][idx])
 		if skeleton_idx == None:
 			pos.append('')
 			pos.append('')
@@ -29,28 +30,60 @@ def get_hitting_pos(set_info, skeleton_info, top_is_Taiwan):
 					pos.append(skeleton_info['top_right_y'][skeleton_idx])
 					pos.append(skeleton_info['top_left_x'][skeleton_idx])
 					pos.append(skeleton_info['top_left_y'][skeleton_idx])
-					times.append(int(set_info['time'][idx].split(':')[0])*60*60*1000+int(set_info['time'][idx].split(':')[1])*60*1000+int(set_info['time'][idx].split(':')[2].split('.')[0])*1000+int(set_info['time'][idx].split(':')[2].split('.')[1])/100*100)
+					try:
+						#times.append(int(set_info['time'][idx].split(':')[0])*60*60*1000+int(set_info['time'][idx].split(':')[1])*60*1000+int(set_info['time'][idx].split(':')[2].split('.')[0])*1000+int(set_info['time'][idx].split(':')[2].split('.')[1])/100*100)
+						times.append(int(set_info['time'][idx].split(':')[0])*60*60*1000+int(set_info['time'][idx].split(':')[1])*60*1000+int(set_info['time'][idx].split(':')[2].split('.')[0])*1000)
+					except:
+						#print(set_info['time'][idx].split(':'))
+						#print(int(set_info['time'][idx].split(':')[0])*60*60*1000+int(set_info['time'][idx].split(':')[1])*60*1000+int(set_info['time'][idx].split(':')[2])*1000)
+						times.append(int(set_info['time'][idx].split(':')[0])*60*60*1000+int(set_info['time'][idx].split(':')[1])*60*1000+int(set_info['time'][idx].split(':')[2])*1000)
 				else:
 					pos.append(skeleton_info['bot_right_x'][skeleton_idx])
 					pos.append(skeleton_info['bot_right_y'][skeleton_idx])
 					pos.append(skeleton_info['bot_left_x'][skeleton_idx])
 					pos.append(skeleton_info['bot_left_y'][skeleton_idx])
-					times.append(int(set_info['time'][idx].split(':')[0])*60*60*1000+int(set_info['time'][idx].split(':')[1])*60*1000+int(set_info['time'][idx].split(':')[2].split('.')[0])*1000+int(set_info['time'][idx].split(':')[2].split('.')[1])/100*100)
+					try:
+						#print(set_info['time'][idx].split(':'))
+						#print(int(set_info['time'][idx].split(':')[0])*60*60*1000+int(set_info['time'][idx].split(':')[1])*60*1000+int(set_info['time'][idx].split(':')[2].split('.')[0])*1000+int(set_info['time'][idx].split(':')[2].split('.')[1])/100*100)
+						#times.append(int(set_info['time'][idx].split(':')[0])*60*60*1000+int(set_info['time'][idx].split(':')[1])*60*1000+int(set_info['time'][idx].split(':')[2].split('.')[0])*1000+int(set_info['time'][idx].split(':')[2].split('.')[1])/100*100)
+						times.append(int(set_info['time'][idx].split(':')[0])*60*60*1000+int(set_info['time'][idx].split(':')[1])*60*1000+int(set_info['time'][idx].split(':')[2].split('.')[0])*1000)
+
+					except:
+						#print(set_info['time'][idx].split(':'))
+						#print(int(set_info['time'][idx].split(':')[0])*60*60*1000+int(set_info['time'][idx].split(':')[1])*60*1000+int(set_info['time'][idx].split(':')[2])*1000)
+						times.append(int(set_info['time'][idx].split(':')[0])*60*60*1000+int(set_info['time'][idx].split(':')[1])*60*1000+int(set_info['time'][idx].split(':')[2])*1000)
 			else:
 				if set_info['player'][idx] == 'A':
 					pos.append(skeleton_info['bot_right_x'][skeleton_idx])
 					pos.append(skeleton_info['bot_right_y'][skeleton_idx])
 					pos.append(skeleton_info['bot_left_x'][skeleton_idx])
 					pos.append(skeleton_info['bot_left_y'][skeleton_idx])
-					times.append(int(set_info['time'][idx].split(':')[0])*60*60*1000+int(set_info['time'][idx].split(':')[1])*60*1000+int(set_info['time'][idx].split(':')[2].split('.')[0])*1000+int(set_info['time'][idx].split(':')[2].split('.')[1])/100*100)
+					try:
+						times.append(int(set_info['time'][idx].split(':')[0])*60*60*1000+int(set_info['time'][idx].split(':')[1])*60*1000+int(set_info['time'][idx].split(':')[2].split('.')[0])*1000)
+						#print(set_info['time'][idx].split(':'))
+						#print(int(set_info['time'][idx].split(':')[0])*60*60*1000+int(set_info['time'][idx].split(':')[1])*60*1000+int(set_info['time'][idx].split(':')[2].split('.')[0])*1000+int(set_info['time'][idx].split(':')[2].split('.')[1])/100*100)
+						#times.append(int(set_info['time'][idx].split(':')[0])*60*60*1000+int(set_info['time'][idx].split(':')[1])*60*1000+int(set_info['time'][idx].split(':')[2].split('.')[0])*1000+int(set_info['time'][idx].split(':')[2].split('.')[1])/100*100)
+					except:
+						#print(set_info['time'][idx].split(':'))
+						#print(int(set_info['time'][idx].split(':')[0])*60*60*1000+int(set_info['time'][idx].split(':')[1])*60*1000+int(set_info['time'][idx].split(':')[2])*1000)
+						times.append(int(set_info['time'][idx].split(':')[0])*60*60*1000+int(set_info['time'][idx].split(':')[1])*60*1000+int(set_info['time'][idx].split(':')[2])*1000)
 				else:
 					pos.append(skeleton_info['top_right_x'][skeleton_idx])
 					pos.append(skeleton_info['top_right_y'][skeleton_idx])
 					pos.append(skeleton_info['top_left_x'][skeleton_idx])
 					pos.append(skeleton_info['top_left_y'][skeleton_idx])
-					times.append(int(set_info['time'][idx].split(':')[0])*60*60*1000+int(set_info['time'][idx].split(':')[1])*60*1000+int(set_info['time'][idx].split(':')[2].split('.')[0])*1000+int(set_info['time'][idx].split(':')[2].split('.')[1])/100*100)
+					try:
+						times.append(int(set_info['time'][idx].split(':')[0])*60*60*1000+int(set_info['time'][idx].split(':')[1])*60*1000+int(set_info['time'][idx].split(':')[2].split('.')[0])*1000)
+						#print(set_info['time'][idx].split(':'))
+						#print(int(set_info['time'][idx].split(':')[0])*60*60*1000+int(set_info['time'][idx].split(':')[1])*60*1000+int(set_info['time'][idx].split(':')[2].split('.')[0])*1000+int(set_info['time'][idx].split(':')[2].split('.')[1])/100*100)
+						#times.append(int(set_info['time'][idx].split(':')[0])*60*60*1000+int(set_info['time'][idx].split(':')[1])*60*1000+int(set_info['time'][idx].split(':')[2].split('.')[0])*1000+int(set_info['time'][idx].split(':')[2].split('.')[1])/100*100)
+					except:
+						#print(set_info['time'][idx].split(':'))
+						#print(int(set_info['time'][idx].split(':')[0])*60*60*1000+int(set_info['time'][idx].split(':')[1])*60*1000+int(set_info['time'][idx].split(':')[2])*1000)
+						times.append(int(set_info['time'][idx].split(':')[0])*60*60*1000+int(set_info['time'][idx].split(':')[1])*60*1000+int(set_info['time'][idx].split(':')[2])*1000)
 				
 		hitting_pos.append(pos)
+
 	return hitting_pos, times
 
 def pos_test(hitting_pos, now):
@@ -75,7 +108,7 @@ def pos_test(hitting_pos, now):
 	return (True, int(start_pos[0])-int(end_pos[0]), int(start_pos[1])-int(end_pos[1]), int(start_pos[2])-int(end_pos[2]), int(start_pos[3])-int(end_pos[3]))
 
 
-def Merge(set_num, total_set, setinfo, skeleton_file, top_is_Taiwan, savename):
+def Merge(set_num, total_set, setinfo, skeleton_file, top_is_Taiwan, savename, change_side):
 	set_info = pd.read_csv(setinfo)
 	skeleton_info = pd.read_csv(skeleton_file)
 	sec_per_frame = 0.04
@@ -104,23 +137,42 @@ def Merge(set_num, total_set, setinfo, skeleton_file, top_is_Taiwan, savename):
 	else:
 		first = pd.DataFrame([])
 		second = pd.DataFrame([])
+		break_point = 0
 
 		for i in range(len(set_info['roundscore_A'])):
-			if int(set_info['roundscore_A'][i]) == 11 or int(set_info['roundscore_B'][i]) == 11:
+			if int(set_info['roundscore_A'][i]) == 12 or int(set_info['roundscore_B'][i]) == 12:
 				first = set_info[:][:i]
 				second = set_info[:][i:]
+				break_point = i
 				print(i)
 				break
-		first = first.reset_index(drop = True)
-		second = second.reset_index(drop = True)
-
+		#print(first)
+		first.reset_index()
+		#print(first)
+		second.reset_index()
+		#print(len(first))
+		#print(len(second))
 		first_part, first_time = get_hitting_pos(first, skeleton_info, top_is_Taiwan)
 		second_part, second_time = get_hitting_pos(second, skeleton_info, top_is_Taiwan)
+		
+		if change_side:
+			hitting_pos = np.array(second_part)
+			times = np.array(second_time)
+			set_info = set_info[:][break_point:]
+			set_info = set_info.reset_index(drop=True)
+			print(len(hitting_pos))
+		else:
+			hitting_pos = np.array(first_part)
+			times = np.array(first_time)
+			set_info = set_info[:][:break_point]
+			set_info = set_info.reset_index(drop=True)
+			print(len(hitting_pos))
 
-		hitting_pos = np.array(first_part+second_part)
-		times = np.array(first_time+second_time)
+		#hitting_pos = np.array(first_part+second_part)
+		#times = np.array(first_time+second_time)
+	set_info = set_info.reset_index(drop=True)
 
-	for i in range(len(hitting_pos)-1):
+	for i in range(len(hitting_pos)-2):
 		r_delta_x = int()
 		r_delta_y = int()
 		l_delta_x = int()
@@ -184,34 +236,55 @@ def Merge(set_num, total_set, setinfo, skeleton_file, top_is_Taiwan, savename):
 
 			dx = ((right_x_delta+left_x_delta)/2)**2
 			dy = ((right_y_delta+left_y_delta)/2)**2
-			dt = float(times[i+2])-float(times[i])
+			dt = float(times[i+2])-float(times[i]) 
 
-			avg_ball_speed.append(abs(math.sqrt(dx+dy)/dt))
+			try:
+				avg_ball_speed.append(abs(math.sqrt(dx+dy)/dt))
+			except:
+				avg_ball_speed.append('')
 		else:
 			avg_ball_speed.append('')
       
-	hitting_area_number = []
-	landing_area_number = []
+	hitting_area_number_1 = []
+	hitting_area_number_2 = []
+	hitting_area_number_3 = []
+	hitting_area_number_4 = []
+	
 	for i in range (0, len(hitting_pos[0:, 1])):
 		if hitting_pos[:, 1][i] == '' or hitting_pos[:, 3][i] == '':
-			hitting_area_number.append('')
+			hitting_area_number_1.append('')
+			hitting_area_number_2.append('')
+			hitting_area_number_3.append('')
+			hitting_area_number_4.append('')
 		else:
 			mid_y = (int(hitting_pos[:, 1][i])+int(hitting_pos[:, 3][i]))/2
-			if mid_y < 0:
-				hitting_area_number.append(4)
-			elif mid_y >= 0 and mid_y < 74:
-				hitting_area_number.append(3)
-			elif mid_y >= 74 and mid_y < 307:
-				hitting_area_number.append(2)
+			if mid_y < 0 or mid_y >= 935:
+				#hitting_area_number.append(4)
+				hitting_area_number_4.append(1)
+				hitting_area_number_3.append(0)
+				hitting_area_number_2.append(0)
+				hitting_area_number_1.append(0)
+
+			elif (mid_y >= 0 and mid_y < 74) or (mid_y >= 861 and mid_y < 935):
+				#hitting_area_number.append(3)
+				hitting_area_number_4.append(0)
+				hitting_area_number_3.append(1)
+				hitting_area_number_2.append(0)
+				hitting_area_number_1.append(0)
+			elif (mid_y >= 74 and mid_y < 307) or (mid_y >= 629 and mid_y < 861):
+				#hitting_area_number.append(2)
+				hitting_area_number_4.append(0)
+				hitting_area_number_3.append(0)
+				hitting_area_number_2.append(1)
+				hitting_area_number_1.append(0)
 			elif mid_y >= 307 and mid_y < 629:
-				hitting_area_number.append(1)
-			elif mid_y >= 629 and mid_y < 861:
-				hitting_area_number.append(2)
-			elif mid_y >= 861 and mid_y < 935:
-				hitting_area_number.append(3)
-			elif mid_y >= 935 :
-				hitting_area_number.append(4)
+				#hitting_area_number.append(1)
+				hitting_area_number_4.append(0)
+				hitting_area_number_3.append(0)
+				hitting_area_number_2.append(0)
+				hitting_area_number_1.append(1)
 	
+	'''
 	for i in range (0, len(hitting_pos[1:, 1])):
 		if hitting_pos[1:, 1][i]=='' or hitting_pos[1:, 3][i]=='':
 			landing_area_number.append('')
@@ -231,8 +304,15 @@ def Merge(set_num, total_set, setinfo, skeleton_file, top_is_Taiwan, savename):
 				landing_area_number.append(3)
 			elif mid_y >= 935 :
 				landing_area_number.append(4)
-
-	landing_area_number.append('')
+	'''
+	landing_area_number_1 = hitting_area_number_1[1:]
+	landing_area_number_2 = hitting_area_number_2[1:]
+	landing_area_number_3 = hitting_area_number_3[1:]
+	landing_area_number_4 = hitting_area_number_4[1:]
+	landing_area_number_1.append('')
+	landing_area_number_2.append('')
+	landing_area_number_3.append('')
+	landing_area_number_4.append('')
 
 	for i in range(len(times)-1):
 		if times[i] != '' and times[i+1] != '':
@@ -271,17 +351,37 @@ def Merge(set_num, total_set, setinfo, skeleton_file, top_is_Taiwan, savename):
 	set_info['avg_ball_speed'] = pd.Series(avg_ball_speed)
 	set_info['left_right_distance'] = pd.Series(left_right_distance)
 
-	set_info['hitting_area_number'] = pd.Series(hitting_area_number)
-	set_info['landing_area_number'] = pd.Series(landing_area_number)
+	set_info['hitting_area_number_1'] = pd.Series(hitting_area_number_1)
+	set_info['hitting_area_number_2'] = pd.Series(hitting_area_number_2)
+	set_info['hitting_area_number_3'] = pd.Series(hitting_area_number_3)
+	set_info['hitting_area_number_4'] = pd.Series(hitting_area_number_4)
+
+	set_info['landing_area_number_1'] = pd.Series(landing_area_number_1)
+	set_info['landing_area_number_2'] = pd.Series(landing_area_number_2)
+	set_info['landing_area_number_3'] = pd.Series(landing_area_number_3)
+	set_info['landing_area_number_4'] = pd.Series(landing_area_number_4)
 
 	set_info.to_csv(savename, index=False, encoding = 'utf-8')
 
-def run(set_num, total_set, top_is_Taiwan):
-	Merge(set_num, total_set, '../data/set'+str(set_num)+'.csv', '../data/set'+str(set_num)+'_skeleton.csv', top_is_Taiwan, '../data/set'+str(set_num)+'_with_skeleton.csv')
+def run(set_num, total_set, game_name, top_is_Taiwan, change_side):
+	if change_side:
+		Merge(set_num, total_set, '../data/'+str(game_name)+'/set'+str(set_num)+'.csv', '../data/'+str(game_name)+'/player_skeleton/'+str(game_name)+'_set'+str(set_num)+'_skeleton.csv', top_is_Taiwan, '../data/'+str(game_name)+'/'+str(game_name)+'_set'+str(set_num)+'-1_with_skeleton.csv', change_side)
+	else:
+		Merge(set_num, total_set, '../data/'+str(game_name)+'/set'+str(set_num)+'.csv', '../data/'+str(game_name)+'/player_skeleton/'+str(game_name)+'_set'+str(set_num)+'_skeleton.csv', top_is_Taiwan, '../data/'+str(game_name)+'/'+str(game_name)+'_set'+str(set_num)+'_with_skeleton.csv', change_side)
 
 def exec(number_of_sets):
-	top_Taiwan = False
-	for i in range(number_of_sets):
-		run(i+1, number_of_sets, top_Taiwan)
+	top_Taiwan = False #18IND_TC: True # 18ENG_TC: False
+	change_side = False
+	game_name = "18ENG_TC"
+
+	for i in range(1, number_of_sets+1):
+		print("Start merging set "+str(i))
+		run(i, number_of_sets, game_name, top_Taiwan, change_side)
+		print("Set "+str(i)+" merge done")
 		top_Taiwan = not top_Taiwan
+	
+	if number_of_sets == 3:
+		change_side = True
+		run(number_of_sets, 3, game_name, top_Taiwan, change_side)
+
 exec(3)
