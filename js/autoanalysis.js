@@ -58,24 +58,28 @@ function show_file_select() {
                 formData.append('tracknetpredictmode', 'on');
                 formData.append('segmentationmode', 'off');
                 formData.append('predictballtpyemode', 'off');
+                $(".modal-footer .waiting-content").html("Mode : TrackNet <br><br> Input : frames <br><br> Output : ball's visibility and position in each frame");
             }
             if(document.getElementById('model_name').name == 'segmentation_btn'){
                 formData.append('uploadvideomode', 'off');
                 formData.append('tracknetpredictmode', 'off');
                 formData.append('segmentationmode', 'on');
                 formData.append('predictballtpyemode', 'off');
+                $(".modal-footer .waiting-content").html("Mode : Segmentation <br><br> Input : ball's visibility and position <br><br> Output : sets of hitpoint's frame");
             }
             if(document.getElementById('model_name').name == 'predict_ball_type_btn'){
                 formData.append('uploadvideomode', 'off');
                 formData.append('tracknetpredictmode', 'off');
                 formData.append('segmentationmode', 'off');
                 formData.append('predictballtpyemode', 'on');
+                $(".modal-footer .waiting-content").html("Mode : Predict balltype <br><br> Input : skeleton in real-world court plane <br><br> Output : Balltype when hitpoint");
             }
             if(document.getElementById('model_name').name == 'one_click_to_complete_btn'){
                 formData.append('uploadvideomode', 'off');
                 formData.append('tracknetpredictmode', 'on');
                 formData.append('segmentationmode', 'on');
                 formData.append('predictballtpyemode', 'on');
+                $(".modal-footer .waiting-content").html("Mode : One click to complete <br><br> Input video <br><br> Output : Balltype when hitpoint");
             }
 
             var dataFile = document.getElementById('video_name').value;
