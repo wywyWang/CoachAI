@@ -67,7 +67,7 @@ def SVM(x_train, y_train, model_name):
 def XGBoost(x_train, y_train, model_name):
 	params = {
         'learning_rate': 0.01,
-        'n_estimators': 800,
+        'n_estimators': 1200,
         #'max_depth': 2000,
         #'min_child_weight': 2,
         'gamma': 0,
@@ -127,7 +127,7 @@ def Run(filename, svm_option, svm_model_name, xgboost_option, xgboost_model_name
 		print("Random Forest training done!")
 		print("Random Forest training time: "+str(te-ts))
 
-game_name = "18ENG_TC"
+game_name = "18IND_TC"
 Run('../data/'+str(game_name)+'/'+str(game_name)+'_set1_with_skeleton.csv', \
 	False, '../model/'+str(game_name)+'_SVM_skeleton.joblib.dat', \
 	True, '../model/'+str(game_name)+'_XGB_skeleton.joblib.dat', \

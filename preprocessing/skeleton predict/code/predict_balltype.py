@@ -273,7 +273,7 @@ def Run(game_name, change_side, set_now, filename, svm_option, svm_model_name, s
 
 def exec(predict_set):
     change_side = False
-    game_name = "18ENG_TC"
+    game_name = "18IND_TC"
 
     for i in predict_set:
         Run(game_name, change_side, i ,'../data/'+str(game_name)+'/'+str(game_name)+'_set'+str(i)+'_with_skeleton.csv', \
@@ -288,4 +288,4 @@ def exec(predict_set):
             True, '../model/XGB_balltype.joblib.dat', '../data/result/XGB_set'+str(i)+'-1_skeleton_out.csv', '../data/result/XGB_set'+str(i)+'-1_balltype_out.csv', \
             True, '../model/RF_balltype.joblib.dat', '../data/result/RF_set'+str(i)+'-1_skeleton_out.csv', '../data/result/RF_set'+str(i)+'-1_balltype_out.csv')
     '''
-exec([1, 2, 3])	
+exec([1, 2])	

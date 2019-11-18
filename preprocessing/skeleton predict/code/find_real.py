@@ -149,7 +149,7 @@ def check_empty(data):
 
     if cnt:
         empty_cnt.append(cnt)
-    print("total: "+str(len(data))+" empty: "+str(total_empty))
+    print("Total frames: "+str(len(data))+" Empty frames: "+str(total_empty))
     return empty_idx, empty_cnt
 
 def fill(data, empty_idx, empty_cnt):

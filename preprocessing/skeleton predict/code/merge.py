@@ -144,7 +144,6 @@ def Merge(set_num, total_set, setinfo, skeleton_file, top_is_Taiwan, savename, c
 				first = set_info[:][:i]
 				second = set_info[:][i:]
 				break_point = i
-				print(i)
 				break
 		#print(first)
 		first.reset_index()
@@ -160,13 +159,11 @@ def Merge(set_num, total_set, setinfo, skeleton_file, top_is_Taiwan, savename, c
 			times = np.array(second_time)
 			set_info = set_info[:][break_point:]
 			set_info = set_info.reset_index(drop=True)
-			print(len(hitting_pos))
 		else:
 			hitting_pos = np.array(first_part)
 			times = np.array(first_time)
 			set_info = set_info[:][:break_point]
 			set_info = set_info.reset_index(drop=True)
-			print(len(hitting_pos))
 
 		#hitting_pos = np.array(first_part+second_part)
 		#times = np.array(first_time+second_time)
@@ -365,14 +362,14 @@ def Merge(set_num, total_set, setinfo, skeleton_file, top_is_Taiwan, savename, c
 
 def run(set_num, total_set, game_name, top_is_Taiwan, change_side):
 	if change_side:
-		Merge(set_num, total_set, '../data/'+str(game_name)+'/set'+str(set_num)+'.csv', '../data/'+str(game_name)+'/player_skeleton/'+str(game_name)+'_set'+str(set_num)+'_skeleton.csv', top_is_Taiwan, '../data/'+str(game_name)+'/'+str(game_name)+'_set'+str(set_num)+'-1_with_skeleton.csv', change_side)
+		Merge(set_num, total_set, '../data/'+str(game_name)+'/set'+str(set_num)+'.csv', '../data/'+str(game_name)+'/player_skeleton/'+str(game_name)+'_skeleton.csv', top_is_Taiwan, '../data/'+str(game_name)+'/'+str(game_name)+'_set'+str(set_num)+'-1_with_skeleton.csv', change_side)
 	else:
-		Merge(set_num, total_set, '../data/'+str(game_name)+'/set'+str(set_num)+'.csv', '../data/'+str(game_name)+'/player_skeleton/'+str(game_name)+'_set'+str(set_num)+'_skeleton.csv', top_is_Taiwan, '../data/'+str(game_name)+'/'+str(game_name)+'_set'+str(set_num)+'_with_skeleton.csv', change_side)
+		Merge(set_num, total_set, '../data/'+str(game_name)+'/set'+str(set_num)+'.csv', '../data/'+str(game_name)+'/player_skeleton/'+str(game_name)+'_skeleton.csv', top_is_Taiwan, '../data/'+str(game_name)+'/'+str(game_name)+'_set'+str(set_num)+'_with_skeleton.csv', change_side)
 
 def exec(number_of_sets):
-	top_Taiwan = False #18IND_TC: True # 18ENG_TC: False
+	top_Taiwan = True # 18IND_TC: True # 18ENG_TC: False
 	change_side = False
-	game_name = "18ENG_TC"
+	game_name = "18IND_TC"
 
 	for i in range(1, number_of_sets+1):
 		print("Start merging set "+str(i))
@@ -384,4 +381,5 @@ def exec(number_of_sets):
 		change_side = True
 		run(number_of_sets, 3, game_name, top_Taiwan, change_side)
 
-exec(3)
+total_set_num = 2
+exec(total_set_num)

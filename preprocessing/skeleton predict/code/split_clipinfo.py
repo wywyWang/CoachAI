@@ -23,16 +23,19 @@ def split_data(filename, game_name):
 		if needed_data['unique_id'][i] != now_id:
 			set_data = needed_data[pre_idx:i]
 			set_data.reset_index(drop=True, inplace=True)
-			set_data.to_csv(pre_dir+game_name+"_set"+str(now_id.split("-")[-1])+".csv", index=False, encoding = 'utf-8')
+			print("Saving set "+str(now_id))
+			set_data.to_csv(pre_dir+game_name+'/'+game_name+"_set"+str(now_id.split("-")[-1])+".csv", index=False, encoding = 'utf-8')
 			pre_idx = i
 			now_id = needed_data['unique_id'][i]
 
+
 	set_data = needed_data[pre_idx:len(needed_data)]
 	set_data.reset_index(drop=True, inplace=True)
-	set_data.to_csv(pre_dir+game_name+"_set"+str(now_id.split("-")[-1])+".csv", index=False, encoding = 'utf-8')
+	print("Saving set "+str(now_id))
+	set_data.to_csv(pre_dir+game_name+'/'+game_name+"_set"+str(now_id.split("-")[-1])+".csv", index=False, encoding = 'utf-8')
 
 def run(filenames):
 	for f in filenames:
-		split_data(pre_dir+"clip_info_"+f+".xlsx", f)
+		split_data(pre_dir+f+"/clip_info_"+f+".xlsx", f)
 
 run(["18IND_TC"])

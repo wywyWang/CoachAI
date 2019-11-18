@@ -91,12 +91,12 @@ def SVM(x_train, y_train, model_name):
 def XGBoost(x_train, y_train, model_name):
 	params = {
         'learning_rate': 0.01,
-        'n_estimators': 800,
+        'n_estimators': 2500,
         #'max_depth': 8,
         #'min_child_weight': 1,
         'gamma': 0,
-        'subsample': 0.8,
-        'colsample_bytree': 0.8,
+        'subsample': 0.85,
+        'colsample_bytree': 0.85,
         'reg_alpha': 0.01,
         'objective':'multi:softmax',
         'scale_pos_weight': 1,
@@ -157,7 +157,7 @@ def Run(filename, svm_option, svm_model_name, svm_ball_height_predict_result, xg
 		print("Random Forest training done!")
 		print("Random Forest training time: "+str(te-ts))
 
-game_name = "18ENG_TC"
+game_name = "18IND_TC"
 
 Run('../data/'+str(game_name)+'/'+str(game_name)+'_set1_with_skeleton.csv', \
 	False, '../model/'+str(game_name)+'_SVM_balltype.joblib.dat', '../data/'+str(game_name)+'/result/SVM_set1_skeleton_out.csv', \
