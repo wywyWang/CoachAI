@@ -226,7 +226,7 @@ def compressTest(M):
         return False
     else:
         return True
-#      and y / x > 13.4 / 6.1 - 0.25 and y / x < 13.4 / 6.1
+    #  and y / x > 13.4 / 6.1 - 0.25 and y / x < 13.4 / 6.1
 
 def calculatehomographycandidate(horizontal_line_eliminate, vertical_line_eliminate, model_court_horizontal, model_court_vertical, court_all_points, img_candidate):
     model_court_combination = []
@@ -234,8 +234,8 @@ def calculatehomographycandidate(horizontal_line_eliminate, vertical_line_elimin
         for vertical_idx in itertools.combinations(model_court_vertical,2):
             model_court_combination.append([horizontal_idx, vertical_idx])
 
-#     print(np.shape(model_court_combination))
-#     print(model_court_combination)
+    # print(np.shape(model_court_combination))
+    # print(model_court_combination)
     best_score = -1000
     # best_beta = -1000
     best_homography = []
@@ -257,7 +257,7 @@ def calculatehomographycandidate(horizontal_line_eliminate, vertical_line_elimin
             candidate_bunch = np.array([candidate_point1, candidate_point2, candidate_point3, candidate_point4], dtype="float32")
 
             for model_detail in model_court_combination:
-#                 print("model detail = {}".format(model_detail))
+                # print("model detail = {}".format(model_detail))
                 court_point1 = [model_detail[0][0], model_detail[1][0]]
                 court_point2 = [model_detail[0][0], model_detail[1][1]]
                 court_point3 = [model_detail[0][1], model_detail[1][0]]
