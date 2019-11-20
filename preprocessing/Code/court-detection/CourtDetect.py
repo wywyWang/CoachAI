@@ -106,7 +106,7 @@ def detectCourtline(img_candidate):
         y1 = int(y0 + 1e4*(a))
         x2 = int(x0 - 1e4*(-b))
         y2 = int(y0 - 1e4*(a))
-
+        
         if x1 == x2:
             m = 1e9
         else:
@@ -166,7 +166,6 @@ def computeScore(model_project, img_candidate):
         flag = 0
         project_x = int(round(project_coordinate[0]))
         project_y = int(round(project_coordinate[1]))
-        # print("now score = {}".format(score))
         
         if project_x < 0 or project_x >= max_col or project_y < 0 or project_y >= max_row:
             score -= 0
@@ -216,9 +215,18 @@ def rejectTest(H):
     Beta_square = ((H[0][1] ** 2) + (H[1][1] ** 2) + f_square * (H[2][1] ** 2)) / ((H[0][0] ** 2) + (H[1][0] ** 2) + (f_square * (H[2][0] ** 2)))
     
     if Beta_square < (0.5 ** 2) or Beta_square > (2 ** 2):
+        return False, Beta_square
+    else:
+        return True, Beta_square
+
+def compressTest(M):
+    x = ((M[0][0][0] - M[0][24][0]) ** 2 + (M[0][0][1] - M[0][24][1]) **2 ) ** 0.5
+    y = ((M[0][0][0] - M[0][5][0]) ** 2 + (M[0][0][1] - M[0][5][1]) ** 2) ** 0.5
+    if x * y * 8 > max_row * max_col  :
         return False
     else:
         return True
+#      and y / x > 13.4 / 6.1 - 0.25 and y / x < 13.4 / 6.1
 
 def calculatehomographycandidate(horizontal_line_eliminate, vertical_line_eliminate, model_court_horizontal, model_court_vertical, court_all_points, img_candidate):
     model_court_combination = []
@@ -226,9 +234,10 @@ def calculatehomographycandidate(horizontal_line_eliminate, vertical_line_elimin
         for vertical_idx in itertools.combinations(model_court_vertical,2):
             model_court_combination.append([horizontal_idx, vertical_idx])
 
-    # print(np.shape(model_court_combination))
-    # print(model_court_combination)
+#     print(np.shape(model_court_combination))
+#     print(model_court_combination)
     best_score = -1000
+    # best_beta = -1000
     best_homography = []
     best_court_model = []
     best_h1 = []
@@ -248,6 +257,7 @@ def calculatehomographycandidate(horizontal_line_eliminate, vertical_line_elimin
             candidate_bunch = np.array([candidate_point1, candidate_point2, candidate_point3, candidate_point4], dtype="float32")
 
             for model_detail in model_court_combination:
+#                 print("model detail = {}".format(model_detail))
                 court_point1 = [model_detail[0][0], model_detail[1][0]]
                 court_point2 = [model_detail[0][0], model_detail[1][1]]
                 court_point3 = [model_detail[0][1], model_detail[1][0]]
@@ -255,30 +265,28 @@ def calculatehomographycandidate(horizontal_line_eliminate, vertical_line_elimin
                 court_bunch = np.array([court_point1, court_point2, court_point3, court_point4], dtype="float32")
 
                 homography = cv2.getPerspectiveTransform(court_bunch, candidate_bunch)
-                reject_flag = rejectTest(homography)
-                if reject_flag == False:
-                    continue
+                # reject_flag, beta_score = rejectTest(homography)
+                # if reject_flag == False:
+                #     continue
                 
                 model_project = cv2.perspectiveTransform(court_all_points, homography)
+                compress_flag = compressTest(model_project)
+                if compress_flag == True:
+                    continue
+                
                 score = computeScore(model_project, img_candidate)
                 
                 #calculate score
                 if score > best_score:
                     best_score = score
+                    # best_beta = beta_score
                     best_homography = homography.copy()
                     best_h1 = h1.copy()
                     best_h2 = h2.copy()
                     best_v1 = v1.copy()
                     best_v2 = v2.copy()
                     best_court_model = court_bunch.copy()
-                    # computeScore_debug(model_project, img_candidate)
-                    # print("best score = {}".format(best_score))
-                    # print("court point = {}".format(court_bunch))
-                    # print("best h1 = {}".format(h1))
-                    # print("best h2 = {}".format(h2))
-                    # print("best v1 = {}".format(v1))
-                    # print("best v2 = {}".format(v2))
-                    # print("best intersection = {}".format(candidate_bunch))
+                    # print("best beta = {}".format(best_beta))
     
     return best_homography, [best_h1, best_h2, best_v1, best_v2], best_court_model
 
@@ -352,10 +360,10 @@ def outputImage(img, img_thresh, horizontal_line_sorted, vertical_line_sorted, h
     
     model_project = cv2.perspectiveTransform(court_all_points, best_homography)
     for project_point in model_project[0]:
-        cv2.circle(img_output, tuple(project_point), 2, (0,255,255), 5)
+        cv2.circle(img_output, tuple(project_point), 5, (255,0,0), 5)
         
-    # for best_court_point in best_court_model:
-    #     print(tuple(best_court_point))
+    for best_court_point in best_court_model:
+        print(tuple(best_court_point))
     cv2.imwrite('court_detection_result.jpg', img_output)
 
 if __name__ == '__main__':
