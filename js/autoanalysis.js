@@ -58,28 +58,28 @@ function show_file_select() {
                 formData.append('tracknetpredictmode', 'on');
                 formData.append('segmentationmode', 'off');
                 formData.append('predictballtpyemode', 'off');
-                $(".modal-footer .waiting-content").html("Mode : TrackNet <br><br> Input : frames <br><br> Output : ball's visibility and position in each frame");
+                $(".modal-footer .waiting-content").html("Mode : TrackNet <br> Input : frames <br> Output : ball's visibility and position in each frame <br><br> Description : TrackNet is used to detect shuttlecock in each frames.");
             }
             if(document.getElementById('model_name').name == 'segmentation_btn'){
                 formData.append('uploadvideomode', 'off');
                 formData.append('tracknetpredictmode', 'off');
                 formData.append('segmentationmode', 'on');
                 formData.append('predictballtpyemode', 'off');
-                $(".modal-footer .waiting-content").html("Mode : Segmentation <br><br> Input : ball's visibility and position <br><br> Output : sets of hitpoint's frame");
+                $(".modal-footer .waiting-content").html("Mode : Segmentation <br> Input : ball's visibility and position <br> Output : sets of hitpoint's frame <br><br> Description : Segmentation is divided into two parts, first part is hitpoint detection, second part is classify loss reason for every hitpoint.");
             }
             if(document.getElementById('model_name').name == 'predict_ball_type_btn'){
                 formData.append('uploadvideomode', 'off');
                 formData.append('tracknetpredictmode', 'off');
                 formData.append('segmentationmode', 'off');
                 formData.append('predictballtpyemode', 'on');
-                $(".modal-footer .waiting-content").html("Mode : Predict balltype <br><br> Input : skeleton in real-world court plane <br><br> Output : Balltype when hitpoint");
+                $(".modal-footer .waiting-content").html("Mode : Predict balltype <br> Input : skeleton in real-world court plane <br> Output : Balltype when hitpoint event <br><br> Description : Predict balltype uses projected skeleton coordinate as input features, through XGBoost classifier to classify which balltype player used when hitpoint.");
             }
             if(document.getElementById('model_name').name == 'one_click_to_complete_btn'){
                 formData.append('uploadvideomode', 'off');
                 formData.append('tracknetpredictmode', 'on');
                 formData.append('segmentationmode', 'on');
                 formData.append('predictballtpyemode', 'on');
-                $(".modal-footer .waiting-content").html("Mode : One click to complete <br><br> Input video <br><br> Output : Balltype when hitpoint");
+                $(".modal-footer .waiting-content").html("Mode : One click to complete <br> Input video <br> Output : Balltype when hitpoint <br><br> Description : Only need to click this button, it will automatically run all modes.");
             }
 
             var dataFile = document.getElementById('video_name').value;
