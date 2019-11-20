@@ -30,17 +30,23 @@ train_needed = ['flying_time', 'now_right_x', 'now_right_y', 'now_left_x', 'now_
 		'landing_area_number_1', 'landing_area_number_2', 'landing_area_number_3', 'landing_area_number_4']
 test_needed = ['type']
 
-def LoadData(filename, ball_height_predict):
-	data = pd.read_csv(filename)
-	ball_height = pd.read_csv(ball_height_predict)
-	data = data[needed]
-	data.dropna(inplace=True)
+def LoadData(filenameA, filenameB, ball_height_predictA, ball_height_predictB):
+	dataA = pd.read_csv(filenameA)
+	dataB = pd.read_csv(filenameB)
+	ball_heightA = pd.read_csv(ball_height_predictA)
+	ball_heightB = pd.read_csv(ball_height_predictB)
+	dataA = dataA[needed]
+	dataB = dataB[needed]
+	dataA.dropna(inplace=True)
+	dataB.dropna(inplace=True)
+
+	data = pd.concat([dataA, dataB])
+
 	data = data[data.type != '未擊球']
 	data = data[data.type != '掛網球']
 	data = data[data.type != '未過網']
 	data = data[data.type != '發球犯規']
 	data.reset_index(drop=True, inplace=True)
-	
 
 	eng_type_to_num = {'cut': 0, 'drive': 1, 'lob': 2, 'long': 3, 'netplay': 4, 'rush': 5, 'smash': 6}
 
@@ -55,7 +61,15 @@ def LoadData(filename, ball_height_predict):
 	active = []
 	passive = []
 
-	for i in ball_height['Predict']:
+	for i in ball_heightA['Predict']:
+		if i == 1:
+			active.append(1)
+			passive.append(0)
+		else:
+			active.append(0)
+			passive.append(1)
+
+	for i in ball_heightB['Predict']:
 		if i == 1:
 			active.append(1)
 			passive.append(0)
@@ -125,7 +139,7 @@ def XGBoost(x_train, y_train, model_name):
 	#plt.show()
 	joblib.dump(xgbc, model_name)
 
-def Run(filename, svm_option, svm_model_name, svm_ball_height_predict_result, xgboost_option, xgboost_model_name, xgboost_ball_height_predict_result, RF_option, RF_model_name, RF_ball_height_predict_result):
+def Run(filenameA, filenameB, svm_option, svm_model_name, svm_ball_height_predict_result, xgboost_option, xgboost_model_name, xgboost_ball_height_predict_resultA, xgboost_ball_height_predict_resultB, RF_option, RF_model_name, RF_ball_height_predict_resultA, RF_ball_height_predict_resultB):
 	
 	if svm_option and svm_model_name != '':
 		x_train, y_train = LoadData(filename, svm_ball_height_predict_result)
@@ -138,7 +152,7 @@ def Run(filename, svm_option, svm_model_name, svm_ball_height_predict_result, xg
 		print("SVM training time: "+str(te-ts))
 
 	if xgboost_option and xgboost_model_name != '':
-		x_train, y_train = LoadData(filename, xgboost_ball_height_predict_result)
+		x_train, y_train = LoadData(filenameA, filenameB, xgboost_ball_height_predict_resultA, xgboost_ball_height_predict_resultB)
 
 		print("XGBoost training...")
 		ts = time.time()
@@ -148,7 +162,7 @@ def Run(filename, svm_option, svm_model_name, svm_ball_height_predict_result, xg
 		print("XGBoost training time: "+str(te-ts))
 
 	if RF_option and RF_model_name != '':
-		x_train, y_train = LoadData(filename, RF_ball_height_predict_result)
+		x_train, y_train = LoadData(filenameA, filenameB, RF_ball_height_predict_resultA, RF_ball_height_predict_resultB)
 
 		print("Random Forest training...")
 		ts = time.time()
@@ -158,8 +172,18 @@ def Run(filename, svm_option, svm_model_name, svm_ball_height_predict_result, xg
 		print("Random Forest training time: "+str(te-ts))
 
 game_name = "18IND_TC"
-
+other_game = "18ENG_TC"
+merge_game_name = "18ENG_TC+18IND_TC"
+'''
 Run('../data/'+str(game_name)+'/'+str(game_name)+'_set1_with_skeleton.csv', \
 	False, '../model/'+str(game_name)+'_SVM_balltype.joblib.dat', '../data/'+str(game_name)+'/result/SVM_set1_skeleton_out.csv', \
 	True, '../model/'+str(game_name)+'_XGB_balltype.joblib.dat', '../data/'+str(game_name)+'/result/XGB_set1_skeleton_out.csv', \
 	True, '../model/'+str(game_name)+'_RF_balltype.joblib.dat', '../data/'+str(game_name)+'/result/RF_set1_skeleton_out.csv')
+'''
+
+# merge 18IND_TC and 18ENG_TC
+Run('../data/'+str(merge_game_name)+'/'+str(game_name)+'_set1_with_skeleton.csv', \
+	'../data/'+str(merge_game_name)+'/'+str(other_game)+'_set1_with_skeleton.csv', \
+	False, '../model/'+str(merge_game_name)+'_SVM_balltype.joblib.dat', '../data/'+str(game_name)+'/result/SVM_set1_skeleton_out.csv', \
+	True, '../model/'+str(merge_game_name)+'_XGB_balltype.joblib.dat', '../data/'+str(merge_game_name)+'/result/'+str(game_name)+'_XGB_set1_skeleton_out.csv', '../data/'+str(merge_game_name)+'/result/'+str(other_game)+'_XGB_set1_skeleton_out.csv', \
+	True, '../model/'+str(merge_game_name)+'_RF_balltype.joblib.dat', '../data/'+str(merge_game_name)+'/result/'+str(game_name)+'_RF_set1_skeleton_out.csv', '../data/'+str(merge_game_name)+'/result/'+str(other_game)+'_RF_set1_skeleton_out.csv')

@@ -64,9 +64,11 @@ def plot_Confusion_Matrix(game_name, set_now, model_type, cm, groundtruth, grid_
             plt.text(i, j, format(cm[j, i], 'd'), 
             color="white" if cm[j, i] > cm.max()/2. else "black", 
             horizontalalignment="center")
-
-    if change_side:
-        plt.savefig('../data/'+str(game_name)+'/img/'+str(model_type)+'-1_set'+str(set_now)+'_skeleton_confusion_matrix.png')
+    if check_split:
+	    if change_side:
+	        plt.savefig('../data/'+str(game_name)+'/img/'+str(model_type)+'-2_set'+str(set_now)+'_skeleton_confusion_matrix.png')
+	    else:
+	        plt.savefig('../data/'+str(game_name)+'/img/'+str(model_type)+'-1_set'+str(set_now)+'_skeleton_confusion_matrix.png')
     else:
         plt.savefig('../data/'+str(game_name)+'/img/'+str(model_type)+'_set'+str(set_now)+'_skeleton_confusion_matrix.png')
 
@@ -188,44 +190,64 @@ def XGBoost(filename, x_predict, model_name, xgb_outputname, set_now, game_name,
 def Run(game_name, change_side, set_now, filename, svm_option, svm_model_name, svm_outputname, xgboost_option, xgboost_model_name, xgboost_outputname, RF_option, RF_model_name, RF_outputname):
 	x_predict = LoadData(filename)
 	if svm_option and svm_model_name != '':
-		if change_side:
-			print("SVM predicting set"+str(set_now)+"-1...")
+		if start_check_split:
+			if change_side:
+				print("SVM predicting set"+str(set_now)+"-2...")
+			else:
+				print("SVM predicting set"+str(set_now)+"-1...")
 		else:
 			print("SVM predicting set"+str(set_now)+"...")
 		SVM(filename, x_predict, svm_model_name, svm_outputname, set_now, game_name, change_side)
 		#print("SVM predict set"+str(set_now)+" done!")
 		print("---------------------------------------------------")
 	if xgboost_option and xgboost_model_name != '':
-		if change_side:
-			print("XGBoost predicting set"+str(set_now)+"-1...")
+		if start_check_split:
+			if change_side:
+				print("XGBoost predicting set"+str(set_now)+"-2...")
+			else:
+				print("XGBoost predicting set"+str(set_now)+"-1...")
 		else:
 			print("XGBoost predicting set"+str(set_now)+"...")
 		XGBoost(filename, x_predict, xgboost_model_name, xgboost_outputname, set_now, game_name, change_side)
 		#print("XGBoost predict set"+str(set_now)+" done!")
 		print("---------------------------------------------------")
 	if RF_option and RF_model_name != '':
-		if change_side:
-			print("Random Forest predicting set"+str(set_now)+"-1...")
+		if start_check_split:
+			if change_side:
+				print("Random Forest predicting set"+str(set_now)+"-2...")
+			else:
+				print("Random Forest predicting set"+str(set_now)+"-1...")
 		else:
 			print("Random Forest predicting set"+str(set_now)+"...")
 		RandomForest(filename, x_predict, RF_model_name, RF_outputname, set_now, game_name, change_side)
 		#print("Random Forest predict set"+str(set_now)+" done!")
 		print("---------------------------------------------------")
 def exec(predict_set):
+	global start_check_split
 	change_side = False
-	game_name = "18IND_TC"
+	game_name = "18ENG_TC"
+	merge_game_name = "18ENG_TC+18IND_TC"
 
 	for i in predict_set:
 		Run(game_name, change_side, i, '../data/'+str(game_name)+'/'+str(game_name)+'_set'+str(i)+'_with_skeleton.csv', \
 			False, '../model/'+str(game_name)+'_SVM_skeleton.joblib.dat', '../data/'+str(game_name)+'/result/SVM_set'+str(i)+'_skeleton_out.csv', \
-			True, '../model/'+str(game_name)+'_XGB_skeleton.joblib.dat', '../data/'+str(game_name)+'/result/XGB_set'+str(i)+'_skeleton_out.csv', \
-			True, '../model/'+str(game_name)+'_RF_skeleton.joblib.dat', '../data/'+str(game_name)+'/result/RF_set'+str(i)+'_skeleton_out.csv')
-	'''
-	if 3 in predict_set:
+			True, '../model/'+str(merge_game_name)+'_XGB_skeleton.joblib.dat', '../data/'+str(merge_game_name)+'/result/'+str(game_name)+'_XGB_set'+str(i)+'_skeleton_out.csv', \
+			True, '../model/'+str(merge_game_name)+'_RF_skeleton.joblib.dat', '../data/'+str(merge_game_name)+'/result/'+str(game_name)+'_RF_set'+str(i)+'_skeleton_out.csv')
+	
+
+
+	if 3 in predict_set and check_split:
+		start_check_split = True
+		Run(game_name, change_side, i, '../data/'+str(game_name)+'/'+str(game_name)+'_set'+str(i)+'-1_with_skeleton.csv', \
+			False, '../model/'+str(game_name)+'_SVM_skeleton.joblib.dat', '../data/'+str(game_name)+'/result/SVM_set'+str(i)+'_skeleton_out.csv', \
+			True, '../model/'+str(game_name)+'_XGB_skeleton.joblib.dat', '../data/'+str(merge_game_name)+'/result/'+str(game_name)+'_XGB_set'+str(i)+'-1_skeleton_out.csv', \
+			True, '../model/'+str(game_name)+'_RF_skeleton.joblib.dat', '../data/'+str(merge_game_name)+'/result/'+str(game_name)+'_RF_set'+str(i)+'-1_skeleton_out.csv')
 		change_side = True
-		Run(change_side, i, '../data/'+str(game_name)+'_set'+str(i)+'-1_with_skeleton.csv', \
-			True, '../model/'+str(game_name)+'_SVM_skeleton.joblib.dat', '../data/'+str(game_name)+'/result/SVM_set'+str(i)+'_skeleton_out.csv', \
-			True, '../model/'+str(game_name)+'_XGB_skeleton.joblib.dat', '../data/'+str(game_name)+'/result/XGB_set'+str(i)+'_skeleton_out.csv', \
-			True, '../model/'+str(game_name)+'_RF_skeleton.joblib.dat', '../data/'+str(game_name)+'/result/RF_set'+str(i)+'_skeleton_out.csv')
-	'''
-exec([1, 2])
+		Run(game_name, change_side, i, '../data/'+str(game_name)+'/'+str(game_name)+'_set'+str(i)+'-2_with_skeleton.csv', \
+			False, '../model/'+str(game_name)+'_SVM_skeleton.joblib.dat', '../data/'+str(game_name)+'/result/SVM_set'+str(i)+'_skeleton_out.csv', \
+			True, '../model/'+str(game_name)+'_XGB_skeleton.joblib.dat', '../data/'+str(merge_game_name)+'/result/'+str(game_name)+'_XGB_set'+str(i)+'-2_skeleton_out.csv', \
+			True, '../model/'+str(game_name)+'_RF_skeleton.joblib.dat', '../data/'+str(merge_game_name)+'/result/'+str(game_name)+'_RF_set'+str(i)+'-2_skeleton_out.csv')
+
+check_split = False
+start_check_split = False
+exec([1, 2, 3])

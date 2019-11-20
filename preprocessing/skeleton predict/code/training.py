@@ -34,9 +34,15 @@ def convert_area(area):
 	val = {'E': 0, 'C': 4, 'A': 8, 'B': 12, 'D': 16}
 	return float(val[area[0]]+float(area[1]))
 
-def LoadData(filename):
-	data = pd.read_csv(filename)
-	data = data[needed]
+def LoadData(filenameA, filenameB):
+	dataA = pd.read_csv(filenameA)
+	dataB = pd.read_csv(filenameB)
+
+	dataA = dataA[needed]
+	dataB = dataB[needed]
+
+	data = pd.concat([dataA, dataB])
+	
 	data.dropna(inplace=True)
 	data.reset_index(drop=True, inplace=True)
 	data = data[data.type != '未擊球']
@@ -103,8 +109,8 @@ def XGBoost(x_train, y_train, model_name):
 	#plt.show()
 	joblib.dump(xgbc, model_name)
 
-def Run(filename, svm_option, svm_model_name, xgboost_option, xgboost_model_name, RF_option, RF_model_name):
-	x_train, y_train = LoadData(filename)
+def Run(filenameA, filenameB, svm_option, svm_model_name, xgboost_option, xgboost_model_name, RF_option, RF_model_name):
+	x_train, y_train = LoadData(filenameA, filenameB)
 	if svm_option and svm_model_name != '':
 		print("SVM training...")
 		ts = time.time()
@@ -127,8 +133,16 @@ def Run(filename, svm_option, svm_model_name, xgboost_option, xgboost_model_name
 		print("Random Forest training done!")
 		print("Random Forest training time: "+str(te-ts))
 
-game_name = "18IND_TC"
+game_name = ["18ENG_TC", "18IND_TC"]
+'''
 Run('../data/'+str(game_name)+'/'+str(game_name)+'_set1_with_skeleton.csv', \
 	False, '../model/'+str(game_name)+'_SVM_skeleton.joblib.dat', \
 	True, '../model/'+str(game_name)+'_XGB_skeleton.joblib.dat', \
 	True, '../model/'+str(game_name)+'_RF_skeleton.joblib.dat')
+'''
+if len(game_name) > 1:
+	Run('../data/'+str(game_name[0])+'+'+str(game_name[1])+'/'+str(game_name[0])+'_set1_with_skeleton.csv', \
+		'../data/'+str(game_name[0])+'+'+str(game_name[1])+'/'+str(game_name[1])+'_set1_with_skeleton.csv',
+		False, '../model/'+str(game_name[0])+'+'+str(game_name[1])+'_SVM_skeleton.joblib.dat', \
+		True, '../model/'+str(game_name[0])+'+'+str(game_name[1])+'_XGB_skeleton.joblib.dat', \
+		True, '../model/'+str(game_name[0])+'+'+str(game_name[1])+'_RF_skeleton.joblib.dat')
