@@ -2,6 +2,8 @@ import cv2
 import numpy as np
 from operator import itemgetter
 import itertools
+from random import randint
+import math
 np.set_printoptions(precision=5, suppress=True)
 
 def readImage(filename):
@@ -43,11 +45,62 @@ def detectWhitepixel(img_thresh):
 
     return img_candidate
 
-    # # eliminate phase 2 (not used yet)
-    # # 1,0 : x direction gradient
-    # sobelx = cv2.Sobel(img,cv2.CV_64F,1,0,ksize=5)
-    # # 0,1 : y direction gradient
-    # sobely = cv2.Sobel(img,cv2.CV_64F,0,1,ksize=5)
+def runRANSAC(m, b, iteration, max_col):
+    """
+    m = [-0.06992481, -0.08753701, -0.06992481, -0.08753701]
+    b = [900.90526315, 918.95919289, 902.90526315, 923.04672991]
+    iteration = 100
+    max_col = 1920
+    """
+
+    best_count = -1
+    best_weight = None
+    picknum = 10000
+    for i in range(iteration):
+        random_x = np.random.uniform(0, max_col, picknum).reshape(-1, 1)
+        random_y = []
+        for idx_x in range(len(random_x)):
+            random_line = randint(0, len(m)-1)
+            random_y += [m[random_line] * random_x[idx_x] + b[random_line]]
+        
+        random_y = np.array(random_y).reshape(-1, 1)
+        random_x = np.hstack((random_x, np.ones(len(random_x)).reshape(-1, 1)))
+
+        #compute regression line
+        weight = np.matmul(np.linalg.inv(np.matmul(random_x.T, random_x)), np.matmul(random_x.T,random_y))
+
+        random_x = random_x[:,0]
+        inlier_threshold = 3
+        inlier_count = 0
+        for idx_x in range(len(random_x)):
+            distance = abs(weight[0] * random_x[idx_x] - random_y[idx_x] + weight[1]) / math.sqrt(weight[0] ** 2 + 1)
+            if distance <= inlier_threshold:
+                inlier_count += 1
+
+        if inlier_count > best_count:
+            best_count = inlier_count
+            best_weight = weight.copy()
+
+    # #draw
+    # color = ['black', 'blue', 'green', 'yellow']
+    # fig = plt.figure()
+    # x = np.linspace(0,max_col,100)
+    # for i in range(len(m)):
+    #     func = np.poly1d([m[i], b[i]])
+    #     y = func(x)
+    #     plt.plot(x, y, color = color[i])
+
+    # func = np.poly1d(best_weight.flatten())
+    # y = func(x)
+    # plt.plot(x, y, color = 'red')
+
+    # plt.scatter(random_x, random_y)
+    # fig.savefig('test.png')
+
+    print("best count = {}".format(best_count))
+    print("best weight = {}".format(best_weight))
+
+    return best_weight[0][0], best_weight[1][0]
 
 # Court line candidate dectector
 def detectCourtline(img_candidate):
@@ -120,11 +173,13 @@ def detectCourtline(img_candidate):
 
     print("sorted horizontal line = {}".format(np.shape(horizontal_line_sorted)))
     print("sorted vertical line = {}".format(np.shape(vertical_line_sorted)))
-
+    
     # Line parameter refinement
     eliminate_flag = [0 for _ in range(len(horizontal_line_sorted))]
     distance_threshold = 10
     for line_first in range(len(horizontal_line_sorted)):
+        eliminate_m = []
+        eliminate_b = []
         if eliminate_flag[line_first] == 1:
             continue
         for line_second in range(line_first+1, len(horizontal_line_sorted)):
@@ -132,14 +187,28 @@ def detectCourtline(img_candidate):
                 continue
             if horizontal_line_sorted[line_second][2] - horizontal_line_sorted[line_first][2] <= distance_threshold:
                 eliminate_flag[line_second] = 1
-
+                eliminate_m.append(horizontal_line_sorted[line_second][0])
+                eliminate_b.append(horizontal_line_sorted[line_second][1])
+        if (len(eliminate_m) != 0) :
+            eliminate_m.append(horizontal_line_sorted[line_first][0])
+            eliminate_b.append(horizontal_line_sorted[line_first][1])
+            print(eliminate_b)
+            print(eliminate_m)
+            best_m, best_b = runRANSAC(eliminate_m, eliminate_b, 10, max_col)
+            #replace first line
+            horizontal_line_sorted[line_first][0] = best_m
+            horizontal_line_sorted[line_first][1] = best_b
+        
     horizontal_line_eliminate = []
     for eliminate_idx in range(len(eliminate_flag)):
         if eliminate_flag[eliminate_idx] == 0:
             horizontal_line_eliminate.append(horizontal_line_sorted[eliminate_idx])
 
     eliminate_flag = [0 for _ in range(len(vertical_line_sorted))]
+    
     for line_first in range(len(vertical_line_sorted)):
+        eliminate_m = []
+        eliminate_b = []
         if eliminate_flag[line_first] == 1:
             continue
         for line_second in range(line_first+1, len(vertical_line_sorted)):
@@ -147,6 +216,15 @@ def detectCourtline(img_candidate):
                 continue
             if vertical_line_sorted[line_second][2] - vertical_line_sorted[line_first][2] <= distance_threshold:
                 eliminate_flag[line_second] = 1
+                eliminate_m.append(vertical_line_sorted[line_second][0])
+                eliminate_b.append(vertical_line_sorted[line_second][1])
+        if (len(eliminate_m) != 0) :
+            eliminate_m.append(vertical_line_sorted[line_first][0])
+            eliminate_b.append(vertical_line_sorted[line_first][1])
+            best_m, best_b = runRANSAC(eliminate_m, eliminate_b, 10, max_col)
+            #replace first line
+            vertical_line_sorted[line_first][0] = best_m
+            vertical_line_sorted[line_first][1] = best_b
 
     vertical_line_eliminate = []
     for eliminate_idx in range(len(eliminate_flag)):
@@ -226,7 +304,16 @@ def compressTest(M):
         return False
     else:
         return True
-    #  and y / x > 13.4 / 6.1 - 0.25 and y / x < 13.4 / 6.1
+#      and y / x > 13.4 / 6.1 - 0.25 and y / x < 13.4 / 6.1
+
+def areaTest(M, best_area):
+    x = ((M[0][0][0] - M[0][24][0]) ** 2 + (M[0][0][1] - M[0][24][1]) **2 ) ** 0.5
+    y = ((M[0][0][0] - M[0][5][0]) ** 2 + (M[0][0][1] - M[0][5][1]) ** 2) ** 0.5
+    if x * y > best_area :
+        return True, x * y
+    else:
+        return False, x * y
+#      and y / x > 13.4 / 6.1 - 0.25 and y / x < 13.4 / 6.1
 
 def calculatehomographycandidate(horizontal_line_eliminate, vertical_line_eliminate, model_court_horizontal, model_court_vertical, court_all_points, img_candidate):
     model_court_combination = []
@@ -234,22 +321,21 @@ def calculatehomographycandidate(horizontal_line_eliminate, vertical_line_elimin
         for vertical_idx in itertools.combinations(model_court_vertical,2):
             model_court_combination.append([horizontal_idx, vertical_idx])
 
-    # print(np.shape(model_court_combination))
-    # print(model_court_combination)
     best_score = -1000
-    # best_beta = -1000
+    best_beta = -1000
     best_homography = []
     best_court_model = []
+    best_area = 0
     best_h1 = []
     best_h2 = []
     best_v1 = []
     best_v2 = []
     for horizontal_idx in itertools.combinations(horizontal_line_eliminate,2):
         for vertical_idx in itertools.combinations(vertical_line_eliminate,2):
-            h1 = horizontal_idx[0]
-            h2 = horizontal_idx[1]
-            v1 = vertical_idx[0]
-            v2 = vertical_idx[1]
+            h1 = horizontal_idx[0].copy()
+            h2 = horizontal_idx[1].copy()
+            v1 = vertical_idx[0].copy()
+            v2 = vertical_idx[1].copy()
             candidate_point1 = np.linalg.solve([[h2[0],-1], [v2[0],-1]], [-h2[1], -v2[1]])
             candidate_point2 = np.linalg.solve([[h1[0],-1], [v2[0],-1]], [-h1[1], -v2[1]])
             candidate_point3 = np.linalg.solve([[h2[0],-1], [v1[0],-1]], [-h2[1], -v1[1]])
@@ -257,7 +343,7 @@ def calculatehomographycandidate(horizontal_line_eliminate, vertical_line_elimin
             candidate_bunch = np.array([candidate_point1, candidate_point2, candidate_point3, candidate_point4], dtype="float32")
 
             for model_detail in model_court_combination:
-                # print("model detail = {}".format(model_detail))
+#                 print("model detail = {}".format(model_detail))
                 court_point1 = [model_detail[0][0], model_detail[1][0]]
                 court_point2 = [model_detail[0][0], model_detail[1][1]]
                 court_point3 = [model_detail[0][1], model_detail[1][0]]
@@ -265,9 +351,9 @@ def calculatehomographycandidate(horizontal_line_eliminate, vertical_line_elimin
                 court_bunch = np.array([court_point1, court_point2, court_point3, court_point4], dtype="float32")
 
                 homography = cv2.getPerspectiveTransform(court_bunch, candidate_bunch)
-                # reject_flag, beta_score = rejectTest(homography)
-                # if reject_flag == False:
-                #     continue
+                reject_flag, beta_score = rejectTest(homography)
+#                 if reject_flag == False:
+#                     continue
                 
                 model_project = cv2.perspectiveTransform(court_all_points, homography)
                 compress_flag = compressTest(model_project)
@@ -275,17 +361,30 @@ def calculatehomographycandidate(horizontal_line_eliminate, vertical_line_elimin
                     continue
                 
                 score = computeScore(model_project, img_candidate)
-                
+                area_flag, area = areaTest(model_project, best_area)
                 #calculate score
-                if score > best_score:
+                if score >= best_score - 3:
+                    if area_flag == True:
+                        best_score = score
+                        best_beta = beta_score
+                        best_homography = homography.copy()
+                        best_h1 = h1.copy()
+                        best_h2 = h2.copy()
+                        best_v1 = v1.copy()
+                        best_v2 = v2.copy()
+                        best_court_model = court_bunch.copy()
+                        best_area = area
+                        # print("best beta area = {}".format(best_beta))
+                if score > best_score :
                     best_score = score
-                    # best_beta = beta_score
+                    best_beta = beta_score
                     best_homography = homography.copy()
                     best_h1 = h1.copy()
                     best_h2 = h2.copy()
                     best_v1 = v1.copy()
                     best_v2 = v2.copy()
                     best_court_model = court_bunch.copy()
+                    best_area = area
                     # print("best beta = {}".format(best_beta))
     
     return best_homography, [best_h1, best_h2, best_v1, best_v2], best_court_model
@@ -360,7 +459,7 @@ def outputImage(img, img_thresh, horizontal_line_sorted, vertical_line_sorted, h
     
     model_project = cv2.perspectiveTransform(court_all_points, best_homography)
     for project_point in model_project[0]:
-        cv2.circle(img_output, tuple(project_point), 5, (255,0,0), 5)
+        cv2.circle(img_output, tuple(project_point), 5, (0,255,255), 4)
         
     for best_court_point in best_court_model:
         print(tuple(best_court_point))
@@ -372,7 +471,7 @@ if __name__ == '__main__':
     court_all_points = [_ for _ in itertools.product(model_court_horizontal, model_court_vertical)]
     court_all_points = np.array([court_all_points], dtype="float32")
 
-    filename = './original_chou.jpg'
+    filename = './original_contest.jpg'
     img, img_thresh, img_gray = readImage(filename)
     img_candidate = detectWhitepixel(img_thresh)
     horizontal_line_sorted, vertical_line_sorted, horizontal_line_eliminate, vertical_line_eliminate = detectCourtline(img_candidate)
