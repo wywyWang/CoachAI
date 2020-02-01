@@ -3,6 +3,7 @@ import numpy as np
 import math
 import xy_to_area as mapping
 
+# find skeleton data's index with frame number
 def find_index(data, target):
 	for idx in range(len(data)):
 		if data[idx] == target:
@@ -86,6 +87,7 @@ def get_hitting_pos(set_info, skeleton_info, top_is_Taiwan):
 
 	return hitting_pos, times
 
+# Check if all hitting position are available, then we can find the difference between two hitting position
 def pos_test(hitting_pos, now):
 	start_pos = tuple()
 	end_pos = tuple()
@@ -342,7 +344,7 @@ def Merge(set_num, total_set, setinfo, skeleton_file, top_is_Taiwan, savename, c
 	set_info.to_csv(savename, index=False, encoding = 'utf-8')
 
 def run(set_num, total_set, game_name, top_is_Taiwan, change_side):
-	if game_name == "18IND_TC":
+	if game_name == "19SIN_CG":
 		Merge(set_num, total_set, '../data/'+str(game_name)+'/set'+str(set_num)+'.csv', '../data/'+str(game_name)+'/player_skeleton/'+str(game_name)+'_skeleton.csv', top_is_Taiwan, '../data/'+str(game_name)+'/'+str(game_name)+'_set'+str(set_num)+'_with_skeleton.csv', change_side)
 	else:
 		if start_split:
@@ -355,10 +357,10 @@ def run(set_num, total_set, game_name, top_is_Taiwan, change_side):
 
 def exec(number_of_sets):
 	global start_split
-	top_Taiwan = True # 18IND_TC: True # 18ENG_TC: False
+	top_Taiwan = True # 18IND_TC: True # 18ENG_TC: False # 19SIN_CG: True
 	change_side = False
 	
-	game_name = "18IND_TC"
+	game_name = "19SIN_CG"
 
 	for i in range(1, number_of_sets+1):
 		if split and i == 3:
@@ -381,5 +383,5 @@ def exec(number_of_sets):
 
 split = False
 start_split = False
-total_set_num = 2
+total_set_num = 3
 exec(total_set_num)

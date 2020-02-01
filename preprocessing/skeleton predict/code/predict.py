@@ -225,9 +225,9 @@ def Run(game_name, change_side, set_now, filename, svm_option, svm_model_name, s
 def exec(predict_set):
 	global start_check_split
 	change_side = False
-	game_name = "18ENG_TC"
-	merge_game_name = "18ENG_TC+18IND_TC"
-
+	game_name = "19SIN_CG"
+	merge_game_name = "19SIN_CG"
+	
 	for i in predict_set:
 		Run(game_name, change_side, i, '../data/'+str(game_name)+'/'+str(game_name)+'_set'+str(i)+'_with_skeleton.csv', \
 			False, '../model/'+str(game_name)+'_SVM_skeleton.joblib.dat', '../data/'+str(game_name)+'/result/SVM_set'+str(i)+'_skeleton_out.csv', \

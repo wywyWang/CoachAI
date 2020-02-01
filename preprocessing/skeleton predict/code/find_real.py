@@ -5,11 +5,15 @@ import json
 import numpy as np
 import cv2
 
-game_name = '18ENG_TC'
+game_name = '19SIN_CG'
 ext = '.csv'
 
-bot_filename = '../data/'+str(game_name)+'/player_skeleton/bottom_player_skeleton'
-top_filename = '../data/'+str(game_name)+'/player_skeleton/top_player_skeleton'
+#bot_filename = '../data/'+str(game_name)+'/player_skeleton/bottom_player_skeleton'
+#top_filename = '../data/'+str(game_name)+'/player_skeleton/top_player_skeleton'
+
+# video skeletion coordinate file
+bot_filename = '../data/'+str(game_name)+'/player_skeleton/bot_player_box_poses'
+top_filename = '../data/'+str(game_name)+'/player_skeleton/top_player_box_poses'
 
 raw_bot_filename = bot_filename+str(ext)
 raw_top_filename = top_filename+str(ext)
@@ -40,7 +44,7 @@ def find_real():
     dst=np.array([[610,1340],[0,1340],[610,0],[0,0]], np.float32)
 
     # 影像中球場位置(右下、左下、右上、左上): !!! 要重新確認座標點 !!!
-    src=np.array([[1011,671],[276,671],[880,383],[404,383]], np.float32)
+    src=np.array([[1515,1069],[410,1037],[1386,542],[600,520]], np.float32)
 
     H = cv2.getPerspectiveTransform(src,dst)
     frame = []
@@ -56,7 +60,7 @@ def find_real():
 
     for i in range(len(player_bot)):
         #img = draw_court()
-        
+        '''
         if sets != int(player_bot['set'][i]):
             save_to_csv(sets, frame, top_left_x, top_left_y, top_right_x, top_right_y, bot_left_x, bot_left_y, bot_right_x, bot_right_y)
             frame = []
@@ -70,8 +74,12 @@ def find_real():
             bot_right_y = []
             
             sets = int(player_bot['set'][i])
-        
-        frame.append(player_bot['frame_id'][i])
+        '''
+        # has frame_id use this
+        #frame.append(player_bot['frame_id'][i])
+
+        # only index use this
+        frame.append(player_bot['index'][i])
 
         # middle point of bottom player
         bot_mid_x = (player_bot['x11'][i] + player_bot['x14'][i])/2

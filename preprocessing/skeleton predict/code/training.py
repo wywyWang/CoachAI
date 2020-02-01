@@ -34,7 +34,7 @@ def convert_area(area):
 	val = {'E': 0, 'C': 4, 'A': 8, 'B': 12, 'D': 16}
 	return float(val[area[0]]+float(area[1]))
 
-def LoadData(filenameA, filenameB):
+def Load_two_Data(filenameA, filenameB):
 	dataA = pd.read_csv(filenameA)
 	dataB = pd.read_csv(filenameB)
 
@@ -43,6 +43,21 @@ def LoadData(filenameA, filenameB):
 
 	data = pd.concat([dataA, dataB])
 	
+	data.dropna(inplace=True)
+	data.reset_index(drop=True, inplace=True)
+	data = data[data.type != '未擊球']
+	data = data[data.type != '掛網球']
+	data = data[data.type != '未過網']
+	data = data[data.type != '發球犯規']
+	x_train = data[train_needed]
+	y_train = data[test_needed].values
+
+	y_train = np.array(y_train).ravel()
+	return x_train, y_train
+
+def LoadData(filename):
+	data = pd.read_csv(filename)
+	data = data[needed]
 	data.dropna(inplace=True)
 	data.reset_index(drop=True, inplace=True)
 	data = data[data.type != '未擊球']
@@ -109,8 +124,8 @@ def XGBoost(x_train, y_train, model_name):
 	#plt.show()
 	joblib.dump(xgbc, model_name)
 
-def Run(filenameA, filenameB, svm_option, svm_model_name, xgboost_option, xgboost_model_name, RF_option, RF_model_name):
-	x_train, y_train = LoadData(filenameA, filenameB)
+def Run_with_two_file(filenameA, filenameB, svm_option, svm_model_name, xgboost_option, xgboost_model_name, RF_option, RF_model_name):
+	x_train, y_train = Load_two_Data(filenameA, filenameB)
 	if svm_option and svm_model_name != '':
 		print("SVM training...")
 		ts = time.time()
@@ -133,16 +148,42 @@ def Run(filenameA, filenameB, svm_option, svm_model_name, xgboost_option, xgboos
 		print("Random Forest training done!")
 		print("Random Forest training time: "+str(te-ts))
 
-game_name = ["18ENG_TC", "18IND_TC"]
-'''
+def Run(filename, svm_option, svm_model_name, xgboost_option, xgboost_model_name, RF_option, RF_model_name):
+	x_train, y_train = LoadData(filename)
+	if svm_option and svm_model_name != '':
+		print("SVM training...")
+		ts = time.time()
+		SVM(x_train, y_train, svm_model_name)
+		te = time.time()
+		print("SVM training done!")
+		print("SVM training time: "+str(te-ts))
+	if xgboost_option and xgboost_model_name != '':
+		print("XGBoost training...")
+		ts = time.time()
+		XGBoost(x_train, y_train, xgboost_model_name)
+		te = time.time()
+		print("XGBoost training done!")
+		print("XGBoost training time: "+str(te-ts))
+	if RF_option and RF_model_name != '':
+		print("Random Forest training...")
+		ts = time.time()
+		RandomForest(x_train, y_train, RF_model_name)
+		te = time.time()
+		print("Random Forest training done!")
+		print("Random Forest training time: "+str(te-ts))
+
+game_name = "19SIN_CG"
+
 Run('../data/'+str(game_name)+'/'+str(game_name)+'_set1_with_skeleton.csv', \
 	False, '../model/'+str(game_name)+'_SVM_skeleton.joblib.dat', \
 	True, '../model/'+str(game_name)+'_XGB_skeleton.joblib.dat', \
 	True, '../model/'+str(game_name)+'_RF_skeleton.joblib.dat')
 '''
+game_name = ["18IND_TC", "18ENG_TC"]
 if len(game_name) > 1:
-	Run('../data/'+str(game_name[0])+'+'+str(game_name[1])+'/'+str(game_name[0])+'_set1_with_skeleton.csv', \
+	Run_with_two_file('../data/'+str(game_name[0])+'+'+str(game_name[1])+'/'+str(game_name[0])+'_set1_with_skeleton.csv', \
 		'../data/'+str(game_name[0])+'+'+str(game_name[1])+'/'+str(game_name[1])+'_set1_with_skeleton.csv',
 		False, '../model/'+str(game_name[0])+'+'+str(game_name[1])+'_SVM_skeleton.joblib.dat', \
 		True, '../model/'+str(game_name[0])+'+'+str(game_name[1])+'_XGB_skeleton.joblib.dat', \
 		True, '../model/'+str(game_name[0])+'+'+str(game_name[1])+'_RF_skeleton.joblib.dat')
+'''

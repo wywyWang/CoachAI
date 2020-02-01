@@ -284,8 +284,8 @@ def Run(game_name, change_side, set_now, filename, svm_option, svm_model_name, s
 def exec(predict_set):
     global start_check_split
     change_side = False
-    game_name = "18IND_TC"
-    merge_game_name = "18ENG_TC+18IND_TC"
+    game_name = "19SIN_CG"
+    merge_game_name = "19SIN_CG"
 
     for i in predict_set:
         if i == 3 and check_split:
@@ -302,11 +302,11 @@ def exec(predict_set):
             True, '../model/'+str(merge_game_name)+'_XGB_balltype.joblib.dat', '../data/'+str(merge_game_name)+'/result/'+str(game_name)+'_XGB_set3-1_skeleton_out.csv', '../data/'+str(merge_game_name)+'/result/'+str(game_name)+'_XGB_set3-1_balltype_out.csv', \
             True, '../model/'+str(merge_game_name)+'_RF_balltype.joblib.dat', '../data/'+str(merge_game_name)+'/result/'+str(game_name)+'_RF_set3-1_skeleton_out.csv', '../data/'+str(merge_game_name)+'/result/'+str(game_name)+'_RF_set3-1_balltype_out.csv')
         change_side = True
-        Run(game_name, change_side, 3 ,'../data/'+str(game_name)+'/'+str(game_name)+'_set'+str(i)+'_with_skeleton.csv', \
+        Run(game_name, change_side, 3 ,'../data/'+str(game_name)+'/'+str(game_name)+'_set3-2_with_skeleton.csv', \
             False, '../model/'+str(merge_game_name)+'_SVM_balltype.joblib.dat', '../data/'+str(merge_game_name)+'/result/'+str(game_name)+'_SVM_set3-2_skeleton_out.csv', '../data/'+str(merge_game_name)+'/result/'+str(game_name)+'_SVM_set3-2_balltype_out.csv', \
             True, '../model/'+str(merge_game_name)+'_XGB_balltype.joblib.dat', '../data/'+str(merge_game_name)+'/result/'+str(game_name)+'_XGB_set3-2_skeleton_out.csv', '../data/'+str(merge_game_name)+'/result/'+str(game_name)+'_XGB_set3-2_balltype_out.csv', \
             True, '../model/'+str(merge_game_name)+'_RF_balltype.joblib.dat', '../data/'+str(merge_game_name)+'/result/'+str(game_name)+'_RF_set3-2_skeleton_out.csv', '../data/'+str(merge_game_name)+'/result/'+str(game_name)+'_RF_set3-2_balltype_out.csv')
-        
+
 check_split = False
 start_check_split = False
-exec([1, 2])	
+exec([1, 2, 3])	
