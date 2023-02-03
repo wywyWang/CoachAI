@@ -3,6 +3,7 @@ import numpy as np
 import math
 import xy_to_area as mapping
 
+# find skeleton data's index with frame number
 def find_index(data, target):
 	for idx in range(len(data)):
 		if data[idx] == target:
@@ -86,6 +87,7 @@ def get_hitting_pos(set_info, skeleton_info, top_is_Taiwan):
 
 	return hitting_pos, times
 
+# Check if all hitting position are available, then we can find the difference between two hitting position
 def pos_test(hitting_pos, now):
 	start_pos = tuple()
 	end_pos = tuple()
@@ -144,32 +146,31 @@ def Merge(set_num, total_set, setinfo, skeleton_file, top_is_Taiwan, savename, c
 				first = set_info[:][:i]
 				second = set_info[:][i:]
 				break_point = i
-				print(i)
 				break
-		#print(first)
-		first.reset_index()
-		#print(first)
-		second.reset_index()
-		#print(len(first))
-		#print(len(second))
-		first_part, first_time = get_hitting_pos(first, skeleton_info, top_is_Taiwan)
-		second_part, second_time = get_hitting_pos(second, skeleton_info, top_is_Taiwan)
-		
-		if change_side:
-			hitting_pos = np.array(second_part)
-			times = np.array(second_time)
-			set_info = set_info[:][break_point:]
-			set_info = set_info.reset_index(drop=True)
-			print(len(hitting_pos))
-		else:
-			hitting_pos = np.array(first_part)
-			times = np.array(first_time)
-			set_info = set_info[:][:break_point]
-			set_info = set_info.reset_index(drop=True)
-			print(len(hitting_pos))
 
-		#hitting_pos = np.array(first_part+second_part)
-		#times = np.array(first_time+second_time)
+		first.reset_index()
+		second.reset_index()
+		
+		if split:
+			if change_side:
+				second_part, second_time = get_hitting_pos(second, skeleton_info, top_is_Taiwan)
+				hitting_pos = np.array(second_part)
+				times = np.array(second_time)
+				set_info = set_info[:][break_point:]
+				set_info = set_info.reset_index(drop=True)
+			else:
+				first_part, first_time = get_hitting_pos(first, skeleton_info, top_is_Taiwan)
+				hitting_pos = np.array(first_part)
+				times = np.array(first_time)
+				set_info = set_info[:][:break_point]
+				set_info = set_info.reset_index(drop=True)
+		else:
+			first_part, first_time = get_hitting_pos(first, skeleton_info, top_is_Taiwan)
+			top_is_Taiwan = not top_is_Taiwan
+			second_part, second_time = get_hitting_pos(second, skeleton_info, top_is_Taiwan)
+			hitting_pos = np.array(first_part+second_part)
+			times = np.array(first_time+second_time)
+	
 	set_info = set_info.reset_index(drop=True)
 
 	for i in range(len(hitting_pos)-2):
@@ -236,7 +237,7 @@ def Merge(set_num, total_set, setinfo, skeleton_file, top_is_Taiwan, savename, c
 
 			dx = ((right_x_delta+left_x_delta)/2)**2
 			dy = ((right_y_delta+left_y_delta)/2)**2
-			dt = float(times[i+2])-float(times[i]) 
+			dt = (float(times[i+2])-float(times[i]))/2
 
 			try:
 				avg_ball_speed.append(abs(math.sqrt(dx+dy)/dt))
@@ -284,27 +285,6 @@ def Merge(set_num, total_set, setinfo, skeleton_file, top_is_Taiwan, savename, c
 				hitting_area_number_2.append(0)
 				hitting_area_number_1.append(1)
 	
-	'''
-	for i in range (0, len(hitting_pos[1:, 1])):
-		if hitting_pos[1:, 1][i]=='' or hitting_pos[1:, 3][i]=='':
-			landing_area_number.append('')
-		else:
-			mid_y = (int(hitting_pos[1:, 1][i])+int(hitting_pos[1:, 3][i]))/2
-			if mid_y < 0 :
-				landing_area_number.append(4)
-			elif mid_y >= 0 and mid_y < 74:
-				landing_area_number.append(3)
-			elif mid_y >= 74 and mid_y < 307:
-				landing_area_number.append(2)
-			elif mid_y >= 307 and mid_y < 629:
-				landing_area_number.append(1)
-			elif mid_y >= 629 and mid_y < 861:
-				landing_area_number.append(2)
-			elif mid_y >= 861 and mid_y < 935:
-				landing_area_number.append(3)
-			elif mid_y >= 935 :
-				landing_area_number.append(4)
-	'''
 	landing_area_number_1 = hitting_area_number_1[1:]
 	landing_area_number_2 = hitting_area_number_2[1:]
 	landing_area_number_3 = hitting_area_number_3[1:]
@@ -364,24 +344,44 @@ def Merge(set_num, total_set, setinfo, skeleton_file, top_is_Taiwan, savename, c
 	set_info.to_csv(savename, index=False, encoding = 'utf-8')
 
 def run(set_num, total_set, game_name, top_is_Taiwan, change_side):
-	if change_side:
-		Merge(set_num, total_set, '../data/'+str(game_name)+'/set'+str(set_num)+'.csv', '../data/'+str(game_name)+'/player_skeleton/'+str(game_name)+'_set'+str(set_num)+'_skeleton.csv', top_is_Taiwan, '../data/'+str(game_name)+'/'+str(game_name)+'_set'+str(set_num)+'-1_with_skeleton.csv', change_side)
+	if game_name == "19SIN_CG":
+		Merge(set_num, total_set, '../data/'+str(game_name)+'/set'+str(set_num)+'.csv', '../data/'+str(game_name)+'/player_skeleton/'+str(game_name)+'_skeleton.csv', top_is_Taiwan, '../data/'+str(game_name)+'/'+str(game_name)+'_set'+str(set_num)+'_with_skeleton.csv', change_side)
 	else:
-		Merge(set_num, total_set, '../data/'+str(game_name)+'/set'+str(set_num)+'.csv', '../data/'+str(game_name)+'/player_skeleton/'+str(game_name)+'_set'+str(set_num)+'_skeleton.csv', top_is_Taiwan, '../data/'+str(game_name)+'/'+str(game_name)+'_set'+str(set_num)+'_with_skeleton.csv', change_side)
+		if start_split:
+			if change_side:
+				Merge(set_num, total_set, '../data/'+str(game_name)+'/set'+str(set_num)+'.csv', '../data/'+str(game_name)+'/player_skeleton/'+str(game_name)+'_set'+str(set_num)+'_skeleton.csv', top_is_Taiwan, '../data/'+str(game_name)+'/'+str(game_name)+'_set'+str(set_num)+'-2_with_skeleton.csv', change_side)
+			else:
+				Merge(set_num, total_set, '../data/'+str(game_name)+'/set'+str(set_num)+'.csv', '../data/'+str(game_name)+'/player_skeleton/'+str(game_name)+'_set'+str(set_num)+'_skeleton.csv', top_is_Taiwan, '../data/'+str(game_name)+'/'+str(game_name)+'_set'+str(set_num)+'-1_with_skeleton.csv', change_side)
+		else:
+			Merge(set_num, total_set, '../data/'+str(game_name)+'/set'+str(set_num)+'.csv', '../data/'+str(game_name)+'/player_skeleton/'+str(game_name)+'_set'+str(set_num)+'_skeleton.csv', top_is_Taiwan, '../data/'+str(game_name)+'/'+str(game_name)+'_set'+str(set_num)+'_with_skeleton.csv', change_side)
 
 def exec(number_of_sets):
-	top_Taiwan = False #18IND_TC: True # 18ENG_TC: False
+	global start_split
+	top_Taiwan = True # 18IND_TC: True # 18ENG_TC: False # 19SIN_CG: True
 	change_side = False
-	game_name = "18ENG_TC"
+	
+	game_name = "19SIN_CG"
 
 	for i in range(1, number_of_sets+1):
+		if split and i == 3:
+			break
 		print("Start merging set "+str(i))
 		run(i, number_of_sets, game_name, top_Taiwan, change_side)
 		print("Set "+str(i)+" merge done")
 		top_Taiwan = not top_Taiwan
 	
-	if number_of_sets == 3:
+	if split:
+		start_split = True
+		print("Start merging set 3-1")
+		run(number_of_sets, number_of_sets, game_name, top_Taiwan, change_side)
+		print("Set 3-1 merge done")
 		change_side = True
-		run(number_of_sets, 3, game_name, top_Taiwan, change_side)
+		top_Taiwan = not top_Taiwan
+		print("Start merging set 3-2")
+		run(number_of_sets, number_of_sets, game_name, top_Taiwan, change_side)
+		print("Set 3-2 merge done")
 
-exec(3)
+split = False
+start_split = False
+total_set_num = 3
+exec(total_set_num)

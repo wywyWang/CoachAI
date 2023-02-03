@@ -2,6 +2,7 @@ import numpy as np
 import pandas as pd
 import math
 
+# Ball velocity
 def velocity(time_current,time_next,hit_x,hit_y,landing_x,landing_y):
     
     if type(time_current) == float:
@@ -30,6 +31,7 @@ def velocity(time_current,time_next,hit_x,hit_y,landing_x,landing_y):
 
     return round(velocity,3)
 
+# Ball flying direction
 def direction(diagonal_angle,hit_x,hit_y,hit_area,landing_x,landing_y,landing_area):
 
     if type(hit_area) == float:
@@ -61,7 +63,7 @@ def direction(diagonal_angle,hit_x,hit_y,hit_area,landing_x,landing_y,landing_ar
     else:
         return 1
 
-
+# convert balltype from Chinese to English
 def ball_type_convertion(ball_type):
     if ball_type == '切球' or ball_type == '過渡切球':
         return 'cut'
@@ -80,7 +82,7 @@ def ball_type_convertion(ball_type):
     else:
         return 'error'
 
-
+# Mapping hitting area to number (9 block)
 def hit_convertion_9(hit):
     if hit[0] == 'A':
         return '2',hit[1]
@@ -95,6 +97,7 @@ def hit_convertion_9(hit):
     else:
         return 'X'
 
+# Mapping ball landing area to number (9 block)
 def landing_convertion_9(landing):
     if landing[0] == 'A':
         return '2',landing[1]
@@ -108,7 +111,8 @@ def landing_convertion_9(landing):
         return '4',landing[1]
     else:
         return 'X'
-    
+
+# Mapping hitting area to number 
 def hit_convertion(hit):
     if hit[0] == 'A':
         return '2',hit[1]
@@ -125,6 +129,7 @@ def hit_convertion(hit):
     else:
         return 'X'
 
+# Mapping ball landing area to number
 def landing_convertion(landing):
     if landing[0] == 'A':
         return '3',landing[1]
@@ -141,6 +146,7 @@ def landing_convertion(landing):
     else:
         return 'X'
 
+# Mapping losing reason from number to Chinese
 def map_reason(reason):
     if reason == 0:
         return '出界'
@@ -150,6 +156,8 @@ def map_reason(reason):
         return '未回擊成功'
     else:
         return ''
+
+# Mapping losing reason from Chinese to number
 def revese_map_reason(reason_name):
     if reason_name == '出界':
         return 0
@@ -160,6 +168,7 @@ def revese_map_reason(reason_name):
     else:
         return ''
 
+# Decide who is the another player
 def another_player(player):
     if player == 'A':
         return 'B'
@@ -168,6 +177,7 @@ def another_player(player):
     else:
         return ''
 
+# Decide who get the first point
 def who_first_blood(reason_name, winner):
     reason = revese_map_reason(reason_name)
     if reason == 0 or reason == 2:
